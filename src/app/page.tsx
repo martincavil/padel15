@@ -7,27 +7,23 @@ import Values from "@/components/Values";
 
 export default function Home() {
   return (
-   <div>
+   <>
     <HeroBanner />
-    <TeamBuilding />
-    <Values />
-    <Club />
+    <Club  />
     <OpeningHours />
+    <Values />
+    <TeamBuilding />
     <Contact />
-    <div>
-      À retravailler avec Gasp :
-
-      club : 
-        -Les installations (2 terrains)
-        -Le Club House (bar et restaurant)
-        -Entreprises et particuliers (Ce qu’on propose avec adresse mail pour devis)
-        
-
-        -Nos tarifs 
-        -Le restaurant 
-        -Tournois 
-        -Cours particuliers 
-    </div>
-   </div>
+   </>
   )
 }
+
+
+// TODO :
+
+// Ajouter transition smooth au clic ancre navbar
+// Ajouter SEO
+// Mobile
+// Ajouter sections photos restaurants
+// ne pas trop surcharger
+// trouver un moyen pour détecter l'appareil et le rediriger vers le store de l'utilisateur

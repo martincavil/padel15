@@ -5,7 +5,7 @@ import { Button } from "./ui/Button"
 
 export default function TeamBuilding() {
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-2 gap-8 my-10 md:my-20">
+    <div id='events' className="scroll-mt-16 container grid grid-cols-1 md:grid-cols-2 gap-8 my-10 md:my-20">
       <div className="flex flex-col justify-center space-y-4">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-500 via-green-600 to-green-600 bg-clip-text text-transparent">
           Team Building
@@ -14,8 +14,9 @@ export default function TeamBuilding() {
           Organisez des événements de team building mémorables avec Padel15. 
           Renforcez la cohésion d'équipe tout en vous amusant sur le court !
         </p>
-        {/* lien vers le formulaire de contact ou le mail ou le téléphone */}
-        <Button className="w-full md:w-fit">Contactez-nous</Button>
+        <a href="#contact">
+          <Button className="w-full md:w-fit">Contactez-nous</Button>
+        </a>
       </div>
       <div>
         <Image 

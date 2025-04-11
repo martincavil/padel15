@@ -12,6 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       <footer className="bg-gray-100 text-center text-sm py-4 text-gray-500">
+        {/* Ajouter Réseaux sociaux et autres */}
         © {year} Padel15. Tous droits réservés.
       </footer>
     </div>
