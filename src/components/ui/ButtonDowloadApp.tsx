@@ -24,7 +24,7 @@ export function ButtonDownloadApp() {
 
   return (
     <Button
-      className="bg-green-700 hover:bg-green-800"
+      className="bg-green-700 hover:bg-green-800 cursor-pointer"
       onClick={() => window.location.href = storeLink}
     >
       {storeLabel}

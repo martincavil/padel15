@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const year = new Date().getFullYear()
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen">
       <Navbar />
       <div>
         {children}

@@ -6,20 +6,21 @@ export default function HeroBanner() {
  
 
   return (
-    <div className="relative h-screen">
+    <div className="h-screen max-h-screen">
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-80 z-0"
+        className="absolute top-0 left-0 right-0 w-full h-screen md:h-fit object-cover opacity-90 z-0"
         autoPlay
         loop
         muted
         src="/bg-video-test.mp4"
       />
-      <div className="relative container h-full flex flex-col justify-center space-y-6 md:space-y-12 z-10">
-        <h1 className="text-3xl md:text-6xl font-bold text-white">Padel15</h1>
-        <h2 className="text-lg md:text-xl text-slate-300 max-w-2xl">
-          Description du padel : Join the fastest growing racket sport at PADEL15. Premium courts, professional equipment, and an amazing atmosphere.
+      <div className="relative container h-full flex flex-col justify-center space-y-6 md:space-y-10 z-10">
+        <h1 className="text-5xl md:text-[200px] font-bold text-white text-center">Padel15</h1>
+        <h2 className="text-lg md:text-xl text-slate-100 max-w-3xl text-center mx-auto">
+        Votre club de padel au cœur de Paris, où sport, design et lifestyle se rencontrent.
+        Padel 15 vous accueille dans un lieu unique, pensé pour les passionnés de sport comme pour les amateurs de détente.
         </h2>
-        <div className="flex items-center space-x-4">
+        <div className="mx-auto">
           <ButtonDownloadApp />
         </div>
       </div>
