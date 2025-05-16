@@ -12,12 +12,12 @@ const images = [
   { src: '/terrain-match-1.jpg', alt: 'Match en cours' },
 ]
 
-export default function Club() {
+export default function Club2() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   return (
-    <div id='club' className="scroll-mt-16 container py-10 md:my-20 flex flex-col justify-center space-y-4">
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-500 via-green-600 to-green-600 bg-clip-text text-transparent">
+    <div id='club' className="scroll-mt-16 container flex flex-col justify-center space-y-4">
+      <h2 className="text-2xl  font-bold text-[#FF6727]">
         Padel15 : Nos terrains, notre club et restaurant
       </h2>
 
@@ -33,7 +33,7 @@ export default function Club() {
                   width={600}
                   height={400}
                   onClick={() => setSelectedImage(img.src)}
-                  className={`w-full h-full rounded-lg shadow-lg cursor-pointer ${
+                  className={`w-full h-full rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-all duration-200 ${
                     index % 2 !== 0 ? 'md:-mt-12' : ''
                   }`}
                 />

@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react'
 import { Button } from './ui/Button'
 import { ButtonDownloadApp } from "./ui/ButtonDowloadApp"
 import Image from 'next/image'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
+import { cn } from '@/lib/utils'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,11 +25,12 @@ export default function Navbar() {
       <div className="container py-4 flex justify-between items-center">
         <Link href="/" >
           <Image 
-          src="../logo.svg" 
-          alt="Logo" 
-          width={120}
-          height={50}
-          className='h-full' />
+            src="../logo.svg" 
+            alt="Logo" 
+            width={120}
+            height={50}
+            className='h-full' 
+          />
         </Link>
         <div className="hidden lg:flex items-center">
           <div className='flex items-center space-x-12'>
@@ -38,45 +41,44 @@ export default function Navbar() {
         </div>
         <div className='hidden lg:flex items-center'>
           <Link href='#contact'>
-            <Button className={`${isScrolled ? 'bg-orange-500 hover:bg-orange-600' : 'bg-white text-orange-500 hover:bg-slate-100'} cursor-pointer`}>Contactez-nous</Button>
+            <Button className={`${isScrolled ? 'bg-[#FF6727] hover:bg-orange-600' : 'bg-white text-[#FF6727] hover:bg-slate-100'} cursor-pointer`}>Contactez-nous</Button>
           </Link>
         </div>
-          {/* mobile */}
-          <button
-            className={`lg:hidden text-orange-600 text-3xl z-[60] ${menuOpen ? 'fixed top-6 right-10' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="relative w-6 h-5">
-              <span
-                className={`absolute h-0.5 w-full bg-current transform transition duration-300 ease-in-out 
-                  ${menuOpen ? 'rotate-45 top-2.5' : 'top-0'}`}
-              />
-              <span
-                className={`absolute h-0.5 w-full bg-current transition-all duration-300 ease-in-out 
-                  ${menuOpen ? 'opacity-0' : 'top-2.5'}`}
-              />
-              <span
-                className={`absolute h-0.5 w-full bg-current transform transition duration-300 ease-in-out 
-                  ${menuOpen ? '-rotate-45 bottom-2.5' : 'bottom-0'}`}
-              />
-            </div>
-          </button>
-          {menuOpen && (
-          <div className="fixed top-0 right-0 rounded h-screen w-3/4 text-black bg-white shadow-lg z-50 flex flex-col justify-between p-6">
-            <div className='flex flex-col space-y-4 mt-12'>
-              <Link href="#club" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Le Club</Link>
-              <Link href="#pricing" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Les Tarifs</Link>
-              <Link href="#events" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Évènements</Link>
-            </div>
-            <div className='flex flex-col space-y-4'>
-              <Link href='#contact' onClick={() => setMenuOpen(false)}>
-                <Button className='bg-orange-500 hover:bg-orange-600 w-full'>Contactez-nous</Button>
-              </Link>
-              <ButtonDownloadApp />
-            </div>
+        
+        {/* mobile */}
+        <button
+          className='lg:hidden text-orange-600 text-2xl z-[60]'
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <XMarkIcon className='w-6 text-[#FF6727]' /> : <Bars3Icon className='w-6'/>}
+        </button>
+        
+        <div className={cn(
+          "fixed top-0 right-0 h-screen w-3/4 text-black bg-white shadow-lg z-50 flex flex-col justify-between p-6",
+          "transform transition-transform duration-300 ease-in-out",
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        )}>
+          <div className='flex flex-col space-y-4 mt-12'>
+            <Link href="#club" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Le Club</Link>
+            <Link href="#pricing" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Les Tarifs</Link>
+            <Link href="#events" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Évènements</Link>
           </div>
-        )}
+          <div className='flex flex-col space-y-4'>
+            <Link href='#contact' onClick={() => setMenuOpen(false)}>
+              <Button className='bg-[#FF6727] hover:bg-orange-600 w-full'>Contactez-nous</Button>
+            </Link>
+            <ButtonDownloadApp />
+          </div>
+        </div>
+        
+        <div 
+          className={cn(
+            "fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300",
+            menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          )}
+          onClick={() => setMenuOpen(false)}
+        />
       </div>
     </nav>
   )

@@ -6,8 +6,8 @@ import { ButtonDownloadApp } from './ui/ButtonDowloadApp'
 
 export default function OpeningHours() {
   return (
-    <div id='pricing' className="scroll-mt-16 container py-10 md:my-20 flex flex-col justify-center space-y-6">
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-500 via-green-600 to-green-600 bg-clip-text text-transparent">
+    <div id='pricing' className="scroll-mt-16 container flex flex-col justify-center space-y-6">
+      <h2 className="text-2xl  font-bold text-[#FF6727]">
         Nos horaires d'ouverture & Tarifs
       </h2>
       <div className='flex flex-col space-y-8'>
