@@ -14,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className="scroll-smooth">
+      <head>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet"></link>
+      </head>
+      <body className="scroll-smooth font-sans">
         <Layout>{children}</Layout>
       </body>
     </html>

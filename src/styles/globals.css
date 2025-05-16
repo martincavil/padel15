@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@tailwind utilities;
+
+.font-sans {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
