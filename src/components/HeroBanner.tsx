@@ -8,14 +8,13 @@ export default function HeroBanner() {
   return (
     <div className="h-screen max-h-screen">
       <video
-        className="absolute top-0 left-0 right-0 w-full h-screen md:h-fit object-cover opacity-95 z-0"
+        className="absolute top-0 left-0 right-0 w-full h-screen md:h-fit object-cover z-10"
         autoPlay
         loop
         muted
         src="/bg-video-test.mp4"
       />
       <div className="relative container h-full flex flex-col justify-center space-y-6 md:space-y-8 z-10">
-        {/* <h1 className="text-5xl md:text-[160px] font-bold text-white text-center font-padel">PADEL15</h1> */}
         <div className="relative">
           <Image
             src="/logo.svg"

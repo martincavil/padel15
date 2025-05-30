@@ -17,7 +17,7 @@ export default function RootLayout({
       <head>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet"></link>
       </head>
-      <body className="scroll-smooth font-sans">
+      <body className="scroll-smooth font-sans overflow-x-hidden">
         <Layout>{children}</Layout>
       </body>
     </html>

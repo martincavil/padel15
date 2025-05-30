@@ -21,13 +21,3 @@ export default function Home() {
    </>
   )
 }
-
-
-// TODO :
-
-// Ajouter transition smooth au clic ancre navbar
-// Ajouter SEO
-// Mobile
-// Ajouter sections photos restaurants
-// ne pas trop surcharger
-// trouver un moyen pour détecter l'appareil et le rediriger vers le store de l'utilisateur

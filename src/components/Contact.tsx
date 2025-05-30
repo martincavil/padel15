@@ -35,18 +35,18 @@ export default function Contact() {
             <PhoneIcon className="w-4 text-[#009F51] mr-3 mt-1" />
             <div>
               <h4 className="font-semibold">Téléphone</h4>
-              <a href='tel:+33123456789' className="text-gray-600">+33 1 23 45 67 89</a>
+              <a href='tel:+33123456789' className="text-gray-600 hover:text-[#FF6727]">+33 1 23 45 67 89</a>
             </div>  
           </div>
           <div className="flex items-start">
             <EnvelopeIcon className="w-4 text-[#009F51] mr-3 mt-1" />
             <div>
               <h4 className="font-semibold">Email</h4>
-              <a href="mailto:contact@padel15.com" className="text-gray-600">contact@padel15.com</a>
+              <a href="mailto:contact@padel15.com" className="text-gray-600 hover:text-[#FF6727]">contact@padel15.com</a>
                 </div>
           </div>
           <div className="pt-4">
-            <h4 className="font-semibold mb-2">Suivez-nous</h4>
+            <h4 className="font-semibold mb-2">Suivez-nous sur nos réseaux sociaux</h4>
             <div className="flex space-x-4">
               <a
                 href="https://www.instagram.com/padel15club/?hl=fr"
