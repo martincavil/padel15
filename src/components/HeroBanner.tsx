@@ -24,9 +24,17 @@ export default function HeroBanner() {
             className="mx-auto filter brightness-0 invert"
           />
         </div>
-        <h2 className="text-lg md:text-xl text-slate-100 max-w-3xl text-center mx-auto">
-        Votre club de padel au cœur de Paris, où sport, design et lifestyle se rencontrent.
-        Padel 15 vous accueille dans un lieu unique, pensé pour les passionnés de sport comme pour les amateurs de détente.
+        <h2 className="text-lg text-slate-100 max-w-3xl text-center mx-auto">
+        <span className="font-medium">
+          L’art de vivre le padel à Paris.
+        </span>
+        <br />
+        <span className="font-medium">
+        Un club d’exception où sport, élégance et convivialité se rencontrent.
+        </span>
+        <br />
+          Dans un écrin végétalisé en plein cœur de la capitale, jouez, partagez, détendez-vous… et savourez chaque instant.
+          Terrains couvert et haut de gamme, terrasse guinguette, pétanque, fléchettes, bar et restaurant
         </h2>
         <div className="mx-auto">
           <ButtonDownloadApp />

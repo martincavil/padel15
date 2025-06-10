@@ -6,16 +6,16 @@ import { Button } from "./ui/Button"
 export default function TeamBuilding() {
   const cards = [ 
     {
-      title: "Évenements d'entreprise",
-      description: 'Customized team building activities with optional catering and private courts.'
+      title: "🧑‍💼 Événements d’entreprise",
+      description: 'Formules sur-mesure pour vos team buildings, afterworks ou séminaires, avec possibilité de restauration et d’espaces privatifs.'
     },
     {
-      title: "Cours particuliers",
-      description: 'Customized team building activities with optional catering and private courts.'
+      title: "🎾 Cours & coaching privé",
+      description: 'Sessions encadrées pour vos collaborateurs ou groupes, tous niveaux. Coaching, initiation ou perfectionnement à la carte.'
     },
     {
-      title: "Tournois",
-      description: 'Customized team building activities with optional catering and private courts.'
+      title: "🏆 Tournois & challenges",
+      description: 'Organisez votre tournoi privé entre collègues, partenaires ou ami·e·s, dans une ambiance dynamique et clé-en-main.'
     },
   ]
   return (
@@ -28,11 +28,11 @@ export default function TeamBuilding() {
       }}
     />
     <div className="container mx-auto px-4 relative z-20">
-      <div className="max-w-2xl mx-auto text-center text-white">
+      <div className="max-w-5xl mx-auto text-center text-white">
       <h2 className="text-2xl  font-bold text-white mb-6">Team Building & Évenements</h2>
         <p className="text-lg opacity-90 mb-8">
-        Organisez des événements de team building mémorables avec Padel15. 
-        Renforcez la cohésion d'équipe tout en vous amusant sur le court !
+        Organisez vos événements d’entreprise ou privés dans un lieu atypique au cœur de Paris.
+        Renforcez la cohésion de vos équipes ou célébrez une occasion spéciale dans une ambiance conviviale, sportive et festive. 
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {cards.map((card, index) => (
@@ -42,8 +42,13 @@ export default function TeamBuilding() {
             </div>
           ))}
         </div>
+        <p className="text-lg opacity-90 mb-8">
+        👉 Privatisation, traiteur, animations : tout est possible.
+        <br />
+        Contactez-nous pour imaginer ensemble un événement sur mesure !  
+        </p>
         <a href="#contact">
-          <Button className="bg-[#FF6727] hover:bg-[#FF6727] hover:opacity-90 text-white px-8 py-6 text-lg !rounded-button whitespace-nowrap cursor-pointer">
+          <Button className="bg-[#FF6727] hover:bg-[#FF6727] hover:opacity-90 text-white px-8 py-6 !rounded-button whitespace-nowrap cursor-pointer">
             Contactez-nous
           </Button>
         </a>

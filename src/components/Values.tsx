@@ -4,22 +4,30 @@ import { UserGroupIcon, PuzzlePieceIcon, FaceSmileIcon } from '@heroicons/react/
 export default function Values() {
   const values = [
     {
-      title: "Community",
-      description: "We foster a welcoming environment where players of all levels can connect, learn, and share their passion for padel.",
+      title: "Communauté",
+      description:<p>Chez <span className='font-semibold'>Padel 15</span>, on ne vient pas juste jouer, on vient <span className='font-semibold'>vivre</span> quelque chose ensemble. Un lieu où les passionné·e·s de padel, les amateur·rice·s de détente et les ami·e·s de passage se croisent, partagent un moment et créent du lien.</p>,
       icon: <UserGroupIcon className="w-10 h-10" />,
       bgClass: "bg-orange-500/10",
       textClass: "text-orange-500"
     },
     {
-      title: "Accessibility",
-      description: "We believe padel should be accessible to everyone...",
+      title: "Inclusif",
+      description:
+      <p>
+        Notre club est <span className='font-semibold'>ouvert à tou·te·s</span>, sans barrière.
+        Terrains accessibles, services pensés pour le confort de chacun·e, lieux inclusifs et faciles d’accès — <span className='font-semibold'>en plein cœur de Paris.</span>
+      </p>,
       icon: <PuzzlePieceIcon className="w-10 h-10" />,
       bgClass: "bg-green-600/10",
       textClass: "text-green-600"
     },
     {
       title: "Fair Play",
-      description: "We promote sportsmanship, respect, and fair play...",
+      description: 
+      <p>
+        Le jeu, toujours dans le respect.
+        Que ce soit sur le terrain ou en terrasse, <span className='font-semibold'>l’esprit fair play, la bienveillance et la bonne humeur</span> sont les fondations de l’expérience Padel 15.
+      </p>,
       icon: <FaceSmileIcon className="w-10 h-10" />,
       bgClass: "bg-orange-500/10",
       textClass: "text-orange-500"
@@ -38,8 +46,8 @@ export default function Values() {
                   {value.icon}
                 </div>
               </div>
-              <h3 className="text-2xl font-semibold mb-3">{value.title}</h3>
-              <p className="text-gray-600">{value.description}</p>
+              <h3 className="text-xl md:text-2xl font-semibold mb-3">{value.title}</h3>
+              <div className="text-gray-600">{value.description}</div>
             </div>
           ))}
         </div>

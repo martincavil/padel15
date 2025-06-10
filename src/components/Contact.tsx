@@ -13,13 +13,13 @@ export default function Contact() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div className="bg-gray-200 h-80 mb-6 rounded-lg overflow-hidden">
         <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2520.470694110703!2d2.3022233761530275!3d48.82983390271616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671937ac7d32d%3A0x71974bb231b51ad7!2sPADEL%2015!5e1!3m2!1sfr!2ses!4v1744392649571!5m2!1sfr!2ses"
-            className="w-full h-full"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2520.470694110703!2d2.3022233761530275!3d48.82983390271616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671937ac7d32d%3A0x71974bb231b51ad7!2sPADEL%2015!5e1!3m2!1sfr!2ses!4v1744392649571!5m2!1sfr!2ses&z=10"
+          className="w-full h-full"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
         </div>
         <div className="space-y-4">
           <div className="flex items-start">
@@ -35,7 +35,7 @@ export default function Contact() {
             <PhoneIcon className="w-4 text-[#009F51] mr-3 mt-1" />
             <div>
               <h4 className="font-semibold">Téléphone</h4>
-              <a href='tel:+33123456789' className="text-gray-600 hover:text-[#FF6727]">+33 1 23 45 67 89</a>
+              <a href='tel:+33145315876' className="text-gray-600 hover:text-[#FF6727]">+33 1 45 31 58 76</a>
             </div>  
           </div>
           <div className="flex items-start">

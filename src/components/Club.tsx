@@ -20,7 +20,6 @@ export default function Club2() {
       <h2 className="text-2xl  font-bold text-[#FF6727]">
         Padel15 : Nos terrains, notre club et restaurant
       </h2>
-
       <div className="mb-6">
         <h3 className="text-xl md:text-2xl font-semibold mb-6 md:mb-20">Nos terrains</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 justify-self-center gap-4 md:gap-12">
