@@ -22,18 +22,28 @@ export function CarouselClub() {
   const medias = [
     {
       id: 1,
-      src: "/terrain-ext-1.jpg",
+      src: "/terrain-ext-jour.webp",
       alt: "Club 1",
     },
     {
       id: 2,
-      src: "/terrain-inte-1.jpg",
+      src: "/terrain-inte-game.webp",
       alt: "Club 2",
+    },
+    {
+      id: 3,
+      src: "/terrain-ext-nuit.webp",
+      alt: "Club 3",
+    },
+    {
+      id: 4,
+      src: "/terrain-inte-vide.webp",
+      alt: "Club 4",
     },
   ]
 
   return (
-    <div className="rounded-lg shadow-lg bg-card overflow-hidden">
+    <div className="rounded-lg shadow-lg bg-card overflow-hidden max-w-3xl mx-auto">
       <Carousel
         plugins={[plugin.current]}
         opts={{ loop: true }}
@@ -48,9 +58,9 @@ export function CarouselClub() {
                 <Image 
                   src={img.src}
                   alt="Padel15" 
-                  width={560}
+                  width={800}
                   height={372}
-                  className="h-[560px] w-full aspect-ratio rounded-t-lg" />
+                  className="h-full w-[900px] object-cover aspect-ratio rounded-t-lg" />
               </div>
             </CarouselItem>
           ))}
@@ -60,7 +70,7 @@ export function CarouselClub() {
       </Carousel>
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">Nos terrains</h3>
-        <p className="text-gray-600">
+        <p className="text-sm text-gray-600">
         2 terrains dernière génération, full panoramiques, entièrement couverts et hermétiques, jouables par tous les temps. Toits ouvrants pour profiter du soleil quand il est là ! Location de raquettes et vente de balles disponibles sur place.
         </p>
       </div>

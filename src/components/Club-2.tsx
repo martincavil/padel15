@@ -10,7 +10,7 @@ const items = [
     description:
     'Ouvert 7j/7 en service continu, du petit-déjeuner au dîner, avec des produits frais et de saison. Un cadre chaleureux pour se détendre après un match… ou organiser vos séminaires, afterworks et événements privés dans un lieu unique au cœur de Paris.'
    },
-  { img: '/terrain-inte-1.jpg', 
+  { img: '/guinguette.webp', 
     title: 'Terrasse & Guinguette',
     description: 
     <div>
@@ -49,26 +49,11 @@ export default function Club() {
                 </div>
                 <div className="p-6 bg-white">
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <div className="text-gray-600">{item.description}</div>
+                  <div className="text-sm text-gray-600">{item.description}</div>
                 </div>
               </div>
               ))}
           </div>
-          {/* <div className="group overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl mx-auto w-full">
-            <div className="h-80 overflow-hidden">
-              <Image
-                src='/rest-inte-grand-angle.jpg'
-                alt='Notre restaurant'
-                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                width={600}
-                height={400}
-              />
-            </div>
-            <div className="p-6 bg-white">
-              <h3 className="text-xl font-semibold mb-2">Notre restaurant</h3>
-              <p className="text-gray-600">Venez vous raffraichir après votre match dans notre restaurant !</p>
-            </div>
-          </div> */}
         </div>
       </section>
   )
