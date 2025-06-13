@@ -18,12 +18,11 @@ export function ButtonDownloadApp() {
 
     if (isAndroid) {
       setStoreLink("https://play.google.com/store/apps/details?id=com.trenicom.padel15");
-      setStoreLabel("Télécharger sur Android");
+      setStoreLabel("Réserver un terrain");
     } else if (isIOS) {
       setStoreLink("https://apps.apple.com/fr/app/padel-15/id6738955590");
-      setStoreLabel("Télécharger sur iPhone");
+      setStoreLabel("Réserver un terrain");
     } else {
-      // Sur desktop: scroll vers la section contact
       setStoreLink("#contact");
       setStoreLabel("Contactez-nous");
     }
@@ -33,10 +32,9 @@ export function ButtonDownloadApp() {
     if (!storeLink) return;
 
     if (isMobile) {
-      // Comportement mobile: ouverture store
-      window.open(storeLink, '_blank', 'noopener,noreferrer');
+      // Modification ici: plus de '_blank' sur mobile
+      window.location.href = storeLink;
     } else {
-      // Comportement desktop: scroll vers la section
       const contactSection = document.getElementById('contact');
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth' });
