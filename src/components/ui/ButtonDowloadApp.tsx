@@ -4,31 +4,53 @@ import { useState, useEffect } from 'react';
 import { Button } from './Button';
 
 export function ButtonDownloadApp() {
-  const [storeLink, setStoreLink] = useState<string>("")
-  const [storeLabel, setStoreLabel] = useState<string>("Réserver un terrain")
+  const [isMobile, setIsMobile] = useState(false);
+  const [storeLink, setStoreLink] = useState<string>("");
+  const [storeLabel, setStoreLabel] = useState<string>("Réserver un terrain");
 
   useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isAndroid = /android/.test(userAgent);
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const mobileCheck = isAndroid || isIOS;
 
-    if (/android/i.test(userAgent)) {
-      setStoreLink("https://play.google.com/store/apps/details?id=com.trenicom.padel15&hl=fr_UY&pli=1") // 🔁 remplace par ton lien Play Store
-      setStoreLabel("Réserve ton terrain")
-    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-      setStoreLink("https://apps.apple.com/fr/app/padel-15/id6738955590?l=fr-FR") // 🔁 remplace par ton lien App Store
-      setStoreLabel("Réserve ton terrain")
+    setIsMobile(mobileCheck);
+
+    if (isAndroid) {
+      setStoreLink("https://play.google.com/store/apps/details?id=com.trenicom.padel15");
+      setStoreLabel("Télécharger sur Android");
+    } else if (isIOS) {
+      setStoreLink("https://apps.apple.com/fr/app/padel-15/id6738955590");
+      setStoreLabel("Télécharger sur iPhone");
     } else {
-      setStoreLink("https://padel15.com") // 🔁 remplace par ton lien de réservation
-      setStoreLabel("Réserve ton terrain") 
+      // Sur desktop: scroll vers la section contact
+      setStoreLink("#contact");
+      setStoreLabel("Contactez-nous");
     }
-  }, [])
+  }, []);
+
+  const handleClick = () => {
+    if (!storeLink) return;
+
+    if (isMobile) {
+      // Comportement mobile: ouverture store
+      window.open(storeLink, '_blank', 'noopener,noreferrer');
+    } else {
+      // Comportement desktop: scroll vers la section
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <Button
-      size='lg'
+      size="lg"
       className="bg-green-700 hover:bg-green-800 cursor-pointer px-8 py-6 !text-base"
-      onClick={() => window.location.href = storeLink}
+      onClick={handleClick}
     >
       {storeLabel}
     </Button>
-  )
+  );
 }
