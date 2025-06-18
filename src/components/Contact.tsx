@@ -42,7 +42,7 @@ export default function Contact() {
             <EnvelopeIcon className="w-4 text-[#009F51] mr-3 mt-1" />
             <div>
               <h4 className="font-semibold">Email</h4>
-              <a href="mailto:contact@padel15.com" className="text-gray-600 hover:text-[#FF6727]">contact@padel15.com</a>
+              <a href="mailto:contact@padel15.fr" className="text-gray-600 hover:text-[#FF6727]">contact@padel15.fr</a>
                 </div>
           </div>
           <div className="pt-4">
