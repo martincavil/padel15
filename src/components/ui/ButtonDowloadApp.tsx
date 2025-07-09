@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Button } from './Button';
+import { useState, useEffect } from "react";
+import { Button } from "./Button";
 
 export function ButtonDownloadApp() {
   const [isMobile, setIsMobile] = useState(false);
@@ -11,20 +11,22 @@ export function ButtonDownloadApp() {
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
     const isAndroid = /android/.test(userAgent);
-    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isIOS = /iphone|ipad|ipod|macintosh|mac os x/.test(userAgent);
     const mobileCheck = isAndroid || isIOS;
 
     setIsMobile(mobileCheck);
 
     if (isAndroid) {
-      setStoreLink("https://play.google.com/store/apps/details?id=com.trenicom.padel15");
+      setStoreLink(
+        "https://play.google.com/store/apps/details?id=com.trenicom.padel15"
+      );
       setStoreLabel("Réserver un terrain");
     } else if (isIOS) {
       setStoreLink("https://apps.apple.com/fr/app/padel-15/id6738955590");
       setStoreLabel("Réserver un terrain");
     } else {
-      setStoreLink("#contact");
-      setStoreLabel("Contactez-nous");
+      setStoreLink("#info");
+      setStoreLabel("Réserver un terrain");
     }
   }, []);
 
@@ -32,12 +34,11 @@ export function ButtonDownloadApp() {
     if (!storeLink) return;
 
     if (isMobile) {
-      // Modification ici: plus de '_blank' sur mobile
-      window.location.href = storeLink;
+      window.open(storeLink, "_blank");
     } else {
-      const contactSection = document.getElementById('contact');
+      const contactSection = document.getElementById("contact");
       if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+        contactSection.scrollIntoView({ behavior: "smooth" });
       }
     }
   };
