@@ -86,8 +86,15 @@ export default function OpeningHours() {
             </h3>
             <ul className="mb-2">
               <li>
-                Les réservations se font exclusivement via notre application «
-                Padel15 ».
+                Les réservations se font via notre application « Padel15 » ou
+                sur{" "}
+                <a
+                  href="https://www.anybuddyapp.com/club-padel-15-paris"
+                  className="text-[#FF6727] hover:underline"
+                >
+                  https://www.anybuddyapp.com/club-padel-15-paris
+                </a>
+                .
               </li>
               <li>
                 📅 Les créneaux ouvrent 5 jours à l’avance, heure par heure :

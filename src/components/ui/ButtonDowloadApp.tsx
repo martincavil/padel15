@@ -25,7 +25,7 @@ export function ButtonDownloadApp() {
       setStoreLink("https://apps.apple.com/fr/app/padel-15/id6738955590");
       setStoreLabel("Réserver un terrain");
     } else {
-      setStoreLink("#info");
+      setStoreLink("https://www.anybuddyapp.com/club-padel-15-paris");
       setStoreLabel("Réserver un terrain");
     }
   }, []);
