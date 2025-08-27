@@ -24,7 +24,7 @@ export default function RootLayout({
         <link rel="icon" href="/P15.ico" type="image/x-icon"></link>
       </head>
       <body className="scroll-smooth font-sans">
-        <GoogleAnalytics ga_id="G-G8XMBWB2VT" />
+        <GoogleAnalytics ga_id="G-N2Y4ZCYHTB" />
         <Layout>{children}</Layout>
       </body>
     </html>
