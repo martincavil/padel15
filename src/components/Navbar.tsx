@@ -1,104 +1,191 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { Button } from './ui/Button'
-import { ButtonDownloadApp } from "./ui/ButtonDowloadApp"
-import Image from 'next/image'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
-import { cn } from '@/lib/utils'
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { Button } from "./ui/Button";
+import { ButtonDownloadApp } from "./ui/ButtonDowloadApp";
+import Image from "next/image";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    setIsScrolled(false);
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Écoute l'événement de scroll
+    window.addEventListener("scroll", handleScroll);
+
+    // Appel initial pour définir l'état correct
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Bloque le scroll quand le menu est ouvert
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflowX = "hidden";
     } else {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflowX = '';
+      document.body.style.overflow = "";
+      document.documentElement.style.overflowX = "";
     }
     return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflowX = '';
+      document.body.style.overflow = "";
+      document.documentElement.style.overflowX = "";
     };
   }, [menuOpen]);
 
   return (
-    <nav className={cn(
-      "sticky top-0 z-50 w-full",
-      "transition-all duration-300",
-      isScrolled ? "bg-white text-black shadow-md" : "bg-transparent text-white"
-    )}>
+    <nav
+      className={cn(
+        "fixed top-0 z-50 w-full",
+        "transition-all duration-300",
+        isScrolled
+          ? "bg-white text-black shadow-md"
+          : "bg-transparent text-white"
+      )}
+    >
       <div className="container py-4 flex justify-between items-center">
         <Link href="/">
-          <Image 
-            src="../logo.svg" 
-            alt="Logo" 
+          <Image
+            src="/logo.svg"
+            alt="Logo"
             width={120}
             height={50}
-            className='h-full' 
+            className={cn(
+              "h-full",
+              isScrolled ? "" : "filter brightness-0 invert"
+            )}
           />
         </Link>
 
         {/* Navigation desktop */}
         <div className="hidden lg:flex items-center gap-12">
-          <Link href="#club" className="hover:text-orange-600 font-medium text-lg">Le Club</Link>
-          <Link href="#pricing" className="hover:text-orange-600 font-medium text-lg">Les Tarifs</Link>
-          <Link href="#events" className="hover:text-orange-600 font-medium text-lg">Évènements</Link>
+          <Link
+            href="#club"
+            className="hover:text-orange-600 font-medium text-lg"
+          >
+            Le Club
+          </Link>
+          <Link
+            href="#pricing"
+            className="hover:text-orange-600 font-medium text-lg"
+          >
+            Les Tarifs
+          </Link>
+          <Link
+            href="#events"
+            className="hover:text-orange-600 font-medium text-lg"
+          >
+            Évènements
+          </Link>
           <Link href="#contact">
-            <Button className={cn(
-              "cursor-pointer",
-              isScrolled ? "bg-[#FF6727] hover:bg-orange-600" : "bg-white text-[#FF6727] hover:bg-slate-100"
-            )}>
+            <Button
+              className={cn(
+                "cursor-pointer",
+                isScrolled
+                  ? "bg-[#FF6727] hover:bg-orange-600"
+                  : "bg-white text-black hover:bg-slate-100"
+              )}
+            >
               Contactez-nous
             </Button>
+          </Link>
+          <Link href="https://www.instagram.com/padel15club/?hl=fr">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className={cn(
+                isScrolled ? "text-black" : "text-white",
+                "hover:text-orange-600",
+                "lucide lucide-instagram-icon lucide-instagram"
+              )}
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </svg>
           </Link>
         </div>
 
         {/* Bouton mobile */}
         <button
-          className='lg:hidden text-orange-600 text-2xl z-[60]'
+          className="lg:hidden text-orange-600 text-2xl z-[60]"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          {menuOpen ? <XMarkIcon className='w-6 text-[#FF6727]' /> : <Bars3Icon className='w-6'/>}
+          {menuOpen ? (
+            <XMarkIcon className="w-6 text-[#FF6727]" />
+          ) : (
+            <Bars3Icon
+              className={cn(
+                "w-6",
+                isScrolled ? "text-orange-600" : "text-white"
+              )}
+            />
+          )}
         </button>
 
         {/* Menu mobile */}
-        <div className={cn(
-          "fixed top-0 right-0 h-full w-full max-w-xs text-black bg-white shadow-lg z-50",
-          "flex flex-col justify-between p-6",
-          "transition-transform duration-300 ease-in-out",
-          "overflow-y-auto", // Scroll vertical seulement si nécessaire
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        )}>
-          <div className='flex flex-col space-y-4 mt-12'>
-            <Link href="#club" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Le Club</Link>
-            <Link href="#pricing" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Les Tarifs</Link>
-            <Link href="#events" className="hover:text-orange-600" onClick={() => setMenuOpen(false)}>Évènements</Link>
+        <div
+          className={cn(
+            "fixed top-0 right-0 h-full w-full max-w-xs text-black bg-white shadow-lg z-50",
+            "flex flex-col justify-between p-6",
+            "transition-transform duration-300 ease-in-out",
+            "overflow-y-auto", // Scroll vertical seulement si nécessaire
+            menuOpen ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col space-y-4 mt-12">
+            <Link
+              href="#club"
+              className="hover:text-orange-600"
+              onClick={() => setMenuOpen(false)}
+            >
+              Le Club
+            </Link>
+            <Link
+              href="#pricing"
+              className="hover:text-orange-600"
+              onClick={() => setMenuOpen(false)}
+            >
+              Les Tarifs
+            </Link>
+            <Link
+              href="#events"
+              className="hover:text-orange-600"
+              onClick={() => setMenuOpen(false)}
+            >
+              Évènements
+            </Link>
           </div>
-          <div className='flex flex-col space-y-4 pb-8'>
-            <Link href='#contact' onClick={() => setMenuOpen(false)}>
-              <Button className='bg-[#FF6727] hover:bg-orange-600 w-full'>Contactez-nous</Button>
+          <div className="flex flex-col space-y-4 pb-8">
+            <Link href="#contact" onClick={() => setMenuOpen(false)}>
+              <Button className="bg-[#FF6727] hover:bg-orange-600 w-full">
+                Contactez-nous
+              </Button>
             </Link>
             <ButtonDownloadApp />
           </div>
         </div>
 
         {/* Overlay */}
-        <div 
+        <div
           className={cn(
             "fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300",
             menuOpen ? "opacity-100 block" : "opacity-0 hidden"
@@ -107,5 +194,5 @@ export default function Navbar() {
         />
       </div>
     </nav>
-  )
+  );
 }

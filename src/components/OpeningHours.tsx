@@ -31,12 +31,15 @@ export default function OpeningHours() {
               <li>2 Terrains Indoor/Outdoor</li>
             </ul>
             <h3 className="text-lg font-medium">Prix : </h3>
-            <ul>
+            <ul className="list-disc list-inside">
               <li>
-                50€/heure en heure creuse (8h-12h et 14h-16h du lundi au
-                vendredi){" "}
+                12,5 € / personne / heure en heures creuses (8h-12h et 14h-16h
+                du lundi au vendredi){" "}
               </li>
-              <li>60€/heure (12h/14h, 16h/22h et week-end) </li>
+              <li>
+                15 € / personne / heure en heures pleines (12h/14h, 16h/22h et
+                week-end){" "}
+              </li>
             </ul>
             <ButtonDownloadApp />
           </Card>
