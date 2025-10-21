@@ -1,5 +1,5 @@
 // import Club from "@/components/Club";
-import Clients from "@/components/Clients";
+// import Clients from "@/components/Clients";
 import Club2 from "@/components/Club-2";
 import Contact from "@/components/Contact";
 import HeroBanner from "@/components/HeroBanner";
@@ -13,7 +13,7 @@ export default function Home() {
       <HeroBanner />
       <div className="space-y-10 md:space-y-20 md:mt-20 mt-10">
         {/* <Club  /> */}
-        <Clients />
+        {/* <Clients /> */}
         <Club2 />
         <OpeningHours />
         <Values />

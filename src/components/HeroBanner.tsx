@@ -1,52 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { ButtonDownloadApp } from "./ui/ButtonDowloadApp";
 import Image from "next/image";
 
 export default function HeroBanner() {
-  // État pour suivre l'image active
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Images temporaires (remplacer par des vrais chemins quand disponibles)
-  const carouselImages = [
-    { id: 1, color: "bg-red-500" },
-    { id: 2, color: "bg-blue-500" },
-    { id: 3, color: "bg-green-500" },
-    { id: 4, color: "bg-purple-500" },
-    { id: 5, color: "bg-yellow-500" },
-  ];
-
-  // Effet pour faire défiler automatiquement
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) =>
-        current === carouselImages.length - 1 ? 0 : current + 1
-      );
-    }, 4000); // Changer d'image toutes les 4 secondes
-
-    return () => clearInterval(interval);
-  }, [carouselImages.length]);
+  // --- Code carousel commenté ---
+  // // État pour suivre l'image active
+  // const [activeIndex, setActiveIndex] = useState(0);
+  // // Images temporaires (remplacer par des vrais chemins quand disponibles)
+  // const carouselImages = [
+  //   { id: 1, color: "bg-red-500" },
+  //   { id: 2, color: "bg-blue-500" },
+  //   { id: 3, color: "bg-green-500" },
+  //   { id: 4, color: "bg-purple-500" },
+  //   { id: 5, color: "bg-yellow-500" },
+  // ];
+  // // Effet pour faire défiler automatiquement
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setActiveIndex((current) =>
+  //       current === carouselImages.length - 1 ? 0 : current + 1
+  //     );
+  //   }, 4000); // Changer d'image toutes les 4 secondes
+  //   return () => clearInterval(interval);
+  // }, [carouselImages.length]);
 
   return (
     <div className="h-screen max-h-screen relative overflow-hidden">
-      {/* Carousel d'images */}
-      <div className="absolute inset-0 z-10">
-        {carouselImages.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-              index === activeIndex ? "opacity-100" : "opacity-0"
-            } ${slide.color}`}
-            // Remplacer la ligne ci-dessus par celle-ci quand les images seront disponibles :
-            // style={{ backgroundImage: `url(/carousel-${slide.id}.webp)` }}
-            // className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}
-          />
-        ))}
+      {/* Image de fond provisoire */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/bg-provisoire.jpg"
+          alt="Fond provisoire"
+          fill
+          className="object-cover w-full h-full"
+          priority
+        />
       </div>
 
       {/* Volet orange semi-transparent */}
-      <div className="absolute inset-0 bg-orange-600 bg-opacity-70 z-5"></div>
+      {/* <div className="absolute inset-0 bg-orange-600 bg-opacity-70 z-5"></div> */}
 
       {/* Contenu - même structure que l'original */}
       <div className="relative container h-full flex flex-col justify-center space-y-6 md:space-y-8 z-10">
