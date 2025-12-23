@@ -77,7 +77,7 @@ export default function OpeningHours() {
           className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
         >
           <Image
-            src="/app-mobile.jpeg"
+            src="/app-mobile.webp"
             alt="Team Building"
             width={800}
             height={500}
