@@ -89,7 +89,7 @@ export default function OpeningHours() {
             </h3>
             <ul className="mb-2">
               <li>
-                Les réservations se font via notre application « Padel15 » ou
+                Les réservations se font via notre application « Playtomic » ou
                 sur{" "}
                 <a
                   href="https://playtomic.com/clubs/padel-15"
@@ -107,10 +107,8 @@ export default function OpeningHours() {
             <h3 className="text-lg font-medium">🧢 Besoin de matériel ?</h3>
             <ul>
               <li>
-                Pas de panique : 📲 Grâce à l’application « Padel 15 Locker »,
-                vous pouvez louer des raquettes et acheter des balles
-                directement depuis votre téléphone. À récupérer dans l’armoire
-                entre les terrains
+                Les raquettes en location et les balles sont disponible dans un
+                casier connecté entre les terrains
               </li>
             </ul>
           </Card>
