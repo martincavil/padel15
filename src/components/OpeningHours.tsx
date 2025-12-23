@@ -107,7 +107,7 @@ export default function OpeningHours() {
             <h3 className="text-lg font-medium">🧢 Besoin de matériel ?</h3>
             <ul>
               <li>
-                Les raquettes en location et les balles sont disponible dans un
+                Les raquettes en location et les balles sont disponibles dans un
                 casier connecté entre les terrains
               </li>
             </ul>
