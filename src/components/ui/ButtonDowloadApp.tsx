@@ -11,7 +11,10 @@ export function ButtonDownloadApp() {
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
     const isAndroid = /android/.test(userAgent);
-    const isIOS = /iphone|ipad|ipod|macintosh|mac os x/.test(userAgent);
+    // Exclude MacOS from iOS detection - only detect actual iOS devices
+    const isIOS =
+      /iphone|ipad|ipod/.test(userAgent) &&
+      !/macintosh|mac os x/.test(userAgent);
     const mobileCheck = isAndroid || isIOS;
 
     setIsMobile(mobileCheck);
@@ -34,15 +37,7 @@ export function ButtonDownloadApp() {
 
   const handleClick = () => {
     if (!storeLink) return;
-
-    if (isMobile) {
-      window.open(storeLink, "_blank");
-    } else {
-      const contactSection = document.getElementById("contact");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+    window.open(storeLink, "_blank");
   };
 
   return (

@@ -43,6 +43,16 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  // Gestion du smooth scroll pour les ancres
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <nav
       className={cn(
@@ -69,25 +79,28 @@ export default function Navbar() {
 
         {/* Navigation desktop */}
         <div className="hidden lg:flex items-center gap-12">
-          <Link
+          <a
             href="#club"
-            className="hover:text-orange-600 font-medium text-lg"
+            onClick={(e) => handleAnchorClick(e, "club")}
+            className="hover:text-orange-600 font-medium text-lg cursor-pointer"
           >
             Le Club
-          </Link>
-          <Link
+          </a>
+          <a
             href="#pricing"
-            className="hover:text-orange-600 font-medium text-lg"
+            onClick={(e) => handleAnchorClick(e, "pricing")}
+            className="hover:text-orange-600 font-medium text-lg cursor-pointer"
           >
             Les Tarifs
-          </Link>
-          <Link
+          </a>
+          <a
             href="#events"
-            className="hover:text-orange-600 font-medium text-lg"
+            onClick={(e) => handleAnchorClick(e, "events")}
+            className="hover:text-orange-600 font-medium text-lg cursor-pointer"
           >
             Évènements
-          </Link>
-          <Link href="#contact">
+          </a>
+          <a href="#contact" onClick={(e) => handleAnchorClick(e, "contact")}>
             <Button
               className={cn(
                 "cursor-pointer",
@@ -98,7 +111,7 @@ export default function Navbar() {
             >
               Contactez-nous
             </Button>
-          </Link>
+          </a>
           <Link href="https://www.instagram.com/padel15club/?hl=fr">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -152,34 +165,34 @@ export default function Navbar() {
           )}
         >
           <div className="flex flex-col space-y-4 mt-12">
-            <Link
+            <a
               href="#club"
-              className="hover:text-orange-600"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleAnchorClick(e, "club")}
+              className="hover:text-orange-600 cursor-pointer"
             >
               Le Club
-            </Link>
-            <Link
+            </a>
+            <a
               href="#pricing"
-              className="hover:text-orange-600"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleAnchorClick(e, "pricing")}
+              className="hover:text-orange-600 cursor-pointer"
             >
               Les Tarifs
-            </Link>
-            <Link
+            </a>
+            <a
               href="#events"
-              className="hover:text-orange-600"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleAnchorClick(e, "events")}
+              className="hover:text-orange-600 cursor-pointer"
             >
               Évènements
-            </Link>
+            </a>
           </div>
           <div className="flex flex-col space-y-4 pb-8">
-            <Link href="#contact" onClick={() => setMenuOpen(false)}>
+            <a href="#contact" onClick={(e) => handleAnchorClick(e, "contact")}>
               <Button className="bg-[#FF6727] hover:bg-orange-600 w-full">
                 Contactez-nous
               </Button>
-            </Link>
+            </a>
             <ButtonDownloadApp />
           </div>
         </div>
