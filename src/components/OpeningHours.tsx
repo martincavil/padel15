@@ -92,10 +92,10 @@ export default function OpeningHours() {
                 Les réservations se font via notre application « Padel15 » ou
                 sur{" "}
                 <a
-                  href="https://www.anybuddyapp.com/club-padel-15-paris"
+                  href="https://playtomic.com/clubs/padel-15"
                   className="text-[#FF6727] hover:underline"
                 >
-                  https://www.anybuddyapp.com/club-padel-15-paris
+                  https://playtomic.com/clubs/padel-15
                 </a>
                 .
               </li>

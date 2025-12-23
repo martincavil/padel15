@@ -18,14 +18,16 @@ export function ButtonDownloadApp() {
 
     if (isAndroid) {
       setStoreLink(
-        "https://play.google.com/store/apps/details?id=com.trenicom.padel15"
+        "https://play.google.com/store/apps/details?id=com.playtomic&hl=fr"
       );
       setStoreLabel("Réserver un terrain");
     } else if (isIOS) {
-      setStoreLink("https://apps.apple.com/fr/app/padel-15/id6738955590");
+      setStoreLink(
+        "https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
+      );
       setStoreLabel("Réserver un terrain");
     } else {
-      setStoreLink("https://www.anybuddyapp.com/club-padel-15-paris");
+      setStoreLink("https://playtomic.com/clubs/padel-15");
       setStoreLabel("Réserver un terrain");
     }
   }, []);

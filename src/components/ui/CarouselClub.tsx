@@ -1,8 +1,7 @@
-'use client'
-import * as React from "react"
+"use client";
+import * as React from "react";
 
-import Autoplay from "embla-carousel-autoplay"
-
+import Autoplay from "embla-carousel-autoplay";
 
 import {
   Carousel,
@@ -10,14 +9,11 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from './Carousel'
-import Image from "next/image"
-
+} from "./Carousel";
+import Image from "next/image";
 
 export function CarouselClub() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000})
-  )
+  const plugin = React.useRef(Autoplay({ delay: 2000 }));
 
   const medias = [
     {
@@ -31,16 +27,11 @@ export function CarouselClub() {
       alt: "Club 2",
     },
     {
-      id: 3,
-      src: "/terrain-ext-nuit.webp",
-      alt: "Club 3",
-    },
-    {
       id: 4,
       src: "/terrain-inte-vide.webp",
       alt: "Club 4",
     },
-  ]
+  ];
 
   return (
     <div className="rounded-lg shadow-lg bg-card overflow-hidden max-w-3xl mx-auto">
@@ -55,12 +46,13 @@ export function CarouselClub() {
           {medias?.map((img, index) => (
             <CarouselItem key={index} className="pl-1">
               <div className="p-1 w-full">
-                <Image 
+                <Image
                   src={img.src}
-                  alt="Padel15" 
+                  alt="Padel15"
                   width={800}
                   height={372}
-                  className="h-full w-[900px] object-cover aspect-ratio rounded-t-lg" />
+                  className="h-full w-[900px] object-cover aspect-ratio rounded-t-lg"
+                />
               </div>
             </CarouselItem>
           ))}
@@ -71,10 +63,12 @@ export function CarouselClub() {
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">Nos terrains</h3>
         <p className="text-sm text-gray-600">
-        2 terrains dernière génération, full panoramiques, entièrement couverts et hermétiques, jouables par tous les temps. Toits ouvrants pour profiter du soleil quand il est là ! Location de raquettes et vente de balles disponibles sur place.
+          2 terrains dernière génération, full panoramiques, entièrement
+          couverts et hermétiques, jouables par tous les temps. Toits ouvrants
+          pour profiter du soleil quand il est là ! Location de raquettes et
+          vente de balles disponibles sur place.
         </p>
       </div>
     </div>
-
-  )
+  );
 }
