@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Button } from "./ui/Button";
 
 export default function Clients() {
   // Liste des clients organisée par ligne
@@ -13,7 +14,8 @@ export default function Clients() {
     { id: 6, name: "MUFG", logo: "/logos/mufg.svg" },
     { id: 7, name: "BNP Paribas", logo: "/logos/bnp.svg" },
     { id: 8, name: "Boston Consulting Group", logo: "/logos/bcg.svg" },
-    { id: 9, name: "MC2i", logo: "/logos/mc2i.svg" },
+    { id: 9, name: "ASICS", logo: "/logos/asics.svg" },
+    { id: 10, name: "Cupra", logo: "/logos/cupra.svg" },
   ];
 
   const clientsRow2 = [
@@ -24,12 +26,10 @@ export default function Clients() {
     { id: 16, name: "DEEL", logo: "/logos/deel.svg" },
     { id: 17, name: "HubSpot", logo: "/logos/hubspot.svg" },
     { id: 18, name: "American Vintage", logo: "/logos/americanvintage.png" },
-    { id: 19, name: "ASICS", logo: "/logos/asics.svg" },
-    { id: 20, name: "Cupra", logo: "/logos/cupra.png" },
+    { id: 19, name: "HEC", logo: "/logos/hec.png" },
+    { id: 20, name: "Pompiers de Paris", logo: "/logos/pompiers.jpeg" },
     { id: 21, name: "Kering", logo: "/logos/kering.svg" },
-    { id: 22, name: "Pompiers de Paris", logo: "/logos/pompiers.jpeg" },
-    { id: 23, name: "LFP", logo: "/logos/lfp.png" },
-    { id: 24, name: "HEC", logo: "/logos/hec.png" },
+    { id: 22, name: "LFP", logo: "/logos/lfp.png" },
   ];
 
   return (
@@ -82,6 +82,19 @@ export default function Clients() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="container mx-auto mt-12 text-center">
+        <p className="text-lg mb-6 text-gray-700">
+          Rejoignez les entreprises qui nous font confiance pour leurs
+          événements
+        </p>
+        <a href="/contact-entreprise">
+          <Button className="bg-[#FF6727] hover:bg-[#FF6727] hover:opacity-90 text-white px-8 py-6 !rounded-button whitespace-nowrap cursor-pointer">
+            Organiser mon événement
+          </Button>
+        </a>
       </div>
 
       <style jsx>{`
