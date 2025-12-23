@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "./ui/Button";
+// import { Button } from "./ui/Button";
 
 export default function Clients() {
   // Liste des clients organisée par ligne
@@ -85,7 +85,7 @@ export default function Clients() {
       </div>
 
       {/* CTA Section */}
-      <div className="container mx-auto mt-12 text-center">
+      {/* <div className="container mx-auto mt-12 text-center">
         <p className="text-lg mb-6 text-gray-700">
           Rejoignez les entreprises qui nous font confiance pour leurs
           événements
@@ -95,7 +95,7 @@ export default function Clients() {
             Organiser mon événement
           </Button>
         </a>
-      </div>
+      </div> */}
 
       <style jsx>{`
         @keyframes scroll-left {
