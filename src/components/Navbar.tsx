@@ -93,6 +93,18 @@ export default function Navbar() {
           >
             Les Tarifs
           </a>
+          <a href="#cours" onClick={(e) => handleAnchorClick(e, "cours")}>
+            <Button
+              className={cn(
+                "cursor-pointer",
+                isScrolled
+                  ? "bg-[#FF6727] hover:bg-orange-600"
+                  : "bg-white text-black hover:bg-slate-100"
+              )}
+            >
+              Cours
+            </Button>
+          </a>
           <a
             href="#events"
             onClick={(e) => handleAnchorClick(e, "events")}
@@ -178,6 +190,13 @@ export default function Navbar() {
               className="hover:text-orange-600 cursor-pointer"
             >
               Les Tarifs
+            </a>
+            <a
+              href="#cours"
+              onClick={(e) => handleAnchorClick(e, "cours")}
+              className="font-semibold text-[#FF6727] cursor-pointer"
+            >
+              🎾 Réserver un cours
             </a>
             <a
               href="#events"

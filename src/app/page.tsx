@@ -2,6 +2,7 @@
 import Clients from "@/components/Clients";
 import Club2 from "@/components/Club-2";
 import Contact from "@/components/Contact";
+import CoursParticuliers from "@/components/CoursParticuliers";
 import HeroBanner from "@/components/HeroBanner";
 import OpeningHours from "@/components/OpeningHours";
 import TeamBuilding from "@/components/TeamBuilding";
@@ -16,6 +17,7 @@ export default function Home() {
         <Clients />
         <Club2 />
         <OpeningHours />
+        <CoursParticuliers />
         <Values />
         <TeamBuilding />
         <Contact />
