@@ -34,7 +34,7 @@ export default function CoursParticuliers() {
     "https://tally.so/embed/7R4EXa?alignLeft=1&hideTitle=1&dynamicHeight=1";
 
   return (
-    <section id="cours" className="relative scroll-mt-24 py-20 overflow-hidden">
+    <section id="cours" className="relative scroll-mt-16 py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f]" />
       <div
@@ -61,9 +61,9 @@ export default function CoursParticuliers() {
         </div>
 
         {/* Main layout */}
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
           {/* Left — infos + tabs */}
-          <div>
+          <div className="lg:col-span-1 ">
             {/* Toggle tabs */}
             <div className="flex gap-3 mb-8 bg-white/5 p-1.5 rounded-xl border border-white/10">
               {COURSE_TYPES.map((type) => (
@@ -139,7 +139,7 @@ export default function CoursParticuliers() {
                               ✓
                             </span>
                           </span>
-                          Groupes de 4 à 8 joueurs maximum
+                          Groupes de 2 à 8 joueurs maximum
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
                           <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
@@ -193,7 +193,7 @@ export default function CoursParticuliers() {
           </div>
 
           {/* Right — Tally form */}
-          <div className="border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
+          <div className="lg:col-span-2 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
             <div className="bg-white px-6 pt-6 pb-4">
               <h3 className="font-semibold text-lg mb-1">Demande de cours</h3>
               <p className="text-gray-400 text-sm">
