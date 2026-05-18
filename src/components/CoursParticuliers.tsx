@@ -195,9 +195,7 @@ export default function CoursParticuliers() {
           {/* Right — Tally form */}
           <div className="border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
             <div className="bg-white px-6 pt-6 pb-4">
-              <h3 className="font-semibold text-lg mb-1">
-                Demande de réservation
-              </h3>
+              <h3 className="font-semibold text-lg mb-1">Demande de cours</h3>
               <p className="text-gray-400 text-sm">
                 Remplissez le formulaire, notre équipe vous contacte sous 24h.
               </p>
