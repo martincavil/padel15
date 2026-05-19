@@ -2,6 +2,12 @@
   "name": "padel15",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

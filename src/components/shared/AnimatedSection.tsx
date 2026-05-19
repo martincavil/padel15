@@ -1,39 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { fadeInUp } from "@/lib/animations";
+import { useEffect, useRef, useState } from "react";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  variants?: typeof fadeInUp;
 }
 
-export function AnimatedSection({
-  children,
-  className,
-  delay = 0,
-  variants = fadeInUp,
-}: AnimatedSectionProps) {
+export function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.08, rootMargin: "-50px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={{
-        ...variants,
-        visible: {
-          ...variants.visible,
-          transition: {
-            ...(variants.visible as { transition?: Record<string, unknown> }).transition,
-            delay,
-          },
-        },
-      }}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.5s ease-out ${delay}s, transform 0.5s ease-out ${delay}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

@@ -1,3 +1,23 @@
 {
-  "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" = \"v2\" ] && exit 1 || exit 0"
+  "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" = \"v2\" ] && exit 1 || exit 0",
+  "headers": [
+    {
+      "source": "/(.*\\.webp|.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.svg|.*\\.ico|.*\\.woff2|.*\\.otf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }

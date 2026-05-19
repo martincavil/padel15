@@ -223,13 +223,15 @@ export default function HeroBanner() {
       {/* Fallback carousel photo */}
       <div className="absolute inset-0 z-0">
         {CAROUSEL_IMAGES.map((src, index) => (
-          <div
-            key={src}
-            style={{ backgroundImage: `url(${src})` }}
-            className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${
-              index === activeIndex ? "opacity-100" : "opacity-0"
-            }`}
-          />
+          index === 0 ? (
+            <div key={src} className={`absolute inset-0 transition-opacity duration-1000 ${activeIndex === 0 ? "opacity-100" : "opacity-0"}`}>
+              <Image src={src} alt="Terrains Padel 15" fill className="object-cover" priority sizes="100vw" />
+            </div>
+          ) : (
+            <div key={src} style={{ backgroundImage: `url(${src})` }}
+              className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+            />
+          )
         ))}
       </div>
 

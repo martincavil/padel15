@@ -98,6 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={dmSans.variable}>
       <head>
+        <link rel="preload" as="image" href="/terrain-ext-jour.webp" fetchPriority="high" />
         <link rel="icon" href="/P15.ico" type="image/x-icon" />
         <JsonLd data={localBusinessSchema} />
         <JsonLd data={sportsActivitySchema} />
