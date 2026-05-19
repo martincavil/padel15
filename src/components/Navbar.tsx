@@ -19,7 +19,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(true);
   const pathname = usePathname();
   const isHome = pathname === "/";
 
@@ -63,7 +63,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav links */}
-        <div className={cn("hidden md:flex items-center gap-5", textColor)}>
+        <div className={cn("hidden xl:flex items-center gap-5", textColor)}>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -79,7 +79,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden xl:flex items-center gap-2">
           <a
             href="https://playtomic.com/clubs/padel-15"
             target="_blank"
@@ -138,7 +138,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden z-[60]"
+          className="xl:hidden z-[60]"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >

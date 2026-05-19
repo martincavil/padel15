@@ -84,7 +84,7 @@ export function B2BSection() {
 
         <div className="text-center">
           <Link
-            href="/evenements"
+            href="/entreprises"
             className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
           >
             Organiser mon événement

@@ -21,7 +21,8 @@ const BLOCKS = [
     img: "/rest-inte-grand-angle.webp",
     label: "Restaurant",
     title: "Restaurant, bar & guinguette",
-    description: "Service continu du petit-déjeuner au dîner. Terrasse végétalisée et pétanque.",
+    description:
+      "Service continu du petit-déjeuner au dîner. Terrasse végétalisée et pétanque.",
     cta: "Découvrir",
   },
   {
@@ -52,7 +53,9 @@ export function ExperienceBlocks() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-center mb-12"
       >
-        <h2 className="font-buzz text-3xl md:text-4xl mb-3">L&apos;expérience Padel 15</h2>
+        <h2 className="font-buzz text-3xl md:text-4xl mb-3">
+          L&apos;expérience Padel 15
+        </h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Un lieu unique à Paris 15 : bien plus qu&apos;un club de padel.
         </p>
@@ -85,7 +88,9 @@ export function ExperienceBlocks() {
                 {block.label}
               </span>
               <h3 className="font-semibold text-lg mt-1 mb-1">{block.title}</h3>
-              <p className="text-white/70 text-sm leading-snug mb-3">{block.description}</p>
+              <p className="text-white/70 text-sm leading-snug mb-3">
+                {block.description}
+              </p>
               <span className="text-xs font-semibold text-brand group-hover:underline">
                 {block.cta} →
               </span>

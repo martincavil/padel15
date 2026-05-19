@@ -23,6 +23,10 @@ export function CTANewsletter({
         </span>
         <h2 className={`font-buzz text-3xl md:text-4xl mb-3 ${isDark ? "text-white" : "text-gray-900"}`}>{title}</h2>
         <p className={`max-w-md mx-auto mb-8 ${isDark ? "text-gray-400" : "text-gray-500"}`}>{subtitle}</p>
+        {/* Incentive badge */}
+        <div className="inline-flex items-center gap-2 bg-brand/20 border border-brand/30 rounded-full px-4 py-1.5 mb-4">
+          <span className="text-brand text-sm font-semibold">🎁 -10% sur votre 1ère réservation</span>
+        </div>
         {brevoFormUrl ? (
           <iframe
             src={brevoFormUrl}
@@ -40,6 +44,11 @@ export function CTANewsletter({
             S&apos;inscrire à la newsletter
           </a>
         )}
+        <p className={`text-xs mt-3 ${isDark ? "text-gray-500" : "text-gray-400"}`}>
+          En vous inscrivant, vous acceptez notre{" "}
+          <a href="/confidentialite" className="underline hover:text-brand">politique de confidentialité</a>.
+          Désabonnement en 1 clic.
+        </p>
       </div>
     </section>
   );

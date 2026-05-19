@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Utensils, Leaf, Wine } from "lucide-react";
+import { Check, Utensils, Leaf, Wine, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { LightboxGallery } from "@/components/shared/LightboxGallery";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { AnimatedPrivatiseCard } from "@/components/restaurant/AnimatedPrivatiseCard";
+import { getMenuByCategory, getActiveFormules, getDailySpecials } from "@/sanity/queries";
+import { MenuDisplay } from "@/components/restaurant/MenuDisplay";
 
 export const metadata: Metadata = {
   title: "Restaurant & Guinguette Paris 15 | Bar, Terrasse, Pétanque",
@@ -62,7 +64,13 @@ const GALLERY_IMAGES = [
   { src: "/rest-inte-terrain.jpg", alt: "Vue sur les terrains" },
 ];
 
-export default function RestaurantPage() {
+export default async function RestaurantPage() {
+  const [menuByCategory, formules, dailySpecials] = await Promise.all([
+    getMenuByCategory(),
+    getActiveFormules(),
+    getDailySpecials(),
+  ]);
+
   return (
     <>
       <JsonLd data={restaurantSchema} />
@@ -138,6 +146,36 @@ export default function RestaurantPage() {
         <AnimatedSection>
           <h2 className="font-buzz text-3xl mb-6">Galerie</h2>
           <LightboxGallery images={GALLERY_IMAGES} columns={3} />
+        </AnimatedSection>
+
+        {/* Daily Specials */}
+        {dailySpecials.length > 0 && (
+          <AnimatedSection>
+            <div className="bg-brand/5 border border-brand/20 rounded-2xl p-7">
+              <div className="flex items-center gap-2 mb-5">
+                <Sparkles className="w-5 h-5 text-brand" />
+                <h2 className="font-buzz text-2xl">Suggestions du jour</h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {dailySpecials.map((special) => (
+                  <div key={special._id} className="flex items-start justify-between gap-3 bg-white rounded-xl p-4">
+                    <div>
+                      <p className="font-semibold">{special.title}</p>
+                      {special.description && <p className="text-gray-500 text-sm mt-1">{special.description}</p>}
+                    </div>
+                    <span className="font-buzz text-2xl text-brand flex-shrink-0">{special.price}€</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+        )}
+
+        {/* Menu complet */}
+        <AnimatedSection>
+          <h2 className="font-buzz text-3xl mb-2">La carte</h2>
+          <p className="text-gray-500 mb-8">Cuisine généreuse avec des produits frais et de saison.</p>
+          <MenuDisplay menuByCategory={menuByCategory} formules={formules} />
         </AnimatedSection>
 
         {/* Animated Privatisez card */}

@@ -13,6 +13,7 @@ const LINKS_CLUB = [
 const LINKS_PRATIQUE = [
   { href: "/contact", label: "Contact & Accès" },
   { href: "/blog", label: "Blog" },
+  { href: "/entreprises", label: "Événements entreprise" },
 ];
 
 export function Footer() {

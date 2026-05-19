@@ -4,6 +4,7 @@ import { DM_Sans } from "next/font/google";
 import Layout from "@/components/Layout";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { JsonLd } from "@/components/shared/JsonLd";
+import Tracking from "@/components/Tracking";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -56,6 +57,23 @@ const localBusinessSchema = {
   ],
 };
 
+const sportsActivitySchema = {
+  "@context": "https://schema.org",
+  "@type": "SportsActivityLocation",
+  name: "Padel 15",
+  sport: "Padel",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "115 rue Castagnary",
+    postalCode: "75015",
+    addressLocality: "Paris",
+    addressCountry: "FR",
+  },
+  openingHours: "Mo-Su 08:00-22:00",
+  telephone: "+33145315876",
+  url: "https://padel15.fr",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://padel15.fr"),
   title: {
@@ -82,9 +100,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/P15.ico" type="image/x-icon" />
         <JsonLd data={localBusinessSchema} />
+        <JsonLd data={sportsActivitySchema} />
       </head>
       <body className="scroll-smooth font-sans">
         <GoogleAnalytics ga_id="G-N2Y4ZCYHTB" />
+        <Tracking />
         <Layout>{children}</Layout>
       </body>
     </html>

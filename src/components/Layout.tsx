@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from './Navbar'
 import { Footer } from './layout/Footer'
+import { StickyMobileCTA } from './shared/StickyMobileCTA'
+import { CookieBanner } from './shared/CookieBanner'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -22,6 +24,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </motion.main>
       </AnimatePresence>
       <Footer />
+      <StickyMobileCTA />
+      <CookieBanner />
     </div>
   )
 }

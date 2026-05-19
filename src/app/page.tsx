@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import HeroBanner from "@/components/HeroBanner";
-import Clients from "@/components/Clients";
-import { ExperienceBlocks } from "@/components/homepage/ExperienceBlocks";
-import { GoogleRating } from "@/components/shared/GoogleRating";
-import { GoogleReviews } from "@/components/shared/GoogleReviews";
+import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
+import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
+import { RestaurantHighlight } from "@/components/homepage/RestaurantHighlight";
+import CoursParticuliers from "@/components/CoursParticuliers";
+import { AgendaSection } from "@/components/homepage/AgendaSection";
+import { PartenairesSection } from "@/components/homepage/PartenairesSection";
 import { B2BSection } from "@/components/homepage/B2BSection";
+import Clients from "@/components/Clients";
 import { CTANewsletter } from "@/components/shared/CTANewsletter";
 
 export const metadata: Metadata = {
@@ -17,15 +20,16 @@ export default function HomePage() {
   return (
     <>
       <HeroBanner />
-      <div className="py-4 bg-white border-b border-gray-100">
-        <GoogleRating rating={4.8} count={247} />
-      </div>
-      <ExperienceBlocks />
-      <GoogleReviews />
+      <PlaytomicSection />
+      <PadelInfoSection />
+      <RestaurantHighlight />
+      <CoursParticuliers />
+      <AgendaSection />
+      <PartenairesSection />
+      <B2BSection />
       <div className="py-6 bg-gray-50">
         <Clients />
       </div>
-      <B2BSection />
       <CTANewsletter variant="light" />
     </>
   );

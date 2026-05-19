@@ -4,13 +4,236 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ChevronDown, Smartphone } from "lucide-react";
 
 const CAROUSEL_IMAGES = [
-  { id: 1, src: "/terrain-ext-jour.webp", alt: "Terrain extérieur de jour" },
-  { id: 2, src: "/terrain-inte-game.webp", alt: "Match en cours terrain intérieur" },
-  { id: 3, src: "/terrain-ext-nuit.webp", alt: "Terrain extérieur de nuit" },
-  { id: 4, src: "/terrain-inte-vide.webp", alt: "Terrain intérieur" },
+  "/terrain-ext-jour.webp",
+  "/terrain-inte-game.webp",
+  "/terrain-ext-nuit.webp",
+  "/terrain-inte-vide.webp",
 ];
+
+const PEAK_HOURS = [12, 13, 17, 18, 19, 20, 21];
+const SIMULATED_COMPLET = [18, 19, 20];
+
+const DAY_NAMES = [
+  "Dimanche",
+  "Lundi",
+  "Mardi",
+  "Mercredi",
+  "Jeudi",
+  "Vendredi",
+  "Samedi",
+];
+const MONTH_NAMES = [
+  "jan.",
+  "fév.",
+  "mar.",
+  "avr.",
+  "mai",
+  "juin",
+  "juil.",
+  "août",
+  "sep.",
+  "oct.",
+  "nov.",
+  "déc.",
+];
+
+function toDateStr(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function BookingWidget() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setNow(new Date());
+    const t = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(t);
+  }, []);
+
+  if (!now) return null;
+
+  const today = `${DAY_NAMES[now.getDay()]} ${now.getDate()} ${MONTH_NAMES[now.getMonth()]}`;
+  const currentHour = now.getHours();
+  const dateStr = toDateStr(now);
+  const bookingUrl = `https://playtomic.com/clubs/padel-15?date=${dateStr}`;
+
+  const slots = Array.from({ length: 14 }, (_, i) => {
+    const hour = 8 + i;
+    const isPast = hour < currentHour;
+    const isComplet = !isPast && SIMULATED_COMPLET.includes(hour);
+    const isPeak = PEAK_HOURS.includes(hour);
+    return { hour, isPast, isComplet, isPeak };
+  });
+
+  const available = slots.filter((s) => !s.isPast && !s.isComplet).length;
+  const next = slots.find((s) => !s.isPast && !s.isComplet);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.35, duration: 0.6, ease: "easeOut" }}
+      className="bg-black/65 backdrop-blur-xl border border-white/20 rounded-2xl p-6 w-full max-w-sm"
+    >
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <p className="text-white/50 text-xs uppercase tracking-wider font-medium mb-0.5">
+            Réservation
+          </p>
+          <p className="text-white font-semibold">{today}</p>
+          <p className="text-brand text-sm font-medium mt-0.5">
+            {available} créneaux disponibles
+            {next && (
+              <span className="text-white/40 font-normal">
+                {" "}
+                · prochain {next.hour}h
+              </span>
+            )}
+          </p>
+        </div>
+        <div className="w-10 h-10 rounded-xl bg-brand/20 flex items-center justify-center shrink-0">
+          <svg
+            className="w-5 h-5 text-brand"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Légende */}
+      <div className="flex items-center gap-3 mb-3">
+        <span className="flex items-center gap-1 text-xs text-white/40">
+          <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
+          Dispo
+        </span>
+        <span className="flex items-center gap-1 text-xs text-white/40">
+          <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block" />
+          Forte demande
+        </span>
+        <span className="flex items-center gap-1 text-xs text-white/40">
+          <span className="w-2 h-2 rounded-full bg-red-400/60 inline-block" />
+          Complet
+        </span>
+      </div>
+
+      {/* Grille des créneaux */}
+      <div className="grid grid-cols-4 gap-2 mb-4">
+        {slots.map(({ hour, isPast, isComplet, isPeak }) => {
+          const label = `${hour}h`;
+          if (isPast) {
+            return (
+              <div
+                key={hour}
+                className="text-center py-2 rounded-xl text-xs text-white/20 bg-white/5 line-through select-none"
+              >
+                {label}
+              </div>
+            );
+          }
+          if (isComplet) {
+            return (
+              <div
+                key={hour}
+                className="text-center py-2 rounded-xl text-xs text-red-400/60 bg-red-400/10 select-none"
+              >
+                {label}
+              </div>
+            );
+          }
+          return (
+            <a
+              key={hour}
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`Réserver ${label}`}
+              className={`text-center py-2 rounded-xl text-xs font-semibold transition-all ${
+                isPeak
+                  ? "text-yellow-300 bg-yellow-400/15 hover:bg-yellow-400/25 ring-1 ring-inset ring-yellow-400/20"
+                  : "text-green-400 bg-green-400/15 hover:bg-green-400/25"
+              }`}
+            >
+              {label}
+            </a>
+          );
+        })}
+      </div>
+
+      {/* Note */}
+      <p className="text-white/25 text-xs text-center mb-4">
+        Créneaux indicatifs · Disponibilités en temps réel sur{" "}
+        <a
+          href={bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-white/50 transition-colors"
+        >
+          Playtomic
+        </a>
+      </p>
+
+      {/* CTA principal */}
+      <a
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 w-full bg-brand hover:bg-brand-dark text-white font-semibold py-3.5 rounded-xl text-sm transition-colors shadow-lg shadow-brand/25 mb-3"
+      >
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 8v4l3 3" />
+        </svg>
+        Voir les créneaux en temps réel
+      </a>
+
+      {/* App badges */}
+      <div className="grid grid-cols-2 gap-2">
+        <a
+          href="https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="App Store"
+          className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 border border-white/15 text-white py-2.5 rounded-xl text-xs font-medium transition-colors"
+        >
+          <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+          </svg>
+          App Store
+        </a>
+        <a
+          href="https://play.google.com/store/apps/details?id=com.playtomic&hl=fr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Google Play"
+          className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 border border-white/15 text-white py-2.5 rounded-xl text-xs font-medium transition-colors"
+        >
+          <Smartphone className="w-4 h-4 shrink-0" />
+          Google Play
+        </a>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function HeroBanner() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -18,97 +241,249 @@ export default function HeroBanner() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((i) => (i === CAROUSEL_IMAGES.length - 1 ? 0 : i + 1));
-    }, 4000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="h-screen max-h-screen relative overflow-hidden">
-      {/* Carousel */}
+      {/* Vidéo — uploadez /public/bg-video-test.mp4 pour activer */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={CAROUSEL_IMAGES[0]}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source src="/bg-video-test.mp4" type="video/mp4" />
+      </video>
+
+      {/* Fallback carousel photo */}
       <div className="absolute inset-0 z-0">
-        {CAROUSEL_IMAGES.map((slide, index) => (
+        {CAROUSEL_IMAGES.map((src, index) => (
           <div
-            key={slide.id}
-            style={{ backgroundImage: `url(${slide.src})` }}
-            className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out ${
+            key={src}
+            style={{ backgroundImage: `url(${src})` }}
+            className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${
               index === activeIndex ? "opacity-100" : "opacity-0"
             }`}
-            role="img"
-            aria-label={slide.alt}
           />
         ))}
       </div>
-      <div className="absolute inset-0 bg-black/45 z-10" />
 
-      {/* Animated content */}
-      <div className="relative container h-full flex flex-col items-center justify-center gap-8 z-20 text-center px-4">
+      {/* Overlays : gauche sombre pour lisibilité texte */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
+
+      {/* ── Desktop lg+ : split gauche / droite ── */}
+      <div className="hidden lg:grid grid-cols-3 relative z-20 h-full container items-center gap-8">
+        {/* LEFT */}
+        <div className="col-span-2 flex flex-col gap-5">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 w-fit"
+          >
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <svg
+                  key={s}
+                  className="w-3.5 h-3.5 fill-yellow-400"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            <span className="text-white text-xs font-medium">
+              4,8 · 247 avis Google
+            </span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
+          >
+            <Image
+              src="/logo.svg"
+              alt="Padel 15"
+              width={300}
+              height={100}
+              className="filter brightness-0 invert mb-4"
+              priority
+            />
+            <h1 className="font-buzz text-6xl xl:text-7xl text-white leading-none tracking-tight">
+              L&apos;art de Vivre <span className="text-brand">Le Padel</span>
+            </h1>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            className="text-white/70"
+          >
+            L&apos;art de vivre le padel à Paris. Un club d&apos;exception où
+            sport, élégance et convivialité se rencontrent. Dans un écrin
+            végétalisé en plein cœur de la capitale, jouez, partagez,
+            détendez-vous… et savourez chaque instant. Terrains couvert et haut
+            de gamme, terrasse guinguette, pétanque, fléchettes, bar et
+            restaurant
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="flex flex-wrap gap-3"
+          >
+            <Link
+              href="/entreprises"
+              className="bg-white/10 hover:bg-white/20 border border-white/40 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors backdrop-blur-sm"
+            >
+              Organiser un événement
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* RIGHT — Booking widget */}
+        <div className="flex justify-end">
+          <BookingWidget />
+        </div>
+      </div>
+
+      {/* ── Mobile / tablet <lg : centré ── */}
+      <div className="flex lg:hidden relative z-20 h-full flex-col items-center justify-center text-center px-4 gap-5">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5"
+        >
+          <div className="flex">
+            {[1, 2, 3, 4, 5].map((s) => (
+              <svg
+                key={s}
+                className="w-3 h-3 fill-yellow-400"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <span className="text-white text-xs font-medium">4,8 · 247 avis</span>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
           <Image
             src="/logo.svg"
-            alt="Logo Padel 15"
-            width={400}
-            height={160}
-            className="mx-auto filter brightness-0 invert"
+            alt="Padel 15"
+            width={240}
+            height={95}
+            className="mx-auto filter brightness-0 invert mb-3"
             priority
           />
+          <h1 className="font-buzz text-5xl text-white leading-none">
+            L&apos;art de vivre
+            <br />
+            <span className="text-brand">le padel</span>
+          </h1>
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-white/70 text-sm"
         >
-          L&apos;art de vivre le padel à Paris.{" "}
-          <span className="font-semibold">
-            Sport, élégance et convivialité dans un écrin végétalisé en plein cœur de la capitale.
-          </span>
+          Sport · Élégance · Convivialité · Paris 15ème
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center gap-4"
+          transition={{ delay: 0.55 }}
+          className="flex flex-col items-center gap-2 w-full max-w-xs"
         >
           <a
             href="https://playtomic.com/clubs/padel-15"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg text-base transition-colors shadow-lg shadow-brand/30"
+            className="w-full text-center bg-brand hover:bg-brand-dark text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg shadow-brand/30"
           >
             Réserver un terrain
           </a>
+          <div className="flex gap-2 w-full">
+            <a
+              href="https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 bg-white/10 border border-white/20 text-white py-2.5 rounded-xl text-xs font-medium"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="w-4 h-4 fill-current shrink-0"
+              >
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.playtomic&hl=fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 bg-white/10 border border-white/20 text-white py-2.5 rounded-xl text-xs font-medium"
+            >
+              <Smartphone className="w-4 h-4 shrink-0" />
+              Google Play
+            </a>
+          </div>
           <Link
-            href="/evenements"
-            className="bg-white/10 hover:bg-white/20 border border-white text-white font-semibold px-8 py-4 rounded-lg text-base transition-colors backdrop-blur-sm bg-transparent"
+            href="/entreprises"
+            className="text-white/60 text-xs hover:text-white transition-colors"
           >
-            Organiser un événement
+            Organiser un événement →
           </Link>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex gap-2"
-        >
-          {CAROUSEL_IMAGES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === activeIndex ? "bg-brand w-6" : "bg-white/50 w-2"
-              }`}
-              aria-label={`Image ${i + 1}`}
-            />
-          ))}
-        </motion.div>
       </div>
+
+      {/* Dots */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+        {CAROUSEL_IMAGES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveIndex(i)}
+            className={`rounded-full transition-all duration-300 ${
+              i === activeIndex
+                ? "w-5 h-1.5 bg-brand"
+                : "w-1.5 h-1.5 bg-white/40"
+            }`}
+            aria-label={`Photo ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Scroll indicator desktop */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-4 left-1/2 z-20 hidden lg:block"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <ChevronDown className="w-5 h-5 text-white/40" />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
