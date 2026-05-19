@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-// import { Button } from "./ui/Button";
 
 export default function Clients() {
   // Liste des clients organisée par ligne
@@ -84,46 +83,6 @@ export default function Clients() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      {/* <div className="container mx-auto mt-12 text-center">
-        <p className="text-lg mb-6 text-gray-700">
-          Rejoignez les entreprises qui nous font confiance pour leurs
-          événements
-        </p>
-        <a href="/contact-entreprise">
-          <Button className="bg-[#FF6727] hover:bg-[#FF6727] hover:opacity-90 text-white px-8 py-6 !rounded-button whitespace-nowrap cursor-pointer">
-            Organiser mon événement
-          </Button>
-        </a>
-      </div> */}
-
-      <style jsx>{`
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        @keyframes scroll-right {
-          0% {
-            transform: translateX(-50%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-
-        .animate-scroll-left {
-          animation: scroll-left 40s linear infinite;
-        }
-
-        .animate-scroll-right {
-          animation: scroll-right 40s linear infinite;
-        }
-      `}</style>
     </section>
   );
 }

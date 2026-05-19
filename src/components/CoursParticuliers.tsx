@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type CourseType = "particulier" | "collectif";
@@ -99,34 +100,26 @@ export default function CoursParticuliers() {
                     {type.id === "particulier" ? (
                       <>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Suivi individuel et technique personnalisée
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Horaires flexibles selon vos disponibilités
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Tous niveaux, de débutant à confirmé
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Pack de séances ou séance à l'unité
                         </li>
@@ -134,34 +127,26 @@ export default function CoursParticuliers() {
                     ) : (
                       <>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Groupes de 2 à 8 joueurs maximum
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Ambiance conviviale et progression rapide
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Initiation, perfectionnement, compétition
                         </li>
                         <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-[#FF6727]/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#FF6727] text-xs font-bold">
-                              ✓
-                            </span>
+                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Tarif préférentiel vs. cours particulier
                         </li>

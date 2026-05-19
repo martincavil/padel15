@@ -1,5 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { staggerContainer, fadeInUp } from "@/lib/animations";
+
+const MotionLink = motion.create(Link);
 
 const BLOCKS = [
   {
@@ -39,20 +45,33 @@ const BLOCKS = [
 export function ExperienceBlocks() {
   return (
     <section className="container mx-auto px-4 py-16">
-      <div className="text-center mb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="text-center mb-12"
+      >
         <h2 className="font-buzz text-3xl md:text-4xl mb-3">L&apos;expérience Padel 15</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Un lieu unique à Paris 15 : bien plus qu&apos;un club de padel.
         </p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      </motion.div>
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      >
         {BLOCKS.map((block) => (
-          <Link
+          <MotionLink
             key={block.href}
             href={block.href}
-            className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow"
+            variants={fadeInUp}
+            className="group relative rounded-2xl shadow-md hover:shadow-xl transition-shadow"
           >
-            <div className="relative h-64">
+            <div className="relative h-64 overflow-hidden rounded-2xl">
               <Image
                 src={block.img}
                 alt={block.title}
@@ -71,9 +90,9 @@ export function ExperienceBlocks() {
                 {block.cta} →
               </span>
             </div>
-          </Link>
+          </MotionLink>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

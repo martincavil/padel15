@@ -1,20 +1,21 @@
 import Link from "next/link";
+import { Briefcase, Activity, Trophy } from "lucide-react";
 
 const CARDS = [
   {
-    icon: "🧑‍💼",
+    icon: Briefcase,
     title: "Événements d'entreprise",
     description:
       "Formules sur-mesure pour vos team buildings, afterworks ou séminaires, avec restauration et espaces privatifs.",
   },
   {
-    icon: "🎾",
+    icon: Activity,
     title: "Coaching privé en groupe",
     description:
       "Sessions encadrées pour vos collaborateurs, tous niveaux. Coaching, initiation ou perfectionnement.",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "Tournois & challenges",
     description:
       "Organisez votre tournoi privé entre collègues ou partenaires dans une ambiance dynamique clé-en-main.",
@@ -54,18 +55,21 @@ export function B2BSection() {
         </div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          {CARDS.map((card) => (
+          {CARDS.map((card) => {
+            const Icon = card.icon;
+            return (
             <div
               key={card.title}
               className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
             >
-              <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center text-2xl mb-5">
-                {card.icon}
+              <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mb-5">
+                <Icon className="w-6 h-6 text-brand" />
               </div>
               <h3 className="text-white font-semibold text-lg mb-2">{card.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">{card.description}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Testimonial */}

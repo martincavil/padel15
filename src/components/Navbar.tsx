@@ -56,14 +56,14 @@ export default function Navbar() {
           <Image
             src="/logo.svg"
             alt="Padel 15"
-            width={120}
-            height={50}
+            width={100}
+            height={40}
             className={cn("h-auto", logoFilter)}
           />
         </Link>
 
         {/* Desktop nav links */}
-        <div className={cn("hidden lg:flex items-center gap-8", textColor)}>
+        <div className={cn("hidden md:flex items-center gap-5", textColor)}>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -79,13 +79,14 @@ export default function Navbar() {
         </div>
 
         {/* Desktop CTAs */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2">
           <a
             href="https://playtomic.com/clubs/padel-15"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Button
+              size="sm"
               className={cn(
                 "cursor-pointer",
                 isScrolled
@@ -99,11 +100,12 @@ export default function Navbar() {
           <Link href="/evenements">
             <Button
               variant="outline"
+              size="sm"
               className={cn(
                 "cursor-pointer",
                 isScrolled
                   ? "border-brand text-brand hover:bg-brand hover:text-white"
-                  : "border-white text-white hover:bg-white/10"
+                  : "border-white text-white bg-transparent hover:bg-white/20"
               )}
             >
               Organiser un événement
@@ -136,7 +138,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden z-[60]"
+          className="md:hidden z-[60]"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
