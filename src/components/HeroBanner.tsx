@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronDown, Smartphone } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Smartphone } from "lucide-react";
 
 const CAROUSEL_IMAGES = [
   "/terrain-ext-jour.webp",
@@ -13,18 +13,8 @@ const CAROUSEL_IMAGES = [
   "/terrain-inte-vide.webp",
 ];
 
-const PEAK_HOURS = [12, 13, 17, 18, 19, 20, 21];
-const SIMULATED_COMPLET = [18, 19, 20];
-
-const DAY_NAMES = [
-  "Dimanche",
-  "Lundi",
-  "Mardi",
-  "Mercredi",
-  "Jeudi",
-  "Vendredi",
-  "Samedi",
-];
+const DAY_NAMES_SHORT = ["Dim.", "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam."];
+const DAY_NAMES_FULL = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MONTH_NAMES = [
   "jan.",
   "fév.",
@@ -40,39 +30,51 @@ const MONTH_NAMES = [
   "déc.",
 ];
 
+function addDays(d: Date, n: number): Date {
+  const r = new Date(d); r.setDate(r.getDate() + n); return r;
+}
 function toDateStr(d: Date) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function isSameDay(a: Date, b: Date) {
+  return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
 }
 
 function BookingWidget() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
-    setNow(new Date());
+    const today = new Date();
+    setSelectedDate(today); setNow(today);
     const t = setInterval(() => setNow(new Date()), 60_000);
     return () => clearInterval(t);
   }, []);
 
-  if (!now) return null;
+  if (!selectedDate || !now) return null;
 
-  const today = `${DAY_NAMES[now.getDay()]} ${now.getDate()} ${MONTH_NAMES[now.getMonth()]}`;
-  const currentHour = now.getHours();
-  const dateStr = toDateStr(now);
+  const isToday = isSameDay(selectedDate, now);
+  const currentHour = isToday ? now.getHours() : -1;
+  const dateStr = toDateStr(selectedDate);
   const bookingUrl = `https://playtomic.com/clubs/padel-15?date=${dateStr}`;
+
+  const maxFuture = addDays(now, 5);
+  const canGoPrev = !isSameDay(selectedDate, now);
+  const canGoNext = selectedDate < maxFuture;
+  const prevDay = () => canGoPrev && setSelectedDate(d => addDays(d!, -1));
+  const nextDay = () => canGoNext && setSelectedDate(d => addDays(d!, 1));
+
+  const weekDays = Array.from({ length: 6 }, (_, i) => addDays(now, i));
 
   const slots = Array.from({ length: 14 }, (_, i) => {
     const hour = 8 + i;
-    const isPast = hour < currentHour;
-    const isComplet = !isPast && SIMULATED_COMPLET.includes(hour);
-    const isPeak = PEAK_HOURS.includes(hour);
-    return { hour, isPast, isComplet, isPeak };
+    return { hour, isPast: hour < currentHour };
   });
 
-  const available = slots.filter((s) => !s.isPast && !s.isComplet).length;
-  const next = slots.find((s) => !s.isPast && !s.isComplet);
+  const upcoming = slots.filter(s => !s.isPast).length;
+  const dayLabel = isToday
+    ? "Aujourd'hui"
+    : `${DAY_NAMES_FULL[selectedDate.getDay()]} ${selectedDate.getDate()} ${MONTH_NAMES[selectedDate.getMonth()]}`;
 
   return (
     <motion.div
@@ -87,86 +89,53 @@ function BookingWidget() {
           <p className="text-white/50 text-xs uppercase tracking-wider font-medium mb-0.5">
             Réservation
           </p>
-          <p className="text-white font-semibold">{today}</p>
-          <p className="text-brand text-sm font-medium mt-0.5">
-            {available} créneaux disponibles
-            {next && (
-              <span className="text-white/40 font-normal">
-                {" "}
-                · prochain {next.hour}h
-              </span>
-            )}
+          <p className="text-white font-semibold">{dayLabel}</p>
+          <p className="text-white/60 text-sm mt-0.5">
+            {upcoming > 0 ? `${upcoming} créneaux à venir` : "Aucun créneau aujourd'hui"}
           </p>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-brand/20 flex items-center justify-center shrink-0">
-          <svg
-            className="w-5 h-5 text-brand"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <rect x="3" y="4" width="18" height="18" rx="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
+        <div className="flex items-center gap-1">
+          <button onClick={prevDay} disabled={!canGoPrev} aria-label="Jour précédent"
+            className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-25 disabled:cursor-not-allowed">
+            <ChevronLeft className="w-4 h-4 text-white" />
+          </button>
+          <button onClick={nextDay} disabled={!canGoNext} aria-label="Jour suivant"
+            className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-25 disabled:cursor-not-allowed">
+            <ChevronRight className="w-4 h-4 text-white" />
+          </button>
         </div>
       </div>
 
-      {/* Légende */}
-      <div className="flex items-center gap-3 mb-3">
-        <span className="flex items-center gap-1 text-xs text-white/40">
-          <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
-          Dispo
-        </span>
-        <span className="flex items-center gap-1 text-xs text-white/40">
-          <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block" />
-          Forte demande
-        </span>
-        <span className="flex items-center gap-1 text-xs text-white/40">
-          <span className="w-2 h-2 rounded-full bg-red-400/60 inline-block" />
-          Complet
-        </span>
+      {/* Mini calendrier horizontal */}
+      <div className="flex gap-1 mb-4">
+        {weekDays.map((d) => {
+          const isSelected = isSameDay(d, selectedDate);
+          const isTodayD = isSameDay(d, now);
+          return (
+            <button key={d.toISOString()} onClick={() => setSelectedDate(d)}
+              className={`flex-1 flex flex-col items-center py-1.5 rounded-lg text-xs transition-colors ${
+                isSelected ? "bg-brand text-white" : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
+              }`}>
+              <span className="font-medium">{DAY_NAMES_SHORT[d.getDay()]}</span>
+              <span className={`font-bold text-sm ${isTodayD && !isSelected ? "text-brand" : ""}`}>{d.getDate()}</span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Grille des créneaux */}
+      {/* Grille créneaux — passés grisés, futurs = liens vers Playtomic */}
       <div className="grid grid-cols-4 gap-2 mb-4">
-        {slots.map(({ hour, isPast, isComplet, isPeak }) => {
+        {slots.map(({ hour, isPast }) => {
           const label = `${hour}h`;
-          if (isPast) {
-            return (
-              <div
-                key={hour}
-                className="text-center py-2 rounded-xl text-xs text-white/20 bg-white/5 line-through select-none"
-              >
-                {label}
-              </div>
-            );
-          }
-          if (isComplet) {
-            return (
-              <div
-                key={hour}
-                className="text-center py-2 rounded-xl text-xs text-red-400/60 bg-red-400/10 select-none"
-              >
-                {label}
-              </div>
-            );
-          }
+          if (isPast) return (
+            <div key={hour} className="text-center py-2 rounded-xl text-xs text-white/20 bg-white/5 line-through select-none">
+              {label}
+            </div>
+          );
           return (
-            <a
-              key={hour}
-              href={bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={`Réserver ${label}`}
-              className={`text-center py-2 rounded-xl text-xs font-semibold transition-all ${
-                isPeak
-                  ? "text-yellow-300 bg-yellow-400/15 hover:bg-yellow-400/25 ring-1 ring-inset ring-yellow-400/20"
-                  : "text-green-400 bg-green-400/15 hover:bg-green-400/25"
-              }`}
-            >
+            <a key={hour} href={bookingUrl} target="_blank" rel="noopener noreferrer"
+              title={`Réserver ${label} — ${dayLabel}`}
+              className="text-center py-2 rounded-xl text-xs font-medium text-white/70 bg-white/10 hover:bg-white/20 hover:text-white transition-colors">
               {label}
             </a>
           );
@@ -175,15 +144,7 @@ function BookingWidget() {
 
       {/* Note */}
       <p className="text-white/25 text-xs text-center mb-4">
-        Créneaux indicatifs · Disponibilités en temps réel sur{" "}
-        <a
-          href={bookingUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-white/50 transition-colors"
-        >
-          Playtomic
-        </a>
+        Cliquez sur un créneau pour vérifier la disponibilité sur Playtomic
       </p>
 
       {/* CTA principal */}

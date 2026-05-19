@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
 
-export const dynamic = "force-static";
 
 const BASE_URL = "https://padel15.fr";
 
