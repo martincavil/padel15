@@ -1,27 +1,30 @@
-// import Club from "@/components/Club";
-import Clients from "@/components/Clients";
-import Club2 from "@/components/Club-2";
-import Contact from "@/components/Contact";
-import CoursParticuliers from "@/components/CoursParticuliers";
+import type { Metadata } from "next";
 import HeroBanner from "@/components/HeroBanner";
-import OpeningHours from "@/components/OpeningHours";
-import TeamBuilding from "@/components/TeamBuilding";
-import Values from "@/components/Values";
+import Clients from "@/components/Clients";
+import { ExperienceBlocks } from "@/components/homepage/ExperienceBlocks";
+import { GoogleRating } from "@/components/shared/GoogleRating";
+import { B2BSection } from "@/components/homepage/B2BSection";
+import { CTANewsletter } from "@/components/shared/CTANewsletter";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
+  description:
+    "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette. Réservez sur Playtomic.",
+};
+
+export default function HomePage() {
   return (
     <>
       <HeroBanner />
-      <div className="space-y-10 md:space-y-20 md:mt-20 mt-10">
-        {/* <Club  /> */}
-        <Clients />
-        <Club2 />
-        <OpeningHours />
-        <CoursParticuliers />
-        <Values />
-        <TeamBuilding />
-        <Contact />
+      <div className="py-4 bg-white border-b border-gray-100">
+        <GoogleRating rating={4.8} count={250} />
       </div>
+      <ExperienceBlocks />
+      <div className="py-6 bg-gray-50">
+        <Clients />
+      </div>
+      <B2BSection />
+      <CTANewsletter />
     </>
   );
 }

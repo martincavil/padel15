@@ -1,229 +1,202 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/Button";
-import { ButtonDownloadApp } from "./ui/ButtonDowloadApp";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { cn } from "@/lib/utils";
 
+const NAV_LINKS = [
+  { href: "/terrains", label: "Terrains" },
+  { href: "/restaurant", label: "Restaurant" },
+  { href: "/coaching", label: "Coaching" },
+  { href: "/evenements", label: "Événements" },
+  { href: "/tarifs", label: "Tarifs" },
+  { href: "/le-club", label: "Le Club" },
+];
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
-    setIsScrolled(false);
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-
-    // Écoute l'événement de scroll
-    window.addEventListener("scroll", handleScroll);
-
-    // Appel initial pour définir l'état correct
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Bloque le scroll quand le menu est ouvert
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflowX = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflowX = "";
+    if (!isHome) {
+      setIsScrolled(true);
+      return;
     }
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
-      document.documentElement.style.overflowX = "";
     };
   }, [menuOpen]);
 
-  // Gestion du smooth scroll pour les ancres
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    setMenuOpen(false);
-  };
+  const textColor = isScrolled ? "text-black" : "text-white";
+  const logoFilter = isScrolled ? "" : "filter brightness-0 invert";
 
   return (
     <nav
       className={cn(
-        "fixed top-0 z-50 w-full",
-        "transition-all duration-300",
-        isScrolled
-          ? "bg-white text-black shadow-md"
-          : "bg-transparent text-white"
+        "fixed top-0 z-50 w-full transition-all duration-300",
+        isScrolled ? "bg-white shadow-md" : "bg-transparent"
       )}
     >
       <div className="container py-4 flex justify-between items-center">
         <Link href="/">
           <Image
             src="/logo.svg"
-            alt="Logo"
+            alt="Padel 15"
             width={120}
             height={50}
-            className={cn(
-              "h-full",
-              isScrolled ? "" : "filter brightness-0 invert"
-            )}
+            className={cn("h-auto", logoFilter)}
           />
         </Link>
 
-        {/* Navigation desktop */}
-        <div className="hidden lg:flex items-center gap-12">
+        {/* Desktop nav links */}
+        <div className={cn("hidden lg:flex items-center gap-8", textColor)}>
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "font-medium hover:text-brand transition-colors",
+                pathname === link.href && "text-brand"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Desktop CTAs */}
+        <div className="hidden lg:flex items-center gap-3">
           <a
-            href="#club"
-            onClick={(e) => handleAnchorClick(e, "club")}
-            className="hover:text-orange-600 font-medium text-lg cursor-pointer"
+            href="https://playtomic.com/clubs/padel-15"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Le Club
-          </a>
-          <a
-            href="#pricing"
-            onClick={(e) => handleAnchorClick(e, "pricing")}
-            className="hover:text-orange-600 font-medium text-lg cursor-pointer"
-          >
-            Les Tarifs
-          </a>
-          <a href="#cours" onClick={(e) => handleAnchorClick(e, "cours")}>
             <Button
               className={cn(
                 "cursor-pointer",
                 isScrolled
-                  ? "bg-[#FF6727] hover:bg-orange-600"
+                  ? "bg-brand hover:bg-brand-dark text-white"
                   : "bg-white text-black hover:bg-slate-100"
               )}
             >
-              Cours
+              Réserver un terrain
             </Button>
           </a>
-          <a
-            href="#events"
-            onClick={(e) => handleAnchorClick(e, "events")}
-            className="hover:text-orange-600 font-medium text-lg cursor-pointer"
-          >
-            Évènements
-          </a>
-          <a href="#contact" onClick={(e) => handleAnchorClick(e, "contact")}>
+          <Link href="/evenements">
             <Button
+              variant="outline"
               className={cn(
                 "cursor-pointer",
                 isScrolled
-                  ? "bg-[#FF6727] hover:bg-orange-600"
-                  : "bg-white text-black hover:bg-slate-100"
+                  ? "border-brand text-brand hover:bg-brand hover:text-white"
+                  : "border-white text-white hover:bg-white/10"
               )}
             >
-              Contactez-nous
+              Organiser un événement
             </Button>
-          </a>
-          <Link href="https://www.instagram.com/padel15club/?hl=fr">
+          </Link>
+          <a
+            href="https://www.instagram.com/padel15club/?hl=fr"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Padel 15"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="28"
+              height="28"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className={cn(
-                isScrolled ? "text-black" : "text-white",
-                "hover:text-orange-600",
-                "lucide lucide-instagram-icon lucide-instagram"
-              )}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={cn(textColor, "hover:text-brand transition-colors")}
             >
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
               <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
             </svg>
-          </Link>
+          </a>
         </div>
 
-        {/* Bouton mobile */}
+        {/* Mobile hamburger */}
         <button
-          className="lg:hidden text-orange-600 text-2xl z-[60]"
+          className="lg:hidden z-[60]"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label="Menu"
         >
           {menuOpen ? (
-            <XMarkIcon className="w-6 text-[#FF6727]" />
+            <XMarkIcon className="w-6 text-brand" />
           ) : (
-            <Bars3Icon
-              className={cn(
-                "w-6",
-                isScrolled ? "text-orange-600" : "text-white"
-              )}
-            />
+            <Bars3Icon className={cn("w-6", isScrolled ? "text-brand" : "text-white")} />
           )}
         </button>
 
-        {/* Menu mobile */}
+        {/* Mobile drawer */}
         <div
           className={cn(
-            "fixed top-0 right-0 h-full w-full max-w-xs text-black bg-white shadow-lg z-50",
-            "flex flex-col justify-between p-6",
+            "fixed top-0 right-0 h-full w-full max-w-xs bg-white text-black shadow-lg z-50",
+            "flex flex-col justify-between p-6 overflow-y-auto",
             "transition-transform duration-300 ease-in-out",
-            "overflow-y-auto", // Scroll vertical seulement si nécessaire
             menuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
-          <div className="flex flex-col space-y-4 mt-12">
-            <a
-              href="#club"
-              onClick={(e) => handleAnchorClick(e, "club")}
-              className="hover:text-orange-600 cursor-pointer"
-            >
-              Le Club
-            </a>
-            <a
-              href="#pricing"
-              onClick={(e) => handleAnchorClick(e, "pricing")}
-              className="hover:text-orange-600 cursor-pointer"
-            >
-              Les Tarifs
-            </a>
-            <a
-              href="#cours"
-              onClick={(e) => handleAnchorClick(e, "cours")}
-              className="font-semibold text-[#FF6727] cursor-pointer"
-            >
-              🎾 Réserver un cours
-            </a>
-            <a
-              href="#events"
-              onClick={(e) => handleAnchorClick(e, "events")}
-              className="hover:text-orange-600 cursor-pointer"
-            >
-              Évènements
-            </a>
+          <div className="flex flex-col space-y-5 mt-14">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={cn(
+                  "text-lg font-medium hover:text-brand transition-colors",
+                  pathname === link.href && "text-brand font-semibold"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
-          <div className="flex flex-col space-y-4 pb-8">
-            <a href="#contact" onClick={(e) => handleAnchorClick(e, "contact")}>
-              <Button className="bg-[#FF6727] hover:bg-orange-600 w-full">
-                Contactez-nous
+          <div className="flex flex-col gap-3 pb-8">
+            <a
+              href="https://playtomic.com/clubs/padel-15"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Button className="bg-brand hover:bg-brand-dark text-white w-full cursor-pointer">
+                Réserver un terrain
               </Button>
             </a>
-            <ButtonDownloadApp />
+            <Link href="/evenements" onClick={() => setMenuOpen(false)}>
+              <Button variant="outline" className="border-brand text-brand w-full cursor-pointer">
+                Organiser un événement
+              </Button>
+            </Link>
           </div>
         </div>
 
         {/* Overlay */}
-        <div
-          className={cn(
-            "fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300",
-            menuOpen ? "opacity-100 block" : "opacity-0 hidden"
-          )}
-          onClick={() => setMenuOpen(false)}
-        />
+        {menuOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
       </div>
     </nav>
   );

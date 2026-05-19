@@ -35,8 +35,8 @@ export default function Clients() {
   return (
     <section className="py-12 overflow-hidden">
       <div className="container mx-auto mb-12">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-[#FF6727]">
-          Ils nous font confiance
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-brand">
+          Vos collègues jouent déjà ici
         </h2>
       </div>
 
