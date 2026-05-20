@@ -99,7 +99,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={dmSans.variable}>
       <head>
         {/* LCP hero image */}
-        <link rel="preload" as="image" href="/images/terrains/terrain-ext-jour.webp" fetchPriority="high" />
         {/* BuzzBlack font */}
         <link rel="preload" as="font" href="/fonts/BuzzBlack.otf" type="font/otf" crossOrigin="anonymous" />
         {/* Preconnect tiers */}

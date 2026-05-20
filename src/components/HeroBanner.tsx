@@ -211,10 +211,11 @@ export default function HeroBanner() {
         muted
         loop
         playsInline
-        poster={CAROUSEL_IMAGES[0]}
+        poster="/_next/image?url=%2Fimages%2Fterrains%2Fterrain-ext-jour.webp&w=828&q=75"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
         <source src="/bg-video-test.mp4" type="video/mp4" />
+        <track kind="captions" srcLang="fr" label="Français" default />
       </video>
 
       {/* Fallback carousel photo */}
@@ -391,18 +392,18 @@ export default function HeroBanner() {
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-0.5">
         {CAROUSEL_IMAGES.map((_, i) => (
           <button
             key={i}
             onClick={() => setActiveIndex(i)}
-            className={`rounded-full transition-all duration-300 ${
-              i === activeIndex
-                ? "w-5 h-1.5 bg-brand"
-                : "w-1.5 h-1.5 bg-white/40"
-            }`}
             aria-label={`Photo ${i + 1}`}
-          />
+            className="p-3 flex items-center justify-center"
+          >
+            <span className={`block rounded-full transition-all duration-300 ${
+              i === activeIndex ? "w-5 h-1.5 bg-brand" : "w-1.5 h-1.5 bg-white/40"
+            }`} />
+          </button>
         ))}
       </div>
 

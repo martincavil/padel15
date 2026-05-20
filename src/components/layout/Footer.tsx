@@ -110,7 +110,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-2 text-gray-500 text-xs">
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-2 text-gray-400 text-xs">
           <p>© {year} Padel 15. Tous droits réservés.</p>
           <p>115 rue Castagnary, 75015 Paris</p>
         </div>
