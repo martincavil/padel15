@@ -35,7 +35,7 @@ export default function HomePage() {
         <Clients />
       </div>
       <InstagramSection />
-      <CTANewsletter variant="light" />
+      <CTANewsletter />
     </>
   );
 }
