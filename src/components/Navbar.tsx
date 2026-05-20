@@ -20,9 +20,11 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(true);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  // Initialisation correcte : transparent sur home (scroll=0), blanc ailleurs
+  // Évite le flash blanc→transparent sur la homepage au premier rendu
+  const [isScrolled, setIsScrolled] = useState(!isHome);
 
   useEffect(() => {
     if (!isHome) {
@@ -48,7 +50,7 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
+        "fixed top-0 z-50 w-full transition-all duration-300 animate-page-in",
         isScrolled ? "bg-white shadow-md" : "bg-transparent",
       )}
     >

@@ -29,13 +29,13 @@ export default function HomePage() {
       </div>
       <PadelInfoSection />
       <RestaurantHighlight />
+      <PartenairesSection />
       <CoursParticuliers />
       <Suspense fallback={<div className="py-16 bg-gray-50" aria-hidden />}>
         <AgendaSection />
       </Suspense>
-      <PartenairesSection />
-      <B2BSection />
       <InstagramSection />
+      <B2BSection />
       <CTANewsletter />
     </>
   );
