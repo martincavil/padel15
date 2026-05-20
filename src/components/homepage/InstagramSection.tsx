@@ -2,42 +2,55 @@
 
 import { Instagram } from "lucide-react";
 
+// Poster = première frame servie par Cloudinary en changeant l'extension .mp4 → .jpg
 const COL_LEFT = [
-  "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.mp4",
-  "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/FOOD_tumxyq.mp4",
+  {
+    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.mp4",
+    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.jpg",
+  },
+  {
+    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/FOOD_tumxyq.mp4",
+    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/FOOD_tumxyq.jpg",
+  },
 ];
 
 const COL_RIGHT = [
-  "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/PADEL_hwhmqg.mp4",
-  "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/APP_yr8e68.mp4",
+  {
+    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/PADEL_hwhmqg.mp4",
+    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/PADEL_hwhmqg.jpg",
+  },
+  {
+    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/APP_yr8e68.mp4",
+    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/APP_yr8e68.jpg",
+  },
 ];
 
 const INSTAGRAM_URL = "https://www.instagram.com/padel15club/?hl=fr";
 
 function ScrollColumn({
-  srcs,
+  videos,
   animClass,
   offsetPx = 0,
 }: {
-  srcs: string[];
+  videos: typeof COL_LEFT;
   animClass: "animate-scroll-up" | "animate-scroll-down";
   offsetPx?: number;
 }) {
-  const doubled = [...srcs, ...srcs];
+  const doubled = [...videos, ...videos];
   return (
-    // Largeur fixe basée sur le ratio 9/16 natif des vidéos
     <div className="w-[260px] flex-shrink-0">
       <div
         className={`flex flex-col gap-3 ${animClass}`}
         style={offsetPx ? { marginTop: `-${offsetPx}px` } : undefined}
       >
-        {doubled.map((src, i) => (
+        {doubled.map((v, i) => (
           <div
-            key={`${src}-${i}`}
+            key={`${v.src}-${i}`}
             className="relative w-full aspect-[9/16] rounded-xl overflow-hidden flex-shrink-0 bg-black"
           >
             <video
-              src={src}
+              src={v.src}
+              poster={v.poster}
               autoPlay
               muted
               loop
@@ -93,12 +106,12 @@ export function InstagramSection() {
         {/* Colonnes centrées, largeur naturelle 9:16 */}
         <div className="flex gap-3 justify-center h-full">
           <ScrollColumn
-            srcs={COL_LEFT}
+            videos={COL_LEFT}
             animClass="animate-scroll-up"
             offsetPx={0}
           />
           <ScrollColumn
-            srcs={COL_RIGHT}
+            videos={COL_RIGHT}
             animClass="animate-scroll-down"
             offsetPx={200}
           />
