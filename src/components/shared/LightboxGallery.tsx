@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -80,8 +81,10 @@ export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
         ))}
       </div>
 
-      {/* Lightbox */}
-      <AnimatePresence>
+      {/* Lightbox — rendu via portal au niveau document.body pour éviter
+          le containing block créé par transform CSS des parents (AnimatedSection) */}
+      {typeof document !== "undefined" && createPortal(
+        <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -168,7 +171,9 @@ export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }

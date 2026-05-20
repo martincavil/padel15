@@ -13,7 +13,8 @@ import { InstagramSection } from "@/components/homepage/InstagramSection";
 import { CTANewsletter } from "@/components/shared/CTANewsletter";
 
 export const metadata: Metadata = {
-  title: "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
+  title:
+    "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
   description:
     "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette. Réservez sur Playtomic.",
 };

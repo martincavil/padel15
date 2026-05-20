@@ -5,23 +5,26 @@ const PARTENAIRES = [
   {
     nom: "ASICS",
     logo: "/logos/asics.svg",
-    description: "Équipementier officiel — raquettes et accessoires de padel disponibles sur place.",
+    description:
+      "Équipementier officiel — raquettes et accessoires de padel disponibles sur place.",
     lien: "https://www.asics.com/fr/fr-fr/padel/",
     hasLogo: true,
   },
   {
     nom: "CUPRA",
     logo: "/logos/cupra.svg",
-    description: "Partenaire automobile — l'esprit performance et élégance, sur le terrain comme sur la route.",
+    description:
+      "Partenaire automobile — l'esprit performance et élégance, sur le terrain comme sur la route.",
     lien: "https://www.cupraofficial.fr/",
     hasLogo: true,
   },
   {
     nom: "HEAD",
     logo: null,
-    description: "Équipementier racket sport — partenaire pour le prêt de matériel premium sur nos courts.",
+    description:
+      "Équipementier racket sport — partenaire pour le prêt de matériel premium sur nos courts.",
     lien: "https://www.head.com/fr-FR/sports/padel/",
-    hasLogo: false,
+    hasLogo: true,
   },
 ];
 
@@ -63,8 +66,12 @@ export function PartenairesSection() {
                     </span>
                   )}
                 </div>
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-brand transition-colors">{p.nom}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{p.description}</p>
+                <h3 className="font-semibold text-lg mb-2 group-hover:text-brand transition-colors">
+                  {p.nom}
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  {p.description}
+                </p>
               </a>
             </AnimatedSection>
           ))}

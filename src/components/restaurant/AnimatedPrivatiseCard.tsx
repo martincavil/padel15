@@ -1,13 +1,31 @@
 import Link from "next/link";
 
-// Animations CSS pures — framer-motion retiré pour réduire le bundle JS
+// Formes décoratives avec animations CSS inline (garantit la génération hors Tailwind JIT)
 export function AnimatedPrivatiseCard() {
   return (
-    <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl p-10 text-center overflow-hidden">
-      <div className="absolute w-40 h-40 rounded-full border border-brand/15 top-[-20px] left-[-20px] animate-[float1_9s_ease-in-out_infinite]" />
-      <div className="absolute w-24 h-24 rounded-full border border-white/[0.08] bottom-[-10px] right-10 animate-[float2_7s_ease-in-out_1s_infinite]" />
-      <div className="absolute w-16 h-16 rounded-full bg-brand/[0.08] top-10 right-[-8px] animate-[float3_11s_ease-in-out_2s_infinite]" />
-      <div className="absolute w-10 h-10 rounded-full border border-brand/20 bottom-12 left-8 animate-[float4_8s_ease-in-out_0.5s_infinite]" />
+    // overflow-visible : les formes peuvent déborder du cadre de façon décorative
+    <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl p-10 text-center overflow-visible">
+      {/* Cercle 1 — haut gauche */}
+      <div
+        className="absolute w-40 h-40 rounded-full border border-brand/20 top-[-20px] left-[-20px]"
+        style={{ animation: "float1 9s ease-in-out infinite" }}
+      />
+      {/* Cercle 2 — bas droite */}
+      <div
+        className="absolute w-24 h-24 rounded-full border border-white/10 bottom-[-10px] right-10"
+        style={{ animation: "float2 7s ease-in-out 1s infinite" }}
+      />
+      {/* Cercle 3 — haut droite */}
+      <div
+        className="absolute w-16 h-16 rounded-full bg-brand/10 top-10 right-[-8px]"
+        style={{ animation: "float3 11s ease-in-out 2s infinite" }}
+      />
+      {/* Cercle 4 — bas gauche */}
+      <div
+        className="absolute w-10 h-10 rounded-full border border-brand/25 bottom-12 left-8"
+        style={{ animation: "float4 8s ease-in-out 0.5s infinite" }}
+      />
+
       <div className="relative z-10">
         <h2 className="font-buzz text-3xl text-white mb-3">Privatisez notre espace</h2>
         <p className="text-gray-400 max-w-lg mx-auto mb-6">
