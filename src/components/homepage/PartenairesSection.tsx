@@ -20,7 +20,7 @@ const PARTENAIRES = [
   },
   {
     nom: "HEAD",
-    logo: null,
+    logo: "/logos/head.png",
     description:
       "Équipementier racket sport — partenaire pour le prêt de matériel premium sur nos courts.",
     lien: "https://www.head.com/fr-FR/sports/padel/",

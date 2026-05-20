@@ -24,6 +24,9 @@ export default function HomePage() {
     <>
       <HeroBanner />
       <PlaytomicSection />
+      <div className="py-6 bg-gray-50">
+        <Clients />
+      </div>
       <PadelInfoSection />
       <RestaurantHighlight />
       <CoursParticuliers />
@@ -32,9 +35,6 @@ export default function HomePage() {
       </Suspense>
       <PartenairesSection />
       <B2BSection />
-      <div className="py-6 bg-gray-50">
-        <Clients />
-      </div>
       <InstagramSection />
       <CTANewsletter />
     </>

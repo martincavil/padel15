@@ -15,6 +15,7 @@
 ## Carte des fichiers
 
 ### Modifiés
+
 - `src/styles/globals.css` — `@font-face` BuzzBlack + `@theme` brand token
 - `src/app/layout.tsx` — `next/font`, JSON-LD LocalBusiness, metadata globale
 - `src/app/page.tsx` — homepage v2 (réassemblage)
@@ -23,19 +24,23 @@
 - `src/components/TeamBuilding.tsx` — remplace image readdy.ai par `/terrain-ext-jour.webp`
 
 ### Créés — Shared
+
 - `src/components/shared/JsonLd.tsx`
 - `src/components/shared/TallyEmbed.tsx`
 - `src/components/shared/CTANewsletter.tsx`
 - `src/components/shared/GoogleRating.tsx`
 
 ### Créés — Layout
+
 - `src/components/layout/Footer.tsx`
 
 ### Créés — Homepage
+
 - `src/components/homepage/ExperienceBlocks.tsx`
 - `src/components/homepage/B2BSection.tsx`
 
 ### Créés — Pages
+
 - `src/app/terrains/page.tsx`
 - `src/app/restaurant/page.tsx`
 - `src/app/evenements/page.tsx`
@@ -45,18 +50,21 @@
 - `src/app/contact/page.tsx`
 
 ### Créés — Blog
+
 - `src/app/blog/page.tsx`
 - `src/app/blog/[slug]/page.tsx`
 - `src/components/blog/BlogCard.tsx`
 - `src/components/blog/PortableTextRenderer.tsx`
 
 ### Créés — Sanity
+
 - `src/lib/sanity.ts`
 - `src/sanity/schemas/post.ts`
 - `src/sanity/schemas/index.ts`
 - `sanity.config.ts` (racine)
 
 ### Créés — SEO
+
 - `src/app/sitemap.ts`
 - `src/app/robots.ts`
 
@@ -67,6 +75,7 @@
 ### Task 1 : Fix bug critique + installer les dépendances
 
 **Files:**
+
 - Modify: `src/components/TeamBuilding.tsx`
 - Run: `npm install`
 
@@ -125,6 +134,7 @@ git commit -m "fix: replace external readdy.ai image, install sanity deps"
 ### Task 2 : Tailwind v4 — BuzzBlack + brand token
 
 **Files:**
+
 - Modify: `src/styles/globals.css`
 
 - [ ] **Step 1 : Vérifier que BuzzBlack.otf existe**
@@ -141,17 +151,17 @@ Dans `src/styles/globals.css`, après la ligne `@import "tw-animate-css";` et av
 
 ```css
 @font-face {
-  font-family: 'BuzzBlack';
-  src: url('/fonts/BuzzBlack.otf') format('opentype');
+  font-family: "BuzzBlack";
+  src: url("/fonts/BuzzBlack.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 @theme {
-  --color-brand: #FF6727;
+  --color-brand: #ff6727;
   --color-brand-dark: #e55a1f;
-  --font-buzz: 'BuzzBlack', sans-serif;
+  --font-buzz: "BuzzBlack", sans-serif;
 }
 ```
 
@@ -177,6 +187,7 @@ git commit -m "feat: add BuzzBlack font and brand color token (Tailwind v4)"
 ### Task 3 : Composants shared (JsonLd, TallyEmbed, GoogleRating, CTANewsletter)
 
 **Files:**
+
 - Create: `src/components/shared/JsonLd.tsx`
 - Create: `src/components/shared/TallyEmbed.tsx`
 - Create: `src/components/shared/GoogleRating.tsx`
@@ -208,7 +219,11 @@ interface TallyEmbedProps {
   title?: string;
 }
 
-export function TallyEmbed({ formId, height = 500, title = "Formulaire" }: TallyEmbedProps) {
+export function TallyEmbed({
+  formId,
+  height = 500,
+  title = "Formulaire",
+}: TallyEmbedProps) {
   return (
     <iframe
       src={`https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&dynamicHeight=1`}
@@ -226,7 +241,13 @@ export function TallyEmbed({ formId, height = 500, title = "Formulaire" }: Tally
 
 ```tsx
 // src/components/shared/GoogleRating.tsx
-export function GoogleRating({ rating = 4.8, count = 250 }: { rating?: number; count?: number }) {
+export function GoogleRating({
+  rating = 4.8,
+  count = 250,
+}: {
+  rating?: number;
+  count?: number;
+}) {
   const stars = Math.round(rating);
   return (
     <div className="flex items-center gap-2 justify-center">
@@ -275,7 +296,9 @@ export function CTANewsletter({
         <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold bg-brand/20 text-brand border border-brand/30 mb-4">
           Newsletter
         </span>
-        <h2 className="font-buzz text-3xl md:text-4xl text-white mb-3">{title}</h2>
+        <h2 className="font-buzz text-3xl md:text-4xl text-white mb-3">
+          {title}
+        </h2>
         <p className="text-gray-400 max-w-md mx-auto mb-8">{subtitle}</p>
         {brevoFormUrl ? (
           <iframe
@@ -320,6 +343,7 @@ git commit -m "feat: add shared components (JsonLd, TallyEmbed, GoogleRating, CT
 ### Task 4 : Navbar v2 — multi-page avec Links et dual CTA
 
 **Files:**
+
 - Modify: `src/components/Navbar.tsx`
 
 La navbar v1 utilise des ancres (`#section`). La v2 utilise `next/link` vers les routes. La logique transparent→blanc au scroll est conservée. Sur les pages intérieures (pas `/`), la navbar part directement blanche via `usePathname`.
@@ -366,7 +390,9 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   const textColor = isScrolled ? "text-black" : "text-white";
@@ -376,7 +402,7 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        isScrolled ? "bg-white shadow-md" : "bg-transparent",
       )}
     >
       <div className="container py-4 flex justify-between items-center">
@@ -398,7 +424,7 @@ export default function Navbar() {
               href={link.href}
               className={cn(
                 "font-medium hover:text-brand transition-colors",
-                pathname === link.href && "text-brand"
+                pathname === link.href && "text-brand",
               )}
             >
               {link.label}
@@ -418,7 +444,7 @@ export default function Navbar() {
                 "cursor-pointer",
                 isScrolled
                   ? "bg-brand hover:bg-brand-dark text-white"
-                  : "bg-white text-black hover:bg-slate-100"
+                  : "bg-white text-black hover:bg-slate-100",
               )}
             >
               Réserver un terrain
@@ -431,7 +457,7 @@ export default function Navbar() {
                 "cursor-pointer",
                 isScrolled
                   ? "border-brand text-brand hover:bg-brand hover:text-white"
-                  : "border-white text-white hover:bg-white/10"
+                  : "border-white text-white hover:bg-white/10",
               )}
             >
               Organiser un événement
@@ -471,7 +497,9 @@ export default function Navbar() {
           {menuOpen ? (
             <XMarkIcon className="w-6 text-brand" />
           ) : (
-            <Bars3Icon className={cn("w-6", isScrolled ? "text-brand" : "text-white")} />
+            <Bars3Icon
+              className={cn("w-6", isScrolled ? "text-brand" : "text-white")}
+            />
           )}
         </button>
 
@@ -481,7 +509,7 @@ export default function Navbar() {
             "fixed top-0 right-0 h-full w-full max-w-xs bg-white text-black shadow-lg z-50",
             "flex flex-col justify-between p-6 overflow-y-auto",
             "transition-transform duration-300 ease-in-out",
-            menuOpen ? "translate-x-0" : "translate-x-full"
+            menuOpen ? "translate-x-0" : "translate-x-full",
           )}
         >
           <div className="flex flex-col space-y-5 mt-14">
@@ -492,7 +520,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={cn(
                   "text-lg font-medium hover:text-brand transition-colors",
-                  pathname === link.href && "text-brand font-semibold"
+                  pathname === link.href && "text-brand font-semibold",
                 )}
               >
                 {link.label}
@@ -511,7 +539,10 @@ export default function Navbar() {
               </Button>
             </a>
             <Link href="/evenements" onClick={() => setMenuOpen(false)}>
-              <Button variant="outline" className="border-brand text-brand w-full cursor-pointer">
+              <Button
+                variant="outline"
+                className="border-brand text-brand w-full cursor-pointer"
+              >
                 Organiser un événement
               </Button>
             </Link>
@@ -551,6 +582,7 @@ git commit -m "feat: navbar v2 — multi-page Links, dual CTA, active route high
 ### Task 5 : Footer v2
 
 **Files:**
+
 - Create: `src/components/layout/Footer.tsx`
 - Modify: `src/components/Layout.tsx`
 
@@ -573,7 +605,11 @@ const LINKS_CLUB = [
 const LINKS_PRATIQUE = [
   { href: "/contact", label: "Contact & Accès" },
   { href: "/blog", label: "Blog" },
-  { href: "https://playtomic.com/clubs/padel-15", label: "Réserver (Playtomic)", external: true },
+  {
+    href: "https://playtomic.com/clubs/padel-15",
+    label: "Réserver (Playtomic)",
+    external: true,
+  },
 ];
 
 export function Footer() {
@@ -605,10 +641,20 @@ export function Footer() {
                 aria-label="Instagram"
                 className="text-gray-400 hover:text-brand transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
               </a>
             </div>
@@ -616,11 +662,16 @@ export function Footer() {
 
           {/* Le Club */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Le Club</h3>
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">
+              Le Club
+            </h3>
             <ul className="space-y-2">
               {LINKS_CLUB.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-gray-300 hover:text-white text-sm transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-gray-300 hover:text-white text-sm transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -630,7 +681,9 @@ export function Footer() {
 
           {/* Pratique */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Pratique</h3>
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">
+              Pratique
+            </h3>
             <ul className="space-y-2">
               {LINKS_PRATIQUE.map((l) => (
                 <li key={l.href}>
@@ -644,7 +697,10 @@ export function Footer() {
                       {l.label}
                     </a>
                   ) : (
-                    <Link href={l.href} className="text-gray-300 hover:text-white text-sm transition-colors">
+                    <Link
+                      href={l.href}
+                      className="text-gray-300 hover:text-white text-sm transition-colors"
+                    >
                       {l.label}
                     </Link>
                   )}
@@ -653,15 +709,29 @@ export function Footer() {
             </ul>
             <div className="mt-4 text-sm text-gray-400 space-y-1">
               <p>7j/7 — 8h à 22h</p>
-              <a href="tel:+33145315876" className="hover:text-white transition-colors block">+33 1 45 31 58 76</a>
-              <a href="mailto:contact@padel15.fr" className="hover:text-white transition-colors block">contact@padel15.fr</a>
+              <a
+                href="tel:+33145315876"
+                className="hover:text-white transition-colors block"
+              >
+                +33 1 45 31 58 76
+              </a>
+              <a
+                href="mailto:contact@padel15.fr"
+                className="hover:text-white transition-colors block"
+              >
+                contact@padel15.fr
+              </a>
             </div>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Newsletter</h3>
-            <p className="text-gray-400 text-sm mb-4">Actu du club, tournois et offres exclusives.</p>
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">
+              Newsletter
+            </h3>
+            <p className="text-gray-400 text-sm mb-4">
+              Actu du club, tournois et offres exclusives.
+            </p>
             <a
               href="mailto:contact@padel15.fr?subject=Newsletter Padel 15"
               className="inline-block bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
@@ -685,21 +755,19 @@ export function Footer() {
 
 ```tsx
 // src/components/Layout.tsx
-'use client'
+"use client";
 
-import Navbar from './Navbar'
-import { Footer } from './layout/Footer'
+import Navbar from "./Navbar";
+import { Footer } from "./layout/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen w-full">
       <Navbar />
-      <main className="flex-1 w-full overflow-x-hidden">
-        {children}
-      </main>
+      <main className="flex-1 w-full overflow-x-hidden">{children}</main>
       <Footer />
     </div>
-  )
+  );
 }
 ```
 
@@ -723,6 +791,7 @@ git commit -m "feat: footer v2 avec navigation complète, contact, newsletter CT
 ### Task 6 : layout.tsx — SEO global + JSON-LD LocalBusiness
 
 **Files:**
+
 - Modify: `src/app/layout.tsx`
 
 - [ ] **Step 1 : Réécrire layout.tsx**
@@ -766,7 +835,15 @@ const localBusinessSchema = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
       opens: "08:00",
       closes: "22:00",
     },
@@ -774,12 +851,28 @@ const localBusinessSchema = {
   priceRange: "€€",
   servesCuisine: "Française",
   amenityFeature: [
-    { "@type": "LocationFeatureSpecification", name: "Terrains de padel couverts", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Restaurant", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Guinguette et terrasse", value: true },
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Terrains de padel couverts",
+      value: true,
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Restaurant",
+      value: true,
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Guinguette et terrasse",
+      value: true,
+    },
     { "@type": "LocationFeatureSpecification", name: "Pétanque", value: true },
     { "@type": "LocationFeatureSpecification", name: "Coworking", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Accessible PMR", value: true },
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Accessible PMR",
+      value: true,
+    },
   ],
   sameAs: [
     "https://www.instagram.com/padel15club/",
@@ -790,12 +883,19 @@ const localBusinessSchema = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://padel15.fr"),
   title: {
-    default: "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
+    default:
+      "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
     template: "%s | Padel 15",
   },
   description:
     "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette. Réservez sur Playtomic.",
-  keywords: ["padel paris", "padel 15ème", "club padel paris", "terrains padel paris", "coaching padel"],
+  keywords: [
+    "padel paris",
+    "padel 15ème",
+    "club padel paris",
+    "terrains padel paris",
+    "coaching padel",
+  ],
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -803,11 +903,22 @@ export const metadata: Metadata = {
     siteName: "Padel 15",
     title: "Padel 15 | Club de Padel Paris 15ème",
     description: "Club de padel haut de gamme au cœur du Paris 15ème.",
-    images: [{ url: "/terrain-ext-jour.webp", width: 1200, height: 630, alt: "Terrains Padel 15" }],
+    images: [
+      {
+        url: "/terrain-ext-jour.webp",
+        width: 1200,
+        height: 630,
+        alt: "Terrains Padel 15",
+      },
+    ],
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr" className={dmSans.variable}>
       <head>
@@ -830,12 +941,12 @@ Dans `src/styles/globals.css`, remplacer la règle `.font-sans` manuelle :
 ```css
 /* Remplacer : */
 .font-sans {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: "DM Sans", sans-serif !important;
 }
 
 /* Par (dans le bloc @theme existant) : */
 @theme {
-  --font-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", sans-serif;
 }
 ```
 
@@ -859,6 +970,7 @@ git commit -m "feat: SEO global — LocalBusiness JSON-LD, metadata, next/font D
 ### Task 7 : sitemap.ts + robots.ts
 
 **Files:**
+
 - Create: `src/app/sitemap.ts`
 - Create: `src/app/robots.ts`
 
@@ -874,14 +986,46 @@ const BASE_URL = "https://padel15.fr";
 
 const STATIC_ROUTES = [
   { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" as const },
-  { url: `${BASE_URL}/terrains`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/restaurant`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/evenements`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/coaching`, priority: 0.8, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/tarifs`, priority: 0.8, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/le-club`, priority: 0.7, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/contact`, priority: 0.7, changeFrequency: "yearly" as const },
-  { url: `${BASE_URL}/blog`, priority: 0.7, changeFrequency: "weekly" as const },
+  {
+    url: `${BASE_URL}/terrains`,
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/restaurant`,
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/evenements`,
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/coaching`,
+    priority: 0.8,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/tarifs`,
+    priority: 0.8,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/le-club`,
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/contact`,
+    priority: 0.7,
+    changeFrequency: "yearly" as const,
+  },
+  {
+    url: `${BASE_URL}/blog`,
+    priority: 0.7,
+    changeFrequency: "weekly" as const,
+  },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -930,6 +1074,7 @@ git commit -m "feat: sitemap.ts et robots.ts pour le SEO"
 ### Task 8 : HeroBanner v2 — dual CTA
 
 **Files:**
+
 - Modify: `src/components/HeroBanner.tsx`
 
 - [ ] **Step 1 : Mettre à jour HeroBanner.tsx avec dual CTA**
@@ -944,7 +1089,11 @@ import Link from "next/link";
 
 const CAROUSEL_IMAGES = [
   { id: 1, src: "/terrain-ext-jour.webp", alt: "Terrain extérieur de jour" },
-  { id: 2, src: "/terrain-inte-game.webp", alt: "Match en cours terrain intérieur" },
+  {
+    id: 2,
+    src: "/terrain-inte-game.webp",
+    alt: "Match en cours terrain intérieur",
+  },
   { id: 3, src: "/terrain-ext-nuit.webp", alt: "Terrain extérieur de nuit" },
   { id: 4, src: "/terrain-inte-vide.webp", alt: "Terrain intérieur" },
 ];
@@ -992,7 +1141,8 @@ export default function HeroBanner() {
         <p className="text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed">
           L'art de vivre le padel à Paris.{" "}
           <span className="font-semibold">
-            Sport, élégance et convivialité dans un écrin végétalisé en plein cœur de la capitale.
+            Sport, élégance et convivialité dans un écrin végétalisé en plein
+            cœur de la capitale.
           </span>
         </p>
 
@@ -1051,6 +1201,7 @@ git commit -m "feat: hero banner v2 avec dual CTA joueur/entreprise"
 ### Task 9 : ExperienceBlocks — 4 piliers de l'expérience
 
 **Files:**
+
 - Create: `src/components/homepage/ExperienceBlocks.tsx`
 
 - [ ] **Step 1 : Créer ExperienceBlocks.tsx**
@@ -1074,7 +1225,8 @@ const BLOCKS = [
     img: "/rest-inte-grand-angle.webp",
     label: "Restaurant",
     title: "Restaurant, bar & guinguette",
-    description: "Service continu du petit-déjeuner au dîner. Terrasse végétalisée et pétanque.",
+    description:
+      "Service continu du petit-déjeuner au dîner. Terrasse végétalisée et pétanque.",
     cta: "Découvrir",
   },
   {
@@ -1099,7 +1251,9 @@ export function ExperienceBlocks() {
   return (
     <section className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
-        <h2 className="font-buzz text-3xl md:text-4xl mb-3">L'expérience Padel 15</h2>
+        <h2 className="font-buzz text-3xl md:text-4xl mb-3">
+          L'expérience Padel 15
+        </h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Un lieu unique à Paris 15 : bien plus qu'un club de padel.
         </p>
@@ -1125,7 +1279,9 @@ export function ExperienceBlocks() {
                 {block.label}
               </span>
               <h3 className="font-semibold text-lg mt-1 mb-1">{block.title}</h3>
-              <p className="text-white/70 text-sm leading-snug mb-3">{block.description}</p>
+              <p className="text-white/70 text-sm leading-snug mb-3">
+                {block.description}
+              </p>
               <span className="text-xs font-semibold text-brand group-hover:underline">
                 {block.cta} →
               </span>
@@ -1150,6 +1306,7 @@ git commit -m "feat: ExperienceBlocks — 4 piliers de l'expérience avec photos
 ### Task 10 : B2BSection — section entreprise standalone
 
 **Files:**
+
 - Create: `src/components/homepage/B2BSection.tsx`
 
 La section TeamBuilding existante est réutilisée mais extraite en composant dédié pour la homepage, avec le vrai fond photo et des testimonials.
@@ -1209,7 +1366,8 @@ export function B2BSection() {
             Team Building & Événements
           </h2>
           <p className="text-gray-300 max-w-xl mx-auto text-lg">
-            Renforcez la cohésion de vos équipes dans un lieu atypique au cœur de Paris.
+            Renforcez la cohésion de vos équipes dans un lieu atypique au cœur
+            de Paris.
           </p>
         </div>
 
@@ -1222,15 +1380,21 @@ export function B2BSection() {
               <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center text-2xl mb-5">
                 {card.icon}
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">{card.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{card.description}</p>
+              <h3 className="text-white font-semibold text-lg mb-2">
+                {card.title}
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {card.description}
+              </p>
             </div>
           ))}
         </div>
 
         {/* Testimonial */}
         <div className="max-w-xl mx-auto text-center mb-10 bg-white/5 border border-white/10 rounded-2xl p-6">
-          <p className="text-white/90 italic text-base mb-3">"{TESTIMONIAL.quote}"</p>
+          <p className="text-white/90 italic text-base mb-3">
+            "{TESTIMONIAL.quote}"
+          </p>
           <p className="text-brand text-sm font-semibold">
             {TESTIMONIAL.author} — {TESTIMONIAL.company}
           </p>
@@ -1262,6 +1426,7 @@ git commit -m "feat: B2BSection avec testimonial et vraie photo de fond"
 ### Task 11 : Homepage page.tsx — réassemblage complet
 
 **Files:**
+
 - Modify: `src/app/page.tsx`
 
 - [ ] **Step 1 : Réécrire page.tsx**
@@ -1277,7 +1442,8 @@ import { B2BSection } from "@/components/homepage/B2BSection";
 import { CTANewsletter } from "@/components/shared/CTANewsletter";
 
 export const metadata: Metadata = {
-  title: "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
+  title:
+    "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
   description:
     "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette. Réservez sur Playtomic.",
 };
@@ -1303,6 +1469,7 @@ export default function HomePage() {
 - [ ] **Step 2 : Mettre à jour Clients.tsx — modifier le titre**
 
 Dans `src/components/Clients.tsx`, ligne 38, remplacer :
+
 ```tsx
 // Avant :
 <h2 className="text-2xl md:text-3xl font-bold text-center text-[#FF6727]">
@@ -1311,7 +1478,7 @@ Dans `src/components/Clients.tsx`, ligne 38, remplacer :
 
 // Après :
 <h2 className="text-2xl md:text-3xl font-bold text-center text-brand">
-  Vos collègues jouent déjà ici
+  Ils nous font confiance
 </h2>
 ```
 
@@ -1337,6 +1504,7 @@ git commit -m "feat: homepage v2 — dual CTA, experience blocks, B2B section, n
 ### Task 12 : /terrains
 
 **Files:**
+
 - Create: `src/app/terrains/page.tsx`
 
 - [ ] **Step 1 : Créer la page terrains**
@@ -1394,7 +1562,9 @@ export default function TerrainsPage() {
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
-          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">Paris 15ème</span>
+          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+            Paris 15ème
+          </span>
           <h1 className="font-buzz text-4xl md:text-6xl mb-4">Nos Terrains</h1>
           <p className="text-white/80 max-w-lg text-lg">
             2 terrains couverts et extérieurs — 7j/7, 8h à 22h
@@ -1419,22 +1589,34 @@ export default function TerrainsPage() {
                 <span className="text-2xl">💶</span>
                 <div>
                   <p className="font-semibold">Tarifs</p>
-                  <p>12,50 € / personne / heure (heures creuses : lun-ven 8h-12h et 14h-16h)</p>
-                  <p>15 € / personne / heure (heures pleines : 12h-14h, 16h-22h et week-end)</p>
+                  <p>
+                    12,50 € / personne / heure (heures creuses : lun-ven 8h-12h
+                    et 14h-16h)
+                  </p>
+                  <p>
+                    15 € / personne / heure (heures pleines : 12h-14h, 16h-22h
+                    et week-end)
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">🎾</span>
                 <div>
                   <p className="font-semibold">Matériel</p>
-                  <p>Raquettes en location et balles disponibles dans un casier connecté entre les terrains</p>
+                  <p>
+                    Raquettes en location et balles disponibles dans un casier
+                    connecté entre les terrains
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">📅</span>
                 <div>
                   <p className="font-semibold">Créneaux</p>
-                  <p>Les créneaux ouvrent 5 jours à l'avance, heure par heure — soyez réactifs !</p>
+                  <p>
+                    Les créneaux ouvrent 5 jours à l'avance, heure par heure —
+                    soyez réactifs !
+                  </p>
                 </div>
               </div>
             </div>
@@ -1487,8 +1669,16 @@ export default function TerrainsPage() {
           <h2 className="font-buzz text-3xl mb-6">Galerie</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {GALLERY.map((img) => (
-              <div key={img.src} className="relative aspect-square rounded-xl overflow-hidden">
-                <Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-105 transition-transform duration-300" />
+              <div
+                key={img.src}
+                className="relative aspect-square rounded-xl overflow-hidden"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
             ))}
           </div>
@@ -1530,6 +1720,7 @@ git commit -m "feat: page /terrains avec Playtomic embed, galerie et tarifs"
 ### Task 13 : /restaurant
 
 **Files:**
+
 - Create: `src/app/restaurant/page.tsx`
 
 - [ ] **Step 1 : Créer la page restaurant**
@@ -1591,10 +1782,15 @@ export default function RestaurantPage() {
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
-          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">Paris 15ème</span>
-          <h1 className="font-buzz text-4xl md:text-6xl mb-4">Restaurant & Guinguette</h1>
+          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+            Paris 15ème
+          </span>
+          <h1 className="font-buzz text-4xl md:text-6xl mb-4">
+            Restaurant & Guinguette
+          </h1>
           <p className="text-white/80 max-w-lg text-lg">
-            Cuisine, bar, terrasse végétalisée et pétanque — service continu 7j/7
+            Cuisine, bar, terrasse végétalisée et pétanque — service continu
+            7j/7
           </p>
         </div>
       </div>
@@ -1606,13 +1802,15 @@ export default function RestaurantPage() {
             <h2 className="font-buzz text-3xl mb-4">Un lieu de vie unique</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                Ouvert 7j/7 en service continu, du petit-déjeuner au dîner, avec des produits frais
-                et de saison. Un cadre chaleureux pour se détendre après un match… ou organiser vos
-                séminaires, afterworks et événements privés dans un lieu unique au cœur de Paris.
+                Ouvert 7j/7 en service continu, du petit-déjeuner au dîner, avec
+                des produits frais et de saison. Un cadre chaleureux pour se
+                détendre après un match… ou organiser vos séminaires, afterworks
+                et événements privés dans un lieu unique au cœur de Paris.
               </p>
               <p>
-                Notre terrasse guinguette vous transporte dans une ambiance dépaysante en plein Paris :
-                espace végétalisé, couleurs vives, terrain de pétanque et espaces lounge.
+                Notre terrasse guinguette vous transporte dans une ambiance
+                dépaysante en plein Paris : espace végétalisé, couleurs vives,
+                terrain de pétanque et espaces lounge.
               </p>
             </div>
             <div className="mt-8">
@@ -1625,7 +1823,12 @@ export default function RestaurantPage() {
             </div>
           </div>
           <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-            <Image src="/guinguette.webp" alt="Terrasse guinguette Padel 15" fill className="object-cover" />
+            <Image
+              src="/guinguette.webp"
+              alt="Terrasse guinguette Padel 15"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
 
@@ -1635,17 +1838,30 @@ export default function RestaurantPage() {
             {
               icon: "🍽️",
               title: "Restaurant",
-              items: ["Service continu 7j/7 — 8h à 22h", "Produits frais et de saison", "Cadre chaleureux et moderne"],
+              items: [
+                "Service continu 7j/7 — 8h à 22h",
+                "Produits frais et de saison",
+                "Cadre chaleureux et moderne",
+              ],
             },
             {
               icon: "🌿",
               title: "Terrasse & Guinguette",
-              items: ["Terrasse végétalisée", "Terrain de pétanque", "Espaces lounge", "Ambiance dépaysante"],
+              items: [
+                "Terrasse végétalisée",
+                "Terrain de pétanque",
+                "Espaces lounge",
+                "Ambiance dépaysante",
+              ],
             },
             {
               icon: "🥂",
               title: "Bar",
-              items: ["Cocktails et boissons fraîches", "Afterworks et soirées", "Privatisation possible"],
+              items: [
+                "Cocktails et boissons fraîches",
+                "Afterworks et soirées",
+                "Privatisation possible",
+              ],
             },
           ].map((service) => (
             <div key={service.title} className="bg-gray-50 rounded-2xl p-6">
@@ -1668,8 +1884,16 @@ export default function RestaurantPage() {
           <h2 className="font-buzz text-3xl mb-6">Galerie</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {GALLERY.map((img) => (
-              <div key={img.src} className={`relative rounded-xl overflow-hidden ${GALLERY.indexOf(img) === 0 ? "md:col-span-2 h-72" : "h-48"}`}>
-                <Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-105 transition-transform duration-300" />
+              <div
+                key={img.src}
+                className={`relative rounded-xl overflow-hidden ${GALLERY.indexOf(img) === 0 ? "md:col-span-2 h-72" : "h-48"}`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
             ))}
           </div>
@@ -1677,9 +1901,12 @@ export default function RestaurantPage() {
 
         {/* CTA privatisation */}
         <div className="bg-black rounded-2xl p-10 text-center">
-          <h2 className="font-buzz text-3xl text-white mb-3">Privatisez notre espace</h2>
+          <h2 className="font-buzz text-3xl text-white mb-3">
+            Privatisez notre espace
+          </h2>
           <p className="text-gray-400 max-w-lg mx-auto mb-6">
-            Anniversaire, afterwork, séminaire ou soirée d'entreprise — nous créons l'événement sur mesure.
+            Anniversaire, afterwork, séminaire ou soirée d'entreprise — nous
+            créons l'événement sur mesure.
           </p>
           <Link
             href="/evenements"
@@ -1706,6 +1933,7 @@ git commit -m "feat: page /restaurant avec galerie, services et CTA privatisatio
 ### Task 14 : /evenements
 
 **Files:**
+
 - Create: `src/app/evenements/page.tsx`
 
 Note : Le formulaire Tally pour les événements doit être créé par le client sur tally.so. En attendant, l'ID `EVENTS_FORM` est un placeholder à remplacer. Le composant fonctionne avec n'importe quel formId Tally.
@@ -1747,20 +1975,38 @@ const FORMULES = [
   {
     icon: "🎾",
     title: "Team Building Padel",
-    description: "Tournoi privé entre collègues, coaching collectif initiation, arbitre inclus. Idéal 8 à 40 personnes.",
-    includes: ["Terrain(s) privatisé(s)", "Coach dédié", "Arbitre", "Matériel fourni"],
+    description:
+      "Tournoi privé entre collègues, coaching collectif initiation, arbitre inclus. Idéal 8 à 40 personnes.",
+    includes: [
+      "Terrain(s) privatisé(s)",
+      "Coach dédié",
+      "Arbitre",
+      "Matériel fourni",
+    ],
   },
   {
     icon: "🍽️",
     title: "Afterwork & Soirée",
-    description: "Padel + restaurant/guinguette en formule tout-compris. Privatisation totale ou partielle.",
-    includes: ["Accès terrains", "Buffet ou menu", "Bar privatisé", "Animation"],
+    description:
+      "Padel + restaurant/guinguette en formule tout-compris. Privatisation totale ou partielle.",
+    includes: [
+      "Accès terrains",
+      "Buffet ou menu",
+      "Bar privatisé",
+      "Animation",
+    ],
   },
   {
     icon: "📋",
     title: "Séminaire & Convention",
-    description: "Espace coworking + terrains pour vos conventions, kick-offs et séminaires d'équipe.",
-    includes: ["Espace coworking", "Terrains privatisés", "Restauration", "Équipement AV"],
+    description:
+      "Espace coworking + terrains pour vos conventions, kick-offs et séminaires d'équipe.",
+    includes: [
+      "Espace coworking",
+      "Terrains privatisés",
+      "Restauration",
+      "Équipement AV",
+    ],
   },
 ];
 
@@ -1782,10 +2028,15 @@ export default function EvenementsPage() {
         />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
-          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">Entreprises & Groupes</span>
-          <h1 className="font-buzz text-4xl md:text-6xl mb-4">Team Building & Événements</h1>
+          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+            Entreprises & Groupes
+          </span>
+          <h1 className="font-buzz text-4xl md:text-6xl mb-4">
+            Team Building & Événements
+          </h1>
           <p className="text-white/80 max-w-xl text-lg">
-            BlackRock, BNP Paribas, BCG, Kering, AXA… et plus de 20 entreprises de premier plan leur font confiance.
+            BlackRock, BNP Paribas, BCG, Kering, AXA… et plus de 20 entreprises
+            de premier plan leur font confiance.
           </p>
         </div>
       </div>
@@ -1796,18 +2047,27 @@ export default function EvenementsPage() {
           <div className="text-center mb-10">
             <h2 className="font-buzz text-3xl mb-3">Nos Formules</h2>
             <p className="text-gray-500 max-w-lg mx-auto">
-              Chaque événement est sur-mesure. Nous nous adaptons à vos besoins, votre budget et votre groupe.
+              Chaque événement est sur-mesure. Nous nous adaptons à vos besoins,
+              votre budget et votre groupe.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FORMULES.map((f) => (
-              <div key={f.title} className="border border-gray-200 rounded-2xl p-6 hover:border-brand transition-colors">
+              <div
+                key={f.title}
+                className="border border-gray-200 rounded-2xl p-6 hover:border-brand transition-colors"
+              >
                 <div className="text-3xl mb-3">{f.icon}</div>
                 <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{f.description}</p>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  {f.description}
+                </p>
                 <ul className="space-y-1.5">
                   {f.includes.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 text-sm text-gray-700"
+                    >
                       <span className="text-brand font-bold">✓</span>
                       {item}
                     </li>
@@ -1828,7 +2088,8 @@ export default function EvenementsPage() {
           <div>
             <h2 className="font-buzz text-3xl mb-4">Demandez un devis</h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Décrivez votre projet et notre équipe revient vers vous sous 24h avec une proposition personnalisée.
+              Décrivez votre projet et notre équipe revient vers vous sous 24h
+              avec une proposition personnalisée.
             </p>
             <div className="space-y-3 text-gray-700">
               <div className="flex items-center gap-3">
@@ -1847,11 +2108,19 @@ export default function EvenementsPage() {
           </div>
           <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
             <div className="bg-brand px-6 py-4">
-              <h3 className="text-white font-semibold">Organisez votre événement</h3>
-              <p className="text-white/70 text-sm">Remplissez le formulaire ci-dessous</p>
+              <h3 className="text-white font-semibold">
+                Organisez votre événement
+              </h3>
+              <p className="text-white/70 text-sm">
+                Remplissez le formulaire ci-dessous
+              </p>
             </div>
             <div className="p-6">
-              <TallyEmbed formId={EVENTS_TALLY_FORM_ID} height={520} title="Formulaire événement entreprise" />
+              <TallyEmbed
+                formId={EVENTS_TALLY_FORM_ID}
+                height={520}
+                title="Formulaire événement entreprise"
+              />
             </div>
           </div>
         </div>
@@ -1873,6 +2142,7 @@ git commit -m "feat: page /evenements avec formules, logos clients et formulaire
 ### Task 15 : /coaching
 
 **Files:**
+
 - Create: `src/app/coaching/page.tsx`
 
 Le composant `CoursParticuliers` existant est réutilisé directement.
@@ -1909,8 +2179,12 @@ export default function CoachingPage() {
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
-          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">Coaching & Progression</span>
-          <h1 className="font-buzz text-4xl md:text-6xl mb-4">Coaching Padel</h1>
+          <span className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+            Coaching & Progression
+          </span>
+          <h1 className="font-buzz text-4xl md:text-6xl mb-4">
+            Coaching Padel
+          </h1>
           <p className="text-white/80 max-w-lg text-lg">
             Débutant ou confirmé — progressez avec nos coachs certifiés
           </p>
@@ -1936,6 +2210,7 @@ git commit -m "feat: page /coaching avec hero et réutilisation de CoursParticul
 ### Task 16 : /le-club
 
 **Files:**
+
 - Create: `src/app/le-club/page.tsx`
 
 - [ ] **Step 1 : Créer la page le-club**
@@ -1948,7 +2223,8 @@ import Values from "@/components/Values";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Le Club | Padel 15 — Infrastructure, Valeurs, Coworking, Accessibilité",
+  title:
+    "Le Club | Padel 15 — Infrastructure, Valeurs, Coworking, Accessibilité",
   description:
     "Découvrez Padel 15 : club haut de gamme au 115 rue Castagnary, Paris 15ème. Terrains, restaurant, guinguette, coworking, vestiaires, accès PMR.",
   openGraph: {
@@ -1958,14 +2234,38 @@ export const metadata: Metadata = {
 };
 
 const INFRA_ITEMS = [
-  { icon: "🎾", label: "2 terrains de padel", detail: "Couverts et extérieurs, panoramiques" },
-  { icon: "🍽️", label: "Restaurant & Bar", detail: "Service continu 7j/7, produits frais" },
-  { icon: "🌿", label: "Terrasse guinguette", detail: "Végétalisée, pétanque, espaces lounge" },
-  { icon: "💻", label: "Espace coworking", detail: "WiFi haut débit, cadre unique" },
-  { icon: "🚿", label: "Vestiaires & Douches", detail: "Équipements modernes et propres" },
+  {
+    icon: "🎾",
+    label: "2 terrains de padel",
+    detail: "Couverts et extérieurs, panoramiques",
+  },
+  {
+    icon: "🍽️",
+    label: "Restaurant & Bar",
+    detail: "Service continu 7j/7, produits frais",
+  },
+  {
+    icon: "🌿",
+    label: "Terrasse guinguette",
+    detail: "Végétalisée, pétanque, espaces lounge",
+  },
+  {
+    icon: "💻",
+    label: "Espace coworking",
+    detail: "WiFi haut débit, cadre unique",
+  },
+  {
+    icon: "🚿",
+    label: "Vestiaires & Douches",
+    detail: "Équipements modernes et propres",
+  },
   { icon: "🚲", label: "Garage à vélo", detail: "Sécurisé, gratuit" },
   { icon: "💧", label: "Fontaine à eau", detail: "En libre-service" },
-  { icon: "♿", label: "Accessibilité PMR", detail: "Site entièrement accessible" },
+  {
+    icon: "♿",
+    label: "Accessibilité PMR",
+    detail: "Site entièrement accessible",
+  },
 ];
 
 export default function LeClubPage() {
@@ -1996,28 +2296,39 @@ export default function LeClubPage() {
             <h2 className="font-buzz text-3xl mb-4">Notre histoire</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                Padel 15 est né d'une passion commune pour le padel et d'une vision : créer le club
-                de référence du 15ème arrondissement, alliant sport de haut niveau, art de vivre et
-                convivialité.
+                Padel 15 est né d'une passion commune pour le padel et d'une
+                vision : créer le club de référence du 15ème arrondissement,
+                alliant sport de haut niveau, art de vivre et convivialité.
               </p>
               <p>
-                Installé au 115 rue Castagnary, notre espace de vie unique mêle terrains de padel
-                panoramiques, restaurant à la cuisine généreuse et terrasse guinguette dépaysante —
-                le tout dans un cadre végétalisé en plein cœur de Paris.
+                Installé au 115 rue Castagnary, notre espace de vie unique mêle
+                terrains de padel panoramiques, restaurant à la cuisine
+                généreuse et terrasse guinguette dépaysante — le tout dans un
+                cadre végétalisé en plein cœur de Paris.
               </p>
             </div>
           </div>
           <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
-            <Image src="/guinguette.webp" alt="Ambiance Padel 15" fill className="object-cover" />
+            <Image
+              src="/guinguette.webp"
+              alt="Ambiance Padel 15"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
 
         {/* Infrastructure */}
         <div>
-          <h2 className="font-buzz text-3xl mb-8 text-center">Notre infrastructure</h2>
+          <h2 className="font-buzz text-3xl mb-8 text-center">
+            Notre infrastructure
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {INFRA_ITEMS.map((item) => (
-              <div key={item.label} className="bg-gray-50 rounded-xl p-5 text-center">
+              <div
+                key={item.label}
+                className="bg-gray-50 rounded-xl p-5 text-center"
+              >
                 <span className="text-3xl block mb-2">{item.icon}</span>
                 <p className="font-semibold text-sm">{item.label}</p>
                 <p className="text-gray-500 text-xs mt-1">{item.detail}</p>
@@ -2067,6 +2378,7 @@ git commit -m "feat: page /le-club avec infrastructure, valeurs et histoire du c
 ### Task 17 : /tarifs
 
 **Files:**
+
 - Create: `src/app/tarifs/page.tsx`
 
 - [ ] **Step 1 : Créer la page tarifs**
@@ -2099,9 +2411,21 @@ const TARIFS_TERRAIN = [
 ];
 
 const TARIFS_COACHING = [
-  { label: "Cours particulier", detail: "1h avec un coach certifié", price: "Sur devis" },
-  { label: "Cours collectif", detail: "Groupe 2-8 joueurs — 1h", price: "Sur devis" },
-  { label: "Stage initiation", detail: "Formule découverte débutants", price: "Sur devis" },
+  {
+    label: "Cours particulier",
+    detail: "1h avec un coach certifié",
+    price: "Sur devis",
+  },
+  {
+    label: "Cours collectif",
+    detail: "Groupe 2-8 joueurs — 1h",
+    price: "Sur devis",
+  },
+  {
+    label: "Stage initiation",
+    detail: "Formule découverte débutants",
+    price: "Sur devis",
+  },
 ];
 
 export default function TarifsPage() {
@@ -2110,7 +2434,8 @@ export default function TarifsPage() {
       <div className="pt-28 pb-16 bg-black text-white text-center px-4">
         <h1 className="font-buzz text-4xl md:text-6xl mb-4">Tarifs</h1>
         <p className="text-gray-300 max-w-lg mx-auto text-lg">
-          Réservation via Playtomic — pas d'abonnement obligatoire, payez à la séance.
+          Réservation via Playtomic — pas d'abonnement obligatoire, payez à la
+          séance.
         </p>
       </div>
 
@@ -2118,7 +2443,9 @@ export default function TarifsPage() {
         {/* Terrains */}
         <div>
           <h2 className="font-buzz text-3xl mb-2">Location de terrains</h2>
-          <p className="text-gray-500 mb-6">Prix par personne pour 1 heure. 4 joueurs par terrain.</p>
+          <p className="text-gray-500 mb-6">
+            Prix par personne pour 1 heure. 4 joueurs par terrain.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {TARIFS_TERRAIN.map((t) => (
               <div
@@ -2128,7 +2455,9 @@ export default function TarifsPage() {
                 }`}
               >
                 {t.highlight && (
-                  <span className="text-xs font-semibold text-brand uppercase tracking-wider">Le plus populaire</span>
+                  <span className="text-xs font-semibold text-brand uppercase tracking-wider">
+                    Le plus populaire
+                  </span>
                 )}
                 <h3 className="font-semibold text-xl mt-1 mb-1">{t.label}</h3>
                 <p className="text-gray-500 text-sm mb-4">{t.detail}</p>
@@ -2140,7 +2469,8 @@ export default function TarifsPage() {
             ))}
           </div>
           <p className="text-gray-500 text-sm mt-4">
-            📅 Créneaux ouverts 5 jours à l'avance via Playtomic. Location de raquettes disponible sur place.
+            📅 Créneaux ouverts 5 jours à l'avance via Playtomic. Location de
+            raquettes disponible sur place.
           </p>
           <div className="mt-6">
             <a
@@ -2157,10 +2487,16 @@ export default function TarifsPage() {
         {/* Coaching */}
         <div>
           <h2 className="font-buzz text-3xl mb-2">Coaching</h2>
-          <p className="text-gray-500 mb-6">Tarifs sur devis selon la formule choisie. Contactez-nous pour un programme personnalisé.</p>
+          <p className="text-gray-500 mb-6">
+            Tarifs sur devis selon la formule choisie. Contactez-nous pour un
+            programme personnalisé.
+          </p>
           <div className="divide-y divide-gray-100 border border-gray-200 rounded-2xl overflow-hidden">
             {TARIFS_COACHING.map((t) => (
-              <div key={t.label} className="flex items-center justify-between p-5 bg-white hover:bg-gray-50">
+              <div
+                key={t.label}
+                className="flex items-center justify-between p-5 bg-white hover:bg-gray-50"
+              >
                 <div>
                   <p className="font-semibold">{t.label}</p>
                   <p className="text-gray-500 text-sm">{t.detail}</p>
@@ -2183,7 +2519,8 @@ export default function TarifsPage() {
         <div className="bg-black rounded-2xl p-8 text-white">
           <h2 className="font-buzz text-2xl mb-2">Événements d'entreprise</h2>
           <p className="text-gray-400 mb-4">
-            Formules sur-mesure pour vos team buildings, afterworks et séminaires. Devis personnalisé sous 24h.
+            Formules sur-mesure pour vos team buildings, afterworks et
+            séminaires. Devis personnalisé sous 24h.
           </p>
           <Link
             href="/evenements"
@@ -2210,6 +2547,7 @@ git commit -m "feat: page /tarifs avec grille complète terrains et coaching"
 ### Task 18 : /contact
 
 **Files:**
+
 - Create: `src/app/contact/page.tsx`
 
 - [ ] **Step 1 : Créer la page contact**
@@ -2258,12 +2596,14 @@ git commit -m "feat: page /contact avec carte et newsletter"
 ### Task 19 : Sanity — setup, config, schemas
 
 **Files:**
+
 - Create: `sanity.config.ts`
 - Create: `src/sanity/schemas/post.ts`
 - Create: `src/sanity/schemas/index.ts`
 - Create: `src/lib/sanity.ts`
 
 **Prérequis client :**
+
 1. Créer un projet sur sanity.io → noter `projectId` et `dataset` (default: `production`)
 2. Mettre ces valeurs dans les env vars ci-dessous
 
@@ -2423,7 +2763,7 @@ export async function getAllPosts(): Promise<SanityPost[]> {
   return sanityClient.fetch(
     `*[_type == "post"] | order(publishedAt desc) {
       _id, title, slug, excerpt, coverImage, publishedAt, category
-    }`
+    }`,
   );
 }
 
@@ -2432,13 +2772,13 @@ export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
     `*[_type == "post" && slug.current == $slug][0] {
       _id, title, slug, excerpt, coverImage, publishedAt, category, body
     }`,
-    { slug }
+    { slug },
   );
 }
 
 export async function getAllPostSlugs(): Promise<string[]> {
   const posts = await sanityClient.fetch(
-    `*[_type == "post"] { "slug": slug.current }`
+    `*[_type == "post"] { "slug": slug.current }`,
   );
   return posts.map((p: { slug: string }) => p.slug);
 }
@@ -2464,6 +2804,7 @@ git commit -m "feat: Sanity setup — config, schema Post, client avec helpers"
 ### Task 20 : Blog — composants BlogCard et PortableTextRenderer
 
 **Files:**
+
 - Create: `src/components/blog/BlogCard.tsx`
 - Create: `src/components/blog/PortableTextRenderer.tsx`
 
@@ -2569,7 +2910,13 @@ const components = {
     strong: ({ children }: { children?: React.ReactNode }) => (
       <strong className="font-semibold text-black">{children}</strong>
     ),
-    link: ({ value, children }: { value?: { href: string }; children?: React.ReactNode }) => (
+    link: ({
+      value,
+      children,
+    }: {
+      value?: { href: string };
+      children?: React.ReactNode;
+    }) => (
       <a
         href={value?.href}
         target="_blank"
@@ -2585,7 +2932,10 @@ const components = {
 export function PortableTextRenderer({ body }: { body: unknown[] }) {
   return (
     <div className="prose max-w-none">
-      <PortableText value={body as Parameters<typeof PortableText>[0]["value"]} components={components} />
+      <PortableText
+        value={body as Parameters<typeof PortableText>[0]["value"]}
+        components={components}
+      />
     </div>
   );
 }
@@ -2603,6 +2953,7 @@ git commit -m "feat: composants blog BlogCard et PortableTextRenderer"
 ### Task 21 : Pages /blog et /blog/[slug]
 
 **Files:**
+
 - Create: `src/app/blog/page.tsx`
 - Create: `src/app/blog/[slug]/page.tsx`
 
@@ -2681,7 +3032,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: post.coverImage ? [{ url: urlFor(post.coverImage).width(1200).height(630).url() }] : [],
+      images: post.coverImage
+        ? [{ url: urlFor(post.coverImage).width(1200).height(630).url() }]
+        : [],
     },
   };
 }
@@ -2720,14 +3073,19 @@ export default async function BlogPostPage({ params }: Props) {
               {post.category}
             </span>
           )}
-          <h1 className="font-buzz text-3xl md:text-5xl max-w-3xl">{post.title}</h1>
+          <h1 className="font-buzz text-3xl md:text-5xl max-w-3xl">
+            {post.title}
+          </h1>
           <p className="text-white/60 text-sm mt-4">{date}</p>
         </div>
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-16 max-w-3xl">
-        <Link href="/blog" className="text-brand hover:underline text-sm font-medium mb-8 inline-block">
+        <Link
+          href="/blog"
+          className="text-brand hover:underline text-sm font-medium mb-8 inline-block"
+        >
           ← Retour au blog
         </Link>
         {post.body && <PortableTextRenderer body={post.body as unknown[]} />}
@@ -2757,6 +3115,7 @@ git commit -m "feat: pages /blog et /blog/[slug] avec Sanity et generateStaticPa
 ### Task 22 : sitemap.ts — ajout des slugs Sanity dynamiques
 
 **Files:**
+
 - Modify: `src/app/sitemap.ts`
 
 - [ ] **Step 1 : Mettre à jour sitemap.ts pour inclure les articles**
@@ -2770,14 +3129,46 @@ const BASE_URL = "https://padel15.fr";
 
 const STATIC_ROUTES = [
   { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" as const },
-  { url: `${BASE_URL}/terrains`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/restaurant`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/evenements`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/coaching`, priority: 0.8, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/tarifs`, priority: 0.8, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/le-club`, priority: 0.7, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/contact`, priority: 0.7, changeFrequency: "yearly" as const },
-  { url: `${BASE_URL}/blog`, priority: 0.7, changeFrequency: "weekly" as const },
+  {
+    url: `${BASE_URL}/terrains`,
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/restaurant`,
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/evenements`,
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/coaching`,
+    priority: 0.8,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/tarifs`,
+    priority: 0.8,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/le-club`,
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  },
+  {
+    url: `${BASE_URL}/contact`,
+    priority: 0.7,
+    changeFrequency: "yearly" as const,
+  },
+  {
+    url: `${BASE_URL}/blog`,
+    priority: 0.7,
+    changeFrequency: "weekly" as const,
+  },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -2795,7 +3186,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   return [
-    ...STATIC_ROUTES.map((r) => ({ url: r.url, lastModified: new Date(), changeFrequency: r.changeFrequency, priority: r.priority })),
+    ...STATIC_ROUTES.map((r) => ({
+      url: r.url,
+      lastModified: new Date(),
+      changeFrequency: r.changeFrequency,
+      priority: r.priority,
+    })),
     ...blogRoutes,
   ];
 }
@@ -2814,14 +3210,14 @@ git commit -m "feat: sitemap dynamique avec slugs Sanity"
 
 Ces 6 articles sont à créer dans le Sanity Studio (`npx sanity dev`) une fois le CMS configuré. Ils ciblent des mots-clés SEO locaux à fort volume.
 
-| # | Titre | Slug | Catégorie | Mots-clés cibles |
-|---|-------|------|-----------|-----------------|
-| 1 | Comment débuter le padel à Paris : guide complet pour débutants | `debuter-padel-paris` | conseils | "padel débutant paris", "apprendre padel paris" |
-| 2 | Padel 15ème : pourquoi Padel 15 est le club incontournable | `padel-15eme-arrondissement-paris` | actualites | "padel 15ème", "club padel paris 15" |
-| 3 | Team building padel Paris : l'activité qui fédère vraiment vos équipes | `team-building-padel-paris` | evenements | "team building padel paris", "activité team building paris" |
-| 4 | Padel vs tennis : quelles différences ? Tout ce qu'il faut savoir | `padel-vs-tennis-differences` | conseils | "difference padel tennis", "padel vs tennis" |
-| 5 | Restaurant et guinguette Paris 15 : l'après-padel parfait | `restaurant-guinguette-paris-15` | lifestyle | "guinguette paris 15", "restaurant paris 15 terrasse" |
-| 6 | Tournois de padel à Paris : comment participer et progresser | `tournoi-padel-paris` | conseils | "tournoi padel paris", "compétition padel paris" |
+| #   | Titre                                                                  | Slug                               | Catégorie  | Mots-clés cibles                                            |
+| --- | ---------------------------------------------------------------------- | ---------------------------------- | ---------- | ----------------------------------------------------------- |
+| 1   | Comment débuter le padel à Paris : guide complet pour débutants        | `debuter-padel-paris`              | conseils   | "padel débutant paris", "apprendre padel paris"             |
+| 2   | Padel 15ème : pourquoi Padel 15 est le club incontournable             | `padel-15eme-arrondissement-paris` | actualites | "padel 15ème", "club padel paris 15"                        |
+| 3   | Team building padel Paris : l'activité qui fédère vraiment vos équipes | `team-building-padel-paris`        | evenements | "team building padel paris", "activité team building paris" |
+| 4   | Padel vs tennis : quelles différences ? Tout ce qu'il faut savoir      | `padel-vs-tennis-differences`      | conseils   | "difference padel tennis", "padel vs tennis"                |
+| 5   | Restaurant et guinguette Paris 15 : l'après-padel parfait              | `restaurant-guinguette-paris-15`   | lifestyle  | "guinguette paris 15", "restaurant paris 15 terrasse"       |
+| 6   | Tournois de padel à Paris : comment participer et progresser           | `tournoi-padel-paris`              | conseils   | "tournoi padel paris", "compétition padel paris"            |
 
 **Action requise :** Créer ces articles dans le Studio (`npx sanity dev`) puis rebuild (`npm run build`) pour les voir apparaître sur le site.
 
