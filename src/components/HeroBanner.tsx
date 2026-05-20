@@ -218,18 +218,23 @@ export default function HeroBanner() {
         <track kind="captions" srcLang="fr" label="Français" default />
       </video>
 
-      {/* Fallback carousel photo */}
+      {/* Fallback carousel photo — seule image 0 est priority, les autres lazy */}
       <div className="absolute inset-0 z-0">
         {CAROUSEL_IMAGES.map((src, index) => (
-          index === 0 ? (
-            <div key={src} className={`absolute inset-0 transition-opacity duration-1000 ${activeIndex === 0 ? "opacity-100" : "opacity-0"}`}>
-              <Image src={src} alt="Terrains Padel 15" fill className="object-cover" priority sizes="100vw" />
-            </div>
-          ) : (
-            <div key={src} style={{ backgroundImage: `url(${src})` }}
-              className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+          <div
+            key={src}
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+          >
+            <Image
+              src={src}
+              alt="Terrains Padel 15"
+              fill
+              className="object-cover"
+              priority={index === 0}
+              sizes="100vw"
+              quality={index === 0 ? 75 : 60}
             />
-          )
+          </div>
         ))}
       </div>
 

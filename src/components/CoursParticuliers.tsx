@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,11 +37,15 @@ export default function CoursParticuliers() {
 
   return (
     <section id="cours" className="relative scroll-mt-16 py-20 overflow-hidden">
-      {/* Background */}
+      {/* Background — next/image optimise automatiquement la 1.2MB source */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f]" />
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-10"
-        style={{ backgroundImage: "url('/images/terrains/terrain-inte-game.webp')" }}
+      <Image
+        src="/images/terrains/terrain-inte-game.webp"
+        alt=""
+        fill
+        className="object-cover opacity-10"
+        sizes="100vw"
+        quality={40}
       />
       {/* Accent orange top */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF6727] to-transparent" />
