@@ -80,7 +80,7 @@ export default function LeClubPage() {
               </div>
             </div>
             <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/restaurant/guinguette.webp" alt="Ambiance Padel 15" fill className="object-cover" />
+              <Image src="/images/restaurant/guinguette.webp" alt="Ambiance Padel 15" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
             </div>
           </div>
         </AnimatedSection>

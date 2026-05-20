@@ -135,7 +135,7 @@ export default function EvenementsPage() {
             </a>
           </div>
           <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-            <Image src="/images/restaurant/guinguette.webp" alt="Espace événements Padel 15" fill className="object-cover" />
+            <Image src="/images/restaurant/guinguette.webp" alt="Espace événements Padel 15" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import HeroBanner from "@/components/HeroBanner";
 import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
 import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
@@ -25,7 +26,9 @@ export default function HomePage() {
       <PadelInfoSection />
       <RestaurantHighlight />
       <CoursParticuliers />
-      <AgendaSection />
+      <Suspense fallback={<div className="py-16 bg-gray-50" aria-hidden />}>
+        <AgendaSection />
+      </Suspense>
       <PartenairesSection />
       <B2BSection />
       <div className="py-6 bg-gray-50">

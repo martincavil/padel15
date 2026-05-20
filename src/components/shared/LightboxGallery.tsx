@@ -69,6 +69,11 @@ export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
               alt={img.alt}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes={
+                columns === 2 ? "(max-width: 640px) 50vw, 50vw"
+                : columns === 4 ? "(max-width: 640px) 50vw, 25vw"
+                : "(max-width: 640px) 50vw, 33vw"
+              }
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center" />
           </button>
