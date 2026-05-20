@@ -55,7 +55,7 @@ export function CTANewsletter() {
         {/* Titre */}
         <h2 className="font-buzz text-4xl md:text-5xl text-gray-900 mb-4 leading-tight">
           Restez au cœur<br />
-          <span className="text-brand">du jeu.</span>
+          <span className="text-brand-dark">du jeu.</span>
         </h2>
 
         {/* Sous-titre */}
@@ -117,10 +117,11 @@ export function CTANewsletter() {
         {/* Incentive + RGPD */}
         {status === "idle" || status === "loading" || status === "error" ? (
           <>
-            <div className="inline-flex items-center gap-2 bg-brand/8 border border-brand/20 rounded-full px-4 py-1.5 mb-4">
-              <span className="text-brand text-sm font-semibold">🎁 −10% sur votre 1ère réservation</span>
+            {/* Fond blanc + texte sombre → contraste 9:1 */}
+            <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-1.5 mb-4 shadow-sm">
+              <span className="text-gray-800 text-sm font-semibold">🎁 −10% sur votre 1ère réservation</span>
             </div>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 mt-2">
               En vous inscrivant, vous acceptez notre{" "}
               <a href="/confidentialite" className="underline hover:text-brand transition-colors">
                 politique de confidentialité

@@ -51,7 +51,7 @@ function TournamentCard({ t }: { t: PlaytomicTournament }) {
           <h3 className="font-semibold text-sm leading-snug mb-1 group-hover:text-brand transition-colors">
             {t.tournament_name}
           </h3>
-          <p className="text-gray-400 text-xs">
+          <p className="text-gray-600 text-xs">
             {levelLabel(t.level_description)} · {price} / équipe
           </p>
         </div>
@@ -102,7 +102,7 @@ export async function AgendaSection() {
               <p className="font-semibold text-gray-700 mb-1">
                 Aucun tournoi à venir pour le moment
               </p>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-600 text-sm mb-4">
                 Consultez Playtomic pour voir tous les créneaux disponibles
               </p>
               <a
