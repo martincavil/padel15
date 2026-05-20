@@ -33,7 +33,7 @@ export function B2BSection() {
   return (
     <section
       className="relative py-24 overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/terrain-ext-jour.webp')" }}
+      style={{ backgroundImage: "url('/images/terrains/terrain-ext-jour.webp')" }}
     >
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/75 z-10" />

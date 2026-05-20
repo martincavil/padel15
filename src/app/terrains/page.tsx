@@ -125,8 +125,8 @@ export default function TerrainsPage() {
               { src: "/images/terrains/terrain-inte-game.webp", alt: "Match en cours" },
               { src: "/images/terrains/terrain-ext-nuit.webp", alt: "Terrain extérieur de nuit" },
               { src: "/images/terrains/terrain-inte-vide.webp", alt: "Terrain intérieur" },
-              { src: "/images/terrains/terrain-inte-1.jpg", alt: "Terrain intérieur vue d'ensemble" },
-              { src: "/images/terrains/terrain-match-1.jpg", alt: "Match en tournoi" },
+              { src: "/images/terrains/terrain-inte-1.webp", alt: "Terrain intérieur vue d'ensemble" },
+              { src: "/images/terrains/terrain-match-1.webp", alt: "Match en tournoi" },
             ]}
             columns={3}
           />

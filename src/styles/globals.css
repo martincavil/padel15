@@ -2,12 +2,20 @@
 @import "tw-animate-css";
 
 @keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @keyframes scroll-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 .animate-scroll-left {
   animation: scroll-left 40s linear infinite;
@@ -17,19 +25,27 @@
 }
 
 @keyframes scroll-up {
-  from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
 }
 @keyframes scroll-down {
-  from { transform: translateY(-50%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 .animate-scroll-up {
-  animation: scroll-up 55s linear infinite;
+  animation: scroll-up 24s linear infinite;
   will-change: transform;
 }
 .animate-scroll-down {
-  animation: scroll-down 65s linear infinite;
+  animation: scroll-down 30s linear infinite;
   will-change: transform;
 }
 .animate-scroll-up:hover,
@@ -38,8 +54,8 @@
 }
 
 @font-face {
-  font-family: 'BuzzBlack';
-  src: url('/fonts/BuzzBlack.otf') format('opentype');
+  font-family: "BuzzBlack";
+  src: url("/fonts/BuzzBlack.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -48,10 +64,10 @@
 @tailwind utilities;
 
 @theme {
-  --color-brand: #FF6727;
+  --color-brand: #ff6727;
   --color-brand-dark: #e55a1f;
-  --font-buzz: 'BuzzBlack', sans-serif;
-  --font-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --font-buzz: "BuzzBlack", sans-serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", sans-serif;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -176,8 +192,14 @@
     animation: page-fade-in 0.25s ease-out;
   }
   @keyframes page-fade-in {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .container {

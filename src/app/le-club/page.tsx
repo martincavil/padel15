@@ -35,13 +35,13 @@ const PHOTO_HIGHLIGHTS = [
     detail: "WiFi haut débit, cadre unique",
   },
   {
-    src: "/images/autres/raquettes-1.jpg",
+    src: "/images/terrains/raquettes-1.webp",
     alt: "Équipements Padel 15",
     label: "Équipements",
     detail: "Location de raquettes",
   },
   {
-    src: "/images/terrains/terrain-inte-filet.jpg",
+    src: "/images/terrains/terrain-inte-filet.webp",
     alt: "Terrain intérieur Padel 15",
     label: "Terrains",
     detail: "2 courts panoramiques",

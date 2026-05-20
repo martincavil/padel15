@@ -60,7 +60,7 @@ export default function EvenementsPage() {
         title="Team Building & Événements"
         subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… plus de 20 entreprises de premier plan font confiance à Padel 15."
         badge="Entreprises & Groupes"
-        imageSrc="/images/terrains/terrain-match-1.jpg"
+        imageSrc="/images/terrains/terrain-match-1.webp"
         imageAlt="Événements d'entreprise Padel 15"
         height="lg"
       />

@@ -39,7 +39,7 @@ export default function TarifsPage() {
       <PageHero
         title="Tarifs"
         subtitle="Réservation via Playtomic — pas d'abonnement obligatoire, payez à la séance."
-        imageSrc="/images/terrains/padel-ext.jpg"
+        imageSrc="/images/terrains/padel-ext.webp"
         imageAlt="Courts Padel 15 Paris"
         height="md"
       />

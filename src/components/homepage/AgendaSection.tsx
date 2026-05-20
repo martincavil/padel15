@@ -32,8 +32,12 @@ function TournamentCard({ t }: { t: PlaytomicTournament }) {
       <div className="flex items-start gap-4">
         {/* Date badge */}
         <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-brand/8 flex flex-col items-center justify-center">
-          <span className="font-buzz text-xl text-brand leading-none">{date.day}</span>
-          <span className="text-xs text-brand/70 uppercase tracking-wide">{date.month}</span>
+          <span className="font-buzz text-xl text-brand leading-none">
+            {date.day}
+          </span>
+          <span className="text-xs text-brand/70 uppercase tracking-wide">
+            {date.month}
+          </span>
         </div>
 
         {/* Content */}
@@ -47,15 +51,9 @@ function TournamentCard({ t }: { t: PlaytomicTournament }) {
           <h3 className="font-semibold text-sm leading-snug mb-1 group-hover:text-brand transition-colors">
             {t.tournament_name}
           </h3>
-          <p className="text-gray-400 text-xs mb-2">
+          <p className="text-gray-400 text-xs">
             {levelLabel(t.level_description)} · {price} / équipe
           </p>
-          <span
-            className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border ${statusColors[status.color]}`}
-          >
-            <Calendar className="w-3 h-3" />
-            {status.text}
-          </span>
         </div>
       </div>
     </a>
@@ -74,7 +72,9 @@ export async function AgendaSection() {
               <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-3">
                 Agenda
               </span>
-              <h2 className="font-buzz text-3xl md:text-4xl">Prochains tournois</h2>
+              <h2 className="font-buzz text-3xl md:text-4xl">
+                Prochains tournois
+              </h2>
             </div>
             <a
               href={PLAYTOMIC_CLUB_URL}
@@ -99,7 +99,9 @@ export async function AgendaSection() {
           <AnimatedSection>
             <div className="bg-white rounded-2xl border border-gray-200 p-10 text-center">
               <Trophy className="w-8 h-8 text-brand/30 mx-auto mb-3" />
-              <p className="font-semibold text-gray-700 mb-1">Aucun tournoi à venir pour le moment</p>
+              <p className="font-semibold text-gray-700 mb-1">
+                Aucun tournoi à venir pour le moment
+              </p>
               <p className="text-gray-400 text-sm mb-4">
                 Consultez Playtomic pour voir tous les créneaux disponibles
               </p>
@@ -134,8 +136,12 @@ export async function AgendaSection() {
                 <Users className="w-5 h-5 text-brand" />
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-0.5">Organiser un événement entreprise ?</p>
-                <p className="text-gray-500 text-sm">Team building, tournoi corporate, soirée privée — sur-mesure.</p>
+                <p className="font-semibold text-gray-900 mb-0.5">
+                  Organiser un événement entreprise ?
+                </p>
+                <p className="text-gray-500 text-sm">
+                  Team building, tournoi corporate, soirée privée — sur-mesure.
+                </p>
               </div>
             </div>
             <Link

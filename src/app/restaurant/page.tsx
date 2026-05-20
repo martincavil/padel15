@@ -59,11 +59,11 @@ const SERVICES = [
 
 const GALLERY_IMAGES = [
   { src: "/images/restaurant/rest-inte-grand-angle.webp", alt: "Restaurant — vue d'ensemble" },
-  { src: "/images/restaurant/rest-inte-bar.jpg", alt: "Bar intérieur" },
+  { src: "/images/restaurant/rest-inte-bar.webp", alt: "Bar intérieur" },
   { src: "/images/restaurant/guinguette.webp", alt: "Terrasse guinguette" },
   { src: "/images/restaurant/restau-diner.webp", alt: "Ambiance dîner" },
-  { src: "/images/restaurant/rest-ext.jpg", alt: "Restaurant extérieur" },
-  { src: "/images/restaurant/rest-inte-terrain.jpg", alt: "Vue sur les terrains" },
+  { src: "/images/restaurant/rest-ext.webp", alt: "Restaurant extérieur" },
+  { src: "/images/restaurant/rest-inte-terrain.webp", alt: "Vue sur les terrains" },
 ];
 
 export default async function RestaurantPage() {

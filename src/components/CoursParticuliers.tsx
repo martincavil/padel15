@@ -40,7 +40,7 @@ export default function CoursParticuliers() {
       <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f]" />
       <div
         className="absolute inset-0 bg-cover bg-center opacity-10"
-        style={{ backgroundImage: "url('/terrain-inte-game.webp')" }}
+        style={{ backgroundImage: "url('/images/terrains/terrain-inte-game.webp')" }}
       />
       {/* Accent orange top */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF6727] to-transparent" />

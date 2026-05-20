@@ -86,7 +86,7 @@ const OFFRES = [
 ];
 
 const GALLERY_IMAGES = [
-  { src: "/images/terrains/terrain-match-1.jpg", alt: "Match de padel en entreprise" },
+  { src: "/images/terrains/terrain-match-1.webp", alt: "Match de padel en entreprise" },
   { src: "/images/autres/work-and-padel.webp", alt: "Coworking et padel" },
   { src: "/images/restaurant/rest-inte-grand-angle.webp", alt: "Espace restaurant et événements" },
   { src: "/images/restaurant/guinguette.webp", alt: "Terrasse guinguette privatisée" },
