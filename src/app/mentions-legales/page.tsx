@@ -16,11 +16,13 @@ export default function MentionsLegalesPage() {
           <h2 className="font-semibold text-xl text-gray-900 mb-3">1. Éditeur du site</h2>
           <p>Le site <strong>padel15.fr</strong> est édité par :</p>
           <ul className="list-none space-y-1 mt-2">
-            <li><strong>Raison sociale :</strong> Padel 15 [À compléter — forme juridique et SIRET]</li>
+            <li><strong>Raison sociale :</strong> SAS Padel15</li>
+            <li><strong>SIRET :</strong> 949 726 848 00011</li>
+            <li><strong>Actionnaires :</strong> GM Holding (Gaspard Megret) &amp; Brok Event (Thomas Brocart)</li>
             <li><strong>Siège social :</strong> 115 rue Castagnary, 75015 Paris, France</li>
             <li><strong>Téléphone :</strong> +33 1 45 31 58 76</li>
             <li><strong>Email :</strong> contact@padel15.fr</li>
-            <li><strong>Directeur de la publication :</strong> [À compléter]</li>
+            <li><strong>Directeur de la publication :</strong> Gaspard Megret</li>
           </ul>
         </section>
 

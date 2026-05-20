@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Users, Trophy, Wine, Download, Phone, Mail, FileText } from "lucide-react";
+import { Check, Users, Trophy, Wine, Download, Phone, Mail, FileText, MessageSquare } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { LightboxGallery } from "@/components/shared/LightboxGallery";
+import { TallyEmbed } from "@/components/shared/TallyEmbed";
 import Clients from "@/components/Clients";
 
 export const metadata: Metadata = {
@@ -238,105 +239,59 @@ export default function EntreprisesPage() {
             </div>
           </div>
 
-          {/* Right — form */}
+          {/* Right — form (Tally si NEXT_PUBLIC_TALLY_FORM_ID est défini, sinon contact direct) */}
           <div className="lg:col-span-2">
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
               <div className="bg-black px-6 py-4">
                 <h3 className="text-white font-semibold">Demande de devis événement</h3>
                 <p className="text-gray-400 text-sm">Gratuit et sans engagement — réponse sous 24h</p>
               </div>
-              <form
-                action="mailto:contact@padel15.fr"
-                method="POST"
-                encType="text/plain"
-                className="p-6 space-y-4"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
-                    <input id="nom" name="nom" type="text" required placeholder="Jean Dupont"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand" />
-                  </div>
-                  <div>
-                    <label htmlFor="entreprise" className="block text-sm font-medium text-gray-700 mb-1">Entreprise *</label>
-                    <input id="entreprise" name="entreprise" type="text" required placeholder="Nom de votre société"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand" />
-                  </div>
+              {process.env.NEXT_PUBLIC_TALLY_FORM_ID ? (
+                // Formulaire Tally — ajouter NEXT_PUBLIC_TALLY_FORM_ID dans .env.local + Vercel
+                <div className="p-2">
+                  <TallyEmbed
+                    formId={process.env.NEXT_PUBLIC_TALLY_FORM_ID}
+                    height={560}
+                    title="Demande de devis événement Padel 15"
+                  />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                    <input id="email" name="email" type="email" required placeholder="jean@entreprise.fr"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand" />
-                  </div>
-                  <div>
-                    <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                    <input id="telephone" name="telephone" type="tel" placeholder="+33 6 00 00 00 00"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">Type d&apos;événement *</label>
-                    <select id="type" name="type" required
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-white">
-                      <option value="">Choisir...</option>
-                      <option value="seminaire">Séminaire padel</option>
-                      <option value="tournoi">Tournoi corporate</option>
-                      <option value="soiree">Soirée privée</option>
-                      <option value="afterwork">Afterwork</option>
-                      <option value="autre">Autre</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="personnes" className="block text-sm font-medium text-gray-700 mb-1">Nombre de personnes</label>
-                    <select id="personnes" name="personnes"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-white">
-                      <option value="">Estimer...</option>
-                      <option value="10-20">10 à 20</option>
-                      <option value="20-40">20 à 40</option>
-                      <option value="40-80">40 à 80</option>
-                      <option value="80+">80+</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Date souhaitée</label>
-                    <input id="date" name="date" type="date"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand" />
-                  </div>
-                  <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">Budget estimé</label>
-                    <select id="budget" name="budget"
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-white">
-                      <option value="">Indiquer...</option>
-                      <option value="1000-3000">1 000 € – 3 000 €</option>
-                      <option value="3000-6000">3 000 € – 6 000 €</option>
-                      <option value="6000-10000">6 000 € – 10 000 €</option>
-                      <option value="10000+">10 000 €+</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message / détails</label>
-                  <textarea id="message" name="message" rows={3} placeholder="Décrivez votre projet, vos attentes particulières..."
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand resize-none" />
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs mb-3">
-                    En envoyant ce formulaire, vous acceptez notre{" "}
-                    <Link href="/confidentialite" className="underline hover:text-brand">politique de confidentialité</Link>.
-                    Données utilisées uniquement pour répondre à votre demande.
+              ) : (
+                // Fallback : contact direct tant que Tally n'est pas configuré
+                <div className="p-8 space-y-6">
+                  <p className="text-gray-600">
+                    Décrivez-nous votre projet par email ou téléphone — nous vous répondons sous 24h avec une proposition sur-mesure.
                   </p>
-                  <button
-                    type="submit"
-                    className="w-full bg-brand hover:bg-brand-dark text-white font-semibold py-3.5 rounded-xl transition-colors"
-                  >
-                    Envoyer ma demande
-                  </button>
+                  <div className="space-y-3">
+                    <a
+                      href="mailto:contact@padel15.fr?subject=Demande%20de%20devis%20%C3%A9v%C3%A9nement"
+                      className="flex items-center gap-3 bg-brand hover:bg-brand-dark text-white font-semibold px-5 py-3.5 rounded-xl transition-colors"
+                    >
+                      <Mail className="w-5 h-5 shrink-0" />
+                      Envoyer un email
+                    </a>
+                    <a
+                      href="tel:+33145315876"
+                      className="flex items-center gap-3 border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-5 py-3.5 rounded-xl transition-colors"
+                    >
+                      <Phone className="w-5 h-5 shrink-0" />
+                      +33 1 45 31 58 76
+                    </a>
+                    <a
+                      href="https://wa.me/33145315876"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-5 py-3.5 rounded-xl transition-colors"
+                    >
+                      <MessageSquare className="w-5 h-5 shrink-0" />
+                      WhatsApp
+                    </a>
+                  </div>
+                  <p className="text-gray-400 text-xs">
+                    En nous contactant, vous acceptez notre{" "}
+                    <Link href="/confidentialite" className="underline hover:text-brand">politique de confidentialité</Link>.
+                  </p>
                 </div>
-              </form>
+              )}
             </div>
           </div>
         </div>

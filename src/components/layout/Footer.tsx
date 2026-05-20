@@ -12,7 +12,7 @@ const LINKS_CLUB = [
 
 const LINKS_PRATIQUE = [
   { href: "/contact", label: "Contact & Accès" },
-  { href: "/blog", label: "Blog" },
+  // { href: "/blog", label: "Blog" }, // à activer quand les premiers articles sont publiés
   { href: "/entreprises", label: "Événements entreprise" },
 ];
 

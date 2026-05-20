@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { href: "/evenements", label: "Événements" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/le-club", label: "Le Club" },
+  // { href: "/blog", label: "Blog" }, // à activer quand les premiers articles sont publiés
 ];
 
 export default function Navbar() {
