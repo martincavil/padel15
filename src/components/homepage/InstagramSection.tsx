@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { Instagram } from "lucide-react";
 
 // Poster = première frame servie par Cloudinary en changeant l'extension .mp4 → .jpg
@@ -27,6 +28,43 @@ const COL_RIGHT = [
 
 const INSTAGRAM_URL = "https://www.instagram.com/padel15club/?hl=fr";
 
+function VideoItem({ src, poster }: { src: string; poster: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    // Joue uniquement quand la section est visible — évite les 50MB de réseau au chargement
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="relative w-full aspect-[9/16] rounded-xl overflow-hidden flex-shrink-0 bg-black">
+      <video
+        ref={ref}
+        src={src}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        preload="none"
+      >
+        {/* Track requis pour l'accessibilité (Lighthouse Accessibility) */}
+        <track kind="captions" srcLang="fr" label="Français" default />
+      </video>
+    </div>
+  );
+}
+
 function ScrollColumn({
   videos,
   animClass,
@@ -44,21 +82,7 @@ function ScrollColumn({
         style={offsetPx ? { marginTop: `-${offsetPx}px` } : undefined}
       >
         {doubled.map((v, i) => (
-          <div
-            key={`${v.src}-${i}`}
-            className="relative w-full aspect-[9/16] rounded-xl overflow-hidden flex-shrink-0 bg-black"
-          >
-            <video
-              src={v.src}
-              poster={v.poster}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-              preload="none"
-            />
-          </div>
+          <VideoItem key={`${v.src}-${i}`} src={v.src} poster={v.poster} />
         ))}
       </div>
     </div>

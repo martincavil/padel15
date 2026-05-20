@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+
 import { ChevronDown, ChevronLeft, ChevronRight, Smartphone } from "lucide-react";
 
 const CAROUSEL_IMAGES = [
@@ -77,10 +77,7 @@ function BookingWidget() {
     : `${DAY_NAMES_FULL[selectedDate.getDay()]} ${selectedDate.getDate()} ${MONTH_NAMES[selectedDate.getMonth()]}`;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.35, duration: 0.6, ease: "easeOut" }}
+    <div
       className="bg-black/65 backdrop-blur-xl border border-white/20 rounded-2xl p-6 w-full max-w-sm"
     >
       {/* Header */}
@@ -192,7 +189,7 @@ function BookingWidget() {
           Google Play
         </a>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -243,10 +240,7 @@ export default function HeroBanner() {
       <div className="hidden lg:grid grid-cols-3 relative z-20 h-full container items-center gap-8">
         {/* LEFT */}
         <div className="col-span-2 flex flex-col gap-5">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+          <div
             className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 w-fit"
           >
             <div className="flex">
@@ -263,12 +257,9 @@ export default function HeroBanner() {
             <span className="text-white text-xs font-medium">
               4,6 · 112 avis Google
             </span>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
+          <div
           >
             <Image
               src="/logo.svg"
@@ -281,12 +272,9 @@ export default function HeroBanner() {
             <h1 className="font-buzz text-6xl xl:text-7xl text-white leading-none tracking-tight">
               L&apos;art de Vivre <span className="text-brand">Le Padel</span>
             </h1>
-          </motion.div>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.45, duration: 0.6 }}
+          <p
             className="text-white/70"
           >
             L&apos;art de vivre le padel à Paris. Un club d&apos;exception où
@@ -295,12 +283,9 @@ export default function HeroBanner() {
             détendez-vous… et savourez chaque instant. Terrains couvert et haut
             de gamme, terrasse guinguette, pétanque, fléchettes, bar et
             restaurant
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+          <div
             className="flex flex-wrap gap-3"
           >
             <Link
@@ -309,7 +294,7 @@ export default function HeroBanner() {
             >
               Organiser un événement
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {/* RIGHT — Booking widget */}
@@ -320,10 +305,7 @@ export default function HeroBanner() {
 
       {/* ── Mobile / tablet <lg : centré ── */}
       <div className="flex lg:hidden relative z-20 h-full flex-col items-center justify-center text-center px-4 gap-5">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+        <div
           className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5"
         >
           <div className="flex">
@@ -338,12 +320,9 @@ export default function HeroBanner() {
             ))}
           </div>
           <span className="text-white text-xs font-medium">4,6 · 112 avis</span>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+        <div
         >
           <Image
             src="/logo.svg"
@@ -358,21 +337,15 @@ export default function HeroBanner() {
             <br />
             <span className="text-brand">le padel</span>
           </h1>
-        </motion.div>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+        <p
           className="text-white/70 text-sm"
         >
           Sport · Élégance · Convivialité · Paris 15ème
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55 }}
+        <div
           className="flex flex-col items-center gap-2 w-full max-w-xs"
         >
           <a
@@ -414,7 +387,7 @@ export default function HeroBanner() {
           >
             Organiser un événement →
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       {/* Dots */}
@@ -434,19 +407,14 @@ export default function HeroBanner() {
       </div>
 
       {/* Scroll indicator desktop */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+      <div
         className="absolute bottom-4 left-1/2 z-20 hidden lg:block"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+        <div
         >
           <ChevronDown className="w-5 h-5 text-white/40" />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }
