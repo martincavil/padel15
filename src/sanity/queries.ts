@@ -1,4 +1,4 @@
-import { sanityClient, SanityMenuItem, SanityDailySpecial, SanityMenuFormule } from "./client";
+import { sanityClient, SanityMenuItem, SanityDailySpecial, SanityMenuFormule, SanityPost } from "./client";
 
 // ─── Mock fallbacks ────────────────────────────────────────────────────────────
 
@@ -73,6 +73,30 @@ export async function getMenuByCategory(): Promise<Record<string, SanityMenuItem
   }, {});
 }
 
+const MOCK_POSTS: SanityPost[] = [
+  {
+    _id: "mock-post-1",
+    title: "Comment progresser au padel en 4 semaines",
+    slug: { current: "progresser-padel-4-semaines" },
+    publishedAt: new Date(Date.now() - 7 * 86400000).toISOString(),
+    categories: [{ title: "Coaching" }],
+  },
+  {
+    _id: "mock-post-2",
+    title: "Les meilleurs équipements padel pour débutants",
+    slug: { current: "equipements-padel-debutants" },
+    publishedAt: new Date(Date.now() - 14 * 86400000).toISOString(),
+    categories: [{ title: "Équipement" }],
+  },
+  {
+    _id: "mock-post-3",
+    title: "Padel vs Tennis : les différences essentielles",
+    slug: { current: "padel-vs-tennis-differences" },
+    publishedAt: new Date(Date.now() - 21 * 86400000).toISOString(),
+    categories: [{ title: "Découverte" }],
+  },
+];
+
 export async function getActiveFormules(): Promise<SanityMenuFormule[]> {
   if (!sanityClient) return MOCK_FORMULES;
   try {
@@ -83,5 +107,51 @@ export async function getActiveFormules(): Promise<SanityMenuFormule[]> {
     );
   } catch {
     return MOCK_FORMULES;
+  }
+}
+
+export async function getPosts(): Promise<SanityPost[]> {
+  if (!sanityClient) return MOCK_POSTS;
+  try {
+    return await sanityClient.fetch(
+      `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+        _id, title, slug, publishedAt,
+        "author": author->{ name },
+        mainImage{ asset, alt },
+        "categories": categories[]->{ title }
+      }`
+    );
+  } catch {
+    return MOCK_POSTS;
+  }
+}
+
+export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
+  if (!sanityClient) return MOCK_POSTS.find((p) => p.slug.current === slug) ?? null;
+  try {
+    return await sanityClient.fetch(
+      `*[_type == "post" && slug.current == $slug][0] {
+        _id, title, slug, publishedAt,
+        "author": author->{ name },
+        mainImage{ asset, alt },
+        "categories": categories[]->{ title },
+        body
+      }`,
+      { slug }
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getPostSlugs(): Promise<string[]> {
+  if (!sanityClient) return MOCK_POSTS.map((p) => p.slug.current);
+  try {
+    const posts: Array<{ slug: { current: string } }> = await sanityClient.fetch(
+      `*[_type == "post" && defined(slug.current)]{ slug }`
+    );
+    return posts.map((p) => p.slug.current);
+  } catch {
+    return [];
   }
 }

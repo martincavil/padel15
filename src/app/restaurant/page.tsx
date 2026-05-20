@@ -10,6 +10,8 @@ import { AnimatedPrivatiseCard } from "@/components/restaurant/AnimatedPrivatise
 import { getMenuByCategory, getActiveFormules, getDailySpecials } from "@/sanity/queries";
 import { MenuDisplay } from "@/components/restaurant/MenuDisplay";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Restaurant & Guinguette Paris 15 | Bar, Terrasse, Pétanque",
   description:

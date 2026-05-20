@@ -33,3 +33,14 @@ export interface SanityMenuFormule {
   includes?: string;
   isActive: boolean;
 }
+
+export interface SanityPost {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  author?: { name: string };
+  mainImage?: { asset: { _ref: string; _type: string }; alt?: string };
+  categories?: Array<{ title: string }>;
+  publishedAt?: string;
+  body?: unknown[];
+}
