@@ -8,6 +8,30 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 828, 1080, 1280, 1920],
     imageSizes: [16, 32, 64, 96, 128, 256],
+    remotePatterns: [
+      // Sanity CDN
+      { protocol: "https", hostname: "cdn.sanity.io" },
+      // Cloudinary (vidéos + images)
+      { protocol: "https", hostname: "res.cloudinary.com" },
+    ],
+  },
+  async headers() {
+    return [
+      {
+        // Assets statiques immutables (hachés par Next.js)
+        source: "/_next/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        // Images et fonts dans /public
+        source: "/:path*.(webp|avif|jpg|png|svg|woff2|woff|otf|ico)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+        ],
+      },
+    ];
   },
 };
 
