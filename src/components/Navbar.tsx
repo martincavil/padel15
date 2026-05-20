@@ -48,7 +48,7 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        isScrolled ? "bg-white shadow-md" : "bg-transparent",
       )}
     >
       <div className="container py-4 flex justify-between items-center">
@@ -70,7 +70,7 @@ export default function Navbar() {
               href={link.href}
               className={cn(
                 "font-medium hover:text-brand transition-colors",
-                pathname === link.href && "text-brand"
+                pathname === link.href && "text-brand",
               )}
             >
               {link.label}
@@ -91,7 +91,7 @@ export default function Navbar() {
                 "cursor-pointer",
                 isScrolled
                   ? "bg-brand hover:bg-brand-dark text-white"
-                  : "bg-white text-black hover:bg-slate-100"
+                  : "bg-white text-black hover:bg-gray-100",
               )}
             >
               Réserver un terrain
@@ -105,7 +105,7 @@ export default function Navbar() {
                 "cursor-pointer",
                 isScrolled
                   ? "border-brand text-brand hover:bg-brand hover:text-white"
-                  : "border-white text-white bg-transparent hover:bg-white/20"
+                  : "border-white text-white bg-transparent hover:bg-white hover:text-brand",
               )}
             >
               Organiser un événement
@@ -145,7 +145,9 @@ export default function Navbar() {
           {menuOpen ? (
             <XMarkIcon className="w-6 text-brand" />
           ) : (
-            <Bars3Icon className={cn("w-6", isScrolled ? "text-brand" : "text-white")} />
+            <Bars3Icon
+              className={cn("w-6", isScrolled ? "text-brand" : "text-white")}
+            />
           )}
         </button>
 
@@ -155,7 +157,7 @@ export default function Navbar() {
             "fixed top-0 right-0 h-full w-full max-w-xs bg-white text-black shadow-lg z-50",
             "flex flex-col justify-between p-6 overflow-y-auto",
             "transition-transform duration-300 ease-in-out",
-            menuOpen ? "translate-x-0" : "translate-x-full"
+            menuOpen ? "translate-x-0" : "translate-x-full",
           )}
         >
           <div className="flex flex-col space-y-5 mt-14">
@@ -166,7 +168,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={cn(
                   "text-lg font-medium hover:text-brand transition-colors",
-                  pathname === link.href && "text-brand font-semibold"
+                  pathname === link.href && "text-brand font-semibold",
                 )}
               >
                 {link.label}
@@ -185,7 +187,10 @@ export default function Navbar() {
               </Button>
             </a>
             <Link href="/evenements" onClick={() => setMenuOpen(false)}>
-              <Button variant="outline" className="border-brand text-brand w-full cursor-pointer">
+              <Button
+                variant="outline"
+                className="border-brand text-brand w-full cursor-pointer"
+              >
                 Organiser un événement
               </Button>
             </Link>

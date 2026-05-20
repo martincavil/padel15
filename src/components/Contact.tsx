@@ -35,14 +35,14 @@ export default function Contact() {
             <PhoneIcon className="w-4 text-[#009F51] mr-3 mt-1" />
             <div>
               <h4 className="font-semibold">Téléphone</h4>
-              <a href='tel:+33145315876' className="text-gray-600 hover:text-[#FF6727]">+33 1 45 31 58 76</a>
+              <a href='tel:+33145315876' className="text-gray-600 hover:text-brand transition-colors">+33 1 45 31 58 76</a>
             </div>  
           </div>
           <div className="flex items-start">
             <EnvelopeIcon className="w-4 text-[#009F51] mr-3 mt-1" />
             <div>
               <h4 className="font-semibold">Email</h4>
-              <a href="mailto:contact@padel15.fr" className="text-gray-600 hover:text-[#FF6727]">contact@padel15.fr</a>
+              <a href="mailto:contact@padel15.fr" className="text-gray-600 hover:text-brand transition-colors">contact@padel15.fr</a>
                 </div>
           </div>
           <div className="pt-4">
@@ -50,7 +50,7 @@ export default function Contact() {
             <div className="flex space-x-4">
               <a
                 href="https://www.instagram.com/padel15club/?hl=fr"
-                className="text-gray-600 hover:text-[#FF6727] transition-colors cursor-pointer"
+                className="text-gray-600 hover:text-brand transition-colors cursor-pointer"
               >
                 <Image 
                 src='/instagram.webp'
@@ -61,7 +61,7 @@ export default function Contact() {
               </a>
               {/* <a
                 href="#"
-                className="text-gray-600 hover:text-[#FF6727] transition-colors cursor-pointer"
+                className="text-gray-600 hover:text-brand transition-colors cursor-pointer"
               >
                 <Image 
                 src='/facebook.webp'
