@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Découvrez Padel 15 : club haut de gamme au 115 rue Castagnary, Paris 15ème. Terrains, restaurant, guinguette, coworking, vestiaires, accès PMR.",
   openGraph: {
     title: "Le Club — Padel 15 Paris 15ème",
-    images: [{ url: "/rest-inte-grand-angle.webp" }],
+    images: [{ url: "/images/restaurant/rest-inte-grand-angle.webp" }],
   },
 };
 
@@ -29,19 +29,19 @@ const INFRA_ITEMS = [
 
 const PHOTO_HIGHLIGHTS = [
   {
-    src: "/work-and-padel.webp",
+    src: "/images/autres/work-and-padel.webp",
     alt: "Espace coworking Padel 15",
     label: "Coworking",
     detail: "WiFi haut débit, cadre unique",
   },
   {
-    src: "/raquettes-1.jpg",
+    src: "/images/autres/raquettes-1.jpg",
     alt: "Équipements Padel 15",
     label: "Équipements",
     detail: "Location de raquettes",
   },
   {
-    src: "/terrain-inte-filet.jpg",
+    src: "/images/terrains/terrain-inte-filet.jpg",
     alt: "Terrain intérieur Padel 15",
     label: "Terrains",
     detail: "2 courts panoramiques",
@@ -54,7 +54,7 @@ export default function LeClubPage() {
       <PageHero
         title="Le Club"
         subtitle="115 rue Castagnary, Paris 15ème — bien plus qu'un club de padel"
-        imageSrc="/rest-inte-grand-angle.webp"
+        imageSrc="/images/restaurant/rest-inte-grand-angle.webp"
         imageAlt="Padel 15 — Le Club"
         height="md"
       />
@@ -80,7 +80,7 @@ export default function LeClubPage() {
               </div>
             </div>
             <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/guinguette.webp" alt="Ambiance Padel 15" fill className="object-cover" />
+              <Image src="/images/restaurant/guinguette.webp" alt="Ambiance Padel 15" fill className="object-cover" />
             </div>
           </div>
         </AnimatedSection>

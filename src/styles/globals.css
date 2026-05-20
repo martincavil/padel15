@@ -16,6 +16,27 @@
   animation: scroll-right 40s linear infinite;
 }
 
+@keyframes scroll-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes scroll-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+.animate-scroll-up {
+  animation: scroll-up 55s linear infinite;
+  will-change: transform;
+}
+.animate-scroll-down {
+  animation: scroll-down 65s linear infinite;
+  will-change: transform;
+}
+.animate-scroll-up:hover,
+.animate-scroll-down:hover {
+  animation-play-state: paused;
+}
+
 @font-face {
   font-family: 'BuzzBlack';
   src: url('/fonts/BuzzBlack.otf') format('opentype');

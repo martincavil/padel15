@@ -18,17 +18,17 @@ export function CarouselClub() {
   const medias = [
     {
       id: 1,
-      src: "/terrain-ext-jour.webp",
+      src: "/images/terrains/terrain-ext-jour.webp",
       alt: "Club 1",
     },
     {
       id: 2,
-      src: "/terrain-inte-game.webp",
+      src: "/images/terrains/terrain-inte-game.webp",
       alt: "Club 2",
     },
     {
       id: 4,
-      src: "/terrain-inte-vide.webp",
+      src: "/images/terrains/terrain-inte-vide.webp",
       alt: "Club 4",
     },
   ];

@@ -7,10 +7,10 @@ import { motion } from "framer-motion";
 import { ChevronDown, ChevronLeft, ChevronRight, Smartphone } from "lucide-react";
 
 const CAROUSEL_IMAGES = [
-  "/terrain-ext-jour.webp",
-  "/terrain-inte-game.webp",
-  "/terrain-ext-nuit.webp",
-  "/terrain-inte-vide.webp",
+  "/images/terrains/terrain-ext-jour.webp",
+  "/images/terrains/terrain-inte-game.webp",
+  "/images/terrains/terrain-ext-nuit.webp",
+  "/images/terrains/terrain-inte-vide.webp",
 ];
 
 const DAY_NAMES_SHORT = ["Dim.", "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam."];
@@ -261,7 +261,7 @@ export default function HeroBanner() {
               ))}
             </div>
             <span className="text-white text-xs font-medium">
-              4,8 · 247 avis Google
+              4,6 · 112 avis Google
             </span>
           </motion.div>
 
@@ -337,7 +337,7 @@ export default function HeroBanner() {
               </svg>
             ))}
           </div>
-          <span className="text-white text-xs font-medium">4,8 · 247 avis</span>
+          <span className="text-white text-xs font-medium">4,6 · 112 avis</span>
         </motion.div>
 
         <motion.div

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Événements d'entreprise & Team Building — Padel 15 Paris",
     description:
       "Formules clé-en-main pour vos événements corporate. BlackRock, BNP, BCG, Kering, AXA leur font confiance.",
-    images: [{ url: "/work-and-padel.webp" }],
+    images: [{ url: "/images/autres/work-and-padel.webp" }],
   },
 };
 
@@ -86,12 +86,12 @@ const OFFRES = [
 ];
 
 const GALLERY_IMAGES = [
-  { src: "/terrain-match-1.jpg", alt: "Match de padel en entreprise" },
-  { src: "/work-and-padel.webp", alt: "Coworking et padel" },
-  { src: "/rest-inte-grand-angle.webp", alt: "Espace restaurant et événements" },
-  { src: "/guinguette.webp", alt: "Terrasse guinguette privatisée" },
-  { src: "/terrain-ext-jour.webp", alt: "Terrains extérieurs" },
-  { src: "/terrain-inte-game.webp", alt: "Match en cours sur terrain intérieur" },
+  { src: "/images/terrains/terrain-match-1.jpg", alt: "Match de padel en entreprise" },
+  { src: "/images/autres/work-and-padel.webp", alt: "Coworking et padel" },
+  { src: "/images/restaurant/rest-inte-grand-angle.webp", alt: "Espace restaurant et événements" },
+  { src: "/images/restaurant/guinguette.webp", alt: "Terrasse guinguette privatisée" },
+  { src: "/images/terrains/terrain-ext-jour.webp", alt: "Terrains extérieurs" },
+  { src: "/images/terrains/terrain-inte-game.webp", alt: "Match en cours sur terrain intérieur" },
 ];
 
 const CHIFFRES = [
@@ -110,7 +110,7 @@ export default function EntreprisesPage() {
         title="Votre prochain événement commence ici"
         subtitle="Team building, tournoi corporate ou soirée privée — formules clé-en-main au cœur de Paris 15ème."
         badge="Entreprises & Groupes"
-        imageSrc="/work-and-padel.webp"
+        imageSrc="/images/autres/work-and-padel.webp"
         imageAlt="Événements d'entreprise Padel 15"
         height="lg"
       />

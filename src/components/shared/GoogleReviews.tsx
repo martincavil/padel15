@@ -64,9 +64,9 @@ export function GoogleReviews() {
           </div>
           <div className="flex items-center gap-4 bg-gray-50 rounded-2xl px-6 py-4">
             <div className="text-center">
-              <div className="text-5xl font-bold text-gray-900">4,8</div>
+              <div className="text-5xl font-bold text-gray-900">4,6</div>
               <StarRating rating={5} />
-              <p className="text-gray-500 text-sm mt-1">247 avis</p>
+              <p className="text-gray-500 text-sm mt-1">112 avis</p>
             </div>
             <div className="w-px h-16 bg-gray-200" />
             <div className="flex flex-col gap-1.5">

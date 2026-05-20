@@ -8,6 +8,7 @@ import { AgendaSection } from "@/components/homepage/AgendaSection";
 import { PartenairesSection } from "@/components/homepage/PartenairesSection";
 import { B2BSection } from "@/components/homepage/B2BSection";
 import Clients from "@/components/Clients";
+import { InstagramSection } from "@/components/homepage/InstagramSection";
 import { CTANewsletter } from "@/components/shared/CTANewsletter";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function HomePage() {
       <div className="py-6 bg-gray-50">
         <Clients />
       </div>
+      <InstagramSection />
       <CTANewsletter variant="light" />
     </>
   );

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Restaurant, bar et terrasse guinguette au cœur du Paris 15ème. Service continu du petit-déjeuner au dîner. Privatisation disponible pour événements.",
   openGraph: {
     title: "Restaurant & Guinguette — Padel 15",
-    images: [{ url: "/rest-inte-grand-angle.webp" }],
+    images: [{ url: "/images/restaurant/rest-inte-grand-angle.webp" }],
   },
 };
 
@@ -58,12 +58,12 @@ const SERVICES = [
 ];
 
 const GALLERY_IMAGES = [
-  { src: "/rest-inte-grand-angle.webp", alt: "Restaurant — vue d'ensemble" },
-  { src: "/rest-inte-bar.jpg", alt: "Bar intérieur" },
-  { src: "/guinguette.webp", alt: "Terrasse guinguette" },
-  { src: "/restau-diner.webp", alt: "Ambiance dîner" },
-  { src: "/rest-ext.jpg", alt: "Restaurant extérieur" },
-  { src: "/rest-inte-terrain.jpg", alt: "Vue sur les terrains" },
+  { src: "/images/restaurant/rest-inte-grand-angle.webp", alt: "Restaurant — vue d'ensemble" },
+  { src: "/images/restaurant/rest-inte-bar.jpg", alt: "Bar intérieur" },
+  { src: "/images/restaurant/guinguette.webp", alt: "Terrasse guinguette" },
+  { src: "/images/restaurant/restau-diner.webp", alt: "Ambiance dîner" },
+  { src: "/images/restaurant/rest-ext.jpg", alt: "Restaurant extérieur" },
+  { src: "/images/restaurant/rest-inte-terrain.jpg", alt: "Vue sur les terrains" },
 ];
 
 export default async function RestaurantPage() {
@@ -81,7 +81,7 @@ export default async function RestaurantPage() {
         title="Restaurant & Guinguette"
         subtitle="Cuisine, bar, terrasse végétalisée et pétanque — service continu 7j/7"
         badge="Paris 15ème"
-        imageSrc="/rest-inte-grand-angle.webp"
+        imageSrc="/images/restaurant/rest-inte-grand-angle.webp"
         imageAlt="Restaurant Padel 15"
         height="lg"
       />
@@ -114,7 +114,7 @@ export default async function RestaurantPage() {
               </div>
             </div>
             <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/guinguette.webp" alt="Terrasse guinguette Padel 15" fill className="object-cover" />
+              <Image src="/images/restaurant/guinguette.webp" alt="Terrasse guinguette Padel 15" fill className="object-cover" />
             </div>
           </div>
         </AnimatedSection>

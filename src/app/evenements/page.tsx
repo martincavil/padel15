@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Organisez vos team buildings, afterworks et séminaires dans un lieu unique Paris 15ème. Terrains privatisables, restauration, coaching. BlackRock, BNP, BCG, Kering…",
   openGraph: {
     title: "Team Building & Événements d'entreprise — Padel 15",
-    images: [{ url: "/terrain-ext-jour.webp" }],
+    images: [{ url: "/images/terrains/terrain-ext-jour.webp" }],
   },
 };
 
@@ -60,7 +60,7 @@ export default function EvenementsPage() {
         title="Team Building & Événements"
         subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… plus de 20 entreprises de premier plan font confiance à Padel 15."
         badge="Entreprises & Groupes"
-        imageSrc="/terrain-match-1.jpg"
+        imageSrc="/images/terrains/terrain-match-1.jpg"
         imageAlt="Événements d'entreprise Padel 15"
         height="lg"
       />
@@ -135,7 +135,7 @@ export default function EvenementsPage() {
             </a>
           </div>
           <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-            <Image src="/guinguette.webp" alt="Espace événements Padel 15" fill className="object-cover" />
+            <Image src="/images/restaurant/guinguette.webp" alt="Espace événements Padel 15" fill className="object-cover" />
           </div>
         </div>
 

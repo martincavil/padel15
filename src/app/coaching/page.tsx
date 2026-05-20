@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Cours particuliers et collectifs de padel à Paris 15ème. Coachs certifiés, tous niveaux de débutant à confirmé. Réservation en ligne via formulaire.",
   openGraph: {
     title: "Coaching Padel Paris 15 — Particulier & Collectif",
-    images: [{ url: "/terrain-inte-game.webp" }],
+    images: [{ url: "/images/terrains/terrain-inte-game.webp" }],
   },
 };
 

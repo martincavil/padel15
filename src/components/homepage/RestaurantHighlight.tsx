@@ -15,7 +15,7 @@ export function RestaurantHighlight() {
             <div className="grid grid-cols-2 gap-3 h-96">
               <div className="relative rounded-2xl overflow-hidden">
                 <Image
-                  src="/rest-inte-grand-angle.webp"
+                  src="/images/restaurant/rest-inte-grand-angle.webp"
                   alt="Salle du restaurant Padel 15 — vue d'ensemble"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"
@@ -24,7 +24,7 @@ export function RestaurantHighlight() {
               </div>
               <div className="relative rounded-2xl overflow-hidden">
                 <Image
-                  src="/guinguette.webp"
+                  src="/images/restaurant/guinguette.webp"
                   alt="Terrasse guinguette Padel 15 — espace végétalisé"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "2 terrains de padel couverts et extérieurs au 115 rue Castagnary, Paris 15ème. Réservation en ligne via Playtomic. Créneaux 7j/7, 8h-22h.",
   openGraph: {
     title: "Terrains Padel 15 — Réservation en ligne",
-    images: [{ url: "/terrain-ext-jour.webp" }],
+    images: [{ url: "/images/terrains/terrain-ext-jour.webp" }],
   },
 };
 
@@ -39,7 +39,7 @@ export default function TerrainsPage() {
         title="Nos Terrains"
         subtitle="2 terrains couverts et extérieurs — 7j/7, 8h à 22h"
         badge="Paris 15ème"
-        imageSrc="/terrain-ext-jour.webp"
+        imageSrc="/images/terrains/terrain-ext-jour.webp"
         imageAlt="Terrains de padel Padel 15"
         height="lg"
       />
@@ -121,12 +121,12 @@ export default function TerrainsPage() {
           <h2 className="font-buzz text-3xl mb-6">Galerie</h2>
           <LightboxGallery
             images={[
-              { src: "/terrain-ext-jour.webp", alt: "Terrain extérieur de jour" },
-              { src: "/terrain-inte-game.webp", alt: "Match en cours" },
-              { src: "/terrain-ext-nuit.webp", alt: "Terrain extérieur de nuit" },
-              { src: "/terrain-inte-vide.webp", alt: "Terrain intérieur" },
-              { src: "/terrain-inte-1.jpg", alt: "Terrain intérieur vue d'ensemble" },
-              { src: "/terrain-match-1.jpg", alt: "Match en tournoi" },
+              { src: "/images/terrains/terrain-ext-jour.webp", alt: "Terrain extérieur de jour" },
+              { src: "/images/terrains/terrain-inte-game.webp", alt: "Match en cours" },
+              { src: "/images/terrains/terrain-ext-nuit.webp", alt: "Terrain extérieur de nuit" },
+              { src: "/images/terrains/terrain-inte-vide.webp", alt: "Terrain intérieur" },
+              { src: "/images/terrains/terrain-inte-1.jpg", alt: "Terrain intérieur vue d'ensemble" },
+              { src: "/images/terrains/terrain-match-1.jpg", alt: "Match en tournoi" },
             ]}
             columns={3}
           />

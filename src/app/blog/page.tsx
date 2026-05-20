@@ -70,7 +70,7 @@ export default async function BlogPage() {
         title="Blog Padel 15"
         subtitle="Conseils techniques, actualités et guides pour progresser au padel"
         badge="Le mag"
-        imageSrc="/terrain-ext-jour.webp"
+        imageSrc="/images/terrains/terrain-ext-jour.webp"
         imageAlt="Terrains Padel 15"
         height="md"
       />

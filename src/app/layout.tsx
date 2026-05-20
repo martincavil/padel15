@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     siteName: "Padel 15",
     title: "Padel 15 | Club de Padel Paris 15ème",
     description: "Club de padel haut de gamme au cœur du Paris 15ème.",
-    images: [{ url: "/terrain-ext-jour.webp", width: 1200, height: 630, alt: "Terrains Padel 15" }],
+    images: [{ url: "/images/terrains/terrain-ext-jour.webp", width: 1200, height: 630, alt: "Terrains Padel 15" }],
   },
 };
 
@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={dmSans.variable}>
       <head>
-        <link rel="preload" as="image" href="/terrain-ext-jour.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/terrains/terrain-ext-jour.webp" fetchPriority="high" />
         <link rel="icon" href="/P15.ico" type="image/x-icon" />
         <JsonLd data={localBusinessSchema} />
         <JsonLd data={sportsActivitySchema} />

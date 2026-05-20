@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 const BLOCKS = [
   {
     href: "/terrains",
-    img: "/terrain-ext-jour.webp",
+    img: "/images/terrains/terrain-ext-jour.webp",
     label: "Terrains",
     title: "2 terrains couverts & extérieurs",
     description: "Réservez en ligne via Playtomic. Créneaux 7j/7, de 8h à 22h.",
@@ -15,7 +15,7 @@ const BLOCKS = [
   },
   {
     href: "/restaurant",
-    img: "/rest-inte-grand-angle.webp",
+    img: "/images/restaurant/rest-inte-grand-angle.webp",
     label: "Restaurant",
     title: "Restaurant, bar & guinguette",
     description:
@@ -24,7 +24,7 @@ const BLOCKS = [
   },
   {
     href: "/coaching",
-    img: "/terrain-inte-game.webp",
+    img: "/images/terrains/terrain-inte-game.webp",
     label: "Coaching",
     title: "Cours particuliers & collectifs",
     description: "Coachs certifiés, tous niveaux. Débutants bienvenus.",
@@ -32,7 +32,7 @@ const BLOCKS = [
   },
   {
     href: "/evenements",
-    img: "/guinguette.webp",
+    img: "/images/restaurant/guinguette.webp",
     label: "Événements",
     title: "Team building & privatisation",
     description: "BlackRock, BNP, BCG, Kering… ils font confiance à Padel 15.",

@@ -1,4 +1,4 @@
-export function GoogleRating({ rating = 4.8, count = 250 }: { rating?: number; count?: number }) {
+export function GoogleRating({ rating = 4.6, count = 112 }: { rating?: number; count?: number }) {
   const stars = Math.round(rating);
   return (
     <div className="flex items-center gap-2 justify-center">
