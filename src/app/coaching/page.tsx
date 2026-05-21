@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CoursParticuliers from "@/components/CoursParticuliers";
+import { PageHero } from "@/components/shared/PageHero";
 
 export const metadata: Metadata = {
   title: "Cours de Padel Paris 15 | Coaching Particulier & Collectif",
@@ -13,8 +14,16 @@ export const metadata: Metadata = {
 
 export default function CoachingPage() {
   return (
-    <div className="pt-16">
+    <>
+      <PageHero
+        title="Coaching Padel"
+        subtitle="Cours particuliers et collectifs avec nos coachs certifiés. Tous niveaux, tous les jours."
+        badge="Coaching & Progression"
+        imageSrc="/images/terrains/terrain-inte-game.webp"
+        imageAlt="Cours de padel Padel 15 Paris"
+        height="md"
+      />
       <CoursParticuliers />
-    </div>
+    </>
   );
 }

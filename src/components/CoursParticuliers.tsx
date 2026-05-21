@@ -36,30 +36,17 @@ export default function CoursParticuliers() {
     "https://tally.so/embed/7R4EXa?alignLeft=1&hideTitle=1&dynamicHeight=1";
 
   return (
-    <section id="cours" className="relative scroll-mt-16 py-20 overflow-hidden">
-      {/* Background — next/image optimise automatiquement la 1.2MB source */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f]" />
-      <Image
-        src="/images/terrains/terrain-inte-game.webp"
-        alt=""
-        fill
-        className="object-cover opacity-10"
-        sizes="100vw"
-        quality={40}
-      />
-      {/* Accent orange top */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF6727] to-transparent" />
-
-      <div className="relative z-10 container mx-auto px-4">
+    <section id="cours" className="scroll-mt-16 py-20 bg-white">
+      <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-[#FF6727]/20 text-[#FF6727] border border-[#FF6727]/30 mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-brand/10 text-brand border border-brand/20 mb-4">
             Coaching & Progression
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Réservez votre cours de Padel
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-lg">
+          <p className="text-gray-500 max-w-xl mx-auto text-lg">
             Débutant ou confirmé, nos coaches certifiés vous accompagnent pour
             progresser rapidement et prendre encore plus de plaisir sur le
             terrain.
@@ -69,9 +56,9 @@ export default function CoursParticuliers() {
         {/* Main layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
           {/* Left — infos + tabs */}
-          <div className="lg:col-span-1 ">
+          <div className="lg:col-span-1">
             {/* Toggle tabs */}
-            <div className="flex gap-3 mb-8 bg-white/5 p-1.5 rounded-xl border border-white/10">
+            <div className="flex gap-3 mb-8 bg-white p-1.5 rounded-xl border border-gray-200">
               {COURSE_TYPES.map((type) => (
                 <button
                   key={type.id}
@@ -79,8 +66,8 @@ export default function CoursParticuliers() {
                   className={cn(
                     "flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer",
                     activeType === type.id
-                      ? "bg-[#FF6727] text-white shadow-lg shadow-orange-500/20"
-                      : "text-gray-400 hover:text-white",
+                      ? "bg-brand text-white shadow-lg shadow-brand/20"
+                      : "text-gray-500 hover:text-gray-900",
                   )}
                 >
                   {type.emoji} {type.label}
@@ -97,33 +84,33 @@ export default function CoursParticuliers() {
                   activeType === type.id ? "block" : "hidden",
                 )}
               >
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
-                  <p className="text-gray-300 text-base leading-relaxed mb-6">
+                <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6">
+                  <p className="text-gray-600 text-base leading-relaxed mb-6">
                     {type.description}
                   </p>
                   <ul className="space-y-3">
                     {type.id === "particulier" ? (
                       <>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Suivi individuel et technique personnalisée
                         </li>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Horaires flexibles selon vos disponibilités
                         </li>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Tous niveaux, de débutant à confirmé
                         </li>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Pack de séances ou séance à l'unité
@@ -131,26 +118,26 @@ export default function CoursParticuliers() {
                       </>
                     ) : (
                       <>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Groupes de 2 à 8 joueurs maximum
                         </li>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Ambiance conviviale et progression rapide
                         </li>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Initiation, perfectionnement, compétition
                         </li>
-                        <li className="flex items-center gap-3 text-gray-300">
-                          <span className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0">
+                        <li className="flex items-center gap-3 text-gray-700">
+                          <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
                           Tarif préférentiel vs. cours particulier
@@ -171,26 +158,26 @@ export default function CoursParticuliers() {
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2"
+                  className="text-center bg-white border border-gray-200 rounded-xl py-4 px-2"
                 >
-                  <div className="text-[#FF6727] font-bold text-xl">
+                  <div className="text-brand font-bold text-xl">
                     {stat.value}
                   </div>
-                  <div className="text-gray-400 text-xs mt-1">{stat.label}</div>
+                  <div className="text-gray-500 text-xs mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Right — Tally form */}
-          <div className="lg:col-span-2 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
-            <div className="bg-white px-6 pt-6 pb-4">
+          <div className="lg:col-span-2 border border-gray-200 rounded-2xl overflow-hidden bg-white">
+            <div className="px-6 pt-6 pb-4 border-b border-gray-100">
               <h3 className="font-semibold text-lg mb-1">Demande de cours</h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-500 text-sm">
                 Remplissez le formulaire, notre équipe vous contacte sous 24h.
               </p>
             </div>
-            <div className="bg-white rounded-b-2xl px-6 pt-2 pb-4">
+            <div className="px-6 pt-2 pb-4">
               <iframe
                 src={tallyUrl}
                 width="100%"
@@ -206,9 +193,6 @@ export default function CoursParticuliers() {
           </div>
         </div>
       </div>
-
-      {/* Accent orange bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF6727] to-transparent" />
     </section>
   );
 }

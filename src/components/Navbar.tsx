@@ -21,21 +21,16 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  // Initialisation correcte : transparent sur home (scroll=0), blanc ailleurs
-  // Évite le flash blanc→transparent sur la homepage au premier rendu
-  const [isScrolled, setIsScrolled] = useState(!isHome);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (!isHome) {
-      setIsScrolled(true);
-      return;
-    }
+    // Réinitialise à chaque navigation (la Navbar persiste dans le layout)
+    setIsScrolled(false);
     const handleScroll = () => setIsScrolled(window.scrollY > 80);
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHome]);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -58,9 +53,9 @@ export default function Navbar() {
     >
       <div
         className={cn(
-          "container flex justify-between items-center transition-all duration-300 rounded-2xl",
+          "container flex justify-between items-center transition-all duration-300",
           isScrolled
-            ? " bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.06] py-3 px-6"
+            ? "rounded-2xl bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.06] py-3 px-6"
             : "py-4",
         )}
       >
@@ -148,7 +143,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger — affiche uniquement les barres, la croix est dans le drawer */}
+        {/* Mobile hamburger */}
         <button
           className="xl:hidden p-1"
           onClick={() => setMenuOpen(true)}
