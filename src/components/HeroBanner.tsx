@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChevronDown, ChevronLeft, ChevronRight, Smartphone } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Smartphone,
+} from "lucide-react";
 
 const CAROUSEL_IMAGES = [
   "/images/terrains/terrain-ext-jour.webp",
@@ -13,8 +18,24 @@ const CAROUSEL_IMAGES = [
   "/images/terrains/terrain-inte-vide.webp",
 ];
 
-const DAY_NAMES_SHORT = ["Dim.", "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam."];
-const DAY_NAMES_FULL = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+const DAY_NAMES_SHORT = [
+  "Dim.",
+  "Lun.",
+  "Mar.",
+  "Mer.",
+  "Jeu.",
+  "Ven.",
+  "Sam.",
+];
+const DAY_NAMES_FULL = [
+  "Dimanche",
+  "Lundi",
+  "Mardi",
+  "Mercredi",
+  "Jeudi",
+  "Vendredi",
+  "Samedi",
+];
 const MONTH_NAMES = [
   "jan.",
   "fév.",
@@ -31,25 +52,56 @@ const MONTH_NAMES = [
 ];
 
 function addDays(d: Date, n: number): Date {
-  const r = new Date(d); r.setDate(r.getDate() + n); return r;
+  const r = new Date(d);
+  r.setDate(r.getDate() + n);
+  return r;
 }
 function toDateStr(d: Date) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 function isSameDay(a: Date, b: Date) {
-  return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
 }
+
+// null = chargement, objet = réponse reçue
+type AvailabilityState = { hours: Set<number>; hasData: boolean } | null;
+
+const WIDGET_DAYS = 14; // horizon affiché (Playtomic ouvre 5 jours, le reste = "non ouvert")
+const DAYS_PER_PAGE = 7;
 
 function BookingWidget() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [now, setNow] = useState<Date | null>(null);
+  const [availability, setAvailability] = useState<AvailabilityState>(null);
+  const [weekPage, setWeekPage] = useState(0); // 0 = cette semaine, 1 = semaine suivante
 
   useEffect(() => {
     const today = new Date();
-    setSelectedDate(today); setNow(today);
+    setSelectedDate(today);
+    setNow(today);
     const t = setInterval(() => setNow(new Date()), 60_000);
     return () => clearInterval(t);
   }, []);
+
+  useEffect(() => {
+    if (!selectedDate) return;
+    setAvailability(null);
+    fetch(`/api/playtomic/availability?date=${toDateStr(selectedDate)}`)
+      .then((r) => r.json())
+      .then((data) =>
+        setAvailability({
+          hours: new Set<number>(data.availableHours ?? []),
+          hasData: data.hasData ?? false,
+        }),
+      )
+      .catch(() =>
+        setAvailability({ hours: new Set<number>(), hasData: false }),
+      );
+  }, [selectedDate]);
 
   if (!selectedDate || !now) return null;
 
@@ -58,91 +110,202 @@ function BookingWidget() {
   const dateStr = toDateStr(selectedDate);
   const bookingUrl = `https://playtomic.com/clubs/padel-15?date=${dateStr}`;
 
-  const maxFuture = addDays(now, 5);
-  const canGoPrev = !isSameDay(selectedDate, now);
-  const canGoNext = selectedDate < maxFuture;
-  const prevDay = () => canGoPrev && setSelectedDate(d => addDays(d!, -1));
-  const nextDay = () => canGoNext && setSelectedDate(d => addDays(d!, 1));
+  const maxWeekPage = Math.floor((WIDGET_DAYS - 1) / DAYS_PER_PAGE);
+  const pageStart = weekPage * DAYS_PER_PAGE;
+  const weekDays = Array.from({ length: DAYS_PER_PAGE }, (_, i) =>
+    addDays(now, pageStart + i),
+  );
 
-  const weekDays = Array.from({ length: 6 }, (_, i) => addDays(now, i));
+  // Quand on change de page, sélectionner le premier jour de la nouvelle page
+  const goNextWeek = () => {
+    if (weekPage < maxWeekPage) {
+      const next = weekPage + 1;
+      setWeekPage(next);
+      setSelectedDate(addDays(now, next * DAYS_PER_PAGE));
+    }
+  };
+  const goPrevWeek = () => {
+    if (weekPage > 0) {
+      const prev = weekPage - 1;
+      setWeekPage(prev);
+      setSelectedDate(addDays(now, prev * DAYS_PER_PAGE));
+    }
+  };
 
   const slots = Array.from({ length: 14 }, (_, i) => {
     const hour = 8 + i;
-    return { hour, isPast: hour < currentHour };
+    const isPast = hour < currentHour;
+    const loading = !isPast && availability === null;
+    const notOpen = !isPast && !loading && !availability!.hasData;
+    const isAvailable =
+      !isPast && !loading && !notOpen && availability!.hours.has(hour);
+    const isFull =
+      !isPast && !loading && !notOpen && !availability!.hours.has(hour);
+    return { hour, isPast, isAvailable, isFull, isLoading: loading, notOpen };
   });
 
-  const upcoming = slots.filter(s => !s.isPast).length;
+  const dispoCount = availability?.hasData
+    ? slots.filter((s) => s.isAvailable).length
+    : null;
+
+  const headerSub =
+    availability === null
+      ? "Chargement…"
+      : !availability.hasData
+        ? "Créneaux pas encore ouverts"
+        : dispoCount! > 0
+          ? `${dispoCount} créneau${dispoCount! > 1 ? "x" : ""} disponible${dispoCount! > 1 ? "s" : ""}`
+          : "Aucun créneau disponible";
+
+  const headerColor =
+    availability === null || !availability.hasData
+      ? "text-white/35"
+      : dispoCount! > 0
+        ? "text-green-400/80"
+        : "text-white/40";
+
   const dayLabel = isToday
     ? "Aujourd'hui"
     : `${DAY_NAMES_FULL[selectedDate.getDay()]} ${selectedDate.getDate()} ${MONTH_NAMES[selectedDate.getMonth()]}`;
 
   return (
-    <div
-      className="bg-black/65 backdrop-blur-xl border border-white/20 rounded-2xl p-6 w-full max-w-sm"
-    >
-      {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <p className="text-white/50 text-xs uppercase tracking-wider font-medium mb-0.5">
-            Réservation
-          </p>
-          <p className="text-white font-semibold">{dayLabel}</p>
-          <p className="text-white/60 text-sm mt-0.5">
-            {upcoming > 0 ? `${upcoming} créneaux à venir` : "Aucun créneau aujourd'hui"}
-          </p>
+    <div className="bg-black/65 backdrop-blur-xl border border-white/20 rounded-2xl p-6 w-full max-w-sm">
+      {/* Header — hauteurs figées pour éviter tout layout shift */}
+      <div className="mb-4">
+        <p className="text-white/50 text-xs uppercase tracking-wider font-medium mb-0.5">
+          Réservation
+        </p>
+        <p className="text-white font-semibold h-6 leading-6 truncate">
+          {dayLabel}
+        </p>
+        <p
+          className={`text-sm h-5 leading-5 truncate transition-colors ${headerColor}`}
+        >
+          {headerSub}
+        </p>
+      </div>
+
+      {/* Mini calendrier — pagination par semaine */}
+      <div className="flex items-center gap-0.5 mb-4">
+        <button
+          onClick={goPrevWeek}
+          disabled={weekPage === 0}
+          aria-label="Semaine précédente"
+          className="w-6 h-6 flex items-center justify-center text-white/40 hover:text-white transition-colors disabled:opacity-20 disabled:cursor-not-allowed flex-shrink-0"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+        </button>
+
+        <div className="flex flex-1">
+          {weekDays.map((d) => {
+            const isSelected = isSameDay(d, selectedDate);
+            const isTodayD = isSameDay(d, now);
+            return (
+              <button
+                key={d.toISOString()}
+                onClick={() => setSelectedDate(d)}
+                className="flex-1 flex flex-col items-center gap-1 h-14 justify-center rounded-xl transition-all hover:bg-white/5 group"
+              >
+                <span className="text-[9px] font-semibold uppercase tracking-widest text-white/35 group-hover:text-white/50 transition-colors">
+                  {DAY_NAMES_SHORT[d.getDay()].replace(".", "")}
+                </span>
+                <span
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                    isSelected
+                      ? "bg-brand text-white shadow-md shadow-brand/50"
+                      : isTodayD
+                        ? "ring-1 ring-brand/70 text-brand"
+                        : "text-white/60 group-hover:text-white"
+                  }`}
+                >
+                  {d.getDate()}
+                </span>
+              </button>
+            );
+          })}
         </div>
-        <div className="flex items-center gap-1">
-          <button onClick={prevDay} disabled={!canGoPrev} aria-label="Jour précédent"
-            className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-25 disabled:cursor-not-allowed">
-            <ChevronLeft className="w-4 h-4 text-white" />
-          </button>
-          <button onClick={nextDay} disabled={!canGoNext} aria-label="Jour suivant"
-            className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-25 disabled:cursor-not-allowed">
-            <ChevronRight className="w-4 h-4 text-white" />
-          </button>
-        </div>
+
+        <button
+          onClick={goNextWeek}
+          disabled={weekPage >= maxWeekPage}
+          aria-label="Semaine suivante"
+          className="w-6 h-6 flex items-center justify-center text-white/40 hover:text-white transition-colors disabled:opacity-20 disabled:cursor-not-allowed flex-shrink-0"
+        >
+          <ChevronRight className="w-3.5 h-3.5" />
+        </button>
       </div>
 
-      {/* Mini calendrier horizontal */}
-      <div className="flex gap-1 mb-4">
-        {weekDays.map((d) => {
-          const isSelected = isSameDay(d, selectedDate);
-          const isTodayD = isSameDay(d, now);
-          return (
-            <button key={d.toISOString()} onClick={() => setSelectedDate(d)}
-              className={`flex-1 flex flex-col items-center py-1.5 rounded-lg text-xs transition-colors ${
-                isSelected ? "bg-brand text-white" : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
-              }`}>
-              <span className="font-medium">{DAY_NAMES_SHORT[d.getDay()]}</span>
-              <span className={`font-bold text-sm ${isTodayD && !isSelected ? "text-brand" : ""}`}>{d.getDate()}</span>
-            </button>
-          );
-        })}
+      {/* Grille créneaux */}
+      <div className="grid grid-cols-4 gap-2 mb-3">
+        {slots.map(
+          ({ hour, isPast, isAvailable, isFull, isLoading, notOpen }) => {
+            const label = `${hour}h`;
+            const base =
+              "h-9 flex items-center justify-center rounded-xl text-xs font-medium";
+            if (isPast)
+              return (
+                <div
+                  key={hour}
+                  className={`${base} text-white/20 bg-white/5 line-through select-none`}
+                >
+                  {label}
+                </div>
+              );
+            if (isLoading)
+              return (
+                <div
+                  key={hour}
+                  className={`${base} text-white/20 bg-white/5 animate-pulse`}
+                >
+                  {label}
+                </div>
+              );
+            if (notOpen)
+              return (
+                <div
+                  key={hour}
+                  className={`${base} text-white/15 bg-white/[0.03] select-none`}
+                >
+                  {label}
+                </div>
+              );
+            if (isAvailable)
+              return (
+                <a
+                  key={hour}
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`Réserver ${label} — ${dayLabel}`}
+                  className={`${base} font-semibold text-white bg-brand/70 hover:bg-brand transition-colors border border-brand/40`}
+                >
+                  {label}
+                </a>
+              );
+            // isFull
+            return (
+              <div
+                key={hour}
+                className={`${base} text-white/25 bg-white/5 select-none`}
+              >
+                {label}
+              </div>
+            );
+          },
+        )}
       </div>
 
-      {/* Grille créneaux — passés grisés, futurs = liens vers Playtomic */}
-      <div className="grid grid-cols-4 gap-2 mb-4">
-        {slots.map(({ hour, isPast }) => {
-          const label = `${hour}h`;
-          if (isPast) return (
-            <div key={hour} className="text-center py-2 rounded-xl text-xs text-white/20 bg-white/5 line-through select-none">
-              {label}
-            </div>
-          );
-          return (
-            <a key={hour} href={bookingUrl} target="_blank" rel="noopener noreferrer"
-              title={`Réserver ${label} — ${dayLabel}`}
-              className="text-center py-2 rounded-xl text-xs font-medium text-white/70 bg-white/10 hover:bg-white/20 hover:text-white transition-colors">
-              {label}
-            </a>
-          );
-        })}
+      {/* Légende */}
+      <div className="flex items-center gap-3 mb-4 justify-center">
+        <span className="flex items-center gap-1 text-[10px] text-white/35">
+          <span className="w-2.5 h-2.5 rounded bg-brand/70 inline-block" />
+          Disponible
+        </span>
+        <span className="flex items-center gap-1 text-[10px] text-white/35">
+          <span className="w-2.5 h-2.5 rounded bg-white/10 border border-white/10 inline-block" />
+          Complet
+        </span>
       </div>
-
-      {/* Note */}
-      <p className="text-white/25 text-xs text-center mb-4">
-        Cliquez sur un créneau pour vérifier la disponibilité sur Playtomic
-      </p>
 
       {/* CTA principal */}
       <a
@@ -206,7 +369,7 @@ export default function HeroBanner() {
   return (
     <div className="h-screen max-h-screen relative overflow-hidden">
       {/* Vidéo — uploadez /public/bg-video-test.mp4 pour activer */}
-      <video
+      {/* <video
         autoPlay
         muted
         loop
@@ -216,7 +379,7 @@ export default function HeroBanner() {
       >
         <source src="/bg-video-test.mp4" type="video/mp4" />
         <track kind="captions" srcLang="fr" label="Français" default />
-      </video>
+      </video> */}
 
       {/* Fallback carousel photo — seule image 0 est priority, les autres lazy */}
       <div className="absolute inset-0 z-0">
@@ -246,9 +409,7 @@ export default function HeroBanner() {
       <div className="hidden lg:grid grid-cols-3 relative z-20 h-full container items-center gap-8">
         {/* LEFT */}
         <div className="col-span-2 flex flex-col gap-5">
-          <div
-            className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 w-fit"
-          >
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 w-fit">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((s) => (
                 <svg
@@ -265,8 +426,7 @@ export default function HeroBanner() {
             </span>
           </div>
 
-          <div
-          >
+          <div>
             <Image
               src="/logo.svg"
               alt="Padel 15"
@@ -280,9 +440,7 @@ export default function HeroBanner() {
             </h1>
           </div>
 
-          <p
-            className="text-white/70"
-          >
+          <p className="text-white/70">
             L&apos;art de vivre le padel à Paris. Un club d&apos;exception où
             sport, élégance et convivialité se rencontrent. Dans un écrin
             végétalisé en plein cœur de la capitale, jouez, partagez,
@@ -291,9 +449,7 @@ export default function HeroBanner() {
             restaurant
           </p>
 
-          <div
-            className="flex flex-wrap gap-3"
-          >
+          <div className="flex flex-wrap gap-3">
             <Link
               href="/entreprises"
               className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors backdrop-blur-sm"
@@ -311,9 +467,7 @@ export default function HeroBanner() {
 
       {/* ── Mobile / tablet <lg : centré ── */}
       <div className="flex lg:hidden relative z-20 h-full flex-col items-center justify-center text-center px-4 gap-5">
-        <div
-          className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5"
-        >
+        <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5">
           <div className="flex">
             {[1, 2, 3, 4, 5].map((s) => (
               <svg
@@ -328,8 +482,7 @@ export default function HeroBanner() {
           <span className="text-white text-xs font-medium">4,6 · 112 avis</span>
         </div>
 
-        <div
-        >
+        <div>
           <Image
             src="/logo.svg"
             alt="Padel 15"
@@ -345,15 +498,11 @@ export default function HeroBanner() {
           </h1>
         </div>
 
-        <p
-          className="text-white/70 text-sm"
-        >
+        <p className="text-white/70 text-sm">
           Sport · Élégance · Convivialité · Paris 15ème
         </p>
 
-        <div
-          className="flex flex-col items-center gap-2 w-full max-w-xs"
-        >
+        <div className="flex flex-col items-center gap-2 w-full max-w-xs">
           <a
             href="https://playtomic.com/clubs/padel-15"
             target="_blank"
@@ -403,21 +552,22 @@ export default function HeroBanner() {
             key={i}
             onClick={() => setActiveIndex(i)}
             aria-label={`Photo ${i + 1}`}
-            className="p-3 flex items-center justify-center"
+            className="p-1 flex items-center justify-center"
           >
-            <span className={`block rounded-full transition-all duration-300 ${
-              i === activeIndex ? "w-5 h-1.5 bg-brand" : "w-1.5 h-1.5 bg-white/40"
-            }`} />
+            <span
+              className={`block rounded-full transition-all duration-300 ${
+                i === activeIndex
+                  ? "w-5 h-1.5 bg-brand"
+                  : "w-1.5 h-1.5 bg-white/40"
+              }`}
+            />
           </button>
         ))}
       </div>
 
       {/* Scroll indicator desktop */}
-      <div
-        className="absolute bottom-4 left-1/2 z-20 hidden lg:block"
-      >
-        <div
-        >
+      <div className="absolute bottom-4 left-1/2 z-20 hidden lg:block">
+        <div>
           <ChevronDown className="w-5 h-5 text-white/40" />
         </div>
       </div>

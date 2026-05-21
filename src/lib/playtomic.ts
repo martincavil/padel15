@@ -2,9 +2,15 @@ const TENANT_ID = "1191f8b5-ea25-4153-89fb-997b6ec5b053";
 const API_URL = `https://api.playtomic.io/v1/tournaments?tenant_id=${TENANT_ID}&size=20`;
 export const PLAYTOMIC_CLUB_URL = "https://playtomic.com/clubs/padel-15";
 
+function buildHeaders(): HeadersInit {
+  const key = process.env.PLAYTOMIC_API_KEY;
+  return key ? { "x-api-key": key } : {};
+}
+
 export interface PlaytomicTournament {
   tournament_id: string;
   tournament_name: string;
+  tournament_image: string | null;
   start_date: string;
   end_date: string;
   registration_closing_time: string;
@@ -28,7 +34,10 @@ const FALLBACK: PlaytomicTournament[] = [];
 
 export async function getUpcomingTournaments(): Promise<PlaytomicTournament[]> {
   try {
-    const res = await fetch(API_URL, { next: { revalidate: 3600 } });
+    const res = await fetch(API_URL, {
+      headers: buildHeaders(),
+      next: { revalidate: 3600 },
+    });
     if (!res.ok) return FALLBACK;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,6 +64,7 @@ export async function getUpcomingTournaments(): Promise<PlaytomicTournament[]> {
       .map((t) => ({
         tournament_id: t.tournament_id,
         tournament_name: t.tournament_name,
+        tournament_image: t.tournament_image ?? null,
         start_date: t.start_date,
         end_date: t.end_date,
         registration_closing_time: t.registration_closing_time,
@@ -70,6 +80,10 @@ export async function getUpcomingTournaments(): Promise<PlaytomicTournament[]> {
   } catch {
     return FALLBACK;
   }
+}
+
+export function tournamentUrl(tournament_id: string): string {
+  return `https://app.playtomic.io/tournament/${tournament_id}`;
 }
 
 // Helpers d'affichage

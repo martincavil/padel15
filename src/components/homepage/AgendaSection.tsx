@@ -7,6 +7,7 @@ import {
   genderLabel,
   levelLabel,
   statusLabel,
+  tournamentUrl,
   PLAYTOMIC_CLUB_URL,
   type PlaytomicTournament,
 } from "@/lib/playtomic";
@@ -24,7 +25,7 @@ function TournamentCard({ t }: { t: PlaytomicTournament }) {
 
   return (
     <a
-      href={PLAYTOMIC_CLUB_URL}
+      href={tournamentUrl(t.tournament_id)}
       target="_blank"
       rel="noopener noreferrer"
       className="group block bg-white rounded-2xl p-5 border border-gray-200 hover:border-brand hover:shadow-md transition-all"

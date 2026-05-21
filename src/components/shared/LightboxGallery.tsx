@@ -19,6 +19,9 @@ interface LightboxGalleryProps {
 export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   const prev = useCallback(() => {
     setActiveIndex((i) => (i === 0 ? images.length - 1 : i - 1));
@@ -83,7 +86,7 @@ export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
 
       {/* Lightbox — rendu via portal au niveau document.body pour éviter
           le containing block créé par transform CSS des parents (AnimatedSection) */}
-      {typeof document !== "undefined" && createPortal(
+      {mounted && createPortal(
         <AnimatePresence>
         {open && (
           <motion.div

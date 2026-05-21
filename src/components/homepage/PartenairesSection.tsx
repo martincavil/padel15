@@ -56,8 +56,8 @@ export function PartenairesSection() {
                     <Image
                       src={p.logo}
                       alt={`Logo ${p.nom}`}
-                      width={160}
-                      height={60}
+                      width={200}
+                      height={80}
                       className="max-h-14 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
                   ) : (
