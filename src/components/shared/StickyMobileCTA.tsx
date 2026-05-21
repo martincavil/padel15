@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 
 export function StickyMobileCTA() {
   const [visible, setVisible] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const footerRef = useRef<Element | null>(null);
 
   useEffect(() => {
@@ -18,7 +19,15 @@ export function StickyMobileCTA() {
     return () => observer.disconnect();
   }, []);
 
-  if (!visible) return null;
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setMenuOpen(document.body.dataset.menuOpen === "true");
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["data-menu-open"] });
+    return () => observer.disconnect();
+  }, []);
+
+  if (!visible || menuOpen) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">

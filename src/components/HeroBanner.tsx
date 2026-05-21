@@ -502,7 +502,7 @@ export default function HeroBanner() {
           Sport · Élégance · Convivialité · Paris 15ème
         </p>
 
-        <div className="flex flex-col items-center gap-2 w-full max-w-xs">
+        <div className="flex flex-col items-center gap-4 w-full max-w-xs">
           <a
             href="https://playtomic.com/clubs/padel-15"
             target="_blank"

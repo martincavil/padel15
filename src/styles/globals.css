@@ -53,10 +53,42 @@
   animation-play-state: paused;
 }
 
-@keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(15px,-10px); } }
-@keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-12px,12px); } }
-@keyframes float3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-8px,15px); } }
-@keyframes float4 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(10px,-8px); } }
+@keyframes float1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(15px, -10px);
+  }
+}
+@keyframes float2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-12px, 12px);
+  }
+}
+@keyframes float3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-8px, 15px);
+  }
+}
+@keyframes float4 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, -8px);
+  }
+}
 
 @font-face {
   font-family: "BuzzBlack";
@@ -217,7 +249,7 @@
       padding-left: 2rem;
       padding-right: 2rem;
     }
-    @media (min-width: 1024px) {
+    @media (min-width: 1280px) {
       padding-left: 4rem;
       padding-right: 4rem;
     }

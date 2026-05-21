@@ -39,8 +39,10 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.dataset.menuOpen = menuOpen ? "true" : "";
     return () => {
       document.body.style.overflow = "";
+      document.body.dataset.menuOpen = "";
     };
   }, [menuOpen]);
 
@@ -50,11 +52,18 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300 animate-page-in",
-        isScrolled ? "bg-white shadow-md" : "bg-transparent",
+        "fixed top-0 z-50 w-full animate-page-in transition-all duration-300",
+        isScrolled ? "pt-3 px-4" : "",
       )}
     >
-      <div className="container py-4 flex justify-between items-center">
+      <div
+        className={cn(
+          "container flex justify-between items-center transition-all duration-300 rounded-2xl",
+          isScrolled
+            ? " bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.06] py-3 px-6"
+            : "py-4",
+        )}
+      >
         <Link href="/">
           <Image
             src="/logo.svg"
@@ -139,74 +148,100 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger — affiche uniquement les barres, la croix est dans le drawer */}
         <button
-          className="xl:hidden z-[60]"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
+          className="xl:hidden p-1"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Ouvrir le menu"
         >
-          {menuOpen ? (
-            <XMarkIcon className="w-6 text-brand" />
-          ) : (
-            <Bars3Icon
-              className={cn("w-6", isScrolled ? "text-brand" : "text-white")}
-            />
-          )}
+          <Bars3Icon className={cn("w-6", isScrolled ? "text-gray-800" : "text-white")} />
         </button>
+      </div>
 
-        {/* Mobile drawer */}
-        <div
-          className={cn(
-            "fixed top-0 right-0 h-full w-full max-w-xs bg-white text-black shadow-lg z-50",
-            "flex flex-col justify-between p-6 overflow-y-auto",
-            "transition-transform duration-300 ease-in-out",
-            menuOpen ? "translate-x-0" : "translate-x-full",
-          )}
-        >
-          <div className="flex flex-col space-y-5 mt-14">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  "text-lg font-medium hover:text-brand transition-colors",
-                  pathname === link.href && "text-brand font-semibold",
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-3 pb-8">
-            <a
-              href="https://playtomic.com/clubs/padel-15"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
-            >
-              <Button className="bg-brand hover:bg-brand-dark text-white w-full cursor-pointer">
-                Réserver un terrain
-              </Button>
-            </a>
-            <Link href="/evenements" onClick={() => setMenuOpen(false)}>
-              <Button
-                variant="outline"
-                className="border-brand text-brand w-full cursor-pointer"
-              >
-                Organiser un événement
-              </Button>
-            </Link>
-          </div>
+      {/* Overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 bg-black/50 z-40 transition-opacity duration-300",
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+        )}
+        onClick={() => setMenuOpen(false)}
+      />
+
+      {/* Mobile drawer — EN DEHORS du container backdrop-blur */}
+      <div
+        className={cn(
+          "fixed top-0 right-0 h-full w-[85vw] max-w-sm z-50",
+          "flex flex-col bg-white",
+          "transition-transform duration-300 ease-in-out",
+          menuOpen ? "translate-x-0" : "translate-x-full",
+        )}
+      >
+        {/* Header drawer */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+          <Image src="/logo.svg" alt="Padel 15" width={80} height={32} className="h-auto" />
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Fermer le menu"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+          >
+            <XMarkIcon className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
 
-        {/* Overlay */}
-        {menuOpen && (
-          <div
-            className="fixed inset-0 bg-black/50 z-40"
+        {/* Nav links */}
+        <nav className="flex-1 px-4 py-4 overflow-y-auto">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className={cn(
+                "flex items-center justify-between px-3 py-3.5 rounded-xl text-base font-medium transition-colors",
+                pathname === link.href
+                  ? "bg-brand/8 text-brand"
+                  : "text-gray-700 hover:bg-gray-50 hover:text-gray-900",
+              )}
+            >
+              {link.label}
+              {pathname === link.href && (
+                <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+              )}
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTAs */}
+        <div className="px-6 py-6 border-t border-gray-100 flex flex-col gap-3">
+          <a
+            href="https://playtomic.com/clubs/padel-15"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
-          />
-        )}
+            className="w-full bg-brand hover:bg-brand-dark text-white font-semibold py-3.5 rounded-xl text-center text-sm transition-colors"
+          >
+            Réserver un terrain
+          </a>
+          <Link
+            href="/evenements"
+            onClick={() => setMenuOpen(false)}
+            className="w-full border border-brand text-brand hover:bg-brand hover:text-white font-semibold py-3.5 rounded-xl text-center text-sm transition-colors"
+          >
+            Organiser un événement
+          </Link>
+          <a
+            href="https://www.instagram.com/padel15club/?hl=fr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 text-gray-400 hover:text-gray-600 text-sm transition-colors pt-1"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </svg>
+            @padel15club
+          </a>
+        </div>
       </div>
     </nav>
   );
