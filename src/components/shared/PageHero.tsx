@@ -30,9 +30,9 @@ export function PageHero({
         priority
       />
       <div className="absolute inset-0 bg-black/55" />
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center gap-8 text-white px-4 text-center">
         {badge && (
-          <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold bg-brand/20 text-brand border border-brand/30 mb-4">
+          <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold bg-brand/20 text-brand border border-brand/30">
             {badge}
           </span>
         )}

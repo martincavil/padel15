@@ -6,6 +6,7 @@ import Clients from "@/components/Clients";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { VideoReel } from "@/components/evenements/VideoReel";
 
 export const metadata: Metadata = {
   title: "Team Building Paris 15 | Événements d'entreprise — Padel 15",
@@ -64,6 +65,8 @@ export default function EvenementsPage() {
         imageAlt="Événements d'entreprise Padel 15"
         height="lg"
       />
+
+      <VideoReel />
 
       <div className="container mx-auto px-4 py-16 space-y-20">
 
