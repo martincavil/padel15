@@ -198,6 +198,7 @@ export default function CoursParticuliers() {
                 frameBorder="0"
                 marginHeight={0}
                 marginWidth={0}
+                loading="lazy"
                 title="Réservation cours de padel"
                 style={{ minHeight: 480, display: "block" }}
               />

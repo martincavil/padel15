@@ -7,7 +7,7 @@ interface GoogleAnalyticsProps {
 const GoogleAnalytics = ({ ga_id }: GoogleAnalyticsProps) => (
   <>
     <Script
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       src={`https://www.googletagmanager.com/gtag/js?id=${ga_id}`}
     />
     <Script

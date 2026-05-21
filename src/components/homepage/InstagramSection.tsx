@@ -3,26 +3,29 @@
 import { useRef, useEffect } from "react";
 import { Instagram } from "lucide-react";
 
-// Poster = première frame servie par Cloudinary en changeant l'extension .mp4 → .jpg
+// Poster = première frame Cloudinary. Transformations w_520,h_924,c_fill,f_auto,q_auto
+// réduisent les posters de ~200 KB à ~20 KB chacun (affiché en 260×462 à 1.75x DPR).
+const CLD_TRANSFORM = "w_520,h_924,c_fill,f_auto,q_auto";
+
 const COL_LEFT = [
   {
     src: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.mp4",
-    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.jpg",
+    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.jpg`,
   },
   {
     src: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/FOOD_tumxyq.mp4",
-    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/FOOD_tumxyq.jpg",
+    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279891/padel15/videos/FOOD_tumxyq.jpg`,
   },
 ];
 
 const COL_RIGHT = [
   {
     src: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/PADEL_hwhmqg.mp4",
-    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/PADEL_hwhmqg.jpg",
+    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279890/padel15/videos/PADEL_hwhmqg.jpg`,
   },
   {
     src: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/APP_yr8e68.mp4",
-    poster: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/APP_yr8e68.jpg",
+    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279890/padel15/videos/APP_yr8e68.jpg`,
   },
 ];
 

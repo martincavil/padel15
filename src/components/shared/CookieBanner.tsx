@@ -6,12 +6,16 @@ import Link from "next/link";
 type ConsentState = "accepted" | "refused" | "pending";
 
 export function CookieBanner() {
-  const [consent, setConsent] = useState<ConsentState | null>(null);
+  // Initialized as "pending" so the banner is in the SSR HTML — this prevents
+  // a late LCP paint when the component only renders after JS hydration.
+  const [consent, setConsent] = useState<ConsentState>("pending");
+  const [hydrated, setHydrated] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("cookie-consent") as ConsentState | null;
     setConsent(stored ?? "pending");
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
@@ -39,7 +43,8 @@ export function CookieBanner() {
     setConsent("refused");
   };
 
-  if (consent === null || consent === "accepted" || consent === "refused") return null;
+  // Hide once consent is resolved (accepted or refused)
+  if (hydrated && consent !== "pending") return null;
 
   return (
     <div
