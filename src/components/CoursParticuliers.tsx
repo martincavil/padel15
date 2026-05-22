@@ -54,9 +54,9 @@ export default function CoursParticuliers() {
         </div>
 
         {/* Main layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
           {/* Left — infos + tabs */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 w-full">
             {/* Toggle tabs */}
             <div className="flex gap-3 mb-8 bg-white p-1.5 rounded-xl border border-gray-200">
               {COURSE_TYPES.map((type) => (
