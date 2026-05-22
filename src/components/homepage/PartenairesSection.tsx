@@ -6,7 +6,7 @@ const PARTENAIRES = [
     nom: "ASICS",
     logo: "/logos/asics.svg",
     description:
-      "Équipementier officiel — raquettes et accessoires de padel disponibles sur place.",
+      "Équipementier officiel — accessoires de padel disponibles sur place.",
     lien: "https://www.asics.com/fr/fr-fr/padel/",
     hasLogo: true,
   },
@@ -22,7 +22,7 @@ const PARTENAIRES = [
     nom: "HEAD",
     logo: "/logos/head.png",
     description:
-      "Équipementier racket sport — partenaire pour le prêt de matériel premium sur nos courts.",
+      "Équipementier racket sport — raquettes et balles de padel disponibles sur nos courts, à l'achat comme à la location.",
     lien: "https://www.head.com/fr-FR/sports/padel/",
     hasLogo: true,
   },

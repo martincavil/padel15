@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import HeroBanner from "@/components/HeroBanner";
 import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
+import { GoogleReviews } from "@/components/shared/GoogleReviews";
 import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
 import { RestaurantHighlight } from "@/components/homepage/RestaurantHighlight";
+import { PartenairesSection } from "@/components/homepage/PartenairesSection";
+import { TarifsSection } from "@/components/homepage/TarifsSection";
 import CoursParticuliers from "@/components/CoursParticuliers";
 import { AgendaSection } from "@/components/homepage/AgendaSection";
-import { PartenairesSection } from "@/components/homepage/PartenairesSection";
-import { B2BSection } from "@/components/homepage/B2BSection";
-import Clients from "@/components/Clients";
 import { InstagramSection } from "@/components/homepage/InstagramSection";
+import { B2BSection } from "@/components/homepage/B2BSection";
 import { CTANewsletter } from "@/components/shared/CTANewsletter";
+import Clients from "@/components/Clients";
 
 export const metadata: Metadata = {
   title:
@@ -24,12 +26,11 @@ export default function HomePage() {
     <>
       <HeroBanner />
       <PlaytomicSection />
-      <div className="py-6 bg-gray-50">
-        <Clients />
-      </div>
+      <GoogleReviews />
       <PadelInfoSection />
       <RestaurantHighlight />
       <PartenairesSection />
+      <TarifsSection />
       <CoursParticuliers />
       <Suspense fallback={<div className="py-16 bg-gray-50" aria-hidden />}>
         <AgendaSection />
@@ -37,6 +38,9 @@ export default function HomePage() {
       <InstagramSection />
       <B2BSection />
       <CTANewsletter />
+      <div className="py-6 bg-gray-50">
+        <Clients />
+      </div>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { UtensilsCrossed, Phone, ExternalLink } from "lucide-react";
@@ -11,24 +12,33 @@ export function RestaurantHighlight() {
         <AnimatedSection>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
-            {/* Photo grid */}
-            <div className="grid grid-cols-2 gap-3 h-96">
-              <div className="relative rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/restaurant/rest-inte-grand-angle.webp"
-                  alt="Salle du restaurant Padel 15 — vue d'ensemble"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </div>
-              <div className="relative rounded-2xl overflow-hidden">
+            {/* Photo grid — grande gauche + 2 empilées droite */}
+            <div className="grid grid-cols-2 grid-rows-2 gap-3 h-[480px]">
+              <div className="relative rounded-2xl overflow-hidden row-span-2">
                 <Image
                   src="/images/restaurant/guinguette.webp"
                   alt="Terrasse guinguette Padel 15 — espace végétalisé"
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className="relative rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/restaurant/restau-diner.webp"
+                  alt="Ambiance dîner au restaurant Padel 15"
+                  fill
+                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 50vw, 20vw"
+                />
+              </div>
+              <div className="relative rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/restaurant/restaurant-nourriture-verticale-1.webp"
+                  alt="Plats du restaurant Padel 15 — cuisine fraîche et de saison"
+                  fill
+                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 50vw, 20vw"
                 />
               </div>
             </div>
@@ -40,7 +50,7 @@ export function RestaurantHighlight() {
               </span>
               <h2 className="font-buzz text-3xl md:text-4xl mb-4">
                 Le plaisir du padel,<br />
-                <span className="text-brand">le plaisir de table</span>
+                <span className="text-brand">le plaisir de La table</span>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Service continu du petit-déjeuner au dîner, 7j/7. Cuisine généreuse avec des produits
@@ -71,7 +81,9 @@ export function RestaurantHighlight() {
               </div>
 
               {/* Daily specials from Sanity */}
-              <DailySpecialsWidget />
+              <Suspense fallback={null}>
+                <DailySpecialsWidget />
+              </Suspense>
 
               <Link
                 href="/restaurant"

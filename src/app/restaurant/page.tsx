@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Utensils, Leaf, Wine, Sparkles } from "lucide-react";
+import { Check, Utensils, Leaf, Wine } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { LightboxGallery } from "@/components/shared/LightboxGallery";
 import { JsonLd } from "@/components/shared/JsonLd";
@@ -9,6 +9,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { AnimatedPrivatiseCard } from "@/components/restaurant/AnimatedPrivatiseCard";
 import { getMenuByCategory, getActiveFormules, getDailySpecials } from "@/sanity/queries";
 import { MenuDisplay } from "@/components/restaurant/MenuDisplay";
+import { ChalkboardSpecials } from "@/components/restaurant/ChalkboardSpecials";
 
 export const revalidate = 3600;
 
@@ -150,25 +151,11 @@ export default async function RestaurantPage() {
           <LightboxGallery images={GALLERY_IMAGES} columns={3} />
         </AnimatedSection>
 
-        {/* Daily Specials */}
+        {/* Menu du jour — ardoise */}
         {dailySpecials.length > 0 && (
           <AnimatedSection>
-            <div className="bg-brand/5 border border-brand/20 rounded-2xl p-7">
-              <div className="flex items-center gap-2 mb-5">
-                <Sparkles className="w-5 h-5 text-brand" />
-                <h2 className="font-buzz text-2xl">Suggestions du jour</h2>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {dailySpecials.map((special) => (
-                  <div key={special._id} className="flex items-start justify-between gap-3 bg-white rounded-xl p-4">
-                    <div>
-                      <p className="font-semibold">{special.title}</p>
-                      {special.description && <p className="text-gray-500 text-sm mt-1">{special.description}</p>}
-                    </div>
-                    <span className="font-buzz text-2xl text-brand flex-shrink-0">{special.price}€</span>
-                  </div>
-                ))}
-              </div>
+            <div className="max-w-lg mx-auto">
+              <ChalkboardSpecials specials={dailySpecials} />
             </div>
           </AnimatedSection>
         )}

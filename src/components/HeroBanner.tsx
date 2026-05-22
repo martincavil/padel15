@@ -452,9 +452,9 @@ export default function HeroBanner() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/entreprises"
-              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors backdrop-blur-sm"
+              className="bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors"
             >
-              Organiser un événement
+              Organiser un événement pro ou perso
             </Link>
           </div>
         </div>
@@ -538,9 +538,9 @@ export default function HeroBanner() {
           </div>
           <Link
             href="/entreprises"
-            className="text-white/60 text-xs hover:text-white transition-colors"
+            className="w-full text-center bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg"
           >
-            Organiser un événement →
+            Organiser un événement pro ou perso
           </Link>
         </div>
       </div>
@@ -566,7 +566,7 @@ export default function HeroBanner() {
       </div>
 
       {/* Scroll indicator desktop */}
-      <div className="absolute bottom-4 left-1/2 z-20 hidden lg:block">
+      <div className="absolute bottom-4 left-1/2 z-20 hidden lg:block animate-pulse">
         <div>
           <ChevronDown className="w-5 h-5 text-white/40" />
         </div>

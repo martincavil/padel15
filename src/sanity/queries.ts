@@ -2,21 +2,30 @@ import { sanityClient, SanityMenuItem, SanityDailySpecial, SanityMenuFormule, Sa
 
 // ─── Mock fallbacks ────────────────────────────────────────────────────────────
 
+// TODO: vider quand les vrais plats sont renseignés dans Sanity
 const MOCK_DAILY_SPECIALS: SanityDailySpecial[] = [
   {
     _id: "mock-1",
     date: new Date().toISOString().split("T")[0],
-    title: "Suggestion du jour",
-    description: "Magret de canard, purée de patate douce, jus de cassis",
+    title: "Magret de canard",
+    description: "Purée de patate douce, jus de cassis",
     price: 18,
     isActive: true,
   },
   {
     _id: "mock-2",
     date: new Date().toISOString().split("T")[0],
-    title: "Menu végétarien",
-    description: "Risotto aux champignons des bois, parmesan, huile de truffe",
+    title: "Risotto champignons des bois",
+    description: "Parmesan affiné, huile de truffe",
     price: 15,
+    isActive: true,
+  },
+  {
+    _id: "mock-3",
+    date: new Date().toISOString().split("T")[0],
+    title: "Fondant chocolat",
+    description: "Cœur coulant, glace vanille",
+    price: 8,
     isActive: true,
   },
 ];
@@ -43,11 +52,13 @@ const MOCK_FORMULES: SanityMenuFormule[] = [
 export async function getDailySpecials(): Promise<SanityDailySpecial[]> {
   if (!sanityClient) return MOCK_DAILY_SPECIALS;
   try {
-    return await sanityClient.fetch(
+    const result = await sanityClient.fetch<SanityDailySpecial[]>(
       `*[_type == "dailySpecial" && isActive == true] | order(date desc) [0...5] {
         _id, date, title, description, price, isActive
       }`
     );
+    // TODO: retirer ce fallback une fois les plats renseignés dans Sanity
+    return result.length > 0 ? result : MOCK_DAILY_SPECIALS;
   } catch {
     return MOCK_DAILY_SPECIALS;
   }

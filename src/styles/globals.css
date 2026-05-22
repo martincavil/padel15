@@ -105,6 +105,7 @@
   --color-brand-dark: #e55a1f;
   --font-buzz: "BuzzBlack", sans-serif;
   --font-sans: var(--font-dm-sans), "DM Sans", sans-serif;
+  --font-chalk: var(--font-caveat), "Caveat", cursive;
 }
 
 @custom-variant dark (&:is(.dark *));
