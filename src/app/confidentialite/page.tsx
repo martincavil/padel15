@@ -24,7 +24,7 @@ export default function ConfidentialitePage() {
             <li>Données de formulaire : nom, email, téléphone, message (formulaires de contact et devis)</li>
             <li>Données de navigation : pages visitées, durée de session (via Google Analytics 4, anonymisé)</li>
             <li>Données marketing : interactions publicitaires (via Meta Pixel, avec consentement préalable)</li>
-            <li>Email pour newsletter (via Brevo, avec consentement explicite)</li>
+            <li>Email pour newsletter (via Mailchimp, avec consentement explicite)</li>
           </ul>
         </section>
 

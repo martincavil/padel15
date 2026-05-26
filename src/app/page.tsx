@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import HeroBanner from "@/components/HeroBanner";
+import { fetchGoogleRating } from "@/lib/google-places";
 import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
 import { GoogleReviews } from "@/components/shared/GoogleReviews";
 import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
@@ -21,10 +22,14 @@ export const metadata: Metadata = {
     "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette. Réservez sur Playtomic.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const raw = await fetchGoogleRating();
+  const googleRating = raw
+    ? { rating: raw.rating, count: raw.userRatingCount }
+    : undefined;
   return (
     <>
-      <HeroBanner />
+      <HeroBanner googleRating={googleRating} />
       <PlaytomicSection />
       <GoogleReviews />
       <PadelInfoSection />

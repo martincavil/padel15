@@ -1,5 +1,5 @@
-// src/components/shared/GoogleReviews.tsx
 import { Star } from "lucide-react";
+import { fetchGoogleRating } from "@/lib/google-places";
 
 const REVIEWS = [
   {
@@ -52,7 +52,12 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
-export function GoogleReviews() {
+export async function GoogleReviews() {
+  const googleRating = await fetchGoogleRating();
+  const rating = googleRating?.rating ?? 4.6;
+  const count = googleRating?.userRatingCount ?? 112;
+  const ratingDisplay = rating.toFixed(1).replace(".", ",");
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -64,9 +69,9 @@ export function GoogleReviews() {
           </div>
           <div className="flex items-center gap-4 bg-gray-50 rounded-2xl px-6 py-4">
             <div className="text-center">
-              <div className="text-5xl font-bold text-gray-900">4,6</div>
+              <div className="text-5xl font-bold text-gray-900">{ratingDisplay}</div>
               <StarRating rating={5} />
-              <p className="text-gray-500 text-sm mt-1">112 avis</p>
+              <p className="text-gray-500 text-sm mt-1">{count} avis</p>
             </div>
             <div className="w-px h-16 bg-gray-200" />
             <div className="flex flex-col gap-1.5">
