@@ -2035,7 +2035,7 @@ export default function EvenementsPage() {
             Team Building & Événements
           </h1>
           <p className="text-white/80 max-w-xl text-lg">
-            BlackRock, BNP Paribas, BCG, Kering, AXA… et plus de 20 entreprises
+            BlackRock, BNP Paribas, BCG, Kering, AXA… et plus de 100 entreprises
             de premier plan leur font confiance.
           </p>
         </div>

@@ -48,10 +48,16 @@ const FORMULES = [
   {
     icon: ClipboardList,
     title: "Séminaire & Convention",
-    subtitle: "Journée, demi-journée ou format hybride travail + sport · 8 à 120 personnes",
+    subtitle:
+      "Journée, demi-journée ou format hybride travail + sport · 8 à 120 personnes",
     description:
       "Un cadre qui change tout. Nos espaces de travail climatisés et équipés accueillent vos réunions stratégiques, kick-offs et conventions.",
-    includes: ["Espace coworking", "Terrains privatisés", "Restauration", "Équipement AV"],
+    includes: [
+      "Espace coworking",
+      "Terrains privatisés",
+      "Restauration",
+      "Équipement AV",
+    ],
   },
 ];
 
@@ -62,7 +68,7 @@ export default function EvenementsPage() {
 
       <PageHero
         title="Team Building & Événements"
-        subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… plus de 20 entreprises de premier plan font confiance à Padel 15."
+        subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… plus de 100 entreprises de premier plan font confiance à Padel 15."
         badge="Entreprises & Groupes"
         imageSrc="/images/terrains/terrain-match-1.webp"
         imageAlt="Événements d'entreprise Padel 15"
@@ -72,37 +78,48 @@ export default function EvenementsPage() {
       <VideoReel />
 
       <div className="container mx-auto px-4 py-16 space-y-20">
-
         {/* Formules */}
         <div>
           <div className="text-center mb-10">
             <h2 className="font-buzz text-3xl mb-3">Nos Formules</h2>
             <p className="text-gray-500 max-w-lg mx-auto">
-              Chaque événement est sur-mesure. Nous nous adaptons à vos besoins, votre budget et votre groupe.
+              Chaque événement est sur-mesure. Nous nous adaptons à vos besoins,
+              votre budget et votre groupe.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {FORMULES.map((f, index) => {
               const Icon = f.icon;
               return (
-              <AnimatedSection delay={index * 0.1} key={f.title} className="h-full">
-                <div className="border border-gray-200 rounded-2xl p-6 hover:border-brand transition-colors h-full flex flex-col">
-                  <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-3">
-                    <Icon className="w-5 h-5 text-brand" />
+                <AnimatedSection
+                  delay={index * 0.1}
+                  key={f.title}
+                  className="h-full"
+                >
+                  <div className="border border-gray-200 rounded-2xl p-6 hover:border-brand transition-colors h-full flex flex-col">
+                    <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-3">
+                      <Icon className="w-5 h-5 text-brand" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-1">{f.title}</h3>
+                    <p className="text-brand text-xs font-semibold mb-3">
+                      {f.subtitle}
+                    </p>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1">
+                      {f.description}
+                    </p>
+                    <ul className="space-y-1.5">
+                      {f.includes.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-center gap-2 text-sm text-gray-700"
+                        >
+                          <Check className="w-4 h-4 text-brand flex-shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="font-semibold text-lg mb-1">{f.title}</h3>
-                  <p className="text-brand text-xs font-semibold mb-3">{f.subtitle}</p>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1">{f.description}</p>
-                  <ul className="space-y-1.5">
-                    {f.includes.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                        <Check className="w-4 h-4 text-brand flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </AnimatedSection>
+                </AnimatedSection>
               );
             })}
           </div>
@@ -118,7 +135,8 @@ export default function EvenementsPage() {
           <div>
             <h2 className="font-buzz text-3xl mb-4">Demandez un devis</h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Décrivez votre projet et notre équipe revient vers vous sous 24h avec une proposition personnalisée.
+              Décrivez votre projet et notre équipe revient vers vous sous 24h
+              avec une proposition personnalisée.
             </p>
             <div className="space-y-3 text-gray-700 mb-8">
               <div className="flex items-center gap-3">
@@ -142,10 +160,15 @@ export default function EvenementsPage() {
             </a>
           </div>
           <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-            <Image src="/images/restaurant/guinguette.webp" alt="Espace événements Padel 15" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Image
+              src="/images/restaurant/guinguette.webp"
+              alt="Espace événements Padel 15"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
-
       </div>
     </>
   );
