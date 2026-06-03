@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { Activity, ClipboardList, Check } from "lucide-react";
+import { Activity, ClipboardList, Check, Star } from "lucide-react";
 import Clients from "@/components/Clients";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
@@ -51,12 +50,26 @@ const FORMULES = [
     subtitle:
       "Journée, demi-journée ou format hybride travail + sport · 8 à 120 personnes",
     description:
-      "Un cadre qui change tout. Nos espaces de travail climatisés et équipés accueillent vos réunions stratégiques, kick-offs et conventions.",
+      "Un cadre qui change tout. Nos espaces de travail climatisés et équipés accueillent vos réunions stratégiques, kick-offs et conventions — avec la possibilité de couper sur les terrains pour recharger les équipes.\n\nLa restauration, pensée pour les pros : Petit-déjeuner d'accueil, déjeuner assis ou buffet/brunch, pause café gourmande",
     includes: [
-      "Espace coworking",
-      "Terrains privatisés",
-      "Restauration",
-      "Équipement AV",
+      "Salle privatisée & équipement AV complet",
+      "Terrains privatisés entre les sessions",
+      "Restauration complète sur toute la journée",
+      "Coordination par nos équipes : zéro logistique pour vos équipes",
+    ],
+  },
+  {
+    icon: Star,
+    title: "Réception & Événement Client",
+    subtitle:
+      "Entertainment externe : clients, partenaires, prospects · 8 à 120 personnes",
+    description:
+      "Recevez vos clients dans un lieu qui parle de vous. Padel premium, service haut de gamme, ambiance unique : offrez une expérience qui crée le lien.\n\nNous composons des menus adaptés à vos exigences : cocktail dinatoire, déjeuner d'affaires, offre BBQ, formule traiteur.",
+    includes: [
+      "Privatisation complète & accueil personnalisé",
+      "Service en salle haut de gamme",
+      "Menu sur mesure (cocktail, déjeuner, dîner)",
+      "Expérience encadrée par des professionnels",
     ],
   },
 ];
@@ -87,7 +100,7 @@ export default function EvenementsPage() {
               votre budget et votre groupe.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FORMULES.map((f, index) => {
               const Icon = f.icon;
               return (
@@ -104,7 +117,7 @@ export default function EvenementsPage() {
                     <p className="text-brand text-xs font-semibold mb-3">
                       {f.subtitle}
                     </p>
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1">
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1 whitespace-pre-line">
                       {f.description}
                     </p>
                     <ul className="space-y-1.5">

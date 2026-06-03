@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -128,6 +129,7 @@ const CHIFFRES = [
 ];
 
 export default function EntreprisesPage() {
+  redirect("/evenements");
   return (
     <>
       <JsonLd data={eventSchema} />
