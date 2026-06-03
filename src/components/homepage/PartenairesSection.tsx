@@ -48,7 +48,7 @@ export function PartenairesSection() {
                 href={p.lien}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block border border-gray-200 rounded-2xl p-8 hover:border-brand hover:shadow-md transition-all text-center"
+                className="h-full group block border border-gray-200 rounded-2xl p-8 hover:border-brand hover:shadow-md transition-all text-center"
               >
                 {/* Logo ou texte placeholder */}
                 <div className="h-20 flex items-center justify-center mb-5">

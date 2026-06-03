@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Activity, Utensils, ClipboardList, Check } from "lucide-react";
+import { Activity, ClipboardList, Check } from "lucide-react";
 import Clients from "@/components/Clients";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
@@ -34,20 +34,23 @@ const eventSchema = {
 const FORMULES = [
   {
     icon: Activity,
-    title: "Team Building Padel",
-    description: "Tournoi privé entre collègues, coaching collectif initiation, arbitre inclus. Idéal 8 à 40 personnes.",
-    includes: ["Terrain(s) privatisé(s)", "Coach dédié", "Arbitre", "Matériel fourni"],
-  },
-  {
-    icon: Utensils,
-    title: "Afterwork & Soirée",
-    description: "Padel + restaurant/guinguette en formule tout-compris. Privatisation totale ou partielle.",
-    includes: ["Accès terrains", "Buffet ou menu", "Bar privatisé", "Animation"],
+    title: "Team Building & Afterwork Padel",
+    subtitle: "Sport, cohésion & soirée · 8 à 120 personnes",
+    description:
+      "Privatisez nos terrains pour une expérience padel sur-mesure : tournoi interne, coaching collectif ou initiation encadrée par nos pros, puis laissez la soirée prendre le relais. Guinguette, bar privatisé, ambiance pilotée par notre équipe. Notre cuisine assure du début à la fin : collation d'accueil, buffet maison entre les sessions, planches & tapas, BBQ ou dîner assis en soirée, tout préparé sur place, avec des produits frais, et ajusté à votre format et votre budget.",
+    includes: [
+      "Terrains privatisés · Coach dédié · Matériel fourni",
+      "Bar privatisé & animation",
+      "Restauration sur mesure (buffet, dîner, cocktail…)",
+      "Privatisation totale ou partielle selon vos besoins",
+    ],
   },
   {
     icon: ClipboardList,
     title: "Séminaire & Convention",
-    description: "Espace coworking + terrains pour vos conventions, kick-offs et séminaires d'équipe.",
+    subtitle: "Journée, demi-journée ou format hybride travail + sport · 8 à 120 personnes",
+    description:
+      "Un cadre qui change tout. Nos espaces de travail climatisés et équipés accueillent vos réunions stratégiques, kick-offs et conventions.",
     includes: ["Espace coworking", "Terrains privatisés", "Restauration", "Équipement AV"],
   },
 ];
@@ -78,17 +81,18 @@ export default function EvenementsPage() {
               Chaque événement est sur-mesure. Nous nous adaptons à vos besoins, votre budget et votre groupe.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {FORMULES.map((f, index) => {
               const Icon = f.icon;
               return (
-              <AnimatedSection delay={index * 0.1} key={f.title}>
-                <div className="border border-gray-200 rounded-2xl p-6 hover:border-brand transition-colors h-full">
+              <AnimatedSection delay={index * 0.1} key={f.title} className="h-full">
+                <div className="border border-gray-200 rounded-2xl p-6 hover:border-brand transition-colors h-full flex flex-col">
                   <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-3">
                     <Icon className="w-5 h-5 text-brand" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">{f.description}</p>
+                  <h3 className="font-semibold text-lg mb-1">{f.title}</h3>
+                  <p className="text-brand text-xs font-semibold mb-3">{f.subtitle}</p>
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1">{f.description}</p>
                   <ul className="space-y-1.5">
                     {f.includes.map((item) => (
                       <li key={item} className="flex items-center gap-2 text-sm text-gray-700">

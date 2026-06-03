@@ -8,6 +8,9 @@ import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { cn } from "@/lib/utils";
 
+// Pages without a dark hero — navbar must be opaque/dark from scrollY=0
+const LIGHT_BG_PAGES = ["/confidentialite", "/mentions-legales"];
+
 const NAV_LINKS = [
   { href: "/terrains", label: "Terrains" },
   { href: "/restaurant", label: "Restaurant" },
@@ -22,6 +25,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const isLightPage = LIGHT_BG_PAGES.includes(pathname);
 
   useEffect(() => {
     // Réinitialise à chaque navigation (la Navbar persiste dans le layout)
@@ -41,20 +45,21 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const textColor = isScrolled ? "text-black" : "text-white";
-  const logoFilter = isScrolled ? "" : "filter brightness-0 invert";
+  const isDark = isScrolled || isLightPage;
+  const textColor = isDark ? "text-black" : "text-white";
+  const logoFilter = isDark ? "" : "filter brightness-0 invert";
 
   return (
     <nav
       className={cn(
         "fixed top-0 z-50 w-full animate-page-in transition-all duration-300",
-        isScrolled ? "pt-3 px-4" : "",
+        isDark ? "pt-3 px-4" : "",
       )}
     >
       <div
         className={cn(
           "container flex justify-between items-center transition-all duration-300",
-          isScrolled
+          isDark
             ? "rounded-2xl bg-white/80 backdrop-blur-xl shadow-lg shadow-black/[0.06] py-3 px-6"
             : "py-4",
         )}
@@ -96,7 +101,7 @@ export default function Navbar() {
               size="sm"
               className={cn(
                 "cursor-pointer",
-                isScrolled
+                isDark
                   ? "bg-brand hover:bg-brand-dark text-white"
                   : "bg-white text-black hover:bg-gray-100",
               )}
@@ -110,7 +115,7 @@ export default function Navbar() {
               size="sm"
               className={cn(
                 "cursor-pointer",
-                isScrolled
+                isDark
                   ? "border-brand text-brand hover:bg-brand hover:text-white"
                   : "border-white text-white bg-transparent hover:bg-white hover:text-brand",
               )}
@@ -149,7 +154,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(true)}
           aria-label="Ouvrir le menu"
         >
-          <Bars3Icon className={cn("w-6", isScrolled ? "text-gray-800" : "text-white")} />
+          <Bars3Icon className={cn("w-6", isDark ? "text-gray-800" : "text-white")} />
         </button>
       </div>
 

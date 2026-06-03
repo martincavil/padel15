@@ -90,7 +90,9 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
                 </svg>
               ))}
             </div>
-            <span className="text-white text-xs font-medium">{ratingLabel}</span>
+            <span className="text-white text-xs font-medium">
+              {ratingLabel}
+            </span>
           </div>
 
           <div>
@@ -146,7 +148,9 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
               </svg>
             ))}
           </div>
-          <span className="text-white text-xs font-medium">{ratingLabelShort}</span>
+          <span className="text-white text-xs font-medium">
+            {ratingLabelShort}
+          </span>
         </div>
 
         <div>
@@ -233,7 +237,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
       </div>
 
       {/* Scroll indicator desktop */}
-      <div className="absolute bottom-4 left-1/2 z-20 hidden lg:block animate-pulse">
+      <div className="absolute bottom-4 left-1/2 z-20 hidden lg:block animate-bounce">
         <div>
           <ChevronDown className="w-5 h-5 text-white/40" />
         </div>

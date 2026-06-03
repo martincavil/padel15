@@ -1789,8 +1789,8 @@ export default function RestaurantPage() {
             Restaurant & Guinguette
           </h1>
           <p className="text-white/80 max-w-lg text-lg">
-            Cuisine, bar, terrasse végétalisée et pétanque — service continu
-            7j/7
+            Cuisine, bar, terrasse en pleine air, guinguette et pétanque -
+            service continu 7j/7
           </p>
         </div>
       </div>

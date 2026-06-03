@@ -33,7 +33,9 @@ export function B2BSection() {
   return (
     <section
       className="relative py-24 overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/terrains/terrain-ext-jour.webp')" }}
+      style={{
+        backgroundImage: "url('/images/terrains/terrain-ext-jour.webp')",
+      }}
     >
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/75 z-10" />
@@ -50,7 +52,8 @@ export function B2BSection() {
             Team Building &amp; Événements
           </h2>
           <p className="text-gray-300 max-w-xl mx-auto text-lg">
-            Renforcez la cohésion de vos équipes dans un lieu atypique au cœur de Paris.
+            Renforcez la cohésion de vos équipes dans un lieu atypique au cœur
+            de Paris.
           </p>
         </div>
 
@@ -58,16 +61,20 @@ export function B2BSection() {
           {CARDS.map((card) => {
             const Icon = card.icon;
             return (
-            <div
-              key={card.title}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
-            >
-              <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mb-5">
-                <Icon className="w-6 h-6 text-brand" />
+              <div
+                key={card.title}
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
+              >
+                <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mb-5">
+                  <Icon className="w-6 h-6 text-brand" />
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  {card.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {card.description}
+                </p>
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">{card.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{card.description}</p>
-            </div>
             );
           })}
         </div>
@@ -75,7 +82,8 @@ export function B2BSection() {
         {/* Testimonial */}
         <div className="max-w-xl mx-auto text-center mb-10 bg-white/5 border border-white/10 rounded-2xl p-6">
           <p className="text-white/90 italic text-base mb-3">
-            &ldquo;Le team building le plus réussi qu&apos;on ait organisé — tout le monde est reparti avec l&apos;envie de revenir.&rdquo;
+            &ldquo;Le team building le plus réussi qu&apos;on ait organisé —
+            tout le monde est reparti avec l&apos;envie de revenir.&rdquo;
           </p>
           <p className="text-brand text-sm font-semibold">
             {TESTIMONIAL.author} — {TESTIMONIAL.company}

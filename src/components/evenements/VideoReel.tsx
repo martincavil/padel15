@@ -23,16 +23,19 @@ export function VideoReel() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().then(() => {
-            setPlaying(true);
-            setStarted(true);
-          }).catch(() => {});
+          video
+            .play()
+            .then(() => {
+              setPlaying(true);
+              setStarted(true);
+            })
+            .catch(() => {});
         } else {
           video.pause();
           setPlaying(false);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.4 },
     );
     observer.observe(video);
     return () => observer.disconnect();
@@ -42,7 +45,13 @@ export function VideoReel() {
     const video = ref.current;
     if (!video) return;
     if (video.paused) {
-      video.play().then(() => { setPlaying(true); setStarted(true); }).catch(() => {});
+      video
+        .play()
+        .then(() => {
+          setPlaying(true);
+          setStarted(true);
+        })
+        .catch(() => {});
     } else {
       video.pause();
       setPlaying(false);
@@ -61,7 +70,6 @@ export function VideoReel() {
     <section className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
           {/* Left — texte */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-5">
@@ -72,9 +80,9 @@ export function VideoReel() {
               <span className="text-brand">Padel 15</span> en images
             </h2>
             <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-md mx-auto lg:mx-0">
-              Terrain privatisé, coach dédié, restaurant et guinguette — tout
-              ce qu&apos;il faut pour un team building d&apos;exception au cœur
-              de Paris.
+              Terrain privatisé, coach dédié, restaurant et guinguette — tout ce
+              qu&apos;il faut pour un team building d&apos;exception au cœur de
+              Paris.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -95,12 +103,12 @@ export function VideoReel() {
             {/* Stats */}
             <div className="flex gap-8 justify-center lg:justify-start mt-10">
               {[
-                { value: "20+", label: "Entreprises clientes" },
-                { value: "8–40", label: "Personnes / événement" },
+                { value: "100+", label: "Entreprises clientes" },
+                { value: "8–150", label: "Personnes / événement" },
                 { value: "24h", label: "Réponse garantie" },
               ].map((s) => (
                 <div key={s.label}>
-                  <p className="text-gray-900 font-buzz text-2xl">{s.value}</p>
+                  <p className="font-buzz text-2xl">{s.value}</p>
                   <p className="text-gray-400 text-xs mt-0.5">{s.label}</p>
                 </div>
               ))}
@@ -110,7 +118,6 @@ export function VideoReel() {
           {/* Right — vidéo reel vertical */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative group">
-
               {/* Halo orange derrière la vidéo */}
               <div className="absolute -inset-4 bg-brand/10 rounded-[2.5rem] blur-2xl" />
 
@@ -129,7 +136,12 @@ export function VideoReel() {
                   preload="none"
                   className="absolute inset-0 w-full h-full object-cover"
                 >
-                  <track kind="captions" srcLang="fr" label="Français" default />
+                  <track
+                    kind="captions"
+                    srcLang="fr"
+                    label="Français"
+                    default
+                  />
                 </video>
 
                 {/* Overlay sombre léger */}
@@ -147,7 +159,9 @@ export function VideoReel() {
                 {/* Contrôles bas */}
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <div className="flex items-center gap-1.5 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1.5">
-                    <div className={`w-1.5 h-1.5 rounded-full ${playing ? "bg-brand animate-pulse" : "bg-white/40"}`} />
+                    <div
+                      className={`w-1.5 h-1.5 rounded-full ${playing ? "bg-brand animate-pulse" : "bg-white/40"}`}
+                    />
                     <span className="text-white text-xs font-medium">
                       {playing ? "En direct" : "Padel 15"}
                     </span>
@@ -157,10 +171,11 @@ export function VideoReel() {
                     className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
                     aria-label={muted ? "Activer le son" : "Couper le son"}
                   >
-                    {muted
-                      ? <VolumeX className="w-3.5 h-3.5" />
-                      : <Volume2 className="w-3.5 h-3.5" />
-                    }
+                    {muted ? (
+                      <VolumeX className="w-3.5 h-3.5" />
+                    ) : (
+                      <Volume2 className="w-3.5 h-3.5" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -174,7 +189,6 @@ export function VideoReel() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
