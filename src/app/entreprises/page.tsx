@@ -317,7 +317,7 @@ export default function EntreprisesPage() {
                 // Formulaire Tally — ajouter NEXT_PUBLIC_TALLY_FORM_ID dans .env.local + Vercel
                 <div className="p-2">
                   <TallyEmbed
-                    formId={process.env.NEXT_PUBLIC_TALLY_FORM_ID}
+                    formId={process.env.NEXT_PUBLIC_TALLY_FORM_ID!}
                     height={560}
                     title="Demande de devis événement Padel 15"
                   />
