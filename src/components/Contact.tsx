@@ -7,7 +7,7 @@ export default function Contact() {
   return (
     <section id="contact" className="scroll-mt-16 container pb-6">
       <div className="container mx-auto px-4 space-y-6">
-        <h2 className="font-bold text-[#FF6727]">Contactez-nous</h2>
+        <h2 className="font-bold text-brand">Contactez-nous</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-gray-200 h-80 mb-6 rounded-lg overflow-hidden">
             <iframe
@@ -21,7 +21,7 @@ export default function Contact() {
           </div>
           <div className="space-y-4">
             <div className="flex items-start">
-              <MapPinIcon className="w-4 text-[#009F51] mr-3 mt-1" />
+              <MapPinIcon className="w-4 text-green-600 mr-3 mt-1" />
               <div>
                 <h4 className="font-semibold">Adresse</h4>
                 <p className="text-gray-600">
@@ -30,7 +30,7 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex items-start">
-              <PhoneIcon className="w-4 text-[#009F51] mr-3 mt-1" />
+              <PhoneIcon className="w-4 text-green-600 mr-3 mt-1" />
               <div>
                 <h4 className="font-semibold">Téléphone</h4>
                 <a
@@ -42,7 +42,7 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex items-start">
-              <EnvelopeIcon className="w-4 text-[#009F51] mr-3 mt-1" />
+              <EnvelopeIcon className="w-4 text-green-600 mr-3 mt-1" />
               <div>
                 <h4 className="font-semibold">Email</h4>
                 <a

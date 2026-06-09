@@ -40,8 +40,11 @@ export async function getUpcomingTournaments(): Promise<PlaytomicTournament[]> {
     });
     if (!res.ok) return FALLBACK;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const raw: any[] = await res.json();
+    type RawTournament = PlaytomicTournament & {
+      is_cancelled?: boolean;
+      tournament_visibility?: string;
+    };
+    const raw = (await res.json()) as RawTournament[];
     const now = new Date();
 
     return raw
