@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Calendar, ChevronRight, Trophy, Users } from "lucide-react";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import {
@@ -65,7 +64,7 @@ export async function AgendaSection() {
   const tournaments = await getUpcomingTournaments();
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <AnimatedSection>
           <div className="flex items-end justify-between mb-10">
@@ -73,7 +72,7 @@ export async function AgendaSection() {
               <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-3">
                 Agenda
               </span>
-              <h2 className="font-buzz text-3xl md:text-4xl">
+              <h2 className="font-buzz">
                 Prochains tournois
               </h2>
             </div>
@@ -145,12 +144,12 @@ export async function AgendaSection() {
                 </p>
               </div>
             </div>
-            <Link
-              href="/entreprises"
+            <a
+              href="mailto:contact@padel15.fr?subject=Demande de devis événement&body=Bonjour, je souhaite obtenir un devis pour :"
               className="flex-shrink-0 bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap"
             >
               Demander un devis
-            </Link>
+            </a>
           </div>
         </AnimatedSection>
       </div>

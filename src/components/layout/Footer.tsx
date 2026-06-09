@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 const LINKS_CLUB = [
   { href: "/terrains", label: "Nos terrains" },
@@ -10,11 +14,68 @@ const LINKS_CLUB = [
   { href: "/le-club", label: "Le Club" },
 ];
 
-const LINKS_PRATIQUE = [
-  { href: "/contact", label: "Contact & Accès" },
-  // { href: "/blog", label: "Blog" }, // à activer quand les premiers articles sont publiés
-  { href: "/entreprises", label: "Événements entreprise" },
-];
+const LINKS_PRATIQUE = [{ href: "/contact", label: "Contact & Accès" }];
+
+function FooterNewsletter() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error" | "already"
+  >("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus(data.alreadySubscribed ? "already" : "success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "success")
+    return <p className="text-green-400 text-sm">Inscription confirmée !</p>;
+  if (status === "already")
+    return <p className="text-brand text-sm">Vous êtes déjà inscrit·e.</p>;
+
+  return (
+    <form onSubmit={handleSubmit} className="flex gap-2 mt-1">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="votre@email.com"
+        required
+        disabled={status === "loading"}
+        className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-white/20 bg-white/5 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-brand disabled:opacity-60"
+      />
+      <button
+        type="submit"
+        disabled={status === "loading" || !email}
+        className="flex items-center gap-1.5 bg-brand hover:bg-brand-dark text-white font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-60 text-sm whitespace-nowrap"
+      >
+        {status === "loading" ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          <>
+            S&apos;inscrire <ArrowRight className="w-3.5 h-3.5" />
+          </>
+        )}
+      </button>
+    </form>
+  );
+}
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -35,32 +96,45 @@ export function Footer() {
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
               Le club de padel haut de gamme du 15ème arrondissement de Paris.
-              115 rue Castagnary, 75015 Paris.
             </p>
+            <address className="text-gray-400 text-sm mt-2 not-italic leading-relaxed">
+              PADEL 15
+              <br />
+              115 rue Castagnary
+              <br />
+              75015 Paris
+            </address>
             <div className="flex gap-3 mt-4">
               <a
-                href="https://www.instagram.com/padel15club/?hl=fr"
+                href="https://www.instagram.com/padel15club/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram"
+                aria-label="Instagram Padel 15"
                 className="text-gray-400 hover:text-brand transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                </svg>
+                <Image
+                  src="/images/autres/instagram.webp"
+                  alt="Instagram"
+                  width={22}
+                  height={22}
+                  className="opacity-60 hover:opacity-100 transition-opacity"
+                />
               </a>
             </div>
           </div>
 
           {/* Le Club */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Le Club</h3>
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">
+              Le Club
+            </h3>
             <ul className="space-y-2">
               {LINKS_CLUB.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-gray-300 hover:text-white text-sm transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-gray-300 hover:text-white text-sm transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -70,11 +144,16 @@ export function Footer() {
 
           {/* Pratique */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Pratique</h3>
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">
+              Pratique
+            </h3>
             <ul className="space-y-2 mb-4">
               {LINKS_PRATIQUE.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-gray-300 hover:text-white text-sm transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-gray-300 hover:text-white text-sm transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -91,28 +170,55 @@ export function Footer() {
               </li>
             </ul>
             <div className="text-sm text-gray-400 space-y-1">
-              <p>7j/7 — 8h à 22h</p>
-              <a href="tel:+33145315876" className="hover:text-white transition-colors block">+33 1 45 31 58 76</a>
-              <a href="mailto:contact@padel15.fr" className="hover:text-white transition-colors block">contact@padel15.fr</a>
+              <p>7j/7</p>
+              <p>10h – 22h</p>
+              <a
+                href="tel:+33145315876"
+                className="hover:text-white transition-colors block"
+              >
+                +33 1 45 31 58 76
+              </a>
+              <a
+                href="mailto:contact@padel15.fr"
+                className="hover:text-white transition-colors block"
+              >
+                contact@padel15.fr
+              </a>
             </div>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Newsletter</h3>
-            <p className="text-gray-400 text-sm mb-4">Actu du club, tournois et offres exclusives.</p>
-            <a
-              href="mailto:contact@padel15.fr?subject=Newsletter Padel 15"
-              className="inline-block bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
-            >
-              S'inscrire
-            </a>
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">
+              Newsletter
+            </h3>
+            <p className="text-gray-400 text-sm mb-3">
+              Actu du club, tournois et offres exclusives.
+            </p>
+            <FooterNewsletter />
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-2 text-gray-400 text-xs">
-          <p>© {year} Padel 15. Tous droits réservés.</p>
-          <p>115 rue Castagnary, 75015 Paris</p>
+        <div className="border-t border-white/10 pt-6 space-y-3">
+          <p className="text-gray-400 text-xs">
+            © {year} PADEL 15 — SAS au capital de 5 000 € — RCS Paris 949 726
+            848 — 115 rue Castagnary 75015 Paris
+          </p>
+          <div className="flex flex-wrap gap-3 text-xs text-gray-500">
+            <Link
+              href="/mentions-legales"
+              className="hover:text-gray-300 transition-colors"
+            >
+              Mentions légales
+            </Link>
+            <span>·</span>
+            <Link
+              href="/confidentialite"
+              className="hover:text-gray-300 transition-colors"
+            >
+              Politique de confidentialité
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

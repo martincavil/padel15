@@ -1,10 +1,6 @@
-import Link from "next/link";
-
-// Formes décoratives avec animations CSS inline (garantit la génération hors Tailwind JIT)
 export function AnimatedPrivatiseCard() {
   return (
-    // overflow-visible : les formes peuvent déborder du cadre de façon décorative
-    <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl p-10 text-center overflow-visible">
+    <div className="relative bg-gradient-to-br from-gray-700 via-gray)800 to-black rounded-2xl p-10 text-center overflow-hidden">
       {/* Cercle 1 — haut gauche */}
       <div
         className="absolute w-40 h-40 rounded-full border border-brand/20 top-[-20px] left-[-20px]"
@@ -27,16 +23,25 @@ export function AnimatedPrivatiseCard() {
       />
 
       <div className="relative z-10">
-        <h2 className="font-buzz text-3xl text-white mb-3">Privatisez notre espace</h2>
-        <p className="text-gray-400 max-w-lg mx-auto mb-6">
-          Anniversaire, afterwork, séminaire ou soirée d&apos;entreprise — nous créons l&apos;événement sur mesure.
+        <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-brand/20 text-brand border border-brand/30 mb-5">
+          Privatisation
+        </span>
+        <h2 className="font-buzz text-white mb-3">
+          Privatisez notre espace
+        </h2>
+        <p className="text-gray-400 max-w-lg mx-auto mb-2 text-lg">
+          Séminaires · Afterworks · Événements privés
         </p>
-        <Link
-          href="/evenements"
+        <p className="text-gray-500 max-w-md mx-auto mb-8 text-sm">
+          Anniversaire, afterwork, séminaire ou soirée d&apos;entreprise — nous
+          créons l&apos;événement sur mesure.
+        </p>
+        <a
+          href="mailto:contact@padel15.fr?subject=Demande privatisation restaurant"
           className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
         >
           Demander un devis
-        </Link>
+        </a>
       </div>
     </div>
   );

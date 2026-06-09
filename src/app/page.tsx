@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import HeroBanner from "@/components/HeroBanner";
 import { fetchGoogleRating } from "@/lib/google-places";
-import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
 import { GoogleReviews } from "@/components/shared/GoogleReviews";
-import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
 import { RestaurantHighlight } from "@/components/homepage/RestaurantHighlight";
 import { PartenairesSection } from "@/components/homepage/PartenairesSection";
 import { TarifsSection } from "@/components/homepage/TarifsSection";
 import CoursParticuliers from "@/components/CoursParticuliers";
 import { AgendaSection } from "@/components/homepage/AgendaSection";
-import { InstagramSection } from "@/components/homepage/InstagramSection";
 import { B2BSection } from "@/components/homepage/B2BSection";
 import { CTANewsletter } from "@/components/shared/CTANewsletter";
 import Clients from "@/components/Clients";
+import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
+import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
+import { InstagramSection } from "@/components/homepage/InstagramSection";
+import { CarteCanvaWidget } from "@/components/restaurant/CarteCanvaWidget";
 
 export const metadata: Metadata = {
   title:
@@ -31,21 +32,24 @@ export default async function HomePage() {
     <>
       <HeroBanner googleRating={googleRating} />
       <PlaytomicSection />
-      <GoogleReviews />
       <PadelInfoSection />
-      <RestaurantHighlight />
-      <PartenairesSection />
       <TarifsSection />
-      <CoursParticuliers />
       <Suspense fallback={<div className="py-16 bg-gray-50" aria-hidden />}>
         <AgendaSection />
       </Suspense>
+      <RestaurantHighlight />
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <CarteCanvaWidget variant="compact" />
+        </div>
+      </section>
+      <GoogleReviews />
+      <PartenairesSection />
+      <CoursParticuliers />
       <InstagramSection />
       <B2BSection />
+      <Clients />
       <CTANewsletter />
-      <div className="py-6 bg-gray-50">
-        <Clients />
-      </div>
     </>
   );
 }

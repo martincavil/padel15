@@ -9,7 +9,6 @@
     "not ie 11"
   ],
   "scripts": {
-    "postinstall": "node scripts/patch-react-use-effect-event.cjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -20,11 +19,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@portabletext/react": "^6.2.0",
     "@radix-ui/react-dialog": "^1.1.7",
     "@radix-ui/react-slot": "^1.1.2",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/image-url": "^2.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",
@@ -32,7 +28,6 @@
     "framer-motion": "^12.39.0",
     "lucide-react": "^0.487.0",
     "next": "15.2.6",
-    "next-sanity": "^12.4.5",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "styled-components": "^6.4.2",
@@ -42,14 +37,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.60.0",
-    "@sanity/vision": "^5.26.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.6",
-    "sanity": "^5.26.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

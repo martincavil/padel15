@@ -4,17 +4,11 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Sanity utilise useEffectEvent qui n'est pas dans React 19 stable.
-  // serverExternalPackages empêche webpack de bundler sanity côté serveur
-  // et de tomber sur cette API manquante.
-  serverExternalPackages: ["sanity", "@sanity/vision", "next-sanity"],
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 828, 1080, 1280, 1920],
     imageSizes: [16, 32, 64, 96, 128, 256],
     remotePatterns: [
-      // Sanity CDN
-      { protocol: "https", hostname: "cdn.sanity.io" },
       // Cloudinary (vidéos + images)
       { protocol: "https", hostname: "res.cloudinary.com" },
     ],

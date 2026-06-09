@@ -75,7 +75,7 @@ export function VideoReel() {
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-5">
               En exclusivité
             </span>
-            <h2 className="font-buzz text-4xl md:text-5xl text-gray-900 leading-tight mb-6">
+            <h2 className="font-buzz text-gray-900 leading-tight mb-6">
               L&apos;expérience <br />
               <span className="text-brand">Padel 15</span> en images
             </h2>

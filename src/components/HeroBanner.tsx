@@ -182,7 +182,8 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
           >
             Réserver un terrain
           </a>
-          <div className="flex gap-2 w-full">
+          {/* Badges app — visibles uniquement mobile */}
+          <div className="flex gap-2 w-full md:hidden">
             <a
               href="https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
               target="_blank"
@@ -217,7 +218,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-0.5">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-0">
         {CAROUSEL_IMAGES.map((_, i) => (
           <button
             key={i}

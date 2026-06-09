@@ -21,7 +21,7 @@ export default function CoachingPage() {
         badge="Coaching & Progression"
         imageSrc="/images/terrains/terrain-inte-game.webp"
         imageAlt="Cours de padel Padel 15 Paris"
-        height="md"
+        height="lg"
       />
       <CoursParticuliers />
     </>

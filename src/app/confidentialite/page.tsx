@@ -13,12 +13,12 @@ export default function ConfidentialitePage() {
       <div className="prose prose-gray max-w-none space-y-8 text-gray-700">
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-3">1. Responsable du traitement</h2>
+          <h2 className="font-semibold text-gray-900 mb-3">1. Responsable du traitement</h2>
           <p>Padel 15 — 115 rue Castagnary, 75015 Paris — contact@padel15.fr</p>
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-3">2. Données collectées</h2>
+          <h2 className="font-semibold text-gray-900 mb-3">2. Données collectées</h2>
           <p>Nous collectons les données suivantes :</p>
           <ul className="list-disc list-inside space-y-1 mt-2">
             <li>Données de formulaire : nom, email, téléphone, message (formulaires de contact et devis)</li>
@@ -29,7 +29,7 @@ export default function ConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-3">3. Finalités du traitement</h2>
+          <h2 className="font-semibold text-gray-900 mb-3">3. Finalités du traitement</h2>
           <ul className="list-disc list-inside space-y-1">
             <li>Répondre à vos demandes de contact et devis</li>
             <li>Envoyer notre newsletter (sur abonnement)</li>
@@ -39,7 +39,7 @@ export default function ConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-3">4. Durée de conservation</h2>
+          <h2 className="font-semibold text-gray-900 mb-3">4. Durée de conservation</h2>
           <ul className="list-disc list-inside space-y-1">
             <li>Données de contact : 3 ans après le dernier contact</li>
             <li>Données newsletter : jusqu&apos;à désabonnement</li>
@@ -48,7 +48,7 @@ export default function ConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-3">5. Vos droits (RGPD)</h2>
+          <h2 className="font-semibold text-gray-900 mb-3">5. Vos droits (RGPD)</h2>
           <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
           <ul className="list-disc list-inside space-y-1 mt-2">
             <li>Droit d&apos;accès à vos données</li>
@@ -61,7 +61,7 @@ export default function ConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="font-semibold text-xl text-gray-900 mb-3">6. Cookies</h2>
+          <h2 className="font-semibold text-gray-900 mb-3">6. Cookies</h2>
           <p>Vous pouvez gérer vos préférences de cookies à tout moment via le bandeau affiché sur notre site. Le refus des cookies analytiques et marketing n&apos;affecte pas votre navigation.</p>
         </section>
 

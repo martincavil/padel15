@@ -61,7 +61,7 @@ export function CarouselClub() {
         <CarouselNext />
       </Carousel>
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">Nos terrains</h3>
+        <h3 className="font-semibold mb-2">Nos terrains</h3>
         <p className="text-sm text-gray-600">
           2 terrains dernière génération, full panoramiques, entièrement
           couverts et hermétiques, jouables par tous les temps. Toits ouvrants

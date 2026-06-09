@@ -10,7 +10,7 @@ export function TarifsSection() {
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-4">
               Tarifs & Horaires
             </span>
-            <h2 className="font-buzz text-3xl md:text-4xl">
+            <h2 className="font-buzz">
               Jouez à votre rythme
             </h2>
           </div>

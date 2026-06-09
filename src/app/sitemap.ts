@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
 
-
 const BASE_URL = "https://padel15.fr";
 
 const STATIC_ROUTES = [
@@ -12,8 +11,6 @@ const STATIC_ROUTES = [
   { url: `${BASE_URL}/tarifs`, priority: 0.8, changeFrequency: "monthly" as const },
   { url: `${BASE_URL}/le-club`, priority: 0.7, changeFrequency: "monthly" as const },
   { url: `${BASE_URL}/contact`, priority: 0.7, changeFrequency: "yearly" as const },
-  { url: `${BASE_URL}/blog`, priority: 0.7, changeFrequency: "weekly" as const },
-  { url: `${BASE_URL}/entreprises`, priority: 0.9, changeFrequency: "monthly" as const },
   { url: `${BASE_URL}/mentions-legales`, priority: 0.3, changeFrequency: "yearly" as const },
   { url: `${BASE_URL}/confidentialite`, priority: 0.3, changeFrequency: "yearly" as const },
 ];

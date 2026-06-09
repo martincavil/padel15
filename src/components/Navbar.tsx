@@ -18,7 +18,6 @@ const NAV_LINKS = [
   { href: "/evenements", label: "Événements" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/le-club", label: "Le Club" },
-  // { href: "/blog", label: "Blog" }, // à activer quand les premiers articles sont publiés
 ];
 
 export default function Navbar() {
@@ -154,7 +153,9 @@ export default function Navbar() {
           onClick={() => setMenuOpen(true)}
           aria-label="Ouvrir le menu"
         >
-          <Bars3Icon className={cn("w-6", isDark ? "text-gray-800" : "text-white")} />
+          <Bars3Icon
+            className={cn("w-6", isDark ? "text-gray-800" : "text-white")}
+          />
         </button>
       </div>
 
@@ -162,7 +163,9 @@ export default function Navbar() {
       <div
         className={cn(
           "fixed inset-0 bg-black/50 z-40 transition-opacity duration-300",
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+          menuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
         )}
         onClick={() => setMenuOpen(false)}
       />
@@ -178,7 +181,13 @@ export default function Navbar() {
       >
         {/* Header drawer */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-          <Image src="/logo.svg" alt="Padel 15" width={80} height={32} className="h-auto" />
+          <Image
+            src="/logo.svg"
+            alt="Padel 15"
+            width={80}
+            height={32}
+            className="h-auto"
+          />
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Fermer le menu"
@@ -234,7 +243,13 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 text-gray-400 hover:text-gray-600 text-sm transition-colors pt-1"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              className="w-4 h-4 fill-none stroke-current"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
               <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />

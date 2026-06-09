@@ -34,7 +34,7 @@ export function PadelInfoSection() {
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-4">
               Équipements
             </span>
-            <h2 className="font-buzz text-4xl md:text-5xl">
+            <h2 className="font-buzz">
               Tout est prévu
             </h2>
             <p className="text-gray-500 mt-3 text-base max-w-xl mx-auto">

@@ -78,12 +78,11 @@ export default function EvenementsPage() {
   return (
     <>
       <JsonLd data={eventSchema} />
-
       <PageHero
         title="Team Building & Événements"
         subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… plus de 100 entreprises de premier plan font confiance à Padel 15."
         badge="Entreprises & Groupes"
-        imageSrc="/images/terrains/terrain-match-1.webp"
+        imageSrc="/images/events/event-terrain.webp"
         imageAlt="Événements d'entreprise Padel 15"
         height="lg"
       />
@@ -94,7 +93,7 @@ export default function EvenementsPage() {
         {/* Formules */}
         <div>
           <div className="text-center mb-10">
-            <h2 className="font-buzz text-3xl mb-3">Nos Formules</h2>
+            <h2 className="font-buzz mb-3">Nos Formules</h2>
             <p className="text-gray-500 max-w-lg mx-auto">
               Chaque événement est sur-mesure. Nous nous adaptons à vos besoins,
               votre budget et votre groupe.
@@ -113,7 +112,7 @@ export default function EvenementsPage() {
                     <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-3">
                       <Icon className="w-5 h-5 text-brand" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-1">{f.title}</h3>
+                    <h3 className="font-semibold mb-1">{f.title}</h3>
                     <p className="text-brand text-xs font-semibold mb-3">
                       {f.subtitle}
                     </p>
@@ -146,7 +145,7 @@ export default function EvenementsPage() {
         {/* Contact CTA */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="font-buzz text-3xl mb-4">Demandez un devis</h2>
+            <h2 className="font-buzz mb-4">Demandez un devis</h2>
             <p className="text-gray-600 leading-relaxed mb-6">
               Décrivez votre projet et notre équipe revient vers vous sous 24h
               avec une proposition personnalisée.
@@ -166,15 +165,15 @@ export default function EvenementsPage() {
               </div>
             </div>
             <a
-              href="mailto:contact@padel15.fr?subject=Événement entreprise"
+              href="mailto:contact@padel15.fr?subject=Demande de devis événement&body=Bonjour, je souhaite obtenir un devis pour :"
               className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
             >
-              Envoyer une demande
+              Demander un devis
             </a>
           </div>
           <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/images/restaurant/guinguette.webp"
+              src="/images/events/event-group.webp"
               alt="Espace événements Padel 15"
               fill
               className="object-cover"

@@ -320,7 +320,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
       </a>
 
       {/* App badges */}
-      <div className="grid grid-cols-2 gap-2">
+      <div className="md:hidden grid grid-cols-2 gap-2">
         <a
           href="https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
           target="_blank"

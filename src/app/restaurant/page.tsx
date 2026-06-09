@@ -1,26 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Check, Utensils, Leaf, Wine } from "lucide-react";
+import { CarteCanvaWidget } from "@/components/restaurant/CarteCanvaWidget";
 import { PageHero } from "@/components/shared/PageHero";
 import { LightboxGallery } from "@/components/shared/LightboxGallery";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { AnimatedPrivatiseCard } from "@/components/restaurant/AnimatedPrivatiseCard";
-import {
-  getMenuByCategory,
-  getActiveFormules,
-  getDailySpecials,
-} from "@/sanity/queries";
-import { MenuDisplay } from "@/components/restaurant/MenuDisplay";
-import { ChalkboardSpecials } from "@/components/restaurant/ChalkboardSpecials";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Restaurant & Guinguette Paris 15 | Bar, Terrasse, Pétanque",
   description:
-    "Restaurant, bar et terrasse guinguette au cœur du Paris 15ème. Service continu du petit-déjeuner au dîner. Privatisation disponible pour événements.",
+    "Restaurant, bar et terrasse guinguette au cœur du Paris 15ème. Ouvert 7j/7 de 8h à 22h. Ouvert à tous, même sans réservation de terrain. Privatisation disponible.",
   openGraph: {
     title: "Restaurant & Guinguette — Padel 15",
     images: [{ url: "/images/restaurant/rest-inte-grand-angle.webp" }],
@@ -50,6 +43,7 @@ const SERVICES = [
     title: "Restaurant",
     items: [
       "Service continu 7j/7 — 8h à 22h",
+      "Ouvert à tous, sans réservation de terrain",
       "Produits frais et de saison",
       "Cadre chaleureux et moderne",
     ],
@@ -76,34 +70,25 @@ const SERVICES = [
 ];
 
 const GALLERY_IMAGES = [
-  {
-    src: "/images/restaurant/rest-inte-grand-angle.webp",
-    alt: "Restaurant — vue d'ensemble",
-  },
-  { src: "/images/restaurant/rest-inte-bar.webp", alt: "Bar intérieur" },
-  { src: "/images/restaurant/guinguette.webp", alt: "Terrasse guinguette" },
   { src: "/images/restaurant/restau-diner.webp", alt: "Ambiance dîner" },
-  { src: "/images/restaurant/rest-ext.webp", alt: "Restaurant extérieur" },
+  { src: "/images/restaurant/food/DSC00739.webp", alt: "Burger Maison" },
+  { src: "/images/restaurant/rest-inte-bar.webp", alt: "Bar intérieur" },
+  { src: "/images/restaurant/food/DSC00768.webp", alt: "Salade César" },
   {
     src: "/images/restaurant/rest-inte-terrain.webp",
     alt: "Vue sur les terrains",
   },
+  { src: "/images/restaurant/food/DSC00577.webp", alt: "Planche Mixte" },
 ];
 
-export default async function RestaurantPage() {
-  const [menuByCategory, formules, dailySpecials] = await Promise.all([
-    getMenuByCategory(),
-    getActiveFormules(),
-    getDailySpecials(),
-  ]);
-
+export default function RestaurantPage() {
   return (
     <>
       <JsonLd data={restaurantSchema} />
 
       <PageHero
         title="Restaurant & Guinguette"
-        subtitle="Cuisine, bar, terrasse en pleine air, guinguette et pétanque - service continu 7j/7"
+        subtitle="Cuisine, bar, terrasse en plein air — 7j/7 de 8h à 22h · Ouvert à tous, sans réservation"
         badge="Paris 15ème"
         imageSrc="/images/restaurant/rest-inte-grand-angle.webp"
         imageAlt="Restaurant Padel 15"
@@ -115,14 +100,15 @@ export default async function RestaurantPage() {
         <AnimatedSection>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-buzz text-3xl mb-4">Un lieu de vie unique</h2>
+              <h2 className="font-buzz mb-4">Un lieu de vie unique</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Ouvert 7j/7 en service continu, du petit-déjeuner au dîner,
-                  avec des produits frais et de saison. Un cadre chaleureux pour
-                  se détendre après un match… ou organiser vos séminaires,
-                  afterworks et événements privés dans un lieu unique au cœur de
-                  Paris.
+                  Ouvert 7j/7 en service continu de 8h à 22h, avec des produits
+                  frais et de saison.{" "}
+                  <strong>Ouvert à tous, sans réservation de terrain.</strong>{" "}
+                  Un cadre chaleureux pour se détendre après un match… ou
+                  organiser vos séminaires, afterworks et événements privés dans
+                  un lieu unique au cœur de Paris.
                 </p>
                 <p>
                   Notre terrasse guinguette vous transporte dans une ambiance
@@ -131,18 +117,18 @@ export default async function RestaurantPage() {
                 </p>
               </div>
               <div className="mt-8">
-                <Link
-                  href="/evenements"
+                <a
+                  href="mailto:contact@padel15.fr?subject=Demande privatisation restaurant"
                   className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
                 >
                   Privatiser l&apos;espace
-                </Link>
+                </a>
               </div>
             </div>
             <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/images/restaurant/guinguette.webp"
-                alt="Terrasse guinguette Padel 15"
+                src="/images/restaurant/food/DSC00617.webp"
+                alt="Planche à partagée Padel 15"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -161,7 +147,7 @@ export default async function RestaurantPage() {
                   <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-3">
                     <Icon className="w-5 h-5 text-brand" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-3">
+                  <h3 className="font-semibold mb-3">
                     {service.title}
                   </h3>
                   <ul className="space-y-1.5 text-gray-600 text-sm">
@@ -178,31 +164,18 @@ export default async function RestaurantPage() {
           })}
         </div>
 
-        {/* Gallery */}
+        {/* Galerie */}
         <AnimatedSection>
-          <h2 className="font-buzz text-3xl mb-6">Galerie</h2>
+          <h2 className="font-buzz mb-6">Galerie</h2>
           <LightboxGallery images={GALLERY_IMAGES} columns={3} />
         </AnimatedSection>
 
-        {/* Menu du jour — ardoise */}
-        {dailySpecials.length > 0 && (
-          <AnimatedSection>
-            <div className="max-w-lg mx-auto">
-              <ChalkboardSpecials specials={dailySpecials} />
-            </div>
-          </AnimatedSection>
-        )}
-
-        {/* Menu complet */}
+        {/* Notre carte — aperçu Canva + lien */}
         <AnimatedSection>
-          <h2 className="font-buzz text-3xl mb-2">La carte</h2>
-          <p className="text-gray-500 mb-8">
-            Cuisine généreuse avec des produits frais et de saison.
-          </p>
-          <MenuDisplay menuByCategory={menuByCategory} formules={formules} />
+          <CarteCanvaWidget variant="full" />
         </AnimatedSection>
 
-        {/* Animated Privatisez card */}
+        {/* Card privatisation */}
         <AnimatedPrivatiseCard />
       </div>
     </>

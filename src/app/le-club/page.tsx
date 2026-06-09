@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import {
   Trophy,
   Utensils,
@@ -10,10 +11,17 @@ import {
   Bike,
   Droplets,
   Accessibility,
+  Newspaper,
+  ExternalLink,
 } from "lucide-react";
 import Values from "@/components/Values";
 import { PageHero } from "@/components/shared/PageHero";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { AgendaSection } from "@/components/homepage/AgendaSection";
+import { CTANewsletter } from "@/components/shared/CTANewsletter";
+import { getCampaigns, formatCampaignDate } from "@/lib/mailchimp";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title:
@@ -75,22 +83,24 @@ const PHOTO_HIGHLIGHTS = [
     detail: "Location de raquettes",
   },
   {
-    src: "/images/terrains/terrain-inte-filet.webp",
+    src: "/images/terrains/terrain-match-1.webp",
     alt: "Terrain intérieur Padel 15",
     label: "Terrains",
     detail: "2 courts panoramiques",
   },
 ];
 
-export default function LeClubPage() {
+export default async function LeClubPage() {
+  const campaigns = await getCampaigns();
+
   return (
     <>
       <PageHero
         title="Le Club"
         subtitle="115 rue Castagnary, Paris 15ème — bien plus qu'un club de padel"
-        imageSrc="/images/restaurant/rest-inte-grand-angle.webp"
+        imageSrc="/images/restaurant/restaurant-horizontale-1.webp"
         imageAlt="Padel 15 — Le Club"
-        height="md"
+        height="lg"
       />
 
       <div className="container mx-auto px-4 py-16 space-y-16">
@@ -98,7 +108,7 @@ export default function LeClubPage() {
         <AnimatedSection>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-buzz text-3xl mb-4">Notre histoire</h2>
+              <h2 className="font-buzz mb-4">Notre histoire</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
                   Padel 15 est né d&apos;une passion commune pour le padel et
@@ -126,7 +136,7 @@ export default function LeClubPage() {
           </div>
         </AnimatedSection>
 
-        {/* Photo highlights — coworking, équipements, terrains */}
+        {/* Photo highlights */}
         <AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {PHOTO_HIGHLIGHTS.map((photo) => (
@@ -152,7 +162,7 @@ export default function LeClubPage() {
 
         {/* Infrastructure */}
         <AnimatedSection>
-          <h2 className="font-buzz text-3xl mb-8 text-center">
+          <h2 className="font-buzz mb-8 text-center">
             Notre infrastructure
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -174,13 +184,13 @@ export default function LeClubPage() {
           </div>
         </AnimatedSection>
 
-        {/* Valeurs */}
+        {/* Valeurs — version compacte */}
         <Values />
 
         {/* CTA */}
         <AnimatedSection>
           <div className="text-center">
-            <h2 className="font-buzz text-2xl mb-4">
+            <h2 className="font-buzz mb-4">
               Venez découvrir Padel 15
             </h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -202,6 +212,61 @@ export default function LeClubPage() {
           </div>
         </AnimatedSection>
       </div>
+
+      {/* Actualités — archives Mailchimp */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <AnimatedSection>
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-3">
+                  Actualités
+                </span>
+                <h2 className="font-buzz">
+                  Nos newsletters
+                </h2>
+              </div>
+            </div>
+          </AnimatedSection>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {campaigns.map((c, i) => (
+              <AnimatedSection key={c.id} delay={i * 0.08}>
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 flex flex-col h-full hover:border-brand hover:shadow-md transition-all">
+                  <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-4">
+                    <Newspaper className="w-5 h-5 text-brand" />
+                  </div>
+                  <h3 className="font-semibold leading-snug mb-2 flex-1">
+                    {c.settings.subject_line}
+                  </h3>
+                  <p className="text-gray-400 text-xs mb-4">
+                    {formatCampaignDate(c.send_time)}
+                  </p>
+                  {c.archive_url && c.archive_url !== "#" ? (
+                    <a
+                      href={c.archive_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-brand text-sm font-medium hover:underline"
+                    >
+                      Lire <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  ) : (
+                    <span className="text-gray-300 text-sm">À venir</span>
+                  )}
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Prochains tournois */}
+      <Suspense fallback={<div className="py-16 bg-gray-50" aria-hidden />}>
+        <AgendaSection />
+      </Suspense>
+
+      {/* Newsletter */}
+      <CTANewsletter />
     </>
   );
 }

@@ -5,7 +5,9 @@ import { Mail, CheckCircle, ArrowRight, Loader2 } from "lucide-react";
 
 export function CTANewsletter() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "already">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error" | "already"
+  >("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -36,7 +38,7 @@ export function CTANewsletter() {
   }
 
   return (
-    <section className="relative py-20 bg-white overflow-hidden">
+    <section className="relative py-16 bg-gray-50 overflow-hidden">
       {/* Ligne déco haut */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
 
@@ -53,8 +55,9 @@ export function CTANewsletter() {
         </div>
 
         {/* Titre */}
-        <h2 className="font-buzz text-4xl md:text-5xl text-gray-900 mb-4 leading-tight">
-          Restez au cœur<br />
+        <h2 className="font-buzz text-gray-900 mb-4 leading-tight">
+          Restez au cœur
+          <br />
           <span className="text-brand-dark">du jeu.</span>
         </h2>
 
@@ -70,19 +73,30 @@ export function CTANewsletter() {
             <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center">
               <CheckCircle className="w-8 h-8 text-green-500" />
             </div>
-            <p className="font-semibold text-gray-900 text-lg">Bienvenue dans l&apos;équipe !</p>
-            <p className="text-gray-500 text-sm">Vérifiez votre boîte mail pour confirmer votre inscription.</p>
+            <p className="font-semibold text-gray-900 text-lg">
+              Bienvenue dans l&apos;équipe !
+            </p>
+            <p className="text-gray-500 text-sm">
+              Vérifiez votre boîte mail pour confirmer votre inscription.
+            </p>
           </div>
         ) : status === "already" ? (
           <div className="flex flex-col items-center gap-3 py-6">
             <div className="w-16 h-16 rounded-full bg-brand/10 flex items-center justify-center">
               <CheckCircle className="w-8 h-8 text-brand" />
             </div>
-            <p className="font-semibold text-gray-900 text-lg">Vous êtes déjà inscrit·e !</p>
-            <p className="text-gray-500 text-sm">Vous recevez déjà nos newsletters. Merci pour votre fidélité.</p>
+            <p className="font-semibold text-gray-900 text-lg">
+              Vous êtes déjà inscrit·e !
+            </p>
+            <p className="text-gray-500 text-sm">
+              Vous recevez déjà nos newsletters. Merci pour votre fidélité.
+            </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-4">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-4"
+          >
             <input
               type="email"
               value={email}
@@ -114,21 +128,18 @@ export function CTANewsletter() {
           <p className="text-red-500 text-sm mb-4">{errorMsg}</p>
         )}
 
-        {/* Incentive + RGPD */}
+        {/* RGPD */}
         {status === "idle" || status === "loading" || status === "error" ? (
-          <>
-            {/* Fond blanc + texte sombre → contraste 9:1 */}
-            <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-1.5 mb-4 shadow-sm">
-              <span className="text-gray-800 text-sm font-semibold">🎁 −10% sur votre 1ère réservation</span>
-            </div>
-            <p className="text-xs text-gray-600 mt-2">
-              En vous inscrivant, vous acceptez notre{" "}
-              <a href="/confidentialite" className="underline hover:text-brand transition-colors">
-                politique de confidentialité
-              </a>
-              . Désabonnement en 1 clic.
-            </p>
-          </>
+          <p className="text-xs text-gray-600 mt-2">
+            En vous inscrivant, vous acceptez notre{" "}
+            <a
+              href="/confidentialite"
+              className="underline hover:text-brand transition-colors"
+            >
+              politique de confidentialité
+            </a>
+            . Désabonnement en 1 clic.
+          </p>
         ) : null}
       </div>
     </section>

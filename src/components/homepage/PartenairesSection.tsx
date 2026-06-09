@@ -30,14 +30,14 @@ const PARTENAIRES = [
 
 export function PartenairesSection() {
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <AnimatedSection>
           <div className="text-center mb-10">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-4">
               Partenaires premium
             </span>
-            <h2 className="font-buzz text-3xl md:text-4xl">Nos partenaires</h2>
+            <h2 className="font-buzz">Nos partenaires</h2>
           </div>
         </AnimatedSection>
 
@@ -66,7 +66,7 @@ export function PartenairesSection() {
                     </span>
                   )}
                 </div>
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-brand transition-colors">
+                <h3 className="font-semibold mb-2 group-hover:text-brand transition-colors">
                   {p.nom}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed">

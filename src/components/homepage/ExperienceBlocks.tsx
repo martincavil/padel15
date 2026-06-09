@@ -44,7 +44,7 @@ export function ExperienceBlocks() {
   return (
     <section className="container mx-auto px-4 py-16">
       <AnimatedSection className="text-center mb-12">
-        <h2 className="font-buzz text-3xl md:text-4xl mb-3">
+        <h2 className="font-buzz mb-3">
           L&apos;expérience Padel 15
         </h2>
         <p className="text-gray-500 max-w-xl mx-auto">
@@ -71,7 +71,7 @@ export function ExperienceBlocks() {
                 <span className="text-xs font-semibold text-brand uppercase tracking-wider">
                   {block.label}
                 </span>
-                <h3 className="font-semibold text-lg mt-1 mb-1">{block.title}</h3>
+                <h3 className="font-semibold mt-1 mb-1">{block.title}</h3>
                 <p className="text-white/70 text-sm leading-snug mb-3">
                   {block.description}
                 </p>

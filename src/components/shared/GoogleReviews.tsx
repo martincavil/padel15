@@ -64,7 +64,7 @@ export async function GoogleReviews() {
         {/* Header */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
           <div>
-            <h2 className="font-buzz text-3xl mb-1">Ce que disent nos membres</h2>
+            <h2 className="font-buzz mb-1">Ce que disent nos membres</h2>
             <p className="text-gray-500">Avis vérifiés sur Google My Business</p>
           </div>
           <div className="flex items-center gap-4 bg-gray-50 rounded-2xl px-6 py-4">

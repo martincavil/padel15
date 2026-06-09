@@ -24,7 +24,7 @@ export default function TerrainsPage() {
         title="Nos Terrains"
         subtitle="2 terrains couverts et extérieurs — 7j/7, 8h à 22h"
         badge="Paris 15ème"
-        imageSrc="/images/terrains/terrain-ext-jour.webp"
+        imageSrc="/images/terrains/terrain-match-1.webp"
         imageAlt="Terrains de padel Padel 15"
         height="lg"
       />
@@ -33,7 +33,7 @@ export default function TerrainsPage() {
         {/* Info + Booking widget */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div>
-            <h2 className="font-buzz text-3xl mb-6">Réservez votre terrain</h2>
+            <h2 className="font-buzz mb-6">Réservez votre terrain</h2>
             <div className="space-y-4 text-gray-700">
               <div className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-brand flex-shrink-0 mt-0.5" />
@@ -99,7 +99,7 @@ export default function TerrainsPage() {
 
         {/* Gallery */}
         <div>
-          <h2 className="font-buzz text-3xl mb-6">Galerie</h2>
+          <h2 className="font-buzz mb-6">Galerie</h2>
           <LightboxGallery
             images={[
               {
@@ -133,7 +133,7 @@ export default function TerrainsPage() {
 
         {/* Equipment */}
         <div className="bg-gray-50 rounded-2xl p-8">
-          <h2 className="font-buzz text-2xl mb-6">
+          <h2 className="font-buzz mb-6">
             Équipements &amp; Services
           </h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">

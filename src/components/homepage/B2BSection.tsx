@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Briefcase, Activity, Trophy } from "lucide-react";
 
 const CARDS = [
@@ -48,7 +47,7 @@ export function B2BSection() {
           <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-brand/20 text-brand border border-brand/30 mb-4">
             Entreprises &amp; Groupes
           </span>
-          <h2 className="font-buzz text-3xl md:text-4xl text-white mb-4">
+          <h2 className="font-buzz text-white mb-4">
             Team Building &amp; Événements
           </h2>
           <p className="text-gray-300 max-w-xl mx-auto text-lg">
@@ -68,7 +67,7 @@ export function B2BSection() {
                 <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mb-5">
                   <Icon className="w-6 h-6 text-brand" />
                 </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
+                <h3 className="text-white font-semibold mb-2">
                   {card.title}
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
@@ -91,12 +90,12 @@ export function B2BSection() {
         </div>
 
         <div className="text-center">
-          <Link
-            href="/entreprises"
+          <a
+            href="mailto:contact@padel15.fr?subject=Demande de devis événement&body=Bonjour, je souhaite obtenir un devis pour :"
             className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
           >
             Organiser mon événement
-          </Link>
+          </a>
         </div>
       </div>
     </section>

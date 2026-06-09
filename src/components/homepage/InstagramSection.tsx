@@ -43,7 +43,7 @@ function VideoItem({ src, poster }: { src: string; poster: string }) {
         if (entry.isIntersecting) video.play().catch(() => {});
         else video.pause();
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     observer.observe(video);
     return () => observer.disconnect();
@@ -98,7 +98,7 @@ export function InstagramSection() {
       {/* Header */}
       <div className="container mx-auto px-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
         <div>
-          <h2 className="font-buzz text-3xl md:text-4xl mb-1">
+          <h2 className="font-buzz mb-1">
             Vivez l&apos;expérience Padel15
           </h2>
         </div>
