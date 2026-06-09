@@ -33,7 +33,7 @@ export function B2BSection() {
     <section
       className="relative py-24 overflow-hidden bg-cover bg-center"
       style={{
-        backgroundImage: "url('/images/terrains/terrain-ext-jour.webp')",
+        backgroundImage: "url('/images/terrains/match.webp')",
       }}
     >
       {/* Dark overlay */}
@@ -67,9 +67,7 @@ export function B2BSection() {
                 <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mb-5">
                   <Icon className="w-6 h-6 text-brand" />
                 </div>
-                <h3 className="text-white font-semibold mb-2">
-                  {card.title}
-                </h3>
+                <h3 className="text-white font-semibold mb-2">{card.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {card.description}
                 </p>

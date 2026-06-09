@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -113,7 +112,7 @@ export default function CoursParticuliers() {
                           <span className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                           </span>
-                          Pack de séances ou séance à l'unité
+                          Pack de séances ou séance à l&apos;unité
                         </li>
                       </>
                     ) : (

@@ -38,11 +38,6 @@ export default async function HomePage() {
         <AgendaSection />
       </Suspense>
       <RestaurantHighlight />
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <CarteCanvaWidget variant="compact" />
-        </div>
-      </section>
       <GoogleReviews />
       <PartenairesSection />
       <CoursParticuliers />
