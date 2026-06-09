@@ -44,7 +44,7 @@ export function CarteCanvaWidget({ variant = "full" }: CarteCanvaWidgetProps) {
         href={CANVA_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-xl transition-colors"
+        className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-xl transition-colors"
       >
         <UtensilsCrossed className="w-5 h-5" />
         Voir la carte complète

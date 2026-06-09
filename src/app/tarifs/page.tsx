@@ -94,7 +94,7 @@ export default function TarifsPage() {
                 href="https://playtomic.com/clubs/padel-15"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
+                className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
               >
                 Réserver maintenant
               </a>
@@ -138,9 +138,7 @@ export default function TarifsPage() {
         {/* Événements */}
         <AnimatedSection delay={0.2}>
           <div className="bg-black rounded-2xl p-8 text-white">
-            <h2 className="font-buzz mb-2">
-              Événements d&apos;entreprise
-            </h2>
+            <h2 className="font-buzz mb-2">Événements d&apos;entreprise</h2>
             <p className="text-gray-400 mb-4">
               Formules sur-mesure pour vos team buildings, afterworks et
               séminaires. Devis personnalisé sous 24h.

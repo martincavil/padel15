@@ -26,9 +26,7 @@ export function AnimatedPrivatiseCard() {
         <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-brand/20 text-brand border border-brand/30 mb-5">
           Privatisation
         </span>
-        <h2 className="font-buzz text-white mb-3">
-          Privatisez notre espace
-        </h2>
+        <h2 className="font-buzz text-white mb-3">Privatisez notre espace</h2>
         <p className="text-gray-400 max-w-lg mx-auto mb-2 text-lg">
           Séminaires · Afterworks · Événements privés
         </p>
@@ -38,7 +36,7 @@ export function AnimatedPrivatiseCard() {
         </p>
         <a
           href="mailto:contact@padel15.fr?subject=Demande privatisation restaurant"
-          className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
+          className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
         >
           Demander un devis
         </a>

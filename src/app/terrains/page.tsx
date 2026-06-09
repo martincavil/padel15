@@ -84,7 +84,7 @@ export default function TerrainsPage() {
                 href="https://playtomic.com/clubs/padel-15"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg text-center transition-colors"
+                className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg text-center transition-colors"
               >
                 Réserver sur Playtomic
               </a>
@@ -133,9 +133,7 @@ export default function TerrainsPage() {
 
         {/* Equipment */}
         <div className="bg-gray-50 rounded-2xl p-8">
-          <h2 className="font-buzz mb-6">
-            Équipements &amp; Services
-          </h2>
+          <h2 className="font-buzz mb-6">Équipements &amp; Services</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
             {[
               {

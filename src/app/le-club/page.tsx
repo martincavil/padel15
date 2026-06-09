@@ -162,9 +162,7 @@ export default async function LeClubPage() {
 
         {/* Infrastructure */}
         <AnimatedSection>
-          <h2 className="font-buzz mb-8 text-center">
-            Notre infrastructure
-          </h2>
+          <h2 className="font-buzz mb-8 text-center">Notre infrastructure</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {INFRA_ITEMS.map((item) => {
               const Icon = item.icon;
@@ -190,21 +188,19 @@ export default async function LeClubPage() {
         {/* CTA */}
         <AnimatedSection>
           <div className="text-center">
-            <h2 className="font-buzz mb-4">
-              Venez découvrir Padel 15
-            </h2>
+            <h2 className="font-buzz mb-4">Venez découvrir Padel 15</h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="https://playtomic.com/clubs/padel-15"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors"
+                className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors"
               >
                 Réserver un terrain
               </a>
               <Link
                 href="/contact"
-                className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-8 py-4 rounded-lg transition-colors"
+                className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-6 py-3 rounded-lg transition-colors"
               >
                 Nous contacter
               </Link>
@@ -222,9 +218,7 @@ export default async function LeClubPage() {
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-3">
                   Actualités
                 </span>
-                <h2 className="font-buzz">
-                  Nos newsletters
-                </h2>
+                <h2 className="font-buzz">Nos newsletters</h2>
               </div>
             </div>
           </AnimatedSection>

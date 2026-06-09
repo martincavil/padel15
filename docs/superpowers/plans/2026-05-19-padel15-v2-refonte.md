@@ -1152,13 +1152,13 @@ export default function HeroBanner() {
             href="https://playtomic.com/clubs/padel-15"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg text-base transition-colors"
+            className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg text-base transition-colors"
           >
             Réserver un terrain
           </a>
           <Link
             href="/evenements"
-            className="bg-white/10 hover:bg-white/20 border border-white text-white font-semibold px-8 py-4 rounded-lg text-base transition-colors backdrop-blur-sm"
+            className="bg-white/10 hover:bg-white/20 border border-white text-white font-semibold px-6 py-3 rounded-lg text-base transition-colors backdrop-blur-sm"
           >
             Organiser un événement
           </Link>
@@ -1403,7 +1403,7 @@ export function B2BSection() {
         <div className="text-center">
           <Link
             href="/evenements"
-            className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
+            className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
           >
             Organiser mon événement
           </Link>
@@ -1625,7 +1625,7 @@ export default function TerrainsPage() {
                 href="https://playtomic.com/clubs/padel-15"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg text-center transition-colors"
+                className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg text-center transition-colors"
               >
                 Réserver sur Playtomic
               </a>
@@ -1633,7 +1633,7 @@ export default function TerrainsPage() {
                 href="https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-8 py-4 rounded-lg text-center transition-colors"
+                className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-6 py-3 rounded-lg text-center transition-colors"
               >
                 App iOS
               </a>
@@ -1641,7 +1641,7 @@ export default function TerrainsPage() {
                 href="https://play.google.com/store/apps/details?id=com.playtomic&hl=fr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-8 py-4 rounded-lg text-center transition-colors"
+                className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-6 py-3 rounded-lg text-center transition-colors"
               >
                 App Android
               </a>
@@ -1910,7 +1910,7 @@ export default function RestaurantPage() {
           </p>
           <Link
             href="/evenements"
-            className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
+            className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
           >
             Demander un devis
           </Link>
@@ -2348,13 +2348,13 @@ export default function LeClubPage() {
               href="https://playtomic.com/clubs/padel-15"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors"
+              className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors"
             >
               Réserver un terrain
             </a>
             <Link
               href="/contact"
-              className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-8 py-4 rounded-lg transition-colors"
+              className="border border-gray-300 hover:border-brand text-gray-700 hover:text-brand font-semibold px-6 py-3 rounded-lg transition-colors"
             >
               Nous contacter
             </Link>
@@ -2477,7 +2477,7 @@ export default function TarifsPage() {
               href="https://playtomic.com/clubs/padel-15"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg transition-colors inline-block"
+              className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
             >
               Réserver maintenant
             </a>
