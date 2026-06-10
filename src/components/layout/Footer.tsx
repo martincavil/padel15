@@ -171,7 +171,7 @@ export function Footer() {
             </ul>
             <div className="text-sm text-gray-400 space-y-1">
               <p>7j/7</p>
-              <p>10h – 22h</p>
+              <p>8h – 22h</p>
               <a
                 href="tel:+33145315876"
                 className="hover:text-white transition-colors block"
