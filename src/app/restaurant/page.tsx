@@ -13,7 +13,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Restaurant & Guinguette Paris 15 | Bar, Terrasse, Pétanque",
   description:
-    "Restaurant, bar et terrasse guinguette au cœur du Paris 15ème. Ouvert 7j/7 de 8h à 22h. Ouvert à tous, même sans réservation de terrain. Privatisation disponible.",
+    "Restaurant, bar et terrasse guinguette au cœur du Paris 15ème. Ouvert 7j/7 de 10h à 22h. Ouvert à tous, même sans réservation de terrain. Privatisation disponible.",
   openGraph: {
     title: "Restaurant & Guinguette — Padel 15",
     images: [{ url: "/images/restaurant/rest-inte-grand-angle.webp" }],
@@ -42,7 +42,7 @@ const SERVICES = [
     icon: Utensils,
     title: "Restaurant",
     items: [
-      "Service continu 7j/7 — 8h à 22h",
+      "Service continu 7j/7 — 10h à 22h",
       "Ouvert à tous, sans réservation de terrain",
       "Produits frais et de saison",
       "Cadre chaleureux et moderne",
@@ -88,7 +88,7 @@ export default function RestaurantPage() {
 
       <PageHero
         title="Restaurant & Guinguette"
-        subtitle="Cuisine, bar, terrasse en plein air — 7j/7 de 8h à 22h · Ouvert à tous, sans réservation"
+        subtitle="Cuisine, bar, terrasse en plein air — 7j/7 de 10h à 22h · Ouvert à tous, sans réservation"
         badge="Paris 15ème"
         imageSrc="/images/restaurant/rest-inte-grand-angle.webp"
         imageAlt="Restaurant Padel 15"
@@ -103,7 +103,7 @@ export default function RestaurantPage() {
               <h2 className="font-buzz mb-4">Un lieu de vie unique</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Ouvert 7j/7 en service continu de 8h à 22h, avec des produits
+                  Ouvert 7j/7 en service continu de 10h à 22h, avec des produits
                   frais et de saison.{" "}
                   <strong>Ouvert à tous, sans réservation de terrain.</strong>{" "}
                   Un cadre chaleureux pour se détendre après un match… ou
@@ -147,9 +147,7 @@ export default function RestaurantPage() {
                   <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center mb-3">
                     <Icon className="w-5 h-5 text-brand" />
                   </div>
-                  <h3 className="font-semibold mb-3">
-                    {service.title}
-                  </h3>
+                  <h3 className="font-semibold mb-3">{service.title}</h3>
                   <ul className="space-y-1.5 text-gray-600 text-sm">
                     {service.items.map((item) => (
                       <li key={item} className="flex items-center gap-2">
