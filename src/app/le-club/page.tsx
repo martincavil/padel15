@@ -126,7 +126,7 @@ export default async function LeClubPage() {
             </div>
             <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/images/restaurant/guinguette.webp"
+                src="/images/restaurant/rest-inte-terrain.webp"
                 alt="Ambiance Padel 15"
                 fill
                 className="object-cover"

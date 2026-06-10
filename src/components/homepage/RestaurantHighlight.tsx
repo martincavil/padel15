@@ -13,8 +13,8 @@ export function RestaurantHighlight() {
             <div className="grid grid-cols-2 grid-rows-2 gap-3 h-[480px]">
               <div className="relative rounded-2xl overflow-hidden row-span-2">
                 <Image
-                  src="/images/restaurant/guinguette.webp"
-                  alt="Terrasse guinguette Padel 15 — espace végétalisé"
+                  src="/images/restaurant/restaurant-verticale-1.webp"
+                  alt="Restaurant intérieur Padel 15"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 50vw, 25vw"
