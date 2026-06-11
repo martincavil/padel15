@@ -42,3 +42,4 @@ next-env.d.ts
 
 # embedded repo causing ghost submodule on deploy (see commit eac60b8)
 .claude/skills/ui-ux-pro-max-skill
+.gstack/

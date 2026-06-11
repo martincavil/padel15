@@ -9,7 +9,6 @@ const PAGES = [
   { path: "/le-club", title: "Club" },
   { path: "/tarifs", title: "Tarifs" },
   { path: "/contact", title: "Contact" },
-  { path: "/blog", title: "Blog" },
 ];
 
 for (const page of PAGES) {

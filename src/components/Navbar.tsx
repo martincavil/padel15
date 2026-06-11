@@ -198,7 +198,7 @@ export default function Navbar() {
         </div>
 
         {/* Nav links */}
-        <nav className="flex-1 px-4 py-4 overflow-y-auto">
+        <div className="flex-1 px-4 py-4 overflow-y-auto">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -217,7 +217,7 @@ export default function Navbar() {
               )}
             </Link>
           ))}
-        </nav>
+        </div>
 
         {/* CTAs */}
         <div className="px-6 py-6 border-t border-gray-100 flex flex-col gap-3">

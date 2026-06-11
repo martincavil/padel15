@@ -50,30 +50,37 @@ function FooterNewsletter() {
     return <p className="text-brand text-sm">Vous êtes déjà inscrit·e.</p>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mt-1">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="votre@email.com"
-        required
-        disabled={status === "loading"}
-        className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-white/20 bg-white/5 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-brand disabled:opacity-60"
-      />
-      <button
-        type="submit"
-        disabled={status === "loading" || !email}
-        className="flex items-center gap-1.5 bg-brand hover:bg-brand-dark text-white font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-60 text-sm whitespace-nowrap"
-      >
-        {status === "loading" ? (
-          <Loader2 className="w-4 h-4 animate-spin" />
-        ) : (
-          <>
-            S&apos;inscrire <ArrowRight className="w-3.5 h-3.5" />
-          </>
-        )}
-      </button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className="flex gap-2 mt-1">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="votre@email.com"
+          required
+          disabled={status === "loading"}
+          className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-white/20 bg-white/5 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-brand disabled:opacity-60"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading" || !email}
+          className="flex items-center gap-1.5 bg-brand hover:bg-brand-dark text-white font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-60 text-sm whitespace-nowrap"
+        >
+          {status === "loading" ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <>
+              S&apos;inscrire <ArrowRight className="w-3.5 h-3.5" />
+            </>
+          )}
+        </button>
+      </form>
+      {status === "error" && (
+        <p className="text-red-400 text-sm mt-2">
+          Une erreur est survenue. Réessayez dans quelques instants.
+        </p>
+      )}
+    </>
   );
 }
 
