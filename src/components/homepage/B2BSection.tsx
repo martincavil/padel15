@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Briefcase, Activity, Trophy } from "lucide-react";
 
 const CARDS = [
@@ -30,12 +31,15 @@ const TESTIMONIAL = {
 
 export function B2BSection() {
   return (
-    <section
-      className="relative py-24 overflow-hidden bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/images/terrains/match.webp')",
-      }}
-    >
+    <section className="relative py-24 overflow-hidden">
+      <Image
+        src="/images/terrains/match.webp"
+        alt=""
+        fill
+        className="object-cover"
+        sizes="100vw"
+        quality={70}
+      />
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/75 z-10" />
       {/* Orange accent lines */}

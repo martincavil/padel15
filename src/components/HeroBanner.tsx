@@ -19,10 +19,15 @@ interface HeroBannerProps {
 
 export default function HeroBanner({ googleRating }: HeroBannerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadedIndices, setLoadedIndices] = useState<Set<number>>(() => new Set([0]));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((i) => (i === CAROUSEL_IMAGES.length - 1 ? 0 : i + 1));
+      setActiveIndex((i) => {
+        const next = i === CAROUSEL_IMAGES.length - 1 ? 0 : i + 1;
+        setLoadedIndices((prev) => (prev.has(next) ? prev : new Set(prev).add(next)));
+        return next;
+      });
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -50,24 +55,29 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
         <track kind="captions" srcLang="fr" label="Français" default />
       </video> */}
 
-      {/* Fallback carousel photo — seule image 0 est priority, les autres lazy */}
+      {/* Fallback carousel photo — seule image 0 est priority ; les suivantes ne sont
+          montées qu'au moment où le carrousel les atteint, pour éviter de
+          télécharger 4 images plein écran dès le chargement initial */}
       <div className="absolute inset-0 z-0">
-        {CAROUSEL_IMAGES.map((src, index) => (
-          <div
-            key={src}
-            className={`absolute inset-0 transition-opacity duration-1000 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
-          >
-            <Image
-              src={src}
-              alt="Terrains Padel 15"
-              fill
-              className="object-cover"
-              priority={index === 0}
-              sizes="100vw"
-              quality={index === 0 ? 75 : 60}
-            />
-          </div>
-        ))}
+        {CAROUSEL_IMAGES.map((src, index) => {
+          if (!loadedIndices.has(index)) return null;
+          return (
+            <div
+              key={src}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+            >
+              <Image
+                src={src}
+                alt="Terrains Padel 15"
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+                quality={index === 0 ? 70 : 45}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Overlays */}
@@ -222,7 +232,10 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
         {CAROUSEL_IMAGES.map((_, i) => (
           <button
             key={i}
-            onClick={() => setActiveIndex(i)}
+            onClick={() => {
+              setActiveIndex(i);
+              setLoadedIndices((prev) => (prev.has(i) ? prev : new Set(prev).add(i)));
+            }}
             aria-label={`Photo ${i + 1}`}
             className="min-w-6 min-h-6 flex items-center justify-center"
           >
