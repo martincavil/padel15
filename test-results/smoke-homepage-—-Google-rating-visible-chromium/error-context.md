@@ -191,7 +191,7 @@ Call log:
     - heading "Le plaisir du Padel, le plaisir de La table" [level=2]
     - paragraph: Service continu du petit-déjeuner au dîner, 7j/7. Cuisine généreuse avec des produits frais et de saison. Terrasse guinguette végétalisée, terrain de pétanque et espaces lounge — l'après-padel parfait, ou un déjeuner en plein air en semaine.
     - link "Voir la carte":
-        - /url: https://canva.link/4bq0jlgzxkljl6x
+        - /url: https://canva.link/hk499dmtauwn9vl
         - img
         - text: Voir la carte
     - link "Réserver une table":

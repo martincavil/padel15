@@ -1,7 +1,7 @@
 import { ExternalLink, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
 
-const CANVA_URL = "https://canva.link/4bq0jlgzxkljl6x";
+const CANVA_URL = "https://canva.link/hk499dmtauwn9vl";
 
 interface CarteCanvaWidgetProps {
   variant?: "full" | "compact";
