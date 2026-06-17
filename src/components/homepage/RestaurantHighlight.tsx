@@ -60,7 +60,7 @@ export function RestaurantHighlight() {
 
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
                 <a
-                  href="https://canva.link/vt9y58fcuh7rjfd"
+                  href="https://canva.link/4bq0jlgzxkljl6x"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm"

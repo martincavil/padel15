@@ -14,7 +14,6 @@ import Clients from "@/components/Clients";
 import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
 import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
 import { InstagramSection } from "@/components/homepage/InstagramSection";
-import { CarteCanvaWidget } from "@/components/restaurant/CarteCanvaWidget";
 
 export const metadata: Metadata = {
   title:
