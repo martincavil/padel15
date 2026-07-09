@@ -19,13 +19,17 @@ interface HeroBannerProps {
 
 export default function HeroBanner({ googleRating }: HeroBannerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [loadedIndices, setLoadedIndices] = useState<Set<number>>(() => new Set([0]));
+  const [loadedIndices, setLoadedIndices] = useState<Set<number>>(
+    () => new Set([0]),
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((i) => {
         const next = i === CAROUSEL_IMAGES.length - 1 ? 0 : i + 1;
-        setLoadedIndices((prev) => (prev.has(next) ? prev : new Set(prev).add(next)));
+        setLoadedIndices((prev) =>
+          prev.has(next) ? prev : new Set(prev).add(next),
+        );
         return next;
       });
     }, 5000);
@@ -42,8 +46,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
 
   return (
     <div className="h-screen max-h-screen relative overflow-hidden">
-      {/* Vidéo — uploadez /public/bg-video-test.mp4 pour activer */}
-      {/* <video
+      <video
         autoPlay
         muted
         loop
@@ -51,14 +54,14 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
         poster="/_next/image?url=%2Fimages%2Fterrains%2Fterrain-ext-jour.webp&w=828&q=75"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/bg-video-test.mp4" type="video/mp4" />
+        <source src="/videos/padel-15-video-hero.mp4" type="video/mp4" />
         <track kind="captions" srcLang="fr" label="Français" default />
-      </video> */}
+      </video>
 
       {/* Fallback carousel photo — seule image 0 est priority ; les suivantes ne sont
           montées qu'au moment où le carrousel les atteint, pour éviter de
           télécharger 4 images plein écran dès le chargement initial */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
         {CAROUSEL_IMAGES.map((src, index) => {
           if (!loadedIndices.has(index)) return null;
           return (
@@ -78,7 +81,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20 z-10" />
@@ -125,7 +128,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             végétalisé en plein cœur de la capitale, jouez, partagez,
             détendez-vous… et savourez chaque instant. Terrains couvert et haut
             de gamme, terrasse guinguette, pétanque, fléchettes, bar et
-            restaurant
+            restaurant.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -234,7 +237,9 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             key={i}
             onClick={() => {
               setActiveIndex(i);
-              setLoadedIndices((prev) => (prev.has(i) ? prev : new Set(prev).add(i)));
+              setLoadedIndices((prev) =>
+                prev.has(i) ? prev : new Set(prev).add(i),
+              );
             }}
             aria-label={`Photo ${i + 1}`}
             className="min-w-6 min-h-6 flex items-center justify-center"
