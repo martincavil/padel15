@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
     const availableHours = new Set<number>();
     for (const court of courts) {
       for (const slot of court.slots) {
-        if (slot.duration === 60) {
+        if (slot.duration === 60 || slot.duration === 90) {
           // Conversion UTC → heure locale Paris
           const parisHour = utcSlotToParisHour(date, slot.start_time);
           availableHours.add(parisHour);
