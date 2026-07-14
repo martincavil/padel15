@@ -1,40 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Smartphone } from "lucide-react";
 import { BookingWidget } from "@/components/shared/BookingWidget";
 
-const CAROUSEL_IMAGES = [
-  "/images/terrains/terrain-ext-jour.webp",
-  "/images/terrains/terrain-inte-game.webp",
-  "/images/terrains/terrain-ext-nuit.webp",
-  "/images/terrains/terrain-inte-vide.webp",
-];
+// const CAROUSEL_IMAGES = [
+//   "/images/terrains/terrain-ext-jour.webp",
+//   "/images/terrains/terrain-inte-game.webp",
+//   "/images/terrains/terrain-ext-nuit.webp",
+//   "/images/terrains/terrain-inte-vide.webp",
+// ];
 
 interface HeroBannerProps {
   googleRating?: { rating: number; count: number };
 }
 
 export default function HeroBanner({ googleRating }: HeroBannerProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [loadedIndices, setLoadedIndices] = useState<Set<number>>(
-    () => new Set([0]),
-  );
+  // const [activeIndex, setActiveIndex] = useState(0);
+  // const [loadedIndices, setLoadedIndices] = useState<Set<number>>(
+  //   () => new Set([0]),
+  // );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((i) => {
-        const next = i === CAROUSEL_IMAGES.length - 1 ? 0 : i + 1;
-        setLoadedIndices((prev) =>
-          prev.has(next) ? prev : new Set(prev).add(next),
-        );
-        return next;
-      });
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setActiveIndex((i) => {
+  //       const next = i === CAROUSEL_IMAGES.length - 1 ? 0 : i + 1;
+  //       setLoadedIndices((prev) =>
+  //         prev.has(next) ? prev : new Set(prev).add(next),
+  //       );
+  //       return next;
+  //     });
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const ratingLabel = googleRating
     ? `${googleRating.rating.toFixed(1).replace(".", ",")} · ${googleRating.count} avis Google`
@@ -84,8 +84,8 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
       </div> */}
 
       {/* Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20 z-10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/30 to-black/10 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10" />
 
       {/* ── Desktop lg+ : split gauche / droite ── */}
       <div className="hidden lg:grid grid-cols-3 relative z-20 h-full container items-center gap-8">
@@ -231,7 +231,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-0">
+      {/* <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-0">
         {CAROUSEL_IMAGES.map((_, i) => (
           <button
             key={i}
@@ -253,7 +253,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             />
           </button>
         ))}
-      </div>
+      </div> */}
 
       {/* Scroll indicator desktop */}
       <div className="absolute bottom-4 left-1/2 z-20 hidden lg:block animate-bounce">
