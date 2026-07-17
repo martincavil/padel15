@@ -54,7 +54,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
         poster="/_next/image?url=%2Fimages%2Fterrains%2Fterrain-ext-jour.webp&w=828&q=75"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/videos/padel-15-video-herobanner.mp4" type="video/mp4" />
+        <source src="/videos/padel-15-video-hero-banner.mp4" type="video/mp4" />
         <track kind="captions" srcLang="fr" label="Français" default />
       </video>
 
