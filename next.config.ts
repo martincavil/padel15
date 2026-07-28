@@ -50,6 +50,16 @@ const nextConfig: NextConfig = {
           { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
         ],
       },
+      {
+        // Vidéos dans /public — cache 1 an immutable.
+        // ⚠️ Le nom de fichier DOIT être versionné (…-v2.mp4, …-v3.mp4) à chaque
+        // remplacement : sans changement d'URL, les visiteurs conservent
+        // l'ancienne vidéo en cache pendant un an.
+        source: "/:path*.(mp4|webm)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
     ];
   },
 };

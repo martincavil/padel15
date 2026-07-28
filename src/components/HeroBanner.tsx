@@ -46,16 +46,18 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
 
   return (
     <div className="h-screen max-h-screen relative overflow-hidden">
+      {/* Vidéo d'ambiance purement décorative (sans audio) : aria-hidden plutôt
+          qu'une piste <track> vide, qui n'apportait rien à l'accessibilité. */}
       <video
         autoPlay
         muted
         loop
         playsInline
+        aria-hidden="true"
         poster="/_next/image?url=%2Fimages%2Fterrains%2Fterrain-ext-jour.webp&w=828&q=75"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/videos/padel-15-video-hero-banner.mp4" type="video/mp4" />
-        <track kind="captions" srcLang="fr" label="Français" default />
+        <source src="/videos/padel-15-hero-v2.mp4" type="video/mp4" />
       </video>
 
       {/* Fallback carousel photo — seule image 0 est priority ; les suivantes ne sont
