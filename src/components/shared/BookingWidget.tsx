@@ -139,7 +139,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
     availability === null
       ? "Chargement…"
       : !availability.hasData
-        ? "Créneaux pas encore ouverts"
+        ? "Créneaux visibles directement sur Playtomic"
         : dispoCount! > 0
           ? `${dispoCount} créneau${dispoCount! > 1 ? "x" : ""} disponible${dispoCount! > 1 ? "s" : ""}`
           : "Aucun créneau disponible";
