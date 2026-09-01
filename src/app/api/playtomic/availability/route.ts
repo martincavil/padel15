@@ -22,7 +22,7 @@ function isWithinOpeningWindow(date: string): boolean {
   const diffDays = Math.round(
     (new Date(`${date}T00:00:00Z`).getTime() -
       new Date(`${todayStr}T00:00:00Z`).getTime()) /
-      86_400_000
+      86_400_000,
   );
   return diffDays <= OPENING_WINDOW_DAYS;
 }
@@ -31,7 +31,10 @@ export async function GET(req: NextRequest) {
   const date = req.nextUrl.searchParams.get("date");
 
   if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return NextResponse.json({ error: "date invalide (YYYY-MM-DD requis)" }, { status: 400 });
+    return NextResponse.json(
+      { error: "date invalide (YYYY-MM-DD requis)" },
+      { status: 400 },
+    );
   }
 
   const apiKey = process.env.PLAYTOMIC_API_KEY;
@@ -47,12 +50,17 @@ export async function GET(req: NextRequest) {
     });
 
     if (!res.ok) {
-      console.error("[playtomic] availability fetch failed", res.status, await res.text());
+      console.error(
+        "[playtomic] availability fetch failed",
+        res.status,
+        await res.text(),
+      );
       return NextResponse.json({ availableHours: [], hasData: false });
     }
 
-    const courts: Array<{ slots: Array<{ start_time: string; duration: number }> }> =
-      await res.json();
+    const courts: Array<{
+      slots: Array<{ start_time: string; duration: number }>;
+    }> = await res.json();
 
     // hasData = le jour est dans la fenêtre de réservation Playtomic.
     // Un tableau de terrains vide dans cette fenêtre veut dire "complet",
