@@ -52,10 +52,36 @@ function isSameDay(a: Date, b: Date) {
   );
 }
 
-type AvailabilityState = { hours: Set<number>; hasData: boolean } | null;
+type AvailabilityState = { slots: Set<string>; hasData: boolean } | null;
 
 const WIDGET_DAYS = 14;
 const DAYS_PER_PAGE = 7;
+
+// Doit rester aligné sur les constantes de /api/playtomic/availability.
+const OPEN_HOUR = 8;
+const CLOSE_HOUR = 22;
+const STEP_MIN = 30;
+const MIN_DURATION_MIN = 60;
+
+/** Liste des créneaux affichés, en minutes depuis minuit. */
+const SLOT_MINUTES: number[] = (() => {
+  const out: number[] = [];
+  for (
+    let t = OPEN_HOUR * 60;
+    t <= CLOSE_HOUR * 60 - MIN_DURATION_MIN;
+    t += STEP_MIN
+  ) {
+    out.push(t);
+  }
+  return out;
+})();
+
+/** 1170 → "19:30" */
+function slotLabel(minutes: number): string {
+  return `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(
+    minutes % 60,
+  ).padStart(2, "0")}`;
+}
 
 interface BookingWidgetProps {
   className?: string;
@@ -82,19 +108,20 @@ export function BookingWidget({ className }: BookingWidgetProps) {
       .then((r) => r.json())
       .then((data) =>
         setAvailability({
-          hours: new Set<number>(data.availableHours ?? []),
+          slots: new Set<string>(data.availableSlots ?? []),
           hasData: data.hasData ?? false,
         }),
       )
       .catch(() =>
-        setAvailability({ hours: new Set<number>(), hasData: false }),
+        setAvailability({ slots: new Set<string>(), hasData: false }),
       );
   }, [selectedDate]);
 
   if (!selectedDate || !now) return null;
 
   const isToday = isSameDay(selectedDate, now);
-  const currentHour = isToday ? now.getHours() : -1;
+  // Minutes écoulées aujourd'hui : sert à barrer les créneaux déjà passés.
+  const nowMinutes = isToday ? now.getHours() * 60 + now.getMinutes() : -1;
   const dateStr = toDateStr(selectedDate);
   const bookingUrl = `https://playtomic.com/clubs/padel-15?date=${dateStr}`;
 
@@ -119,16 +146,24 @@ export function BookingWidget({ className }: BookingWidgetProps) {
     }
   };
 
-  const slots = Array.from({ length: 14 }, (_, i) => {
-    const hour = 8 + i;
-    const isPast = hour < currentHour;
+  const slots = SLOT_MINUTES.map((minutes) => {
+    const label = slotLabel(minutes);
+    const isPast = minutes < nowMinutes;
     const loading = !isPast && availability === null;
     const notOpen = !isPast && !loading && !availability!.hasData;
     const isAvailable =
-      !isPast && !loading && !notOpen && availability!.hours.has(hour);
+      !isPast && !loading && !notOpen && availability!.slots.has(label);
     const isFull =
-      !isPast && !loading && !notOpen && !availability!.hours.has(hour);
-    return { hour, isPast, isAvailable, isFull, isLoading: loading, notOpen };
+      !isPast && !loading && !notOpen && !availability!.slots.has(label);
+    return {
+      minutes,
+      label,
+      isPast,
+      isAvailable,
+      isFull,
+      isLoading: loading,
+      notOpen,
+    };
   });
 
   const dispoCount = availability?.hasData
@@ -227,17 +262,16 @@ export function BookingWidget({ className }: BookingWidgetProps) {
         </button>
       </div>
 
-      {/* Grille créneaux */}
-      <div className="grid grid-cols-4 gap-2 mb-3">
+      {/* Grille créneaux — 27 demi-heures, scrollable pour garder le widget compact */}
+      <div className="grid grid-cols-4 gap-2 mb-3 max-h-[188px] overflow-y-auto pr-1 [scrollbar-width:thin]">
         {slots.map(
-          ({ hour, isPast, isAvailable, isFull, isLoading, notOpen }) => {
-            const label = `${hour}h`;
+          ({ minutes, label, isPast, isAvailable, isLoading, notOpen }) => {
             const base =
-              "h-9 flex items-center justify-center rounded-xl text-xs font-medium";
+              "h-9 flex items-center justify-center rounded-xl text-xs font-medium tabular-nums";
             if (isPast)
               return (
                 <div
-                  key={hour}
+                  key={minutes}
                   className={`${base} text-white/20 bg-white/5 line-through select-none`}
                 >
                   {label}
@@ -246,7 +280,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
             if (isLoading)
               return (
                 <div
-                  key={hour}
+                  key={minutes}
                   className={`${base} text-white/20 bg-white/5 animate-pulse`}
                 >
                   {label}
@@ -255,7 +289,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
             if (notOpen)
               return (
                 <div
-                  key={hour}
+                  key={minutes}
                   className={`${base} text-white/15 bg-white/[0.03] select-none`}
                 >
                   {label}
@@ -264,7 +298,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
             if (isAvailable)
               return (
                 <a
-                  key={hour}
+                  key={minutes}
                   href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -277,7 +311,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
             // isFull
             return (
               <div
-                key={hour}
+                key={minutes}
                 className={`${base} text-white/25 bg-white/5 select-none`}
               >
                 {label}
@@ -316,7 +350,7 @@ export function BookingWidget({ className }: BookingWidgetProps) {
           <circle cx="12" cy="12" r="10" />
           <path d="M12 8v4l3 3" />
         </svg>
-        Voir les créneaux en temps réel
+        Réserver sur Playtomic
       </a>
 
       {/* App badges */}

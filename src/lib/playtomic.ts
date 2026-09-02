@@ -1,11 +1,22 @@
-const TENANT_ID = "1191f8b5-ea25-4153-89fb-997b6ec5b053";
-const API_URL = `https://api.playtomic.io/v1/tournaments?tenant_id=${TENANT_ID}&size=20`;
 export const PLAYTOMIC_CLUB_URL = "https://playtomic.com/clubs/padel-15";
 
-function buildHeaders(): HeadersInit {
-  const key = process.env.PLAYTOMIC_API_KEY;
-  return key ? { "x-api-key": key } : {};
-}
+/**
+ * ⚠️ Les tournois ne sont plus récupérables automatiquement.
+ *
+ * L'ancienne API (api.playtomic.io/v1/tournaments) a été fermée le 15/07/2026.
+ * La nouvelle API tierce partie (thirdparty.playtomic.io) n'expose que
+ * Authentication, Bookings, Players et Payments — aucun endpoint tournois.
+ * Le champ `tournament_id` des réservations n'est jamais renseigné (vérifié
+ * sur 128 réservations réparties sur 30 jours).
+ *
+ * `getUpcomingTournaments()` renvoie donc systématiquement une liste vide, et
+ * AgendaSection affiche son repli (« Aucun tournoi à venir » + lien Playtomic).
+ * On n'appelle plus l'ancienne URL : elle répond 403 et faisait attendre le
+ * rendu de la page pour rien.
+ *
+ * Pour réactiver la section : soit Playtomic rouvre un endpoint tournois, soit
+ * on passe par une saisie manuelle (CMS ou données en dur).
+ */
 
 export interface PlaytomicTournament {
   tournament_id: string;
@@ -29,60 +40,9 @@ export interface PlaytomicTournament {
   description: string | null;
 }
 
-// Données de fallback si l'API est indisponible
-const FALLBACK: PlaytomicTournament[] = [];
-
 export async function getUpcomingTournaments(): Promise<PlaytomicTournament[]> {
-  try {
-    const res = await fetch(API_URL, {
-      headers: buildHeaders(),
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return FALLBACK;
-
-    type RawTournament = PlaytomicTournament & {
-      is_cancelled?: boolean;
-      tournament_visibility?: string;
-    };
-    const raw = (await res.json()) as RawTournament[];
-    const now = new Date();
-
-    return raw
-      .filter((t) => {
-        const start = new Date(t.start_date);
-        return (
-          !t.is_cancelled &&
-          t.tournament_visibility === "PUBLIC" &&
-          (t.tournament_status === "REGISTRATION_OPEN" ||
-            t.tournament_status === "REGISTRATION_CLOSED") &&
-          start >= now
-        );
-      })
-      .sort(
-        (a, b) =>
-          new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
-      )
-      .slice(0, 6)
-      // Strip registered_players et toute donnée personnelle (RGPD)
-      .map((t) => ({
-        tournament_id: t.tournament_id,
-        tournament_name: t.tournament_name,
-        tournament_image: t.tournament_image ?? null,
-        start_date: t.start_date,
-        end_date: t.end_date,
-        registration_closing_time: t.registration_closing_time,
-        type: t.type,
-        max_players: t.max_players,
-        available_places: t.available_places,
-        level_description: t.level_description,
-        price: t.price,
-        gender: t.gender,
-        tournament_status: t.tournament_status,
-        description: t.description ?? null,
-      }));
-  } catch {
-    return FALLBACK;
-  }
+  // Aucune source de données disponible — cf. commentaire en tête de fichier.
+  return [];
 }
 
 export function tournamentUrl(tournament_id: string): string {
