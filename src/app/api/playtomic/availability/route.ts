@@ -36,9 +36,36 @@ interface PlaytomicBooking {
   is_canceled: boolean;
 }
 
-/** "2026-09-01T19:30:00" → 1170 (minutes depuis minuit). */
-function toMinutes(isoLocal: string): number {
-  return Number(isoLocal.slice(11, 13)) * 60 + Number(isoLocal.slice(14, 16));
+/**
+ * Les dates de l'API Playtomic sont en UTC, sans suffixe « Z ».
+ * Vérifié le 04/09/2026 en comparant au planning public playtomic.com :
+ * lecture en heure murale → 2 créneaux sur 30 concordants ; conversion depuis
+ * UTC → 14/14. C'est aussi ce qui aligne les données sur l'amplitude réelle
+ * du club (08:00–22:00) et sur le pic de fréquentation du soir.
+ *
+ * On passe par Intl plutôt qu'un décalage fixe : Paris est UTC+2 l'été mais
+ * UTC+1 l'hiver.
+ */
+const PARIS_HM = new Intl.DateTimeFormat("fr-FR", {
+  timeZone: "Europe/Paris",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+});
+
+/** "2026-09-04T17:00:00" (UTC) → 1140 (19:00 à Paris, en minutes). */
+function toParisMinutes(isoUtc: string): number {
+  const parts = PARIS_HM.formatToParts(new Date(`${isoUtc}Z`));
+  const h = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
+  const m = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
+  return h * 60 + m;
+}
+
+/** Date calendaire à Paris ("2026-09-04") d'un instant UTC. */
+function toParisDate(isoUtc: string): string {
+  return new Date(`${isoUtc}Z`).toLocaleDateString("en-CA", {
+    timeZone: "Europe/Paris",
+  });
 }
 
 /** 1170 → "19:30" */
@@ -81,11 +108,19 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ availableSlots: [], hasData: false });
   }
 
+  // La plage est interrogée en UTC et élargie d'un jour de chaque côté : la
+  // journée parisienne déborde sur deux journées UTC. On filtre ensuite sur la
+  // date parisienne réelle de chaque réservation.
+  const dayMs = 86_400_000;
+  const prev = new Date(`${date}T00:00:00Z`).getTime() - dayMs;
+  const next = new Date(`${date}T00:00:00Z`).getTime() + dayMs;
+  const toIso = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+
   const url =
     `${PLAYTOMIC_API_BASE}/bookings` +
     `?tenant_id=${TENANT_ID}` +
-    `&start_booking_date=${date}T00:00:00` +
-    `&end_booking_date=${date}T23:59:59`;
+    `&start_booking_date=${toIso(prev)}T00:00:00` +
+    `&end_booking_date=${toIso(next)}T23:59:59`;
 
   try {
     const res = await fetch(url, {
@@ -108,9 +143,12 @@ export async function GET(req: NextRequest) {
     const busyByCourt = new Map<string, Array<[number, number]>>();
     for (const b of bookings) {
       if (b.is_canceled) continue;
-      const start = toMinutes(b.booking_start_date);
-      const end = toMinutes(b.booking_end_date);
-      if (end <= start) continue; // réservation à cheval sur minuit : ignorée
+      // On ne garde que les réservations du jour demandé, en heure de Paris.
+      if (toParisDate(b.booking_start_date) !== date) continue;
+      const start = toParisMinutes(b.booking_start_date);
+      let end = toParisMinutes(b.booking_end_date);
+      // Réservation qui déborde sur le lendemain : on la borne à minuit.
+      if (end <= start) end = 24 * 60;
       const list = busyByCourt.get(b.resource_id) ?? [];
       list.push([start, end]);
       busyByCourt.set(b.resource_id, list);
