@@ -3,20 +3,22 @@
 import { useRef, useEffect, useState } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
 
-const VIDEO_SRC =
-  "https://res.cloudinary.com/martincvl/video/upload/v1779368241/padel15/videos/Reel_Trend_Kent-_1_acuqpj.mp4";
+const VIDEO_SRC = "/images/new-events/WhatsApp-Video-2026-09-15-at-15.32.55.mp4";
+const POSTER = "/images/new-events/event-video-poster.webp";
 
-// Cloudinary auto-thumbnail (première frame, redimensionnée)
-const POSTER =
-  "https://res.cloudinary.com/martincvl/video/upload/w_720,h_1280,c_fill,f_auto,q_auto/v1779368241/padel15/videos/Reel_Trend_Kent-_1_acuqpj.jpg";
+const STATS = [
+  { value: "100+", label: "Entreprises clientes" },
+  { value: "8–150", label: "Personnes / événement" },
+  { value: "24h", label: "Réponse garantie" },
+];
 
-export function VideoReel() {
+export function EventGallery() {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [started, setStarted] = useState(false);
 
-  // Autoplay / pause quand le reel entre / sort du viewport
+  // Autoplay / pause quand la vidéo entre / sort du viewport
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
@@ -73,7 +75,7 @@ export function VideoReel() {
           {/* Left — texte */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-5">
-              En exclusivité
+              En images
             </span>
             <h2 className="font-buzz text-gray-900 leading-tight mb-6">
               L&apos;expérience <br />
@@ -102,11 +104,7 @@ export function VideoReel() {
 
             {/* Stats */}
             <div className="flex gap-8 justify-center lg:justify-start mt-10">
-              {[
-                { value: "100+", label: "Entreprises clientes" },
-                { value: "8–150", label: "Personnes / événement" },
-                { value: "24h", label: "Réponse garantie" },
-              ].map((s) => (
+              {STATS.map((s) => (
                 <div key={s.label}>
                   <p className="font-buzz text-2xl">{s.value}</p>
                   <p className="text-gray-400 text-xs mt-0.5">{s.label}</p>
@@ -115,7 +113,7 @@ export function VideoReel() {
             </div>
           </div>
 
-          {/* Right — vidéo reel vertical */}
+          {/* Right — vidéo verticale */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative group">
               {/* Halo orange derrière la vidéo */}

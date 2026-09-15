@@ -5,7 +5,7 @@ import Clients from "@/components/Clients";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
-import { VideoReel } from "@/components/evenements/VideoReel";
+import { EventGallery } from "@/components/evenements/EventGallery";
 
 export const metadata: Metadata = {
   title: "Team Building Paris 15 | Événements d'entreprise — Padel 15",
@@ -80,14 +80,12 @@ export default function EvenementsPage() {
       <JsonLd data={eventSchema} />
       <PageHero
         title="Team Building & Événements"
-        subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… plus de 100 entreprises de premier plan font confiance à Padel 15."
+        subtitle="BlackRock, BNP Paribas, BCG, Kering, AXA… et plus de 100 autres entreprises font confiance à Padel 15."
         badge="Entreprises & Groupes"
-        imageSrc="/images/events/event-terrain.webp"
-        imageAlt="Événements d'entreprise Padel 15"
         height="lg"
       />
 
-      <VideoReel />
+      <EventGallery />
 
       <div className="container mx-auto px-4 py-16 space-y-20">
         {/* Formules */}
@@ -171,13 +169,13 @@ export default function EvenementsPage() {
               Demander un devis
             </a>
           </div>
-          <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
+          <div className="relative aspect-[2/3] w-full max-w-sm mx-auto lg:mr-0 rounded-2xl overflow-hidden shadow-xl">
             <Image
-              src="/images/events/event-group.webp"
-              alt="Espace événements Padel 15"
+              src="/images/new-events/WhatsApp-Image-2026-09-15-at-15.32.55.webp"
+              alt="Cocktail signature lors d'un événement Padel 15"
               fill
               className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 384px"
             />
           </div>
         </div>
