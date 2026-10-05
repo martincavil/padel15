@@ -1,10 +1,26 @@
 "use client";
 
-// import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Smartphone } from "lucide-react";
 import { BookingWidget } from "@/components/shared/BookingWidget";
+
+/**
+ * Vidéo hébergée sur Cloudflare Pages (projet « padel15-video », dossier
+ * ~/padel15-video-cdn) pour ne pas consommer le Fast Data Transfer Vercel :
+ * 15 Mo × chaque nouveau visiteur dépassait le quota gratuit de 100 Go.
+ *
+ * Pour remplacer la vidéo : déployer le nouveau fichier sous un NOM DIFFÉRENT
+ * (…-v3.mp4) — le cache est « immutable » pendant un an — puis changer l'URL ici.
+ *
+ * Limite connue : Cloudflare Pages ne gère pas les requêtes Range, or Safari
+ * (macOS ET tous les navigateurs iOS, qui reposent sur WebKit) les exige pour
+ * lire une vidéo. Ces visiteurs voient donc l'image poster à la place.
+ * Solution si c'est un problème : héberger le fichier chez un CDN qui répond
+ * en 206 (ex. Bunny CDN, ~0,5 $/mois à ce volume).
+ */
+const HERO_VIDEO_URL = "https://padel15-video.pages.dev/padel-15-hero-v2.mp4";
 
 // const CAROUSEL_IMAGES = [
 //   "/images/terrains/terrain-ext-jour.webp",
@@ -18,6 +34,24 @@ interface HeroBannerProps {
 }
 
 export default function HeroBanner({ googleRating }: HeroBannerProps) {
+  // La vidéo est servie par Cloudflare (hors quota Vercel), donc on la charge
+  // sur tous les écrans. On respecte seulement les préférences explicites de
+  // l'utilisateur : « réduction des animations » et « économie de données ».
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } })
+        .connection?.saveData === true;
+
+    const update = () => setShowVideo(!reduced.matches && !saveData);
+    update();
+    reduced.addEventListener("change", update);
+    return () => reduced.removeEventListener("change", update);
+  }, []);
+
   // const [activeIndex, setActiveIndex] = useState(0);
   // const [loadedIndices, setLoadedIndices] = useState<Set<number>>(
   //   () => new Set([0]),
@@ -46,19 +80,36 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
 
   return (
     <div className="h-screen max-h-screen relative overflow-hidden">
+      {/* Image poster : toujours affichée (mobile, Safari, ou le temps que la
+          vidéo démarre). C'est elle qui porte le LCP. */}
+      <Image
+        src="/images/terrains/terrain-ext-jour.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        quality={75}
+        className="object-cover z-0"
+      />
+
       {/* Vidéo d'ambiance purement décorative (sans audio) : aria-hidden plutôt
-          qu'une piste <track> vide, qui n'apportait rien à l'accessibilité. */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden="true"
-        poster="/_next/image?url=%2Fimages%2Fterrains%2Fterrain-ext-jour.webp&w=828&q=75"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src="/videos/padel-15-hero-v2.mp4" type="video/mp4" />
-      </video>
+          qu'une piste <track> vide. Apparaît en fondu une fois la lecture lancée. */}
+      {showVideo && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onPlaying={() => setVideoReady(true)}
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700 ${
+            videoReady ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <source src={HERO_VIDEO_URL} type="video/mp4" />
+        </video>
+      )}
 
       {/* Fallback carousel photo — seule image 0 est priority ; les suivantes ne sont
           montées qu'au moment où le carrousel les atteint, pour éviter de
