@@ -3,7 +3,8 @@
 import { useRef, useEffect, useState } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
 
-const VIDEO_SRC = "/images/new-events/WhatsApp-Video-2026-09-15-at-15.32.55.mp4";
+const VIDEO_SRC =
+  "/images/new-events/WhatsApp-Video-2026-09-15-at-15.32.55.mp4";
 const POSTER = "/images/new-events/event-video-poster.webp";
 
 const STATS = [
@@ -82,8 +83,8 @@ export function EventGallery() {
               <span className="text-brand">Padel 15</span> en images
             </h2>
             <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-md mx-auto lg:mx-0">
-              Terrain privatisé, coach dédié, restaurant et guinguette — tout ce
-              qu&apos;il faut pour un team building d&apos;exception au cœur de
+              Terrain privatisé, coach dédié, restaurant et guinguette, tout ce
+              qu&apos;il faut pour un évènement d&apos;exception au cœur de
               Paris.
             </p>
 
