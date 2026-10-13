@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Navbar from './Navbar'
 import { Footer } from './layout/Footer'
 import { StickyMobileCTA } from './shared/StickyMobileCTA'
+import { RestaurantBookingButton } from './shared/RestaurantBookingButton'
 import { CookieBanner } from './shared/CookieBanner'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -17,6 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </main>
       {!isStudio && <Footer />}
       {!isStudio && <StickyMobileCTA />}
+      {!isStudio && <RestaurantBookingButton />}
       {!isStudio && <CookieBanner />}
     </div>
   )
