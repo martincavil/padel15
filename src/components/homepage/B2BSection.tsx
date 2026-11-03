@@ -38,7 +38,7 @@ export function B2BSection() {
         fill
         className="object-cover"
         sizes="100vw"
-        quality={70}
+        quality={72}
       />
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/75 z-10" />
