@@ -14,15 +14,18 @@
  * 2 138 px (mobile), avec une marge pour les champs qui s'ouvrent selon les
  * réponses.
  *
- * Problème connu : après l'envoi, l'outil affiche un court message
- * « Merci… » en haut du cadre. Le visiteur, resté en bas près du bouton,
- * voit une zone vide. Le site ne peut pas le détecter seul (domaine
- * différent), donc on écoute deux messages que l'outil peut envoyer via
- * window.parent.postMessage :
- *   { type: "padel15:demande:height", height: <px> } → on ajuste la hauteur
- *   { type: "padel15:demande:sent" }                 → on remonte au message
- *                                                      + événement GA4
- * Tant que l'outil ne les envoie pas, on garde les hauteurs fixes.
+ * Confirmation après envoi : l'outil affiche un court message « Merci… »
+ * en haut du cadre, alors que le visiteur est en bas, près du bouton. Le site
+ * ne voit pas ce qui se passe dans le cadre (autre domaine), sauf un
+ * rechargement complet. On charge donc le formulaire SANS JavaScript
+ * (sandbox sans allow-scripts) : il s'envoie alors comme un formulaire HTML
+ * classique (POST puis redirection vers /demande?envoye=1, vérifié le
+ * 04/11/2026), ce qui recharge le cadre. Sur ce rechargement :
+ *   - on remonte au message de confirmation,
+ *   - on réduit le cadre à la taille du message,
+ *   - on compte la demande dans GA4 (b2b_form_submit).
+ * Le formulaire n'a pas besoin de JS : champs natifs, validation native,
+ * bouton Pro/Privé = simple lien.
  *
  * Toutes les CTA « Demander un devis » / « Organiser un événement » du site
  * pointent vers l'ancre #demande de /evenements.
@@ -33,10 +36,11 @@ import { trackEvent } from "@/components/Tracking";
 export const EVENT_REQUEST_FORM_URL =
   "https://padel15-app-production.up.railway.app/demande";
 
-const FORM_ORIGIN = new URL(EVENT_REQUEST_FORM_URL).origin;
-
 // Hauteur de la navbar fixe, pour ne pas cacher le haut du cadre.
 const NAVBAR_OFFSET = 112;
+
+// Hauteur du cadre une fois le message « Merci » affiché.
+const CONFIRMATION_HEIGHT = 400;
 
 /**
  * `tone="dark"` pour une section à fond sombre (ex. Team Building sur la
@@ -53,31 +57,36 @@ export function EventRequestForm({
   const [height, setHeight] = useState<number | null>(null);
 
   useEffect(() => {
-    function onMessage(e: MessageEvent) {
-      // Uniquement l'outil Padel 15, et uniquement notre iframe (il peut y en
-      // avoir une seule par page, mais on reste strict).
-      if (e.origin !== FORM_ORIGIN) return;
-      if (e.source !== iframeRef.current?.contentWindow) return;
-      const data = e.data as { type?: string; height?: unknown };
-      if (data?.type === "padel15:demande:height") {
-        const h = Number(data.height);
-        if (Number.isFinite(h) && h > 200 && h < 10000) setHeight(Math.ceil(h));
-      } else if (data?.type === "padel15:demande:sent") {
-        const top = frameRef.current?.getBoundingClientRect().top;
-        if (top !== undefined && (top < 0 || top > window.innerHeight / 2)) {
-          window.scrollTo({
-            top: window.scrollY + top - NAVBAR_OFFSET,
-            behavior: "smooth",
-          });
-        }
-        trackEvent("b2b_form_submit", {
-          event_category: "lead",
-          form: "demande_evenement",
-        });
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    let loads = 0;
+
+    function onLoad() {
+      loads += 1;
+      const frameTop = frameRef.current?.getBoundingClientRect().top ?? 0;
+      // Le visiteur était dans le bas du formulaire : c'est le bouton
+      // « Envoyer ». En haut, c'est le chargement initial ou le bouton
+      // Pro/Privé.
+      const wasNearSubmit = frameTop < -300;
+
+      if (!wasNearSubmit) {
+        if (loads > 1) setHeight(null); // ex. « Faire une autre demande »
+        return;
       }
+
+      setHeight(CONFIRMATION_HEIGHT);
+      window.scrollTo({
+        top: window.scrollY + frameTop - NAVBAR_OFFSET,
+        behavior: "smooth",
+      });
+      trackEvent("b2b_form_submit", {
+        event_category: "lead",
+        form: "demande_evenement",
+      });
     }
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
+
+    iframe.addEventListener("load", onLoad);
+    return () => iframe.removeEventListener("load", onLoad);
   }, []);
 
   const frame =
@@ -96,6 +105,10 @@ export function EventRequestForm({
           ref={iframeRef}
           src={EVENT_REQUEST_FORM_URL}
           title="Demande d'événement Padel 15"
+          // Sans allow-scripts : envoi en formulaire HTML classique (voir
+          // l'en-tête). allow-same-origin est nécessaire pour que l'outil
+          // accepte l'envoi (contrôle de l'origine côté serveur).
+          sandbox="allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"
           style={height ? { height } : undefined}
           className="block h-[2400px] w-full border-0 sm:h-[1650px]"
         />
