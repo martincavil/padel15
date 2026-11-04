@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Check, Utensils, Leaf, Wine } from "lucide-react";
@@ -117,12 +118,12 @@ export default function RestaurantPage() {
                 </p>
               </div>
               <div className="mt-8">
-                <a
-                  href="mailto:contact@padel15.fr?subject=Demande privatisation restaurant"
+                <Link
+                  href="/evenements#demande"
                   className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
                 >
                   Privatiser l&apos;espace
-                </a>
+                </Link>
               </div>
             </div>
             <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">

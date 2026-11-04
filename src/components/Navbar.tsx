@@ -108,7 +108,7 @@ export default function Navbar() {
               Réserver un terrain
             </Button>
           </a>
-          <Link href="/evenements">
+          <Link href="/evenements#demande">
             <Button
               variant="outline"
               size="sm"
@@ -231,7 +231,7 @@ export default function Navbar() {
             Réserver un terrain
           </a>
           <Link
-            href="/evenements"
+            href="/evenements#demande"
             onClick={() => setMenuOpen(false)}
             className="w-full border border-brand text-brand hover:bg-brand hover:text-white font-semibold py-3.5 rounded-xl text-center text-sm transition-colors"
           >

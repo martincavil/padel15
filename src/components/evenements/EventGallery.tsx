@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
 
@@ -89,12 +90,12 @@ export function EventGallery() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-              <a
-                href="mailto:contact@padel15.fr?subject=Événement entreprise"
+              <Link
+                href="#demande"
                 className="bg-brand hover:bg-brand-dark text-white font-semibold px-7 py-4 rounded-xl transition-colors shadow-lg shadow-brand/20"
               >
                 Demander un devis
-              </a>
+              </Link>
               <a
                 href="tel:+33145315876"
                 className="border border-gray-200 hover:border-gray-400 text-gray-700 font-medium px-7 py-4 rounded-xl transition-colors"

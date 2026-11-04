@@ -1,0 +1,46 @@
+/**
+ * Formulaire de demande d'événement, hébergé par l'outil interne Padel 15
+ * (Railway) et intégré tel quel en iframe, selon la doc fournie par Gaspard
+ * le 03/11/2026.
+ *
+ * Chaque demande envoyée crée côté outil : le client, un devis prérempli
+ * (tarifs Pennylane) et les tâches de suivi ; le client reçoit un email de
+ * confirmation depuis contact@padel15.fr. Rien à gérer côté site (pas de
+ * base, pas de clé), et le formulaire porte déjà la charte Padel 15.
+ *
+ * Hauteurs fixes reprises de la doc : mesurées à 1 477 px (desktop) et
+ * 2 138 px (mobile), avec une marge pour les champs qui s'ouvrent selon les
+ * réponses. Si Gaspard ajoute des champs, il faudra peut-être les augmenter.
+ *
+ * Toutes les CTA « Demander un devis » / « Organiser un événement » du site
+ * pointent vers l'ancre #demande de /evenements.
+ */
+export const EVENT_REQUEST_FORM_URL =
+  "https://padel15-app-production.up.railway.app/demande";
+
+export function EventRequestForm() {
+  return (
+    <div className="space-y-4">
+      <iframe
+        src={EVENT_REQUEST_FORM_URL}
+        title="Demande d'événement Padel 15"
+        loading="lazy"
+        className="mx-auto block h-[2400px] w-full max-w-[900px] border-0 sm:h-[1650px]"
+      />
+      <p className="text-center text-sm text-gray-500">
+        Un souci avec le formulaire ? Écrivez-nous à{" "}
+        <a
+          href="mailto:contact@padel15.fr?subject=Demande de devis événement"
+          className="text-brand hover:underline"
+        >
+          contact@padel15.fr
+        </a>{" "}
+        ou appelez le{" "}
+        <a href="tel:+33145315876" className="text-brand hover:underline">
+          01 45 31 58 76
+        </a>
+        .
+      </p>
+    </div>
+  );
+}

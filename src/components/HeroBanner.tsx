@@ -186,7 +186,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/entreprises"
+              href="/evenements#demande"
               className="bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors"
             >
               Organiser un événement pro ou perso
@@ -275,7 +275,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             </a>
           </div>
           <Link
-            href="/entreprises"
+            href="/evenements#demande"
             className="w-full text-center bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg"
           >
             Organiser un événement pro ou perso

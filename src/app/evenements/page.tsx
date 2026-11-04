@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { EventGallery } from "@/components/evenements/EventGallery";
+import { EventRequestForm } from "@/components/evenements/EventRequestForm";
 
 export const metadata: Metadata = {
   title: "Team Building Paris 15 | Événements d'entreprise — Padel 15",
@@ -142,7 +143,8 @@ export default function EvenementsPage() {
           <Clients />
         </div>
 
-        {/* Contact CTA */}
+        {/* Demande de devis — cible de toutes les CTA événement du site (#demande) */}
+        <section id="demande" className="scroll-mt-28 space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="font-buzz mb-4">Demandez un devis</h2>
@@ -150,7 +152,7 @@ export default function EvenementsPage() {
               Décrivez votre projet et notre équipe revient vers vous sous 24h
               avec une proposition personnalisée.
             </p>
-            <div className="space-y-3 text-gray-700 mb-8">
+            <div className="space-y-3 text-gray-700">
               <div className="flex items-center gap-3">
                 <Check className="w-4 h-4 text-brand flex-shrink-0" />
                 <span>Réponse sous 24h ouvrées</span>
@@ -164,12 +166,6 @@ export default function EvenementsPage() {
                 <span>Formule entièrement sur-mesure</span>
               </div>
             </div>
-            <a
-              href="mailto:contact@padel15.fr?subject=Demande de devis événement&body=Bonjour, je souhaite obtenir un devis pour :"
-              className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
-            >
-              Demander un devis
-            </a>
           </div>
           <div className="relative aspect-[2/3] w-full max-w-sm mx-auto lg:mr-0 rounded-2xl overflow-hidden shadow-xl">
             <Image
@@ -181,6 +177,9 @@ export default function EvenementsPage() {
             />
           </div>
         </div>
+
+        <EventRequestForm />
+        </section>
       </div>
     </>
   );

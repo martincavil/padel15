@@ -144,7 +144,7 @@ export default function TarifsPage() {
               séminaires. Devis personnalisé sous 24h.
             </p>
             <Link
-              href="/evenements"
+              href="/evenements#demande"
               className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
             >
               Demander un devis

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Calendar, ChevronRight, Trophy, Users } from "lucide-react";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import {
@@ -144,12 +145,12 @@ export async function AgendaSection() {
                 </p>
               </div>
             </div>
-            <a
-              href="mailto:contact@padel15.fr?subject=Demande de devis événement&body=Bonjour, je souhaite obtenir un devis pour :"
+            <Link
+              href="/evenements#demande"
               className="flex-shrink-0 bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap"
             >
               Demander un devis
-            </a>
+            </Link>
           </div>
         </AnimatedSection>
       </div>

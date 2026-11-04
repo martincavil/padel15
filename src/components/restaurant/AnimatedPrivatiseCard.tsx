@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 
@@ -45,13 +46,13 @@ export function AnimatedPrivatiseCard() {
           créons l&apos;événement sur mesure.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href="mailto:contact@padel15.fr?subject=Demande privatisation restaurant"
+          <Link
+            href="/evenements#demande"
             className="inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-xl transition-colors"
           >
             Demander un devis
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
           <a
             href="tel:+33145315876"
             className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white font-semibold px-6 py-3 rounded-xl transition-colors backdrop-blur-sm"

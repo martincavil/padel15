@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Briefcase, Activity, Trophy } from "lucide-react";
 
@@ -92,12 +93,12 @@ export function B2BSection() {
         </div>
 
         <div className="text-center">
-          <a
-            href="mailto:contact@padel15.fr?subject=Demande de devis événement&body=Bonjour, je souhaite obtenir un devis pour :"
+          <Link
+            href="/evenements#demande"
             className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
           >
             Organiser mon événement
-          </a>
+          </Link>
         </div>
       </div>
     </section>
