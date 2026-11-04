@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
 import { Briefcase, Activity, Trophy } from "lucide-react";
+import { EventRequestForm } from "@/components/evenements/EventRequestForm";
 
 const CARDS = [
   {
@@ -92,13 +92,9 @@ export function B2BSection() {
           </p>
         </div>
 
-        <div className="text-center">
-          <Link
-            href="/evenements#demande"
-            className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors inline-block"
-          >
-            Organiser mon événement
-          </Link>
+        {/* Formulaire de demande (outil Padel 15), le même que sur /evenements */}
+        <div id="demande-accueil" className="scroll-mt-28">
+          <EventRequestForm tone="dark" />
         </div>
       </div>
     </section>

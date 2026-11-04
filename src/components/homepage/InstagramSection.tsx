@@ -3,31 +3,25 @@
 import { useRef, useEffect } from "react";
 import { Instagram } from "lucide-react";
 
-// Poster = première frame Cloudinary. Transformations w_520,h_924,c_fill,f_auto,q_auto
-// réduisent les posters de ~200 KB à ~20 KB chacun (affiché en 260×462 à 1.75x DPR).
-const CLD_TRANSFORM = "w_520,h_924,c_fill,f_auto,q_auto";
+// Vidéos sur Cloudflare Pages (projet padel15-video, dossier instagram/),
+// comme la vidéo du hero : ça ne compte pas dans le quota Vercel.
+// Réencodées en 540×960 sans son (~1,5–2 Mo chacune).
+// Aperçus en local dans /public : ils s'affichent même si la vidéo ne charge
+// pas (Safari, mode économie de données, CDN indisponible).
+// Historique : avant le 04/11/2026 tout était sur Cloudinary, dont le compte
+// a été désactivé (la section s'affichait vide).
+const VIDEO_CDN = "https://padel15-video.pages.dev/instagram";
 
-const COL_LEFT = [
-  {
-    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.mp4",
-    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279891/padel15/videos/PADEL_FOOD_r1zv05.jpg`,
-  },
-  {
-    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279891/padel15/videos/FOOD_tumxyq.mp4",
-    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279891/padel15/videos/FOOD_tumxyq.jpg`,
-  },
-];
+function clip(slug: string) {
+  return {
+    src: `${VIDEO_CDN}/${slug}.mp4`,
+    poster: `/images/instagram/${slug}.webp`,
+  };
+}
 
-const COL_RIGHT = [
-  {
-    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/PADEL_hwhmqg.mp4",
-    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279890/padel15/videos/PADEL_hwhmqg.jpg`,
-  },
-  {
-    src: "https://res.cloudinary.com/martincvl/video/upload/v1779279890/padel15/videos/APP_yr8e68.mp4",
-    poster: `https://res.cloudinary.com/martincvl/video/upload/${CLD_TRANSFORM}/v1779279890/padel15/videos/APP_yr8e68.jpg`,
-  },
-];
+const COL_LEFT = [clip("padel-food"), clip("food")];
+
+const COL_RIGHT = [clip("padel"), clip("app")];
 
 const INSTAGRAM_URL = "https://www.instagram.com/padel15club/?hl=fr";
 

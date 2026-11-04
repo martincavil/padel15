@@ -108,7 +108,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* BuzzBlack font */}
         <link rel="preload" as="font" href="/fonts/BuzzBlack.otf" type="font/otf" crossOrigin="anonymous" />
         {/* Preconnect tiers */}
-        <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://playtomic.com" />
         <link rel="icon" href="/P15.ico" type="image/x-icon" />

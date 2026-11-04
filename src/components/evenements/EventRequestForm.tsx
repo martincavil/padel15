@@ -18,15 +18,36 @@
 export const EVENT_REQUEST_FORM_URL =
   "https://padel15-app-production.up.railway.app/demande";
 
-export function EventRequestForm() {
+/**
+ * `tone="dark"` pour une section à fond sombre (ex. Team Building sur la
+ * homepage) : seuls le cadre et le texte de repli changent, le contenu du
+ * formulaire est géré par l'outil de Gaspard.
+ */
+export function EventRequestForm({
+  tone = "light",
+}: {
+  tone?: "light" | "dark";
+}) {
+  const frame =
+    tone === "dark"
+      ? "border-white/10 shadow-2xl shadow-black/40"
+      : "border-gray-200 shadow-lg shadow-gray-200/80";
   return (
     <div className="space-y-4">
-      <iframe
-        src={EVENT_REQUEST_FORM_URL}
-        title="Demande d'événement Padel 15"
-        className="mx-auto block h-[2400px] w-full max-w-[900px] border-0 sm:h-[1650px]"
-      />
-      <p className="text-center text-sm text-gray-500">
+      {/* Cadre aux couleurs des cartes du site. Le fond reprend celui du
+          formulaire (#f6f6f3) pour éviter un flash pendant le chargement. */}
+      <div
+        className={`mx-auto max-w-[900px] overflow-hidden rounded-2xl border bg-[#f6f6f3] ${frame}`}
+      >
+        <iframe
+          src={EVENT_REQUEST_FORM_URL}
+          title="Demande d'événement Padel 15"
+          className="block h-[2400px] w-full border-0 sm:h-[1650px]"
+        />
+      </div>
+      <p
+        className={`text-center text-sm ${tone === "dark" ? "text-gray-400" : "text-gray-500"}`}
+      >
         Un souci avec le formulaire ? Écrivez-nous à{" "}
         <a
           href="mailto:contact@padel15.fr?subject=Demande de devis événement"
