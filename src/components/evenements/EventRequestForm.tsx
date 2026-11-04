@@ -24,7 +24,6 @@ export function EventRequestForm() {
       <iframe
         src={EVENT_REQUEST_FORM_URL}
         title="Demande d'événement Padel 15"
-        loading="lazy"
         className="mx-auto block h-[2400px] w-full max-w-[900px] border-0 sm:h-[1650px]"
       />
       <p className="text-center text-sm text-gray-500">
