@@ -5,6 +5,8 @@ import Layout from "@/components/Layout";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { JsonLd } from "@/components/shared/JsonLd";
 import Tracking from "@/components/Tracking";
+import { PrismicPreview } from "@prismicio/next";
+import { isPrismicConfigured, repositoryName } from "@/prismicio";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -118,6 +120,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GoogleAnalytics ga_id="G-N2Y4ZCYHTB" />
         <Tracking />
         <Layout>{children}</Layout>
+        {/* Barre d'aperçu Prismic, seulement une fois le dépôt renseigné. */}
+        {isPrismicConfigured && <PrismicPreview repositoryName={repositoryName} />}
       </body>
     </html>
   );
