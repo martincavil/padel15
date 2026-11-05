@@ -1,0 +1,139 @@
+{
+  "id": "b2b_highlight",
+  "type": "SharedSlice",
+  "name": "Team Building (accueil)",
+  "description": "Section sur photo sombre : trois cartes, un témoignage et le formulaire de demande d'événement.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Par défaut",
+      "description": "",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte d'introduction",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "background": {
+          "type": "Image",
+          "config": {
+            "label": "Photo de fond",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "cards": {
+          "type": "Group",
+          "config": {
+            "label": "Cartes",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Titre",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "quote": {
+          "type": "Text",
+          "config": {
+            "label": "Témoignage",
+            "placeholder": ""
+          }
+        },
+        "quote_author": {
+          "type": "Text",
+          "config": {
+            "label": "Auteur",
+            "placeholder": "ex. Marie D."
+          }
+        },
+        "quote_company": {
+          "type": "Text",
+          "config": {
+            "label": "Entreprise",
+            "placeholder": ""
+          }
+        },
+        "show_form": {
+          "type": "Boolean",
+          "config": {
+            "label": "Afficher le formulaire de demande",
+            "default_value": true,
+            "placeholder_true": "Oui",
+            "placeholder_false": "Non"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

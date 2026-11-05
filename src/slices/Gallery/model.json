@@ -1,0 +1,98 @@
+{
+  "id": "gallery",
+  "type": "SharedSlice",
+  "name": "Galerie photos",
+  "description": "Grille de photos.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Galerie (agrandissable)",
+      "description": "Ex. « Galerie » (Terrains, Restaurant). Un clic agrandit la photo.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "columns": {
+          "type": "Select",
+          "config": {
+            "label": "Colonnes",
+            "options": [
+              "3",
+              "2",
+              "4"
+            ],
+            "default_value": "3"
+          }
+        },
+        "images": {
+          "type": "Group",
+          "config": {
+            "label": "Photos",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Photo",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "captioned",
+      "name": "Photos légendées",
+      "description": "Ex. les trois photos de Le Club, avec un titre et un détail.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "images": {
+          "type": "Group",
+          "config": {
+            "label": "Photos",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Photo",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Titre",
+                  "placeholder": ""
+                }
+              },
+              "detail": {
+                "type": "Text",
+                "config": {
+                  "label": "Détail",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

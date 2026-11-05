@@ -1,0 +1,204 @@
+{
+  "id": "cta_banner",
+  "type": "SharedSlice",
+  "name": "Appel à l'action",
+  "description": "Un encadré avec titre, texte et boutons.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Simple",
+      "description": "Ex. « Venez découvrir Padel 15 ».",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte (facultatif)",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "dark",
+      "name": "Encadré noir",
+      "description": "Ex. « Événements d'entreprise » sur Tarifs.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "image",
+      "name": "Sur photo",
+      "description": "Ex. « Privatisez notre espace » (Restaurant).",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "subtitle": {
+          "type": "Text",
+          "config": {
+            "label": "Sous-titre",
+            "placeholder": ""
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Photo de fond",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

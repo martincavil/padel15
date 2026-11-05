@@ -1,0 +1,190 @@
+{
+  "id": "settings",
+  "label": "Réglages du site",
+  "repeatable": false,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Club": {
+      "club_name": {
+        "type": "Text",
+        "config": {
+          "label": "Nom du club",
+          "placeholder": ""
+        }
+      },
+      "address": {
+        "type": "Text",
+        "config": {
+          "label": "Adresse",
+          "placeholder": "115 rue Castagnary, 75015 Paris"
+        }
+      },
+      "phone": {
+        "type": "Text",
+        "config": {
+          "label": "Téléphone affiché",
+          "placeholder": "01 45 31 58 76"
+        }
+      },
+      "phone_link": {
+        "type": "Text",
+        "config": {
+          "label": "Téléphone (format international)",
+          "placeholder": "+33145315876"
+        }
+      },
+      "email": {
+        "type": "Text",
+        "config": {
+          "label": "E-mail",
+          "placeholder": "contact@padel15.fr"
+        }
+      },
+      "hours": {
+        "type": "Text",
+        "config": {
+          "label": "Horaires (court)",
+          "placeholder": "8h – 22h"
+        }
+      },
+      "hours_long": {
+        "type": "Text",
+        "config": {
+          "label": "Horaires (long)",
+          "placeholder": "7j/7, 8h à 22h"
+        }
+      }
+    },
+    "Liens": {
+      "playtomic_url": {
+        "type": "Link",
+        "config": {
+          "label": "Playtomic (réservation)",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": true
+        }
+      },
+      "app_store_url": {
+        "type": "Link",
+        "config": {
+          "label": "App Store (Playtomic)",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": true
+        }
+      },
+      "google_play_url": {
+        "type": "Link",
+        "config": {
+          "label": "Google Play (Playtomic)",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": true
+        }
+      },
+      "instagram_url": {
+        "type": "Link",
+        "config": {
+          "label": "Instagram",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": true
+        }
+      },
+      "facebook_url": {
+        "type": "Link",
+        "config": {
+          "label": "Facebook",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": true
+        }
+      },
+      "menu_url": {
+        "type": "Link",
+        "config": {
+          "label": "Carte du restaurant (Canva ou PDF)",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "allowText": true
+        }
+      },
+      "table_booking": {
+        "type": "Link",
+        "config": {
+          "label": "Réserver une table",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "allowText": true
+        }
+      }
+    },
+    "Menu": {
+      "nav_links": {
+        "type": "Group",
+        "config": {
+          "label": "Liens du menu",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "allowText": true
+              }
+            }
+          }
+        }
+      },
+      "nav_cta": {
+        "type": "Link",
+        "config": {
+          "label": "Bouton du menu",
+          "placeholder": "ex. Organiser un événement",
+          "allowTargetBlank": true,
+          "allowText": true
+        }
+      },
+      "footer_links": {
+        "type": "Group",
+        "config": {
+          "label": "Pied de page : liens « Le club »",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "allowText": true
+              }
+            }
+          }
+        }
+      },
+      "footer_practical_links": {
+        "type": "Group",
+        "config": {
+          "label": "Pied de page : liens « Pratique »",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "allowText": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

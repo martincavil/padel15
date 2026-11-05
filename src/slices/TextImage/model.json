@@ -1,0 +1,335 @@
+{
+  "id": "text_image",
+  "type": "SharedSlice",
+  "name": "Texte + visuel",
+  "description": "Un titre, un texte et des boutons à côté d'une photo, de trois photos ou d'une vidéo verticale.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Texte + photo",
+      "description": "Ex. « Notre histoire », « Demandez un devis ».",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "title_highlight": {
+          "type": "Text",
+          "config": {
+            "label": "Suite du titre en orange (facultatif)",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte",
+            "placeholder": "Les listes à puces s'affichent avec des coches orange",
+            "multi": "paragraph,strong,em,hyperlink,list-item",
+            "allowTargetBlank": true
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Photo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_position": {
+          "type": "Select",
+          "config": {
+            "label": "Photo à",
+            "options": [
+              "Droite",
+              "Gauche"
+            ],
+            "default_value": "Droite"
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ancre (facultatif)",
+            "placeholder": "ex. demande → lien /page#demande"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "photoMosaic",
+      "name": "Texte + trois photos",
+      "description": "Ex. bloc restaurant de l'accueil : une grande photo et deux petites.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "title_highlight": {
+          "type": "Text",
+          "config": {
+            "label": "Suite du titre en orange (facultatif)",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte",
+            "placeholder": "",
+            "multi": "paragraph,strong,em,hyperlink,list-item",
+            "allowTargetBlank": true
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        },
+        "image_large": {
+          "type": "Image",
+          "config": {
+            "label": "Grande photo (verticale)",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_top": {
+          "type": "Image",
+          "config": {
+            "label": "Petite photo du haut",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_bottom": {
+          "type": "Image",
+          "config": {
+            "label": "Petite photo du bas",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ancre (facultatif)",
+            "placeholder": "ex. demande → lien /page#demande"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "video",
+      "name": "Texte + vidéo verticale",
+      "description": "Ex. « L'expérience Padel 15 en images » sur Événements.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "title_highlight": {
+          "type": "Text",
+          "config": {
+            "label": "Suite du titre en orange (facultatif)",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte",
+            "placeholder": "",
+            "multi": "paragraph,strong,em,hyperlink,list-item",
+            "allowTargetBlank": true
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        },
+        "video_url": {
+          "type": "Link",
+          "config": {
+            "label": "Adresse de la vidéo (.mp4)",
+            "placeholder": "https://padel15-video.pages.dev/…",
+            "select": "web",
+            "allowTargetBlank": true
+          }
+        },
+        "poster": {
+          "type": "Image",
+          "config": {
+            "label": "Image affichée avant la lecture",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "stats": {
+          "type": "Group",
+          "config": {
+            "label": "Chiffres clés",
+            "repeat": true,
+            "fields": {
+              "value": {
+                "type": "Text",
+                "config": {
+                  "label": "Chiffre",
+                  "placeholder": "ex. 100+"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Légende",
+                  "placeholder": "ex. Entreprises clientes"
+                }
+              }
+            }
+          }
+        },
+        "corner_label": {
+          "type": "Text",
+          "config": {
+            "label": "Étiquette flottante",
+            "placeholder": "ex. Paris 15ème"
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ancre (facultatif)",
+            "placeholder": "ex. demande → lien /page#demande"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

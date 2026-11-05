@@ -1,0 +1,116 @@
+{
+  "id": "page",
+  "label": "Page",
+  "repeatable": true,
+  "status": true,
+  "format": "page",
+  "json": {
+    "Page": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "Adresse de la page (ne pas modifier)",
+          "placeholder": "ex. terrains"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Titre de la page",
+          "placeholder": "ex. Nos Terrains",
+          "single": "heading1"
+        }
+      },
+      "subtitle": {
+        "type": "Text",
+        "config": {
+          "label": "Sous-titre",
+          "placeholder": ""
+        }
+      },
+      "badge": {
+        "type": "Text",
+        "config": {
+          "label": "Pastille",
+          "placeholder": "ex. Paris 15ème"
+        }
+      },
+      "hero_image": {
+        "type": "Image",
+        "config": {
+          "label": "Photo du bandeau",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "text_image": {
+              "type": "SharedSlice"
+            },
+            "feature_grid": {
+              "type": "SharedSlice"
+            },
+            "pricing": {
+              "type": "SharedSlice"
+            },
+            "offer_cards": {
+              "type": "SharedSlice"
+            },
+            "gallery": {
+              "type": "SharedSlice"
+            },
+            "logos": {
+              "type": "SharedSlice"
+            },
+            "cta_banner": {
+              "type": "SharedSlice"
+            },
+            "b2b_highlight": {
+              "type": "SharedSlice"
+            },
+            "course_booking": {
+              "type": "SharedSlice"
+            },
+            "instagram_videos": {
+              "type": "SharedSlice"
+            },
+            "widget": {
+              "type": "SharedSlice"
+            },
+            "rich_text": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO": {
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre Google",
+          "placeholder": "60 caractères max."
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Description Google",
+          "placeholder": "155 caractères max."
+        }
+      },
+      "meta_image": {
+        "type": "Image",
+        "config": {
+          "label": "Image de partage (réseaux sociaux)",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    }
+  }
+}

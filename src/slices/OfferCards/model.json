@@ -1,0 +1,112 @@
+{
+  "id": "offer_cards",
+  "type": "SharedSlice",
+  "name": "Cartes de formules",
+  "description": "Cartes avec icône, description et liste de ce qui est inclus.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Cartes",
+      "description": "Ex. « Nos Formules » (Événements), services du Restaurant.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre (facultatif)",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte d'introduction",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Cartes",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Titre",
+                  "placeholder": ""
+                }
+              },
+              "subtitle": {
+                "type": "Text",
+                "config": {
+                  "label": "Sous-titre orange (facultatif)",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "multi": "paragraph,strong,em,hyperlink",
+                  "allowTargetBlank": true
+                }
+              },
+              "includes": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Ce qui est inclus (liste à puces)",
+                  "placeholder": "",
+                  "multi": "list-item,strong,em,hyperlink",
+                  "allowTargetBlank": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

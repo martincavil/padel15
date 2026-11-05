@@ -1,0 +1,71 @@
+{
+  "id": "instagram_videos",
+  "type": "SharedSlice",
+  "name": "Vidéos Instagram",
+  "description": "Colonnes de vidéos qui défilent, avec le lien vers Instagram.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Par défaut",
+      "description": "",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "handle": {
+          "type": "Text",
+          "config": {
+            "label": "Compte affiché",
+            "placeholder": "ex. @padel15club"
+          }
+        },
+        "videos": {
+          "type": "Group",
+          "config": {
+            "label": "Vidéos",
+            "repeat": true,
+            "fields": {
+              "video_url": {
+                "type": "Link",
+                "config": {
+                  "label": "Adresse de la vidéo (.mp4)",
+                  "placeholder": "",
+                  "select": "web",
+                  "allowTargetBlank": true
+                }
+              },
+              "poster": {
+                "type": "Image",
+                "config": {
+                  "label": "Image affichée avant la lecture",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "column": {
+                "type": "Select",
+                "config": {
+                  "label": "Colonne",
+                  "options": [
+                    "Gauche",
+                    "Droite"
+                  ],
+                  "default_value": "Gauche"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

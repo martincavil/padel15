@@ -1,4 +1,8 @@
 {
-  "repositoryName": "",
-  "routes": []
+  "repositoryName": "aqal1a2b",
+  "routes": [
+    { "type": "homepage", "path": "/" },
+    { "type": "page", "path": "/:uid" },
+    { "type": "legal_page", "path": "/:uid" }
+  ]
 }

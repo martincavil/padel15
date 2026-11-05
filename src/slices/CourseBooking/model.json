@@ -1,0 +1,100 @@
+{
+  "id": "course_booking",
+  "type": "SharedSlice",
+  "name": "Réservation de cours",
+  "description": "Onglets Cours particulier / collectif et formulaire de réservation Tally.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Par défaut",
+      "description": "",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte d'introduction",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "courses": {
+          "type": "Group",
+          "config": {
+            "label": "Types de cours (onglets)",
+            "repeat": true,
+            "fields": {
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Nom de l'onglet",
+                  "placeholder": "ex. Cours Particulier"
+                }
+              },
+              "emoji": {
+                "type": "Text",
+                "config": {
+                  "label": "Émoji",
+                  "placeholder": "ex. 🎾"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "single": "paragraph,strong,em,hyperlink",
+                  "allowTargetBlank": true
+                }
+              },
+              "includes": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Points forts (liste à puces)",
+                  "placeholder": "",
+                  "multi": "list-item,strong,em",
+                  "allowTargetBlank": true
+                }
+              }
+            }
+          }
+        },
+        "tally_url": {
+          "type": "Link",
+          "config": {
+            "label": "Adresse du formulaire Tally (embed)",
+            "placeholder": "",
+            "select": "web",
+            "allowTargetBlank": true
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ancre (facultatif)",
+            "placeholder": "ex. demande → lien /page#demande"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

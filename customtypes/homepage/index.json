@@ -1,0 +1,158 @@
+{
+  "id": "homepage",
+  "label": "Accueil",
+  "repeatable": false,
+  "status": true,
+  "format": "page",
+  "json": {
+    "Vidéo d'accueil": {
+      "hero_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre",
+          "placeholder": "L'art de vivre"
+        }
+      },
+      "hero_title_highlight": {
+        "type": "Text",
+        "config": {
+          "label": "Suite du titre en orange",
+          "placeholder": "le padel"
+        }
+      },
+      "hero_text": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Texte (ordinateur)",
+          "placeholder": "",
+          "single": "paragraph,strong,em,hyperlink",
+          "allowTargetBlank": true
+        }
+      },
+      "hero_tagline": {
+        "type": "Text",
+        "config": {
+          "label": "Accroche (mobile)",
+          "placeholder": "Sport · Élégance · Convivialité · Paris 15ème"
+        }
+      },
+      "hero_video_url": {
+        "type": "Link",
+        "config": {
+          "label": "Adresse de la vidéo (.mp4)",
+          "placeholder": "",
+          "select": "web",
+          "allowTargetBlank": true
+        }
+      },
+      "hero_poster": {
+        "type": "Image",
+        "config": {
+          "label": "Image (affichée avant la vidéo et sur iPhone)",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "hero_buttons": {
+        "type": "Group",
+        "config": {
+          "label": "Boutons",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien et texte du bouton",
+                "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                "allowTargetBlank": true,
+                "allowText": true
+              }
+            },
+            "style": {
+              "type": "Select",
+              "config": {
+                "label": "Style",
+                "options": [
+                  "Orange (principal)",
+                  "Contour",
+                  "Lien texte"
+                ],
+                "default_value": "Orange (principal)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Sections": {
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "text_image": {
+              "type": "SharedSlice"
+            },
+            "feature_grid": {
+              "type": "SharedSlice"
+            },
+            "pricing": {
+              "type": "SharedSlice"
+            },
+            "offer_cards": {
+              "type": "SharedSlice"
+            },
+            "gallery": {
+              "type": "SharedSlice"
+            },
+            "logos": {
+              "type": "SharedSlice"
+            },
+            "cta_banner": {
+              "type": "SharedSlice"
+            },
+            "b2b_highlight": {
+              "type": "SharedSlice"
+            },
+            "course_booking": {
+              "type": "SharedSlice"
+            },
+            "instagram_videos": {
+              "type": "SharedSlice"
+            },
+            "widget": {
+              "type": "SharedSlice"
+            },
+            "rich_text": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO": {
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre Google",
+          "placeholder": "60 caractères max."
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Description Google",
+          "placeholder": "155 caractères max."
+        }
+      },
+      "meta_image": {
+        "type": "Image",
+        "config": {
+          "label": "Image de partage (réseaux sociaux)",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    }
+  }
+}

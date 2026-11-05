@@ -1,0 +1,66 @@
+{
+  "id": "widget",
+  "type": "SharedSlice",
+  "name": "Module du site",
+  "description": "Un module géré par le site (réservation, avis Google, newsletter…). Titre et texte facultatifs : vides, ceux du module s'affichent.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Par défaut",
+      "description": "",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "widget": {
+          "type": "Select",
+          "config": {
+            "label": "Module",
+            "options": [
+              "Prochains tournois (Playtomic)",
+              "Avis Google",
+              "Inscription newsletter",
+              "Archives des newsletters",
+              "Formulaire de demande d'événement",
+              "Contact et plan d'accès",
+              "Carte du restaurant (Canva)"
+            ],
+            "default_value": "Prochains tournois (Playtomic)"
+          }
+        },
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre (facultatif)",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte (facultatif)",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ancre (facultatif)",
+            "placeholder": "ex. demande → lien /page#demande"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

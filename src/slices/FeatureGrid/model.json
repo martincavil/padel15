@@ -1,0 +1,478 @@
+{
+  "id": "feature_grid",
+  "type": "SharedSlice",
+  "name": "Liste à icônes",
+  "description": "Équipements, services, infos pratiques ou valeurs, chacun avec une icône.",
+  "variations": [
+    {
+      "id": "tiles",
+      "name": "Tuiles",
+      "description": "Ex. « Tout est prévu » (accueil), « Notre infrastructure » (Le Club).",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Texte d'introduction",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Éléments",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Libellé",
+                  "placeholder": ""
+                }
+              },
+              "detail": {
+                "type": "Text",
+                "config": {
+                  "label": "Détail (facultatif)",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "list",
+      "name": "Liste sur fond gris",
+      "description": "Ex. « Équipements & Services » (Terrains).",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Éléments",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Libellé",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "bookingInfo",
+      "name": "Infos + réservation Playtomic",
+      "description": "Ex. « Réservez votre terrain » : infos à gauche, widget Playtomic à droite.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Infos",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Intitulé",
+                  "placeholder": "ex. Horaires"
+                }
+              },
+              "detail": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Texte",
+                  "placeholder": "",
+                  "multi": "paragraph,strong,em,hyperlink",
+                  "allowTargetBlank": true
+                }
+              }
+            }
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "strip",
+      "name": "Bandeau noir Playtomic",
+      "description": "Bandeau sous la vidéo de l'accueil : infos rapides, bouton de réservation et applis.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Infos",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Libellé",
+                  "placeholder": "ex. 7j/7 · 8h–22h"
+                }
+              },
+              "detail": {
+                "type": "Text",
+                "config": {
+                  "label": "Détail",
+                  "placeholder": "ex. Ouvert toute l'année"
+                }
+              }
+            }
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        },
+        "show_app_badges": {
+          "type": "Boolean",
+          "config": {
+            "label": "Afficher les boutons App Store / Google Play (mobile)",
+            "default_value": true,
+            "placeholder_true": "Oui",
+            "placeholder_false": "Non"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "values",
+      "name": "Valeurs",
+      "description": "Ex. « Nos Valeurs » (Le Club).",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Valeurs",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "color": {
+                "type": "Select",
+                "config": {
+                  "label": "Couleur",
+                  "options": [
+                    "Orange",
+                    "Vert"
+                  ],
+                  "default_value": "Orange"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Titre",
+                  "placeholder": ""
+                }
+              },
+              "detail": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Texte",
+                  "placeholder": "",
+                  "single": "paragraph,strong,em,hyperlink",
+                  "allowTargetBlank": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
