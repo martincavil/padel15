@@ -1,0 +1,323 @@
+{
+  "assets": {
+    "/images/autres/raquettes-1.webp": {
+      "id": "qpSWu75RXe_Dxchg",
+      "url": "https://images.prismic.io/aqal1a2b/qpSWu75RXe_Dxchg_raquettes-1.webp",
+      "width": 714,
+      "height": 710
+    },
+    "/images/autres/work-and-padel.webp": {
+      "id": "FvHI5EXwj8ZaJmbz",
+      "url": "https://images.prismic.io/aqal1a2b/FvHI5EXwj8ZaJmbz_work-and-padel.webp",
+      "width": 6647,
+      "height": 3493
+    },
+    "/images/instagram/app.webp": {
+      "id": "63eIZZMQX9qKFjXF",
+      "url": "https://images.prismic.io/aqal1a2b/63eIZZMQX9qKFjXF_app.webp",
+      "width": 520,
+      "height": 924
+    },
+    "/images/instagram/food.webp": {
+      "id": "RNV6IIUMQ7hoThmp",
+      "url": "https://images.prismic.io/aqal1a2b/RNV6IIUMQ7hoThmp_food.webp",
+      "width": 520,
+      "height": 924
+    },
+    "/images/instagram/padel-food.webp": {
+      "id": "tbr9wayHbFPgbWu9",
+      "url": "https://images.prismic.io/aqal1a2b/tbr9wayHbFPgbWu9_padel-food.webp",
+      "width": 520,
+      "height": 924
+    },
+    "/images/instagram/padel.webp": {
+      "id": "BLd2jWEIkzw8BB0P",
+      "url": "https://images.prismic.io/aqal1a2b/BLd2jWEIkzw8BB0P_padel.webp",
+      "width": 520,
+      "height": 924
+    },
+    "/images/new-events/WhatsApp-Image-2026-09-15-at-15.32.55.webp": {
+      "id": "SofFaGEK082Sj7LW",
+      "url": "https://images.prismic.io/aqal1a2b/SofFaGEK082Sj7LW_WhatsApp-Image-2026-09-15-at-15.32.55.webp",
+      "width": 1066,
+      "height": 1600
+    },
+    "/images/new-events/evenements-hero.webp": {
+      "id": "VkmxP6eFT5S6sSpH",
+      "url": "https://images.prismic.io/aqal1a2b/VkmxP6eFT5S6sSpH_evenements-hero.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    "/images/new-events/event-video-poster.webp": {
+      "id": "qg-At5dyRDNbLEMA",
+      "url": "https://images.prismic.io/aqal1a2b/qg-At5dyRDNbLEMA_event-video-poster.webp",
+      "width": 464,
+      "height": 832
+    },
+    "/images/restaurant/food/DSC00577.webp": {
+      "id": "5LqmisSHkYHOfL8m",
+      "url": "https://images.prismic.io/aqal1a2b/5LqmisSHkYHOfL8m_DSC00577.webp",
+      "width": 1065,
+      "height": 1331
+    },
+    "/images/restaurant/food/DSC00617.webp": {
+      "id": "TRTZnCPXl0g-waA6",
+      "url": "https://images.prismic.io/aqal1a2b/TRTZnCPXl0g-waA6_DSC00617.webp",
+      "width": 1000,
+      "height": 1250
+    },
+    "/images/restaurant/food/DSC00739.webp": {
+      "id": "Om5RONOhbDzgi0OQ",
+      "url": "https://images.prismic.io/aqal1a2b/Om5RONOhbDzgi0OQ_DSC00739.webp",
+      "width": 1145,
+      "height": 1431
+    },
+    "/images/restaurant/food/DSC00768.webp": {
+      "id": "w5N9g9MS2wf1_ubh",
+      "url": "https://images.prismic.io/aqal1a2b/w5N9g9MS2wf1_ubh_DSC00768.webp",
+      "width": 1345,
+      "height": 1681
+    },
+    "/images/restaurant/gaspard-work.webp": {
+      "id": "YRTBuBSf4FAnyaoQ",
+      "url": "https://images.prismic.io/aqal1a2b/YRTBuBSf4FAnyaoQ_gaspard-work.webp",
+      "width": 1783,
+      "height": 2229
+    },
+    "/images/restaurant/rest-ext.webp": {
+      "id": "93mh-NJuE_2AFjG4",
+      "url": "https://images.prismic.io/aqal1a2b/93mh-NJuE_2AFjG4_rest-ext.webp",
+      "width": 1024,
+      "height": 684
+    },
+    "/images/restaurant/rest-inte-bar.webp": {
+      "id": "PM8Nh4ojVJC6UCnK",
+      "url": "https://images.prismic.io/aqal1a2b/PM8Nh4ojVJC6UCnK_rest-inte-bar.webp",
+      "width": 1024,
+      "height": 684
+    },
+    "/images/restaurant/rest-inte-grand-angle.webp": {
+      "id": "ECNrl3DHydzS87Gt",
+      "url": "https://images.prismic.io/aqal1a2b/ECNrl3DHydzS87Gt_rest-inte-grand-angle.webp",
+      "width": 7253,
+      "height": 4841
+    },
+    "/images/restaurant/rest-inte-terrain.webp": {
+      "id": "7m7A_1mA9TR-H5oa",
+      "url": "https://images.prismic.io/aqal1a2b/7m7A_1mA9TR-H5oa_rest-inte-terrain.webp",
+      "width": 1024,
+      "height": 684
+    },
+    "/images/restaurant/restau-diner.webp": {
+      "id": "c2nLDdnlo-cE7BPJ",
+      "url": "https://images.prismic.io/aqal1a2b/c2nLDdnlo-cE7BPJ_restau-diner.webp",
+      "width": 1280,
+      "height": 1600
+    },
+    "/images/restaurant/restaurant-horizontale-1.webp": {
+      "id": "JLGWn7Fb6NZDCAqo",
+      "url": "https://images.prismic.io/aqal1a2b/JLGWn7Fb6NZDCAqo_restaurant-horizontale-1.webp",
+      "width": 1130,
+      "height": 754
+    },
+    "/images/restaurant/restaurant-nourriture-verticale-1.webp": {
+      "id": "CFjcLT2qEFY3VVNW",
+      "url": "https://images.prismic.io/aqal1a2b/CFjcLT2qEFY3VVNW_restaurant-nourriture-verticale-1.webp",
+      "width": 630,
+      "height": 945
+    },
+    "/images/restaurant/restaurant-verticale-1.webp": {
+      "id": "mHIbQCd3MX4s2CS3",
+      "url": "https://images.prismic.io/aqal1a2b/mHIbQCd3MX4s2CS3_restaurant-verticale-1.webp",
+      "width": 746,
+      "height": 1118
+    },
+    "/images/terrains/match.webp": {
+      "id": "rz7IBwHirgrQMzBX",
+      "url": "https://images.prismic.io/aqal1a2b/rz7IBwHirgrQMzBX_match.webp",
+      "width": 802,
+      "height": 1002
+    },
+    "/images/terrains/terrain-ext-jour.webp": {
+      "id": "5OCDUqdUIX6tPDT6",
+      "url": "https://images.prismic.io/aqal1a2b/5OCDUqdUIX6tPDT6_terrain-ext-jour.webp",
+      "width": 6905,
+      "height": 4608
+    },
+    "/images/terrains/terrain-ext-nuit.webp": {
+      "id": "RkRMhtv42BDEjTxe",
+      "url": "https://images.prismic.io/aqal1a2b/RkRMhtv42BDEjTxe_terrain-ext-nuit.webp",
+      "width": 7302,
+      "height": 4873
+    },
+    "/images/terrains/terrain-inte-1.webp": {
+      "id": "iv70U_5Mf-r9EZru",
+      "url": "https://images.prismic.io/aqal1a2b/iv70U_5Mf-r9EZru_terrain-inte-1.webp",
+      "width": 1024,
+      "height": 691
+    },
+    "/images/terrains/terrain-inte-game.webp": {
+      "id": "lJeGSz0ZQtzt1Q8g",
+      "url": "https://images.prismic.io/aqal1a2b/lJeGSz0ZQtzt1Q8g_terrain-inte-game.webp",
+      "width": 7097,
+      "height": 4736
+    },
+    "/images/terrains/terrain-inte-vide.webp": {
+      "id": "5QsYyI62pbr9eXA7",
+      "url": "https://images.prismic.io/aqal1a2b/5QsYyI62pbr9eXA7_terrain-inte-vide.webp",
+      "width": 7203,
+      "height": 4858
+    },
+    "/images/terrains/terrain-match-1.webp": {
+      "id": "1NsZJpWD-U87Lcl7",
+      "url": "https://images.prismic.io/aqal1a2b/1NsZJpWD-U87Lcl7_terrain-match-1.webp",
+      "width": 1024,
+      "height": 684
+    },
+    "/logos/airliquide.svg": {
+      "id": "oUoInrPj0EZIgfo9",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/oUoInrPj0EZIgfo9_airliquide.svg",
+      "width": 184,
+      "height": 43
+    },
+    "/logos/americanvintage.png": {
+      "id": "j_wn_T5wSYanO8S0",
+      "url": "https://images.prismic.io/aqal1a2b/j_wn_T5wSYanO8S0_americanvintage.png",
+      "width": 500,
+      "height": 500
+    },
+    "/logos/asics.svg": {
+      "id": "JxVy1NYQnMTjFjSK",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/JxVy1NYQnMTjFjSK_asics.svg",
+      "width": 168,
+      "height": 56
+    },
+    "/logos/axa.svg": {
+      "id": "pd4FrfdStngirWfO",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/pd4FrfdStngirWfO_axa.svg",
+      "width": 54,
+      "height": 54
+    },
+    "/logos/bcg.svg": {
+      "id": "NmjeS4r8nUbooqIF",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/NmjeS4r8nUbooqIF_bcg.svg",
+      "width": 191,
+      "height": 40
+    },
+    "/logos/big-mamma.jpeg": {
+      "id": "CfNigrXxhrTgZYzl",
+      "url": "https://images.prismic.io/aqal1a2b/CfNigrXxhrTgZYzl_big-mamma.jpeg",
+      "width": 400,
+      "height": 400
+    },
+    "/logos/blackrock.svg": {
+      "id": "yI2OL6z3SYTHeKOF",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/yI2OL6z3SYTHeKOF_blackrock.svg",
+      "width": 152,
+      "height": 22
+    },
+    "/logos/bnp.svg": {
+      "id": "lMtd1iHJI3ZJ0xED",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/lMtd1iHJI3ZJ0xED_bnp.svg",
+      "width": 219,
+      "height": 45
+    },
+    "/logos/cupra.svg": {
+      "id": "UezHYdCpyTdMMIFA",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/UezHYdCpyTdMMIFA_cupra.svg",
+      "width": 284,
+      "height": 48
+    },
+    "/logos/deel.svg": {
+      "id": "9x1lN-Gnmsr2GYvW",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/9x1lN-Gnmsr2GYvW_deel.svg",
+      "width": 78,
+      "height": 27
+    },
+    "/logos/edf.svg": {
+      "id": "FPg6Fh0DARCBQ1fp",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/FPg6Fh0DARCBQ1fp_edf.svg",
+      "width": 248,
+      "height": 402
+    },
+    "/logos/head.png": {
+      "id": "PHWMI1DJTM1rVrnu",
+      "url": "https://images.prismic.io/aqal1a2b/PHWMI1DJTM1rVrnu_head.png",
+      "width": 3840,
+      "height": 2160
+    },
+    "/logos/hec.png": {
+      "id": "rfZ3x2MNmW9vBtJW",
+      "url": "https://images.prismic.io/aqal1a2b/rfZ3x2MNmW9vBtJW_hec.png",
+      "width": 567,
+      "height": 254
+    },
+    "/logos/hubspot.svg": {
+      "id": "Gwl3icukh4DjhPdA",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/Gwl3icukh4DjhPdA_hubspot.svg",
+      "width": 585,
+      "height": 166
+    },
+    "/logos/kering.svg": {
+      "id": "G-8LxeHP-F0B1v-S",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/G-8LxeHP-F0B1v-S_kering.svg",
+      "width": 283,
+      "height": 94
+    },
+    "/logos/lfp.png": {
+      "id": "TMCN7tdaKAEY3yNi",
+      "url": "https://images.prismic.io/aqal1a2b/TMCN7tdaKAEY3yNi_lfp.png",
+      "width": 773,
+      "height": 1134
+    },
+    "/logos/mufg.svg": {
+      "id": "3wCLH5LfT1PRTrGi",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/3wCLH5LfT1PRTrGi_mufg.svg",
+      "width": 500,
+      "height": 118
+    },
+    "/logos/pompiers.jpeg": {
+      "id": "9VGgwudHqRmmSdlF",
+      "url": "https://images.prismic.io/aqal1a2b/9VGgwudHqRmmSdlF_pompiers.jpeg",
+      "width": 400,
+      "height": 400
+    },
+    "/logos/sander.svg": {
+      "id": "Xy5EDYE3vEJ5ytoh",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/Xy5EDYE3vEJ5ytoh_sander.svg",
+      "width": 413,
+      "height": 61
+    },
+    "/logos/siemens.svg": {
+      "id": "pggeQZt4qRxhbuQT",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/pggeQZt4qRxhbuQT_siemens.svg",
+      "width": 302,
+      "height": 50
+    },
+    "/logos/clubmed.svg": {
+      "id": "rh5GlS8ZgaxfQW0y",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/rh5GlS8ZgaxfQW0y_clubmed.svg",
+      "width": 506,
+      "height": 99
+    },
+    "/logos/linkt.svg": {
+      "id": "k7m-7lHLrgcy--9c",
+      "url": "https://aqal1a2b.cdn.prismic.io/aqal1a2b/k7m-7lHLrgcy--9c_linkt.svg",
+      "width": 129,
+      "height": 50
+    }
+  },
+  "documents": {
+    "settings": "aux7lhIAACkAUN-N",
+    "homepage": "aux8TxIAACkAUOEy",
+    "page/terrains": "aux8UhIAACcAUOE6",
+    "page/restaurant": "aux8VBIAACoAUOFD",
+    "page/coaching": "aux8VxIAACkAUOFP",
+    "page/evenements": "aux8WhIAACkAUOFX",
+    "page/le-club": "aux8XBIAAC4AUOFh",
+    "page/tarifs": "aux8XxIAAC4AUOFn",
+    "page/contact": "aux8YRIAACkAUOFx",
+    "legal_page/mentions-legales": "aux8YxIAACwAUOF3",
+    "legal_page/confidentialite": "aux8ZhIAACgAUOGB"
+  }
+}

@@ -45,3 +45,16 @@ données structurées (JSON-LD), style et mise en page des blocs.
 - Vidéos : on colle l'adresse du fichier (Cloudflare Pages), sans changer
   d'hébergeur ; l'image d'attente se dépose dans Prismic.
 - Ancre : un champ facultatif sur les blocs visés par des liens (`#demande`).
+
+## Migration du contenu (phase 2)
+
+`scripts/prismic/content.mjs` contient le contenu actuel du site, recopié du
+code ; `scripts/prismic/migrate-content.mjs` le vérifie champ par champ par
+rapport aux modèles, puis l'envoie en brouillon (release « Migration » de
+Prismic) avec `--apply`. Les images de `public/` vont dans la médiathèque.
+`migration.lock.json` garde les images envoyées et l'id des documents : une
+relance met à jour les brouillons sans doublon.
+
+Les liens internes sont écrits en adresse complète (`https://www.padel15.fr/…`),
+pour garder les ancres comme `#demande` ; le site les transforme en liens
+internes à l'affichage.
