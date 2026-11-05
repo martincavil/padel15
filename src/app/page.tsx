@@ -1,49 +1,53 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
+import { SliceZone } from "@prismicio/react";
 import HeroBanner from "@/components/HeroBanner";
+import { Title, Text } from "@/components/prismic/RichText";
 import { fetchGoogleRating } from "@/lib/google-places";
-import { GoogleReviews } from "@/components/shared/GoogleReviews";
-import { RestaurantHighlight } from "@/components/homepage/RestaurantHighlight";
-import { PartenairesSection } from "@/components/homepage/PartenairesSection";
-import { TarifsSection } from "@/components/homepage/TarifsSection";
-import CoursParticuliers from "@/components/CoursParticuliers";
-import { AgendaSection } from "@/components/homepage/AgendaSection";
-import { B2BSection } from "@/components/homepage/B2BSection";
-import { CTANewsletter } from "@/components/shared/CTANewsletter";
-import Clients from "@/components/Clients";
-import { PlaytomicSection } from "@/components/homepage/PlaytomicSection";
-import { PadelInfoSection } from "@/components/homepage/PadelInfoSection";
-import { InstagramSection } from "@/components/homepage/InstagramSection";
+import { createClient } from "@/prismicio";
+import { getSettings, type NavLink } from "@/lib/settings";
+import { resolveLink } from "@/lib/prismic-links";
+import { seoMetadata } from "@/lib/prismic-pages";
+import { components } from "@/slices";
 
-export const metadata: Metadata = {
-  title:
-    "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
-  description:
-    "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette. Réservez sur Playtomic.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await createClient().getSingle("homepage");
+  return seoMetadata(data);
+}
 
+/** Contenu : document « Accueil » dans Prismic. */
 export default async function HomePage() {
-  const raw = await fetchGoogleRating();
-  const googleRating = raw
-    ? { rating: raw.rating, count: raw.userRatingCount }
-    : undefined;
+  const [home, settings, raw] = await Promise.all([
+    createClient().getSingle("homepage"),
+    getSettings(),
+    fetchGoogleRating(),
+  ]);
+  const d = home.data;
+  const googleRating = raw ? { rating: raw.rating, count: raw.userRatingCount } : undefined;
+  const buttons = d.hero_buttons
+    .map((b): NavLink | null => {
+      const l = resolveLink(b.link);
+      return l ? { href: l.href, label: l.text ?? "", internal: l.internal, newTab: l.newTab } : null;
+    })
+    .filter((b): b is NavLink => !!b);
+
   return (
     <>
-      <HeroBanner googleRating={googleRating} />
-      <PlaytomicSection />
-      <PadelInfoSection />
-      <TarifsSection />
-      <Suspense fallback={<div className="py-16 bg-gray-50" aria-hidden />}>
-        <AgendaSection />
-      </Suspense>
-      <RestaurantHighlight />
-      <GoogleReviews />
-      <PartenairesSection />
-      <CoursParticuliers />
-      <InstagramSection />
-      <B2BSection />
-      <Clients />
-      <CTANewsletter />
+      <HeroBanner
+        googleRating={googleRating}
+        titleDesktop={
+          <Title field={d.hero_title} as="h1" inline className="font-buzz text-6xl xl:text-7xl text-white leading-none tracking-tight" />
+        }
+        titleMobile={<Title field={d.hero_title} as="h1" className="font-buzz text-5xl text-white leading-none" />}
+        text={<Text field={d.hero_text} paragraphClassName="text-white/70" />}
+        tagline={d.hero_tagline ?? ""}
+        videoUrl={resolveLink(d.hero_video_url)?.href ?? ""}
+        posterUrl={d.hero_poster.url ?? "/images/terrains/terrain-ext-jour.webp"}
+        mainCta={buttons[0] ?? null}
+        ctas={buttons.slice(1)}
+        appStoreUrl={settings.appStoreUrl}
+        googlePlayUrl={settings.googlePlayUrl}
+      />
+      <SliceZone slices={d.slices} components={components} context={{ settings }} />
     </>
   );
 }

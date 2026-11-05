@@ -5,9 +5,80 @@
   "description": "Cartes avec icône, description et liste de ce qui est inclus.",
   "variations": [
     {
+      "id": "simple",
+      "name": "Cartes simples",
+      "description": "Ex. services du Restaurant : cartes grises avec icône, titre et liste.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Cartes",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Titre",
+                  "placeholder": ""
+                }
+              },
+              "includes": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Liste à puces",
+                  "placeholder": "",
+                  "multi": "list-item,strong,em,hyperlink",
+                  "allowTargetBlank": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
       "id": "default",
       "name": "Cartes",
-      "description": "Ex. « Nos Formules » (Événements), services du Restaurant.",
+      "description": "Ex. « Nos Formules » (Événements).",
       "imageUrl": "",
       "docURL": "...",
       "version": "initial",

@@ -7,7 +7,7 @@
     {
       "id": "tiles",
       "name": "Tuiles",
-      "description": "Ex. « Tout est prévu » (accueil), « Notre infrastructure » (Le Club).",
+      "description": "Ex. « Tout est prévu » (accueil).",
       "imageUrl": "",
       "docURL": "...",
       "version": "initial",
@@ -88,6 +88,83 @@
                 "type": "Text",
                 "config": {
                   "label": "Détail (facultatif)",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "cards",
+      "name": "Cartes avec détail",
+      "description": "Ex. « Notre infrastructure » (Le Club) : cartes grises, icône, libellé et détail.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "Le texte en gras s'affiche en orange",
+            "single": "heading2,strong"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Éléments",
+            "repeat": true,
+            "fields": {
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icône",
+                  "options": [
+                    "Horloge",
+                    "Calendrier",
+                    "Smartphone",
+                    "Billets",
+                    "Panier",
+                    "Vélo",
+                    "Douche",
+                    "Canapé",
+                    "Ordinateur",
+                    "Goutte d'eau",
+                    "Accessibilité",
+                    "Pétanque (cercle)",
+                    "Fléchettes (cible)",
+                    "Molkky (couches)",
+                    "Trophée",
+                    "Couverts",
+                    "Feuille",
+                    "Verre",
+                    "Mallette",
+                    "Sport (activité)",
+                    "Liste",
+                    "Étoile",
+                    "Groupe",
+                    "Puzzle",
+                    "Sourire",
+                    "Coche"
+                  ],
+                  "default_value": "Horloge"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Libellé",
+                  "placeholder": ""
+                }
+              },
+              "detail": {
+                "type": "Text",
+                "config": {
+                  "label": "Détail",
                   "placeholder": ""
                 }
               }

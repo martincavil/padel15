@@ -4,17 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
+import type { SiteSettings } from "@/lib/settings";
+import { NavAnchor } from "@/components/prismic/NavAnchor";
 
-const LINKS_CLUB = [
-  { href: "/terrains", label: "Nos terrains" },
-  { href: "/restaurant", label: "Restaurant & Guinguette" },
-  { href: "/coaching", label: "Coaching" },
-  { href: "/evenements", label: "Événements entreprise" },
-  { href: "/tarifs", label: "Tarifs" },
-  { href: "/le-club", label: "Le Club" },
-];
-
-const LINKS_PRATIQUE = [{ href: "/contact", label: "Contact & Accès" }];
 
 function FooterNewsletter() {
   const [email, setEmail] = useState("");
@@ -84,7 +76,7 @@ function FooterNewsletter() {
   );
 }
 
-export function Footer() {
+export function Footer({ settings }: { settings: SiteSettings }) {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-black text-white">
@@ -102,18 +94,20 @@ export function Footer() {
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Le club de padel haut de gamme du 15ème arrondissement de Paris.
+              {settings.footerTagline}
             </p>
             <address className="text-gray-400 text-sm mt-2 not-italic leading-relaxed">
-              PADEL 15
-              <br />
-              115 rue Castagnary
-              <br />
-              75015 Paris
+              {settings.clubName.toUpperCase()}
+              {settings.address.split(", ").map((line) => (
+                <span key={line}>
+                  <br />
+                  {line}
+                </span>
+              ))}
             </address>
             <div className="flex gap-3 mt-4">
               <a
-                href="https://www.instagram.com/padel15club/"
+                href={settings.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram Padel 15"
@@ -136,14 +130,12 @@ export function Footer() {
               Le Club
             </h3>
             <ul className="space-y-2">
-              {LINKS_CLUB.map((l) => (
+              {settings.footerLinks.map((l) => (
                 <li key={l.href}>
-                  <Link
-                    href={l.href}
+                  <NavAnchor
+                    link={l}
                     className="text-gray-300 hover:text-white text-sm transition-colors"
-                  >
-                    {l.label}
-                  </Link>
+                  />
                 </li>
               ))}
             </ul>
@@ -155,19 +147,17 @@ export function Footer() {
               Pratique
             </h3>
             <ul className="space-y-2 mb-4">
-              {LINKS_PRATIQUE.map((l) => (
+              {settings.footerPracticalLinks.map((l) => (
                 <li key={l.href}>
-                  <Link
-                    href={l.href}
+                  <NavAnchor
+                    link={l}
                     className="text-gray-300 hover:text-white text-sm transition-colors"
-                  >
-                    {l.label}
-                  </Link>
+                  />
                 </li>
               ))}
               <li>
                 <a
-                  href="https://playtomic.com/clubs/padel-15"
+                  href={settings.playtomicUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white text-sm transition-colors"
@@ -178,18 +168,18 @@ export function Footer() {
             </ul>
             <div className="text-sm text-gray-400 space-y-1">
               <p>7j/7</p>
-              <p>8h – 22h</p>
+              <p>{settings.hours}</p>
               <a
-                href="tel:+33145315876"
+                href={settings.phoneHref}
                 className="hover:text-white transition-colors block"
               >
-                +33 1 45 31 58 76
+                {settings.phone}
               </a>
               <a
-                href="mailto:contact@padel15.fr"
+                href={`mailto:${settings.email}`}
                 className="hover:text-white transition-colors block"
               >
-                contact@padel15.fr
+                {settings.email}
               </a>
             </div>
           </div>
@@ -200,7 +190,7 @@ export function Footer() {
               Newsletter
             </h3>
             <p className="text-gray-400 text-sm mb-3">
-              Actu du club, tournois et offres exclusives.
+              {settings.footerNewsletterText}
             </p>
             <FooterNewsletter />
           </div>
@@ -208,8 +198,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-6 space-y-3">
           <p className="text-gray-400 text-xs">
-            © {year} PADEL 15 — SAS au capital de 5 000 € — RCS Paris 949 726
-            848 — 115 rue Castagnary 75015 Paris
+            © {year} {settings.footerLegal}
           </p>
           <div className="flex flex-wrap gap-3 text-xs text-gray-500">
             <Link

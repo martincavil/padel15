@@ -85,6 +85,17 @@
             "default_value": "Droite"
           }
         },
+        "image_format": {
+          "type": "Select",
+          "config": {
+            "label": "Format de la photo",
+            "options": [
+              "Paysage",
+              "Portrait"
+            ],
+            "default_value": "Paysage"
+          }
+        },
         "anchor": {
           "type": "Text",
           "config": {

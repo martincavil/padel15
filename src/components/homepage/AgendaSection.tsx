@@ -61,7 +61,10 @@ function TournamentCard({ t }: { t: PlaytomicTournament }) {
   );
 }
 
-export async function AgendaSection() {
+export async function AgendaSection({
+  badge = "Agenda",
+  title = "Prochains tournois",
+}: { badge?: React.ReactNode; title?: React.ReactNode } = {}) {
   const tournaments = await getUpcomingTournaments();
 
   return (
@@ -70,12 +73,12 @@ export async function AgendaSection() {
         <AnimatedSection>
           <div className="flex items-end justify-between mb-10">
             <div>
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-3">
-                Agenda
-              </span>
-              <h2 className="font-buzz">
-                Prochains tournois
-              </h2>
+              {badge && (
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand/10 text-brand border border-brand/20 mb-3">
+                  {badge}
+                </span>
+              )}
+              {typeof title === "string" ? <h2 className="font-buzz">{title}</h2> : title}
             </div>
             <a
               href={PLAYTOMIC_CLUB_URL}

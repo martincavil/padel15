@@ -1,31 +1,14 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, type ReactNode } from "react";
 import { Instagram } from "lucide-react";
 
-// Vidéos sur Cloudflare Pages (projet padel15-video, dossier instagram/),
-// comme la vidéo du hero : ça ne compte pas dans le quota Vercel.
-// Réencodées en 540×960 sans son (~1,5–2 Mo chacune).
-// Aperçus en local dans /public : ils s'affichent même si la vidéo ne charge
-// pas (Safari, mode économie de données, CDN indisponible).
-// Historique : avant le 04/11/2026 tout était sur Cloudinary, dont le compte
-// a été désactivé (la section s'affichait vide).
-const VIDEO_CDN = "https://padel15-video.pages.dev/instagram";
+// Vidéos sur Cloudflare Pages (projet padel15-video, dossier instagram/) :
+// ça ne compte pas dans le quota Vercel. Adresses et images d'attente
+// saisies dans Prismic (bloc « Vidéos Instagram »).
+export type InstagramVideo = { src: string; poster?: string };
 
-function clip(slug: string) {
-  return {
-    src: `${VIDEO_CDN}/${slug}.mp4`,
-    poster: `/images/instagram/${slug}.webp`,
-  };
-}
-
-const COL_LEFT = [clip("padel-food"), clip("food")];
-
-const COL_RIGHT = [clip("padel"), clip("app")];
-
-const INSTAGRAM_URL = "https://www.instagram.com/padel15club/?hl=fr";
-
-function VideoItem({ src, poster }: { src: string; poster: string }) {
+function VideoItem({ src, poster }: InstagramVideo) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -67,7 +50,7 @@ function ScrollColumn({
   animClass,
   offsetPx = 0,
 }: {
-  videos: typeof COL_LEFT;
+  videos: InstagramVideo[];
   animClass: "animate-scroll-up" | "animate-scroll-down";
   offsetPx?: number;
 }) {
@@ -86,15 +69,21 @@ function ScrollColumn({
   );
 }
 
-export function InstagramSection() {
+export function InstagramSection({
+  title, handle, instagramUrl, left, right,
+}: {
+  title: ReactNode;
+  handle: string;
+  instagramUrl: string;
+  left: InstagramVideo[];
+  right: InstagramVideo[];
+}) {
   return (
     <section className="py-20 bg-white">
       {/* Header */}
       <div className="container mx-auto px-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
         <div>
-          <h2 className="font-buzz mb-1">
-            Vivez l&apos;expérience Padel15
-          </h2>
+          {title}
         </div>
       </div>
 
@@ -107,7 +96,7 @@ export function InstagramSection() {
         {/* Badge Instagram central */}
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
           <a
-            href={INSTAGRAM_URL}
+            href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="pointer-events-auto flex items-center gap-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-2xl px-6 py-3.5 shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
@@ -117,7 +106,7 @@ export function InstagramSection() {
             </div>
             <div>
               <p className="font-semibold text-sm leading-tight">
-                @padel15club
+                {handle}
               </p>
               <p className="text-gray-400 text-xs">Voir sur Instagram</p>
             </div>
@@ -127,12 +116,12 @@ export function InstagramSection() {
         {/* Colonnes centrées, largeur naturelle 9:16 */}
         <div className="flex gap-3 justify-center h-full">
           <ScrollColumn
-            videos={COL_LEFT}
+            videos={left}
             animClass="animate-scroll-up"
             offsetPx={0}
           />
           <ScrollColumn
-            videos={COL_RIGHT}
+            videos={right}
             animClass="animate-scroll-down"
             offsetPx={200}
           />

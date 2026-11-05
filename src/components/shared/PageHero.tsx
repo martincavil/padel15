@@ -1,5 +1,5 @@
 // src/components/shared/PageHero.tsx
-import Image from "next/image";
+import { SiteImage } from "@/components/shared/SiteImage";
 
 interface PageHeroProps {
   title: string;
@@ -24,7 +24,7 @@ export function PageHero({
     <div className={`relative ${heightClass} overflow-hidden`}>
       {imageSrc ? (
         <>
-          <Image
+          <SiteImage
             src={imageSrc}
             alt={imageAlt ?? title}
             fill

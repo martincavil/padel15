@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { loaderFor } from "@/lib/imgix-loader";
 
 interface GalleryImage {
   src: string;
@@ -70,6 +71,7 @@ export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
           >
             <Image
               src={img.src}
+              loader={loaderFor(img.src)}
               alt={img.alt}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -134,6 +136,7 @@ export function LightboxGallery({ images, columns = 3 }: LightboxGalleryProps) {
             >
               <Image
                 src={images[activeIndex].src}
+                loader={loaderFor(images[activeIndex].src)}
                 alt={images[activeIndex].alt}
                 width={1200}
                 height={800}

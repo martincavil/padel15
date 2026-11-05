@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ChevronDown, Smartphone } from "lucide-react";
 import { BookingWidget } from "@/components/shared/BookingWidget";
+import { loaderFor } from "@/lib/imgix-loader";
+import { NavAnchor } from "@/components/prismic/NavAnchor";
+import type { NavLink } from "@/lib/settings";
+import type { ReactNode } from "react";
 
 /**
  * Vidéo hébergée sur Cloudflare Pages (projet « padel15-video », dossier
@@ -12,7 +15,8 @@ import { BookingWidget } from "@/components/shared/BookingWidget";
  * 15 Mo × chaque nouveau visiteur dépassait le quota gratuit de 100 Go.
  *
  * Pour remplacer la vidéo : déployer le nouveau fichier sous un NOM DIFFÉRENT
- * (…-v3.mp4) — le cache est « immutable » pendant un an — puis changer l'URL ici.
+ * (…-v3.mp4) — le cache est « immutable » pendant un an — puis changer
+ * l'adresse dans Prismic (Accueil → Vidéo d'accueil).
  *
  * Limite connue : Cloudflare Pages ne gère pas les requêtes Range, or Safari
  * (macOS ET tous les navigateurs iOS, qui reposent sur WebKit) les exige pour
@@ -20,7 +24,6 @@ import { BookingWidget } from "@/components/shared/BookingWidget";
  * Solution si c'est un problème : héberger le fichier chez un CDN qui répond
  * en 206 (ex. Bunny CDN, ~0,5 $/mois à ce volume).
  */
-const HERO_VIDEO_URL = "https://padel15-video.pages.dev/padel-15-hero-v2.mp4";
 
 // const CAROUSEL_IMAGES = [
 //   "/images/terrains/terrain-ext-jour.webp",
@@ -31,9 +34,25 @@ const HERO_VIDEO_URL = "https://padel15-video.pages.dev/padel-15-hero-v2.mp4";
 
 interface HeroBannerProps {
   googleRating?: { rating: number; count: number };
+  /** Titre sur une ligne (ordinateur) et sur deux (mobile). */
+  titleDesktop: ReactNode;
+  titleMobile: ReactNode;
+  text: ReactNode;
+  tagline: string;
+  videoUrl: string;
+  posterUrl: string;
+  /** 1er bouton : réservation, sur mobile seulement (le widget le remplace sur ordinateur). */
+  mainCta: NavLink | null;
+  /** Boutons suivants : sur ordinateur et mobile. */
+  ctas: NavLink[];
+  appStoreUrl: string;
+  googlePlayUrl: string;
 }
 
-export default function HeroBanner({ googleRating }: HeroBannerProps) {
+export default function HeroBanner({
+  googleRating, titleDesktop, titleMobile, text, tagline, videoUrl, posterUrl,
+  mainCta, ctas, appStoreUrl, googlePlayUrl,
+}: HeroBannerProps) {
   // La vidéo est servie par Cloudflare (hors quota Vercel), donc on la charge
   // sur tous les écrans. On respecte seulement les préférences explicites de
   // l'utilisateur : « réduction des animations » et « économie de données ».
@@ -83,7 +102,8 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
       {/* Image poster : toujours affichée (mobile, Safari, ou le temps que la
           vidéo démarre). C'est elle qui porte le LCP. */}
       <Image
-        src="/images/terrains/terrain-ext-jour.webp"
+        src={posterUrl}
+        loader={loaderFor(posterUrl)}
         alt=""
         fill
         priority
@@ -107,7 +127,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             videoReady ? "opacity-100" : "opacity-0"
           }`}
         >
-          <source src={HERO_VIDEO_URL} type="video/mp4" />
+          <source src={videoUrl} type="video/mp4" />
         </video>
       )}
 
@@ -170,27 +190,19 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
               className="filter brightness-0 invert mb-4"
               priority
             />
-            <h1 className="font-buzz text-6xl xl:text-7xl text-white leading-none tracking-tight">
-              L&apos;art de Vivre <span className="text-brand">Le Padel</span>
-            </h1>
+            {titleDesktop}
           </div>
 
-          <p className="text-white/70">
-            L&apos;art de vivre le padel à Paris. Un club d&apos;exception où
-            sport, élégance et convivialité se rencontrent. Dans un écrin
-            végétalisé en plein cœur de la capitale, jouez, partagez,
-            détendez-vous… et savourez chaque instant. Terrains couvert et haut
-            de gamme, terrasse guinguette, pétanque, fléchettes, bar et
-            restaurant.
-          </p>
+          {text}
 
           <div className="flex flex-wrap gap-3">
-            <Link
-              href="/evenements#demande"
-              className="bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors"
-            >
-              Organiser un événement pro ou perso
-            </Link>
+            {ctas.map((cta) => (
+              <NavAnchor
+                key={cta.href}
+                link={cta}
+                className="bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors"
+              />
+            ))}
           </div>
         </div>
 
@@ -228,30 +240,24 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
             className="mx-auto filter brightness-0 invert mb-3"
             priority
           />
-          <h1 className="font-buzz text-5xl text-white leading-none">
-            L&apos;art de vivre
-            <br />
-            <span className="text-brand">le padel</span>
-          </h1>
+          {titleMobile}
         </div>
 
         <p className="text-white/70 text-sm">
-          Sport · Élégance · Convivialité · Paris 15ème
+          {tagline}
         </p>
 
         <div className="flex flex-col items-center gap-4 w-full max-w-xs">
-          <a
-            href="https://playtomic.com/clubs/padel-15"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full text-center bg-brand hover:bg-brand-dark text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg shadow-brand/30"
-          >
-            Réserver un terrain
-          </a>
+          {mainCta && (
+            <NavAnchor
+              link={mainCta}
+              className="w-full text-center bg-brand hover:bg-brand-dark text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg shadow-brand/30"
+            />
+          )}
           {/* Badges app — visibles uniquement mobile */}
           <div className="flex gap-2 w-full md:hidden">
             <a
-              href="https://apps.apple.com/fr/app/playtomic-play-padel/id1242321076"
+              href={appStoreUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-1.5 bg-white/10 border border-white/20 text-white py-2.5 rounded-xl text-xs font-medium"
@@ -265,7 +271,7 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
               App Store
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.playtomic&hl=fr"
+              href={googlePlayUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-1.5 bg-white/10 border border-white/20 text-white py-2.5 rounded-xl text-xs font-medium"
@@ -274,12 +280,13 @@ export default function HeroBanner({ googleRating }: HeroBannerProps) {
               Google Play
             </a>
           </div>
-          <Link
-            href="/evenements#demande"
-            className="w-full text-center bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg"
-          >
-            Organiser un événement pro ou perso
-          </Link>
+          {ctas.map((cta) => (
+            <NavAnchor
+              key={cta.href}
+              link={cta}
+              className="w-full text-center bg-[#1A7A4A] hover:bg-[#155f3a] text-white font-semibold py-4 rounded-xl text-base transition-colors shadow-lg"
+            />
+          ))}
         </div>
       </div>
 

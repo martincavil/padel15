@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/shared/JsonLd";
 import Tracking from "@/components/Tracking";
 import { PrismicPreview } from "@prismicio/next";
 import { isPrismicConfigured, repositoryName } from "@/prismicio";
+import { getSettings } from "@/lib/settings";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -102,7 +103,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSettings();
   return (
     <html lang="fr" className={`${dmSans.variable} ${caveat.variable}`}>
       <head>
@@ -119,7 +121,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="scroll-smooth font-sans">
         <GoogleAnalytics ga_id="G-N2Y4ZCYHTB" />
         <Tracking />
-        <Layout>{children}</Layout>
+        <Layout settings={settings}>{children}</Layout>
         {/* Barre d'aperçu Prismic, seulement une fois le dépôt renseigné. */}
         {isPrismicConfigured && <PrismicPreview repositoryName={repositoryName} />}
       </body>

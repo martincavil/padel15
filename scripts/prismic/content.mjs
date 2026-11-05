@@ -277,14 +277,14 @@ export const DOCUMENTS = [
           buttons: [button(DEVIS, "Privatiser l'espace")],
           image: img("/images/restaurant/food/DSC00617.webp", "Planche à partagée Padel 15"),
           image_position: "Droite",
+          image_format: "Paysage",
           anchor: "",
         }),
-        slice("offer_cards", "default", {
-          title: [], intro: [],
+        slice("offer_cards", "simple", {
           items: [
-            { icon: "Couverts", title: "Restaurant", subtitle: "", description: [], includes: list("Service continu 7j/7 — 10h à 22h", "Ouvert à tous, sans réservation de terrain", "Produits frais et de saison", "Cadre chaleureux et moderne") },
-            { icon: "Feuille", title: "Terrasse & Guinguette", subtitle: "", description: [], includes: list("Terrasse végétalisée", "Terrain de pétanque", "Espaces lounge", "Ambiance dépaysante") },
-            { icon: "Verre", title: "Bar", subtitle: "", description: [], includes: list("Cocktails et boissons fraîches", "Afterworks et soirées", "Privatisation possible") },
+            { icon: "Couverts", title: "Restaurant", includes: list("Service continu 7j/7 — 10h à 22h", "Ouvert à tous, sans réservation de terrain", "Produits frais et de saison", "Cadre chaleureux et moderne") },
+            { icon: "Feuille", title: "Terrasse & Guinguette", includes: list("Terrasse végétalisée", "Terrain de pétanque", "Espaces lounge", "Ambiance dépaysante") },
+            { icon: "Verre", title: "Bar", includes: list("Cocktails et boissons fraîches", "Afterworks et soirées", "Privatisation possible") },
           ],
         }),
         slice("gallery", "default", {
@@ -390,6 +390,7 @@ export const DOCUMENTS = [
           buttons: [],
           image: img("/images/new-events/WhatsApp-Image-2026-09-15-at-15.32.55.webp", "Cocktail signature lors d'un événement Padel 15"),
           image_position: "Droite",
+          image_format: "Portrait",
           anchor: "demande",
         }),
         widget("Formulaire de demande d'événement"),
@@ -417,6 +418,7 @@ export const DOCUMENTS = [
           buttons: [],
           image: img("/images/restaurant/rest-inte-terrain.webp", "Ambiance Padel 15"),
           image_position: "Droite",
+          image_format: "Paysage",
           anchor: "",
         }),
         slice("gallery", "captioned", {
@@ -426,10 +428,8 @@ export const DOCUMENTS = [
             { image: img("/images/terrains/terrain-match-1.webp", "Terrain intérieur Padel 15"), label: "Terrains", detail: "2 courts panoramiques" },
           ],
         }),
-        slice("feature_grid", "tiles", {
-          badge: "",
+        slice("feature_grid", "cards", {
           title: heading("Notre infrastructure"),
-          intro: [],
           items: [
             ["Trophée", "2 terrains de padel", "Couverts et extérieurs, panoramiques"],
             ["Couverts", "Restaurant & Bar", "Service continu 7j/7, produits frais"],

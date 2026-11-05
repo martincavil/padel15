@@ -7,20 +7,14 @@ import { Button } from "./ui/Button";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { cn } from "@/lib/utils";
+import type { SiteSettings } from "@/lib/settings";
+import { NavAnchor } from "@/components/prismic/NavAnchor";
 
 // Pages without a dark hero — navbar must be opaque/dark from scrollY=0
 const LIGHT_BG_PAGES = ["/confidentialite", "/mentions-legales"];
 
-const NAV_LINKS = [
-  { href: "/terrains", label: "Terrains" },
-  { href: "/restaurant", label: "Restaurant" },
-  { href: "/coaching", label: "Coaching" },
-  { href: "/evenements", label: "Événements" },
-  { href: "/tarifs", label: "Tarifs" },
-  { href: "/le-club", label: "Le Club" },
-];
-
-export default function Navbar() {
+export default function Navbar({ settings }: { settings: SiteSettings }) {
+  const NAV_LINKS = settings.navLinks;
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -92,7 +86,7 @@ export default function Navbar() {
         {/* Desktop CTAs */}
         <div className="hidden xl:flex items-center gap-2">
           <a
-            href="https://playtomic.com/clubs/padel-15"
+            href={settings.playtomicUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -108,7 +102,8 @@ export default function Navbar() {
               Réserver un terrain
             </Button>
           </a>
-          <Link href="/evenements#demande">
+          {settings.navCta && (
+          <NavAnchor link={settings.navCta}>
             <Button
               variant="outline"
               size="sm"
@@ -119,11 +114,12 @@ export default function Navbar() {
                   : "border-white text-white bg-transparent hover:bg-white hover:text-brand",
               )}
             >
-              Organiser un événement
+              {settings.navCta.label}
             </Button>
-          </Link>
+          </NavAnchor>
+          )}
           <a
-            href="https://www.instagram.com/padel15club/?hl=fr"
+            href={settings.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram Padel 15"
@@ -222,7 +218,7 @@ export default function Navbar() {
         {/* CTAs */}
         <div className="px-6 py-6 border-t border-gray-100 flex flex-col gap-3">
           <a
-            href="https://playtomic.com/clubs/padel-15"
+            href={settings.playtomicUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
@@ -230,15 +226,15 @@ export default function Navbar() {
           >
             Réserver un terrain
           </a>
-          <Link
-            href="/evenements#demande"
-            onClick={() => setMenuOpen(false)}
-            className="w-full border border-brand text-brand hover:bg-brand hover:text-white font-semibold py-3.5 rounded-xl text-center text-sm transition-colors"
-          >
-            Organiser un événement
-          </Link>
+          {settings.navCta && (
+            <NavAnchor
+              link={settings.navCta}
+              onClick={() => setMenuOpen(false)}
+              className="w-full border border-brand text-brand hover:bg-brand hover:text-white font-semibold py-3.5 rounded-xl text-center text-sm transition-colors"
+            />
+          )}
           <a
-            href="https://www.instagram.com/padel15club/?hl=fr"
+            href={settings.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 text-gray-400 hover:text-gray-600 text-sm transition-colors pt-1"

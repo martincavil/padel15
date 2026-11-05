@@ -2,12 +2,14 @@
 
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import type { ReactNode } from "react";
+import type { SiteSettings } from "@/lib/settings";
 
-export default function Contact() {
+export default function Contact({ settings, title }: { settings: SiteSettings; title?: ReactNode }) {
   return (
     <section id="contact" className="scroll-mt-16 container pb-6">
       <div className="container mx-auto px-4 space-y-6">
-        <h2 className="font-bold text-brand">Contactez-nous</h2>
+        {title ?? <h2 className="font-bold text-brand">Contactez-nous</h2>}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-gray-200 h-80 mb-6 rounded-lg overflow-hidden">
             <iframe
@@ -25,7 +27,7 @@ export default function Contact() {
               <div>
                 <h4 className="font-semibold">Adresse</h4>
                 <p className="text-gray-600">
-                  PADEL15, 115 Rue Castagnary, 75015 Paris, France
+                  {settings.clubName}, {settings.address}, France
                 </p>
               </div>
             </div>
@@ -34,10 +36,10 @@ export default function Contact() {
               <div>
                 <h4 className="font-semibold">Téléphone</h4>
                 <a
-                  href="tel:+33145315876"
+                  href={settings.phoneHref}
                   className="text-gray-600 hover:text-brand transition-colors"
                 >
-                  +33 1 45 31 58 76
+                  {settings.phone}
                 </a>
               </div>
             </div>
@@ -46,10 +48,10 @@ export default function Contact() {
               <div>
                 <h4 className="font-semibold">Email</h4>
                 <a
-                  href="mailto:contact@padel15.fr"
+                  href={`mailto:${settings.email}`}
                   className="text-gray-600 hover:text-brand transition-colors"
                 >
-                  contact@padel15.fr
+                  {settings.email}
                 </a>
               </div>
             </div>
@@ -59,7 +61,7 @@ export default function Contact() {
               </h4>
               <div className="flex space-x-4">
                 <a
-                  href="https://www.instagram.com/padel15club/?hl=fr"
+                  href={settings.instagramUrl}
                   className="text-gray-600 hover:text-brand transition-colors cursor-pointer"
                 >
                   <Image

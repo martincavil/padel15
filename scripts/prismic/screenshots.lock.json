@@ -23,6 +23,10 @@
     "sha": "fd13849da462d5e751f65bd42efcd04075b97dac57abb4ed5c6957e959ac6e88",
     "url": "https://images.prismic.io/aqal1a2b/rr8oOkbp58wZinS7_slice-feature_grid-bookingInfo.jpg"
   },
+  "feature_grid/cards": {
+    "sha": "a8bccbf0cb19761c67bd714872a7195c1f99d68e74d4ab1849cf57860f44bbbe",
+    "url": "https://images.prismic.io/aqal1a2b/gK6OEsibiHApcn53_slice-feature_grid-cards.jpg"
+  },
   "feature_grid/list": {
     "sha": "71dd89a193b28660e357fab004c96cd4e4b795bb6b9b29d0b55923a2ef054348",
     "url": "https://images.prismic.io/aqal1a2b/Y5r0crxB_Av4B_Ym_slice-feature_grid-list.jpg"
@@ -62,6 +66,10 @@
   "offer_cards/default": {
     "sha": "c91d471afdf8bef0726746e80338c7cb55fc93c9248fb16e8f044c42708b1ae3",
     "url": "https://images.prismic.io/aqal1a2b/u3wKtUTadRCg6GgD_slice-offer_cards-default.jpg"
+  },
+  "offer_cards/simple": {
+    "sha": "c11be3a2a5b368272824a32dd2952d937801c745da1a531cb6d9f8ea6a678b73",
+    "url": "https://images.prismic.io/aqal1a2b/pdtRzNdV9yDdAtG1_slice-offer_cards-simple.jpg"
   },
   "pricing/cards": {
     "sha": "b3d2fad4b43e40a2cd620da5a7731d22219f2c67987d8a832bd8a368ac233d8f",

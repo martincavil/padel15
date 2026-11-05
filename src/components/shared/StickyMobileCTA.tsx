@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-export function StickyMobileCTA() {
+export function StickyMobileCTA({ playtomicUrl }: { playtomicUrl: string }) {
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const footerRef = useRef<Element | null>(null);
@@ -32,7 +32,7 @@ export function StickyMobileCTA() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       <a
-        href="https://playtomic.com/clubs/padel-15"
+        href={playtomicUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Réserver un terrain de padel sur Playtomic"
