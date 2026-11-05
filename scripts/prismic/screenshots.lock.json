@@ -1,0 +1,94 @@
+{
+  "b2b_highlight/default": {
+    "sha": "2d0b71fb1b0f9304c500b843819ac2bd6361cf5e70a38afeb7910b23e932c624",
+    "url": "https://images.prismic.io/aqal1a2b/MupUYnz0SftXEdEM_slice-b2b_highlight-default.jpg"
+  },
+  "course_booking/default": {
+    "sha": "311ccf02dc0b4ffc3b8ee3ec3db80258ac44f546de80bd3c062048bd419f82d7",
+    "url": "https://images.prismic.io/aqal1a2b/sydNlwPVtrei5o0g_slice-course_booking-default.jpg"
+  },
+  "cta_banner/dark": {
+    "sha": "d99b5e514d95887cec1744552dcd1005411b9766b7481076234aa7576b746695",
+    "url": "https://images.prismic.io/aqal1a2b/JuhGwlEDbJr8s_sn_slice-cta_banner-dark.jpg"
+  },
+  "cta_banner/default": {
+    "sha": "d5cdc1b153fe83a8a6610bbbd3db135f9d976a591f540da7d69110c04f5baa57",
+    "url": "https://images.prismic.io/aqal1a2b/NEu1Y0MTRvg9Tzl2_slice-cta_banner-default.jpg"
+  },
+  "cta_banner/image": {
+    "sha": "26e7e1ebaf4e602bf5bfce39ab917154e8446b7ac51e5d96b6f6f9cda1ffdcc6",
+    "url": "https://images.prismic.io/aqal1a2b/0WAznYaibRqWZayx_slice-cta_banner-image.jpg"
+  },
+  "feature_grid/bookingInfo": {
+    "sha": "fd13849da462d5e751f65bd42efcd04075b97dac57abb4ed5c6957e959ac6e88",
+    "url": "https://images.prismic.io/aqal1a2b/rr8oOkbp58wZinS7_slice-feature_grid-bookingInfo.jpg"
+  },
+  "feature_grid/list": {
+    "sha": "71dd89a193b28660e357fab004c96cd4e4b795bb6b9b29d0b55923a2ef054348",
+    "url": "https://images.prismic.io/aqal1a2b/Y5r0crxB_Av4B_Ym_slice-feature_grid-list.jpg"
+  },
+  "feature_grid/strip": {
+    "sha": "5142d6a6f524287366c9a2a8bc1a93311024a0ecb5b7a5c9e76ac35509b114f7",
+    "url": "https://images.prismic.io/aqal1a2b/FQYqSmEZb_lHqgf4_slice-feature_grid-strip.jpg"
+  },
+  "feature_grid/tiles": {
+    "sha": "331d20684f569d22899c6ff9db9299a8a07b8aed0f02a6124a39de68a846bc28",
+    "url": "https://images.prismic.io/aqal1a2b/1occLX5GR2UbsoTX_slice-feature_grid-tiles.jpg"
+  },
+  "feature_grid/values": {
+    "sha": "8d32947e8f8e23a5118d1dd0ed33a951f2d7311fddba96fd6363fe9c4f1cae18",
+    "url": "https://images.prismic.io/aqal1a2b/QZB3Ao4G8zFpzMuX_slice-feature_grid-values.jpg"
+  },
+  "gallery/captioned": {
+    "sha": "f80dadef7bfaf64b824e05bf38d786b40595edaf03d6b5bfd8efc0741d2caf3b",
+    "url": "https://images.prismic.io/aqal1a2b/t2zY-9PWpMAcjsDF_slice-gallery-captioned.jpg"
+  },
+  "gallery/default": {
+    "sha": "18c7e2ccbf624fc2716c3a3e6e2fe6f7ba7113dcb20adf9478df6d02d744da16",
+    "url": "https://images.prismic.io/aqal1a2b/1dDwyahidTefIQpZ_slice-gallery-default.jpg"
+  },
+  "instagram_videos/default": {
+    "sha": "08ad2578bf88469ccfd244c4bb66646a99991d724e6afe22063fd0a86cfb6bf3",
+    "url": "https://images.prismic.io/aqal1a2b/KsJ3I8eonvWq9fgw_slice-instagram_videos-default.jpg"
+  },
+  "logos/marquee": {
+    "sha": "49cff682d862daeafeef0ff647e04d314b9bce89d63bf89850f44b38c861a594",
+    "url": "https://images.prismic.io/aqal1a2b/Uc4YIDtcEQBmDPeC_slice-logos-marquee.jpg"
+  },
+  "logos/partners": {
+    "sha": "ce9107a31200149af8136989c6df10ddc3f520e5b8cde0d324928461cc7f1915",
+    "url": "https://images.prismic.io/aqal1a2b/B4STZwSzYmPHqZUS_slice-logos-partners.jpg"
+  },
+  "offer_cards/default": {
+    "sha": "c91d471afdf8bef0726746e80338c7cb55fc93c9248fb16e8f044c42708b1ae3",
+    "url": "https://images.prismic.io/aqal1a2b/u3wKtUTadRCg6GgD_slice-offer_cards-default.jpg"
+  },
+  "pricing/cards": {
+    "sha": "b3d2fad4b43e40a2cd620da5a7731d22219f2c67987d8a832bd8a368ac233d8f",
+    "url": "https://images.prismic.io/aqal1a2b/ynUDaQiHoi1EZC5H_slice-pricing-cards.jpg"
+  },
+  "pricing/list": {
+    "sha": "d00fbe4c95fd5348ec23649a83868b1e25beac8d7196de8b575a44f819680e4a",
+    "url": "https://images.prismic.io/aqal1a2b/zWxvyMPRzRZUwdXa_slice-pricing-list.jpg"
+  },
+  "rich_text/default": {
+    "sha": "4ce872bc38c59df31fe81cfbdc31fee90c7020d3ead868f783bee571deb9c246",
+    "url": "https://images.prismic.io/aqal1a2b/ZUMewB-QNoqLWVv8_slice-rich_text-default.jpg"
+  },
+  "text_image/default": {
+    "sha": "3e471a58d1d193f18f1f61cee4caf463d01765f88c891a70e7f0330c6e2a55e1",
+    "url": "https://images.prismic.io/aqal1a2b/T8CA8x1-17e0Jkwn_slice-text_image-default.jpg"
+  },
+  "text_image/photoMosaic": {
+    "sha": "6d37871249d5337a6862787b30ae37a0d7bd08d1c7509633e3015430ae5a08b7",
+    "url": "https://images.prismic.io/aqal1a2b/y_itb1i54VY0PrIn_slice-text_image-photoMosaic.jpg"
+  },
+  "text_image/video": {
+    "sha": "f513e5288665d79a4376f7091f38a9e9156ce9d6440d98206b5807112dfb3969",
+    "url": "https://images.prismic.io/aqal1a2b/yg0AR5Imk7knkWWT_slice-text_image-video.jpg"
+  },
+  "widget/default": {
+    "sha": "d9dd307987b486779f21e43f5f8df1020ec9437aab97d3e941040ea7b1b6a34c",
+    "url": "https://images.prismic.io/aqal1a2b/5i4-QZ8E5uliHADP_slice-widget-default.jpg"
+  }
+}

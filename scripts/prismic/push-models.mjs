@@ -10,10 +10,16 @@
  *   … --apply --prune                              → supprime aussi dans Prismic
  *                                                    les modèles absents du code
  *
+ * Vignettes : `src/slices/<Nom>/screenshot-<variante>.jpg` (voir
+ * screenshots.mjs) sont déposées dans la médiathèque Prismic puis reliées à
+ * leur variante. `screenshots.lock.json` garde leur adresse : une capture
+ * n'est renvoyée que si elle a changé.
+ *
  * Jeton : PRISMIC_WRITE_TOKEN dans .env.local (jamais sur Vercel).
  */
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const APPLY = process.argv.includes("--apply");
@@ -45,14 +51,40 @@ const readDir = (dir, file) => fs.readdirSync(path.join(ROOT, dir))
   .map((d) => JSON.parse(fs.readFileSync(path.join(ROOT, dir, d, file), "utf8")));
 
 const localSlices = readDir("src/slices", "model.json");
+
+// Vignettes des variantes.
+const LOCK = path.join(ROOT, "scripts/prismic/screenshots.lock.json");
+const lock = fs.existsSync(LOCK) ? JSON.parse(fs.readFileSync(LOCK, "utf8")) : {};
+const pascal = (id) => id.replace(/(^|_)(\w)/g, (_, __, c) => c.toUpperCase());
+const uploads = [];
+for (const s of localSlices) for (const v of s.variations) {
+  const file = path.join(ROOT, "src/slices", pascal(s.id), `screenshot-${v.id}.jpg`);
+  if (!fs.existsSync(file)) continue;
+  const key = `${s.id}/${v.id}`;
+  const sha = crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+  if (lock[key]?.sha === sha) v.imageUrl = lock[key].url;
+  else uploads.push({ key, file, sha, variation: v });
+}
+async function upload({ key, file, sha, variation }) {
+  const form = new FormData();
+  form.append("file", new Blob([fs.readFileSync(file)], { type: "image/jpeg" }), `slice-${key.replace("/", "-")}.jpg`);
+  form.append("notes", `Vignette du modèle (slice ${key}). Ne pas supprimer.`);
+  const res = await fetch("https://asset-api.prismic.io/assets", {
+    method: "POST", headers: { repository: repositoryName, Authorization: `Bearer ${token}` }, body: form,
+  });
+  if (!res.ok) throw new Error(`Envoi de la vignette ${key} → ${res.status} ${await res.text()}`);
+  const { url } = await res.json();
+  variation.imageUrl = url.split("?")[0];
+  lock[key] = { sha, url: variation.imageUrl };
+  fs.writeFileSync(LOCK, JSON.stringify(Object.fromEntries(Object.entries(lock).sort()), null, 2) + "\n");
+}
 const localTypes = readDir("customtypes", "index.json");
 const [remoteSlices, remoteTypes] = await Promise.all([call("GET", "/slices"), call("GET", "/customtypes")]);
 
-// Comparaison indépendante de l'ordre des clés (Prismic les réordonne) et sans
-// les champs que Prismic ajoute de son côté.
+// Comparaison indépendante de l'ordre des clés (Prismic les réordonne).
 const canon = (v) => Array.isArray(v) ? v.map(canon)
   : v && typeof v === "object"
-    ? Object.fromEntries(Object.keys(v).filter((k) => !["imageUrl", "hash"].includes(k)).sort().map((k) => [k, canon(v[k])]))
+    ? Object.fromEntries(Object.keys(v).filter((k) => k !== "hash").sort().map((k) => [k, canon(v[k])]))
     : v;
 const strip = (m) => JSON.stringify(canon(m));
 const plan = [];
@@ -67,15 +99,23 @@ function diff(kind, base, local, remote) {
     plan.push({ action: "supprimer", kind, id: r.id, run: () => call("DELETE", `${base}/${r.id}`) });
 }
 // Les slices avant les types qui les utilisent ; les suppressions de types avant celles de slices.
-diff("slice", "/slices", localSlices, remoteSlices);
-diff("type", "/customtypes", localTypes, remoteTypes);
-plan.sort((a, b) => {
-  const rank = (p) => (p.action === "supprimer" ? (p.kind === "type" ? 2 : 3) : p.kind === "slice" ? 0 : 1);
-  return rank(a) - rank(b);
-});
+function buildPlan() {
+  plan.length = 0;
+  diff("slice", "/slices", localSlices, remoteSlices);
+  diff("type", "/customtypes", localTypes, remoteTypes);
+  plan.sort((a, b) => {
+    const rank = (p) => (p.action === "supprimer" ? (p.kind === "type" ? 2 : 3) : p.kind === "slice" ? 0 : 1);
+    return rank(a) - rank(b);
+  });
+}
+buildPlan();
 
-if (!plan.length) { console.log(`Dépôt ${repositoryName} : déjà à jour.`); process.exit(0); }
+if (!plan.length && !uploads.length) { console.log(`Dépôt ${repositoryName} : déjà à jour.`); process.exit(0); }
 console.log(`Dépôt ${repositoryName} :`);
+for (const u of uploads) console.log(`  ${"envoyer".padEnd(14)} ${"image".padEnd(6)} ${u.key}`);
 for (const p of plan) console.log(`  ${p.action.padEnd(14)} ${p.kind.padEnd(6)} ${p.id}`);
 if (!APPLY) { console.log("\nSimulation. Relancer avec --apply pour envoyer."); process.exit(0); }
+for (const u of uploads) { await upload(u); console.log(`  ✓ envoyer image ${u.key}`); }
+// Les adresses des vignettes changent les slices : on recalcule le plan.
+if (uploads.length) buildPlan();
 for (const p of plan) { await p.run(); console.log(`  ✓ ${p.action} ${p.kind} ${p.id}`); }
