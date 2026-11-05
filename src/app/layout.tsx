@@ -8,6 +8,7 @@ import Tracking from "@/components/Tracking";
 import { PrismicPreview } from "@prismicio/next";
 import { isPrismicConfigured, repositoryName } from "@/prismicio";
 import { getSettings } from "@/lib/settings";
+import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/site";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -27,7 +28,7 @@ const localBusinessSchema = {
   name: "Padel 15",
   description:
     "Club de padel haut de gamme au cœur du 15ème arrondissement de Paris. Terrains couverts et extérieurs, coaching certifié, restaurant guinguette.",
-  url: "https://padel15.fr",
+  url: SITE_URL,
   telephone: "+33145315876",
   email: "contact@padel15.fr",
   address: {
@@ -80,11 +81,11 @@ const sportsActivitySchema = {
   },
   openingHours: "Mo-Su 08:00-22:00",
   telephone: "+33145315876",
-  url: "https://padel15.fr",
+  url: SITE_URL,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://padel15.fr"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Padel 15 | Club de Padel Paris 15ème — Terrains, Restaurant, Coaching",
     template: "%s | Padel 15",
@@ -95,11 +96,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://padel15.fr",
+    url: SITE_URL,
     siteName: "Padel 15",
     title: "Padel 15 | Club de Padel Paris 15ème",
     description: "Club de padel haut de gamme au cœur du Paris 15ème.",
-    images: [{ url: "/images/terrains/terrain-ext-jour.webp", width: 1200, height: 630, alt: "Terrains Padel 15" }],
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

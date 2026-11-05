@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/shared/JsonLd";
+import { SITE_URL } from "@/lib/site";
 import { PrismicPage, pageMetadata } from "@/lib/prismic-pages";
 
 export const generateMetadata = () => pageMetadata("coaching");
@@ -21,7 +22,7 @@ const coachingSchema = {
       addressCountry: "FR",
     },
     telephone: "+33145315876",
-    url: "https://padel15.fr",
+    url: SITE_URL,
   },
   areaServed: {
     "@type": "City",

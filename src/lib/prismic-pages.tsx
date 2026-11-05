@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { asText, isFilled, NotFoundError, type ImageField } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getSettings } from "@/lib/settings";
 import { components } from "@/slices";
 import type { SliceContext } from "@/slices/shared";
@@ -11,15 +12,31 @@ import { Text } from "@/components/prismic/RichText";
 
 type Seo = { meta_title: string | null; meta_description: string | null; meta_image: ImageField };
 
-/** Titre, description et image de partage saisis dans l'onglet SEO. */
-export function seoMetadata(data: Seo, extra: Metadata = {}): Metadata {
-  const metadata: Metadata = { ...extra };
-  if (data.meta_title) metadata.title = data.meta_title;
-  if (data.meta_description) metadata.description = data.meta_description;
-  if (isFilled.image(data.meta_image)) {
-    metadata.openGraph = { title: data.meta_title ?? undefined, images: [{ url: data.meta_image.url }] };
-  }
-  return metadata;
+/**
+ * Titre, description et image de partage saisis dans l'onglet SEO, avec
+ * l'adresse canonique de la page. L'Open Graph reprend les valeurs du site
+ * (nom, langue) pour ne pas les perdre quand une page définit son image.
+ */
+export function seoMetadata(data: Seo, path: string, extra: Metadata = {}): Metadata {
+  const title = data.meta_title || undefined;
+  const description = data.meta_description || undefined;
+  return {
+    ...extra,
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      locale: "fr_FR",
+      siteName: "Padel 15",
+      url: path,
+      title,
+      description,
+      images: isFilled.image(data.meta_image)
+        ? [{ url: data.meta_image.url, alt: data.meta_image.alt ?? undefined }]
+        : [DEFAULT_OG_IMAGE],
+    },
+  };
 }
 
 async function byUID<T extends "page" | "legal_page">(type: T, uid: string) {
@@ -35,12 +52,12 @@ export const getPage = (uid: string) => byUID("page", uid);
 export const getLegalPage = (uid: string) => byUID("legal_page", uid);
 
 export async function pageMetadata(uid: string) {
-  return seoMetadata((await getPage(uid)).data);
+  return seoMetadata((await getPage(uid)).data, `/${uid}`);
 }
 
 export async function legalPageMetadata(uid: string) {
   const { data } = await getLegalPage(uid);
-  return seoMetadata(data, data.noindex ? { robots: { index: false } } : {});
+  return seoMetadata(data, `/${uid}`, data.noindex ? { robots: { index: false } } : {});
 }
 
 /** Page Prismic (type « Page ») : bandeau puis sections. */

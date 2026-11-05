@@ -1,25 +1,42 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { createClient } from "@/prismicio";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://padel15.fr";
+/** Priorité par page (les pages ajoutées dans Prismic prennent 0,6). */
+const PRIORITY: Record<string, number> = {
+  "/": 1.0,
+  "/terrains": 0.9,
+  "/restaurant": 0.9,
+  "/evenements": 0.9,
+  "/coaching": 0.8,
+  "/tarifs": 0.8,
+  "/le-club": 0.7,
+  "/contact": 0.7,
+};
 
-const STATIC_ROUTES = [
-  { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" as const },
-  { url: `${BASE_URL}/terrains`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/restaurant`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/evenements`, priority: 0.9, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/coaching`, priority: 0.8, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/tarifs`, priority: 0.8, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/le-club`, priority: 0.7, changeFrequency: "monthly" as const },
-  { url: `${BASE_URL}/contact`, priority: 0.7, changeFrequency: "yearly" as const },
-  { url: `${BASE_URL}/mentions-legales`, priority: 0.3, changeFrequency: "yearly" as const },
-  { url: `${BASE_URL}/confidentialite`, priority: 0.3, changeFrequency: "yearly" as const },
-];
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  return STATIC_ROUTES.map((route) => ({
-    url: route.url,
-    lastModified: new Date(),
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
+/**
+ * Plan du site tiré de Prismic : accueil, pages et pages légales indexables
+ * (celles marquées « Masquer de Google » sont exclues). La date de
+ * modification est celle de la dernière publication.
+ */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const client = createClient();
+  const [home, pages, legal] = await Promise.all([
+    client.getSingle("homepage"),
+    client.getAllByType("page"),
+    client.getAllByType("legal_page"),
+  ]);
+  const entries = [
+    { path: "/", date: home.last_publication_date },
+    ...pages.map((p) => ({ path: `/${p.uid}`, date: p.last_publication_date })),
+    ...legal.filter((p) => !p.data.noindex).map((p) => ({ path: `/${p.uid}`, date: p.last_publication_date })),
+  ];
+  const priority = (path: string) => PRIORITY[path] ?? 0.6;
+  entries.sort((a, b) => priority(b.path) - priority(a.path));
+  return entries.map(({ path, date }) => ({
+    url: `${SITE_URL}${path === "/" ? "" : path}`,
+    lastModified: new Date(date),
+    changeFrequency: path === "/" ? "weekly" : "monthly",
+    priority: priority(path),
   }));
 }

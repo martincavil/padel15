@@ -11,7 +11,7 @@ import { components } from "@/slices";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data } = await createClient().getSingle("homepage");
-  return seoMetadata(data);
+  return seoMetadata(data, "/");
 }
 
 /** Contenu : document « Accueil » dans Prismic. */

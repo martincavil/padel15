@@ -60,3 +60,12 @@ relance met à jour les brouillons sans doublon.
 Les liens internes sont écrits en adresse complète (`https://www.padel15.fr/…`),
 pour garder les ancres comme `#demande` ; le site les transforme en liens
 internes à l'affichage.
+
+## SEO (phase 4)
+
+- Titre, description et image de partage : onglet SEO de chaque document. Sans
+  image, celle du site (`DEFAULT_OG_IMAGE` dans `src/lib/site.ts`) est utilisée.
+- Adresse canonique sur www.padel15.fr pour chaque page.
+- `sitemap.xml` généré depuis Prismic : accueil, pages, et pages légales sauf
+  celles marquées « Masquer de Google ». Date = dernière publication.
+- Restent dans le code : données structurées (JSON-LD) et robots.txt.
