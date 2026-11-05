@@ -23,8 +23,8 @@
           "type": "StructuredText",
           "config": {
             "label": "Titre",
-            "placeholder": "",
-            "single": "heading2"
+            "placeholder": "Le texte en gras s'affiche en orange",
+            "single": "heading2,strong"
           }
         },
         "intro": {
@@ -109,8 +109,8 @@
           "type": "StructuredText",
           "config": {
             "label": "Titre",
-            "placeholder": "",
-            "single": "heading2"
+            "placeholder": "Le texte en gras s'affiche en orange",
+            "single": "heading2,strong"
           }
         },
         "items": {
@@ -179,8 +179,8 @@
           "type": "StructuredText",
           "config": {
             "label": "Titre",
-            "placeholder": "",
-            "single": "heading2"
+            "placeholder": "Le texte en gras s'affiche en orange",
+            "single": "heading2,strong"
           }
         },
         "items": {
@@ -396,8 +396,8 @@
           "type": "StructuredText",
           "config": {
             "label": "Titre",
-            "placeholder": "",
-            "single": "heading2"
+            "placeholder": "Le texte en gras s'affiche en orange",
+            "single": "heading2,strong"
           }
         },
         "items": {

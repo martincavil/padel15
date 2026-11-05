@@ -38,6 +38,8 @@ données structurées (JSON-LD), style et mise en page des blocs.
 
 ## Choix
 
+- Titres : le texte en gras s'affiche en orange (ex. « L'expérience **Padel 15**
+  en images ») ; Maj+Entrée pour aller à la ligne.
 - Icônes : liste fermée en français (« Vélo », « Douche »…), reliée aux icônes
   du site dans le code, pour garder un rendu homogène.
 - Boutons : un lien avec son texte (page du site, adresse web, `tel:`, PDF) et

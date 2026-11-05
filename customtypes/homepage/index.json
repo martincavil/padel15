@@ -7,17 +7,11 @@
   "json": {
     "Vidéo d'accueil": {
       "hero_title": {
-        "type": "Text",
+        "type": "StructuredText",
         "config": {
           "label": "Titre",
-          "placeholder": "L'art de vivre"
-        }
-      },
-      "hero_title_highlight": {
-        "type": "Text",
-        "config": {
-          "label": "Suite du titre en orange",
-          "placeholder": "le padel"
+          "placeholder": "Le texte en gras s'affiche en orange",
+          "single": "heading1,strong"
         }
       },
       "hero_text": {

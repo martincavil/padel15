@@ -39,8 +39,8 @@
           "type": "StructuredText",
           "config": {
             "label": "Titre (facultatif)",
-            "placeholder": "",
-            "single": "heading2"
+            "placeholder": "Le texte en gras s'affiche en orange",
+            "single": "heading2,strong"
           }
         },
         "intro": {

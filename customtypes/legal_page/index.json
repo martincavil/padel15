@@ -18,7 +18,7 @@
         "config": {
           "label": "Titre",
           "placeholder": "ex. Mentions légales",
-          "single": "heading1"
+          "single": "heading1,strong"
         }
       },
       "content": {

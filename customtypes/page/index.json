@@ -18,7 +18,7 @@
         "config": {
           "label": "Titre de la page",
           "placeholder": "ex. Nos Terrains",
-          "single": "heading1"
+          "single": "heading1,strong"
         }
       },
       "subtitle": {
