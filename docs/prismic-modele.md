@@ -19,7 +19,7 @@ avec `node scripts/prismic/push-models.mjs` (simulation) puis `--apply`.
 |---|---|---|
 | Texte + visuel `text_image` | photo · trois photos · vidéo verticale | Notre histoire (Le Club), Un lieu de vie unique (Restaurant), Demandez un devis (Événements) · Restaurant & Bar (accueil) · L'expérience en images (Événements) |
 | Liste à icônes `feature_grid` | tuiles · liste · infos + réservation · bandeau noir · valeurs | Tout est prévu (accueil), Notre infrastructure (Le Club) · Équipements & Services (Terrains) · Réservez votre terrain (Terrains) · bandeau Playtomic (accueil) · Nos Valeurs (Le Club) |
-| Tarifs `pricing` | cartes · liste | Jouez à votre rythme (accueil), Location de terrains (Tarifs) · Coaching (Tarifs) |
+| Tarifs `pricing` | cartes · aperçu · liste | Location de terrains (Tarifs) · Jouez à votre rythme (accueil) · Coaching (Tarifs) |
 | Cartes de formules `offer_cards` | — | Nos Formules (Événements), services du Restaurant |
 | Galerie photos `gallery` | agrandissable · légendée | Galerie (Terrains, Restaurant) · trois photos (Le Club) |
 | Logos `logos` | partenaires · clients | Nos partenaires (accueil) · Ils nous font confiance (accueil, Événements) |

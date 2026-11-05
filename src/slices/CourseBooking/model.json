@@ -77,6 +77,43 @@
             }
           }
         },
+        "stats": {
+          "type": "Group",
+          "config": {
+            "label": "Chiffres clés",
+            "repeat": true,
+            "fields": {
+              "value": {
+                "type": "Text",
+                "config": {
+                  "label": "Chiffre",
+                  "placeholder": "ex. 5+"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Légende",
+                  "placeholder": "ex. Coachs certifiés"
+                }
+              }
+            }
+          }
+        },
+        "form_title": {
+          "type": "Text",
+          "config": {
+            "label": "Titre du formulaire",
+            "placeholder": "ex. Demande de cours"
+          }
+        },
+        "form_text": {
+          "type": "Text",
+          "config": {
+            "label": "Texte du formulaire",
+            "placeholder": "ex. Remplissez le formulaire, notre équipe vous contacte sous 24h."
+          }
+        },
         "tally_url": {
           "type": "Link",
           "config": {

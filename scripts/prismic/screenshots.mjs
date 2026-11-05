@@ -3,14 +3,18 @@
  * de slice, et l'enregistre dans `src/slices/<Nom>/screenshot-<variante>.jpg`.
  * `push-models.mjs` les envoie ensuite dans Prismic (vignettes de l'éditeur).
  *
- *   node scripts/prismic/screenshots.mjs [adresse du site]
+ *   node scripts/prismic/screenshots.mjs [adresse du site] [Slice/variante …]
+ *
+ * Sans liste, toutes les variantes sont capturées.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "@playwright/test";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
-const SITE = (process.argv[2] || "https://www.padel15.fr").replace(/\/$/, "");
+const args = process.argv.slice(2);
+const SITE = (args.find((a) => a.startsWith("http")) || "https://www.padel15.fr").replace(/\/$/, "");
+const ONLY = args.filter((a) => a.includes("/") && !a.startsWith("http"));
 const MAX_HEIGHT = 1300;
 
 // slice, variante, page, élément à capturer (sélecteur Playwright).
@@ -25,6 +29,7 @@ const SHOTS = [
   ["FeatureGrid", "strip", "/", `section:has-text("Créneaux en temps réel")`],
   ["FeatureGrid", "values", "/le-club", `section#values`],
   ["Pricing", "cards", "/tarifs", `${h2("Location de terrains")} >> xpath=..`],
+  ["Pricing", "compact", "/", `section:has(${h2("Jouez à votre rythme")})`],
   ["Pricing", "list", "/tarifs", `h2:text-is("Coaching") >> xpath=..`],
   ["OfferCards", "default", "/evenements", `${h2("Nos Formules")} >> xpath=../..`],
   ["Gallery", "default", "/terrains", `h2:text-is("Galerie") >> xpath=..`],
@@ -47,6 +52,7 @@ let current = "";
 // Regroupées par page pour ne charger chaque page qu'une fois.
 SHOTS.sort((a, b) => a[2].localeCompare(b[2]));
 for (const [slice, variation, url, selector] of SHOTS) {
+  if (ONLY.length && !ONLY.includes(`${slice}/${variation}`)) continue;
   if (url !== current) {
     await page.goto(SITE + url, { waitUntil: "load" });
     await page.waitForTimeout(2000);

@@ -132,6 +132,117 @@
       "items": {}
     },
     {
+      "id": "compact",
+      "name": "Aperçu (accueil)",
+      "description": "Ex. « Jouez à votre rythme » sur l'accueil : deux prix compacts et un lien vers la page Tarifs.",
+      "imageUrl": "",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Pastille au-dessus du titre",
+            "placeholder": "ex. Restaurant & Bar"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titre",
+            "placeholder": "",
+            "single": "heading2"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Tarifs",
+            "repeat": true,
+            "fields": {
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Nom",
+                  "placeholder": "ex. Heures creuses"
+                }
+              },
+              "detail": {
+                "type": "Text",
+                "config": {
+                  "label": "Détail",
+                  "placeholder": ""
+                }
+              },
+              "price": {
+                "type": "Text",
+                "config": {
+                  "label": "Prix",
+                  "placeholder": "ex. 12,50 €"
+                }
+              },
+              "unit": {
+                "type": "Text",
+                "config": {
+                  "label": "Unité",
+                  "placeholder": "ex. / pers / h"
+                }
+              },
+              "highlight": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Mettre en avant (bordure orange)",
+                  "default_value": false,
+                  "placeholder_true": "Oui",
+                  "placeholder_false": "Non"
+                }
+              }
+            }
+          }
+        },
+        "note": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Note sous les prix",
+            "placeholder": "",
+            "single": "paragraph,strong,em,hyperlink",
+            "allowTargetBlank": true
+          }
+        },
+        "buttons": {
+          "type": "Group",
+          "config": {
+            "label": "Boutons",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Lien et texte du bouton",
+                  "placeholder": "Page du site, adresse web, téléphone (tel:…) ou PDF",
+                  "allowTargetBlank": true,
+                  "allowText": true
+                }
+              },
+              "style": {
+                "type": "Select",
+                "config": {
+                  "label": "Style",
+                  "options": [
+                    "Orange (principal)",
+                    "Contour",
+                    "Lien texte"
+                  ],
+                  "default_value": "Orange (principal)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
       "id": "list",
       "name": "Liste de formules",
       "description": "Ex. « Coaching » sur la page Tarifs.",

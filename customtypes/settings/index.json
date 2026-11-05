@@ -184,6 +184,27 @@
             }
           }
         }
+      },
+      "footer_tagline": {
+        "type": "Text",
+        "config": {
+          "label": "Pied de page : phrase de présentation",
+          "placeholder": ""
+        }
+      },
+      "footer_newsletter_text": {
+        "type": "Text",
+        "config": {
+          "label": "Pied de page : texte newsletter",
+          "placeholder": ""
+        }
+      },
+      "footer_legal": {
+        "type": "Text",
+        "config": {
+          "label": "Pied de page : mention légale",
+          "placeholder": "© PADEL 15 — SAS au capital de…"
+        }
       }
     }
   }
