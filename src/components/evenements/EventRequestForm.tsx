@@ -2,45 +2,36 @@
 
 /**
  * Formulaire de demande d'événement, hébergé par l'outil interne Padel 15
- * (Railway) et intégré tel quel en iframe, selon la doc fournie par Gaspard
- * le 03/11/2026.
+ * (Railway) et intégré en iframe selon la doc de Gaspard du 13/11/2026.
  *
- * Chaque demande envoyée crée côté outil : le client, un devis prérempli
- * (tarifs Pennylane) et les tâches de suivi ; le client reçoit un email de
- * confirmation depuis contact@padel15.fr. Rien à gérer côté site (pas de
- * base, pas de clé), et le formulaire porte déjà la charte Padel 15.
+ * Chaque demande envoyée crée côté outil : le client, un devis prérempli et
+ * les tâches de suivi ; le client reçoit un e-mail de confirmation. Rien à
+ * gérer côté site (pas de base, pas de clé).
  *
- * Hauteurs fixes reprises de la doc : mesurées à 1 477 px (desktop) et
- * 2 138 px (mobile), avec une marge pour les champs qui s'ouvrent selon les
- * réponses.
- *
- * Confirmation après envoi : l'outil affiche un court message « Merci… »
- * en haut du cadre, alors que le visiteur est en bas, près du bouton. Le site
- * ne voit pas ce qui se passe dans le cadre (autre domaine), sauf un
- * rechargement complet. On charge donc le formulaire SANS JavaScript
- * (sandbox sans allow-scripts) : il s'envoie alors comme un formulaire HTML
- * classique (POST puis redirection vers /demande?envoye=1, vérifié le
- * 04/11/2026), ce qui recharge le cadre. Sur ce rechargement :
- *   - on remonte au message de confirmation,
- *   - on réduit le cadre à la taille du message,
- *   - on compte la demande dans GA4 (b2b_form_submit).
- * Le formulaire n'a pas besoin de JS : champs natifs, validation native,
- * bouton Pro/Privé = simple lien.
+ * - `?embed=1` : version compacte, sans en-tête ni introduction en double.
+ * - Le formulaire (6 étapes) a besoin de JavaScript : `allow-scripts`.
+ * - Il envoie sa hauteur (`padel15:demande:height`) à chaque étape : le cadre
+ *   prend cette hauteur, sans espace vide en dessous.
+ * - Quand une étape est plus courte que la précédente (ou après l'envoi), le
+ *   bas du formulaire peut remonter au-dessus de l'écran : on ramène alors le
+ *   haut du cadre sous la navbar.
+ * - Envoi : si l'outil envoie `padel15:demande:sent`, la demande est comptée
+ *   dans GA4 (`b2b_form_submit`).
  *
  * Toutes les CTA « Demander un devis » / « Organiser un événement » du site
  * pointent vers l'ancre #demande de /evenements.
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { trackEvent } from "@/components/Tracking";
 
-export const EVENT_REQUEST_FORM_URL =
-  "https://padel15-app-production.up.railway.app/demande";
+const APP = "https://padel15-app-production.up.railway.app";
+export const EVENT_REQUEST_FORM_URL = `${APP}/demande?embed=1`;
 
-// Hauteur de la navbar fixe, pour ne pas cacher le haut du cadre.
+/** Hauteur avant le premier message du formulaire. */
+const INITIAL_HEIGHT = 760;
+
+/** Hauteur de la navbar fixe, pour ne pas cacher le haut du cadre. */
 const NAVBAR_OFFSET = 112;
-
-// Hauteur du cadre une fois le message « Merci » affiché.
-const CONFIRMATION_HEIGHT = 400;
 
 /**
  * `tone="dark"` pour une section à fond sombre (ex. Team Building sur la
@@ -54,39 +45,28 @@ export function EventRequestForm({
 }) {
   const frameRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState<number | null>(null);
 
   useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
-    let loads = 0;
+    function onMessage(e: MessageEvent) {
+      const iframe = iframeRef.current;
+      if (e.origin !== APP || !iframe || e.source !== iframe.contentWindow) return;
 
-    function onLoad() {
-      loads += 1;
-      const frameTop = frameRef.current?.getBoundingClientRect().top ?? 0;
-      // Le visiteur était dans le bas du formulaire : c'est le bouton
-      // « Envoyer ». En haut, c'est le chargement initial ou le bouton
-      // Pro/Privé.
-      const wasNearSubmit = frameTop < -300;
-
-      if (!wasNearSubmit) {
-        if (loads > 1) setHeight(null); // ex. « Faire une autre demande »
-        return;
+      if (e.data?.type === "padel15:demande:height" && typeof e.data.height === "number") {
+        iframe.style.height = `${Math.ceil(e.data.height)}px`;
+        // Le formulaire a raccourci et son bas est passé au-dessus du milieu
+        // de l'écran : on remonte au début pour ne pas laisser un vide.
+        const box = frameRef.current?.getBoundingClientRect();
+        if (box && box.bottom < window.innerHeight / 2) {
+          window.scrollTo({ top: window.scrollY + box.top - NAVBAR_OFFSET, behavior: "smooth" });
+        }
       }
 
-      setHeight(CONFIRMATION_HEIGHT);
-      window.scrollTo({
-        top: window.scrollY + frameTop - NAVBAR_OFFSET,
-        behavior: "smooth",
-      });
-      trackEvent("b2b_form_submit", {
-        event_category: "lead",
-        form: "demande_evenement",
-      });
+      if (e.data?.type === "padel15:demande:sent") {
+        trackEvent("b2b_form_submit", { event_category: "lead", form: "demande_evenement" });
+      }
     }
-
-    iframe.addEventListener("load", onLoad);
-    return () => iframe.removeEventListener("load", onLoad);
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, []);
 
   const frame =
@@ -105,12 +85,9 @@ export function EventRequestForm({
           ref={iframeRef}
           src={EVENT_REQUEST_FORM_URL}
           title="Demande d'événement Padel 15"
-          // Sans allow-scripts : envoi en formulaire HTML classique (voir
-          // l'en-tête). allow-same-origin est nécessaire pour que l'outil
-          // accepte l'envoi (contrôle de l'origine côté serveur).
-          sandbox="allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-          style={height ? { height } : undefined}
-          className="block h-[2400px] w-full border-0 sm:h-[1650px]"
+          sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          className="block w-full border-0"
+          style={{ height: INITIAL_HEIGHT }}
         />
       </div>
       <p
